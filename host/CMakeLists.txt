@@ -43,3 +43,8 @@ target_include_directories(alloc_test PRIVATE ../engine/include ../tests/alloc_s
 target_compile_definitions(alloc_test PRIVATE ESP_PLATFORM=1)
 target_compile_options(alloc_test PRIVATE -UNDEBUG)
 add_test(NAME fast_allocation_fallback COMMAND alloc_test)
+
+add_executable(tokenizer_memory_test tokenizer_memory_test.c ../engine/src/nd_cact.c)
+target_include_directories(tokenizer_memory_test PRIVATE ../engine/include)
+target_compile_options(tokenizer_memory_test PRIVATE -UNDEBUG)
+add_test(NAME tokenizer_memory COMMAND tokenizer_memory_test)

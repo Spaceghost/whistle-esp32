@@ -93,7 +93,7 @@ int nd_tok_init(nd_tokenizer *t, const void *blob, size_t size)
 {
     const uint8_t *b = (const uint8_t *)blob;
     size_t         off;
-    uint32_t       i, nbucket;
+    uint32_t       i, nbucket, marker_count = 0;
 
     if (!t || !b || size < 24)
         return -1;
@@ -122,6 +122,8 @@ int nd_tok_init(nd_tokenizer *t, const void *blob, size_t size)
             goto bad;
         t->pieces[i].score = rd_f32(b + off);
         t->pieces[i].type  = b[off + 4];
+        if (t->pieces[i].type == ND_TK_USER_DEFINED)
+            marker_count++;
         slen               = (uint16_t)(b[off + 5] | (b[off + 6] << 8));
         off += 7;
         if (off + slen > size)
@@ -131,9 +133,10 @@ int nd_tok_init(nd_tokenizer *t, const void *blob, size_t size)
         off += slen;
     }
 
-    /* Power-of-two table with load factor < 0.6. */
+    /* Smallest power-of-two table with load factor <= 0.6.
+     * Keep token IDs unchanged: only lookup metadata is compacted. */
     nbucket = 1;
-    while (nbucket < t->n_pieces * 2)
+    while (nbucket * 3 < t->n_pieces * 5)
         nbucket <<= 1;
     t->mask   = nbucket - 1;
     t->bucket = (uint16_t *)calloc(nbucket, sizeof(uint16_t));
@@ -143,9 +146,11 @@ int nd_tok_init(nd_tokenizer *t, const void *blob, size_t size)
     for (i = 0; i < 256; i++)
         t->byte_id[i] = -1;
 
-    t->markers = (uint32_t *)calloc(t->n_pieces, sizeof(uint32_t));
-    if (!t->markers)
-        goto bad;
+    if (marker_count) {
+        t->markers = (uint32_t *)calloc(marker_count, sizeof(uint32_t));
+        if (!t->markers)
+            goto bad;
+    }
 
     for (i = 0; i < t->n_pieces; i++) {
         uint16_t    len;
