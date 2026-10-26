@@ -11,6 +11,28 @@ Cactus Compute (Apache 2.0). Cactus ships no ESP32 build and no source for
 Whistle's engine. Everything here is an independent C99 implementation with no
 dependencies, checked tensor by tensor against the official engine.
 
+## English deployment profile
+
+The runtime accepts English only. For physical model pruning, run:
+
+```sh
+python3 tools/whistle_english.py model/whistle/whistle_d2.cact model/whistle/whistle_d2_en.cact
+python3 tools/check_english_profile.py build/wh_run model/whistle/whistle_d2.cact model/whistle/whistle_d2_en.cact test-16k.wav
+```
+
+The exporter removes six non-English conditioning rows and markers, retaining
+text IDs 0..8191 and English prefix ID 8192. The current depth-two file shrinks
+by 1,614 bytes. Retained quantized rows are copied exactly; shared tokenizer
+pieces and neural weights remain, so this is not monolingual retraining.
+The checker compares all retained logits, encoder bytes, greedy token IDs and
+transcript on the supplied synthetic 16 kHz mono PCM16 fixture. Model scores may
+change after removing candidates from the softmax denominator.
+
+Tokenizer lookup/marker metadata also requests 65,440 fewer heap bytes for the
+original model. These changes do not require Nelibc or remapping token IDs.
+`ctest` runs allocation, English API, tokenizer and synthetic model pruning
+regressions without downloading a model; Python 3 is required for the host suite.
+
 ## What you need
 
 | Part | Notes |

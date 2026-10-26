@@ -48,3 +48,7 @@ add_executable(tokenizer_memory_test tokenizer_memory_test.c ../engine/src/nd_ca
 target_include_directories(tokenizer_memory_test PRIVATE ../engine/include)
 target_compile_options(tokenizer_memory_test PRIVATE -UNDEBUG)
 add_test(NAME tokenizer_memory COMMAND tokenizer_memory_test)
+
+find_package(Python3 REQUIRED COMPONENTS Interpreter)
+add_test(NAME english_model_pruning
+         COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/english_model_test.py)

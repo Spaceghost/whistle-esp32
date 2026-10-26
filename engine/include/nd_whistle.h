@@ -101,7 +101,7 @@ void nd_whistle_close(nd_whistle *w);
  * --audio-depth selects. Returns 0, or -1 for an out-of-range depth. */
 int  nd_whistle_set_depth(nd_whistle *w, uint32_t depth);
 
-/* Copy the decoder's hot weights (the tied 8199-row output head, read in
+/* Copy the decoder's hot weights (the tied output head, read in
  * full every token) out of the mapped blob into `alloc`ed memory - on the
  * ESP32-S3, octal PSRAM, which streams faster than the QIO flash mapping.
  * Returns the bytes copied, or 0. */
@@ -144,7 +144,7 @@ int  nd_whistle_decode(nd_whistle *w, const float *enc, uint32_t T, int lang,
                        uint32_t *ids, uint32_t cap);
 
 /* Logits for every position of a token sequence fed from scratch
- * (validation against tools/whistle_ref.py). out is [n][vocab]. */
+ * (validation against tools/whistle_ref.py). out is [n][vocab]. Token IDs outside vocab return -1. */
 int  nd_whistle_logits(nd_whistle *w, const float *enc, uint32_t T,
                        const uint32_t *toks, uint32_t n, float *out);
 

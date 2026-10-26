@@ -31,7 +31,7 @@ uint64_t nd_wprof[ND_WP_COUNT];
 #define EG_PRIME     0x01000193u
 #define BOS_ID       2u
 #define EOS_ID       1u
-#define LANG_BASE    8192u       /* en de fr es it nl pl follow the text vocab */
+#define LANG_BASE    8192u       /* English prefix follows shared text IDs */
 
 /* Front-end constants, established against the official engine (see
  * tools/whistle_ref.py DEFAULTS): the clip is scaled to peak 1, then
@@ -1152,7 +1152,7 @@ static void dec_step(nd_whistle *w, uint32_t tok, uint32_t pos, float *hid)
 
 static void logits_all(nd_whistle *w, const float *hid, float *out)
 {
-    lin(w, w->i_emb, hid, 1, out);       /* tied head: 8199 x 512, 4-bit */
+    lin(w, w->i_emb, hid, 1, out);       /* tied head: original or English-pruned rows */
 }
 
 int nd_whistle_logits(nd_whistle *w, const float *enc, uint32_t T,
@@ -1160,7 +1160,14 @@ int nd_whistle_logits(nd_whistle *w, const float *enc, uint32_t T,
 {
     float    hid[512];
     uint32_t p;
-    if (n > w->max_seq || session_begin(w, enc, T) != 0)
+    if (n > w->max_seq)
+        return -1;
+    /* A pruned profile has no foreign prefix rows. Reject invalid IDs before
+     * touching embedding data (also protects the original model API). */
+    for (p = 0; p < n; p++)
+        if (toks[p] >= w->vocab)
+            return -1;
+    if (session_begin(w, enc, T) != 0)
         return -1;
     for (p = 0; p < n; p++) {
         dec_step(w, toks[p], p, hid);
