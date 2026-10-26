@@ -16,16 +16,8 @@
 #include "nd_quant.h"
 #include "nd_whistle.h"
 
-static const char *LANGS[] = { "en", "de", "fr", "es", "it", "nl", "pl" };
-static const char *const COLORS6[] = { "red", "green", "blue", "yellow", "purple", "white" };
+static const char *LANGS[] = { "en" };
 
-/* The LED demo's acceptance test for a transcript: it names a colour. */
-static int has_command(const char *text, void *ctx)
-{
-    nd_led_cmd c;
-    (void)ctx;
-    return nd_led_parse(text, COLORS6, 6, 3.0f, &c);
-}
 
 static void *slurp(const char *path, size_t *n)
 {
@@ -111,9 +103,7 @@ int main(int argc, char **argv)
 {
     const char *enc_out = NULL, *lg_out = NULL, *toks_arg = NULL, *kw = NULL;
     float       bonus = 0.0f, gate_db = 0.0f;
-    int         protocol = 0, led_kw = 0, retry = -1;
-    uint32_t    mask = 0x7F;
-    float       margin = 0.2f;         /* the engine default */
+    int         protocol = 0, led_kw = 0;
     uint32_t    s0 = 0, s1 = 0;
     int         lang = 0, depth = 0, i, rc;
     size_t      size;
@@ -140,18 +130,7 @@ int main(int argc, char **argv)
                 lang = -1;                        /* detect, as the board does */
             i++;
         } else if (!strcmp(argv[i], "--led-keywords")) {
-            led_kw = 1;                           /* the demo's 7-language lists */
-        } else if (!strcmp(argv[i], "--margin") && i + 1 < argc) {
-            margin = (float)atof(argv[++i]);      /* retry must score within this */
-        } else if (!strcmp(argv[i], "--retry") && i + 1 < argc) {
-            retry = atoi(argv[++i]);              /* languages re-tried on no command */
-        } else if (!strcmp(argv[i], "--langs") && i + 1 < argc) {
-            const char *l = argv[++i];            /* e.g. en,fr,es: detection set */
-            int k;
-            mask = 0;
-            for (k = 0; k < ND_WH_LANGS; k++)
-                if (strstr(l, LANGS[k]))
-                    mask |= 1u << k;
+            led_kw = 1;                           /* the demo's English list */
         } else if (!strcmp(argv[i], "--depth") && i + 1 < argc) {
             depth = atoi(argv[++i]);
         } else if (!strcmp(argv[i], "--enc-out") && i + 1 < argc) {
@@ -176,7 +155,7 @@ int main(int argc, char **argv)
         }
     }
     if (lang < -1) {
-        fprintf(stderr, "language must be one of en de fr es it nl pl, or auto\n");
+        fprintf(stderr, "language must be en (auto is an English alias)\n");
         return 2;
     }
 
@@ -204,12 +183,6 @@ int main(int argc, char **argv)
     if (protocol)
         printf("EVT ready model=whistle depth=%u enc_layers=%u (host)\nEVT recording\n"
                "EVT released held_ms=%u\n", w.depth, w.enc_layers, n / 16);
-    w.lang_mask = mask;
-    w.retry_margin = margin;
-    if (retry >= 0)
-        w.retry_langs = (uint32_t)retry;
-    if (led_kw)
-        w.accept = has_command;               /* as the board: retry when no colour */
     if (led_kw) {
         int k;
         nd_whistle_set_keywords(&w, NULL, 0.0f);
@@ -303,15 +276,9 @@ int main(int argc, char **argv)
     fprintf(stderr, "tokens");
     for (i = 0; i < rc; i++)
         fprintf(stderr, " %u", ids[i]);
-    if (lang < 0) {
-        int k;
-        fprintf(stderr, "\nlang_logits");
-        for (k = 0; k < ND_WH_LANGS; k++)
-            fprintf(stderr, " %s=%.2f", LANGS[k], w.lang_logit[k]);
-    }
-    fprintf(stderr, "\nscore %.3f first %.3f", w.score, w.score_first);
+    fprintf(stderr, "\nscore %.3f", w.score);
     fprintf(stderr, "\nlanguage %s%s\naudio %.2f s  frames %u  depth %u\n", LANGS[w.lang],
-            lang < 0 ? " (detected)" : "", n / 16000.0, T, w.depth);
+            lang < 0 ? " (English)" : "", n / 16000.0, T, w.depth);
     fprintf(stderr, "time  encode %.0f ms  decode %.0f ms (%d tokens, %.1f ms/token)\n",
             t_enc, t_dec, rc, rc ? t_dec / (rc + 1) : 0.0);
 #ifdef ND_PROFILE

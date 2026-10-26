@@ -1,10 +1,10 @@
-# Whistle speech recognition on an ESP32-S3
+# AckermanOS English-only Whistle fork
 
 Hold a button and say *"flash the light blue"*. The LED flashes blue.
 
 The speech recognition runs entirely on a $10 microcontroller: no network, no
 cloud, no phone. It transcribes whatever you say rather than matching a fixed
-list of phrases, and it understands commands in seven languages.
+list of phrases, with English decoding only in this fork.
 
 The model is [Whistle](https://huggingface.co/Cactus-Compute/whistle) by
 Cactus Compute (Apache 2.0). Cactus ships no ESP32 build and no source for
@@ -123,24 +123,36 @@ heard words but no colour.
 Short phrases work better than a bare word: "make it red" was recognised far
 more often than "red" alone (86-93% vs 44% across six test voices).
 
-### Other languages
+### English-only fork
 
-Language detection is automatic. Every language below is on the board at the
-same time.
+This branch removes language detection, multilingual retry decoding, foreign
+LED command dictionaries, and Unicode case folding. `lang=0` selects English;
+`lang=-1` is an English alias. Other language indices are rejected. Keyword
+capacity defaults to 32 sequences (overridable with `ND_WH_MAX_KW`); the English
+LED demo uses 10 sequences with the current model.
 
-| Language | Example | Colours |
-|---|---|---|
-| English | *Flash the light blue.* | red, green, blue, yellow, purple, white |
-| French | *Fais clignoter la lumière en violet.* | rouge, vert, bleu, jaune, violet, blanc |
-| Spanish | *Pon la luz amarilla.* | rojo, verde, azul, amarillo, morado, blanco |
-| German | *Lass das Licht rot blinken.* | rot, grün, blau, gelb, lila, weiß |
-| Italian | *Fai lampeggiare la luce verde.* | rosso, verde, blu, giallo, viola, bianco |
-| Dutch | *Laat het licht blauw knipperen.* | rood, groen, blauw, geel, paars, wit |
-| Polish | *Niech światło miga na czerwono.* | czerwony, zielony, niebieski, żółty, fioletowy, biały |
+The shared tokenizer and neural weights remain multilingual internally. They
+are not independent language packs. No vocabulary rows have been deleted;
+doing that without retraining and English evaluation would damage recognition.
+Decoder-depth stripping is a separate size optimization.
 
-The blink words are *clignoter*, *parpadear*, *blinken*, *lampeggiare*,
-*knipperen* and *migać*. Numbers from one to ten and "half" work in each
-language, as in *toutes les deux secondes* or *alle zwei Sekunden*.
+Host checks:
+
+```sh
+.venv/bin/cmake -S host -B build -DCMAKE_BUILD_TYPE=MinSizeRel
+.venv/bin/cmake --build build
+.venv/bin/ctest --test-dir build --output-on-failure
+```
+
+Measured model files: depth 2 = 10,663,791 bytes; depth 4 = 14,515,887 bytes.
+Depth 2 is experimental. Neither depth is accepted for release accuracy yet.
+A single synthetic English greeting gives the same transcripts as unmodified
+upstream forced to English at each depth, but both misrecognize the greeting.
+This is a compatibility smoke check, not an English accuracy benchmark.
+
+The sections below retain upstream hardware/performance context. AckermanOS
+uses a T-Watch S3 Plus with an onboard PDM microphone; do not wire or flash a
+watch using the external-I2S-microphone demo's pin assignments.
 
 ## Performance
 

@@ -29,3 +29,11 @@ target_link_libraries(wh_run PRIVATE needle_engine)
 
 add_executable(ledcmd_test ledcmd_test.c)
 target_link_libraries(ledcmd_test PRIVATE needle_engine)
+
+add_executable(english_test english_test.c)
+target_link_libraries(english_test PRIVATE needle_engine)
+# Keep assertions active in release/minimum-size test builds.
+target_compile_options(english_test PRIVATE -UNDEBUG)
+enable_testing()
+add_test(NAME english_api COMMAND english_test)
+add_test(NAME english_commands COMMAND ledcmd_test)

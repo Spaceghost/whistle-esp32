@@ -4,13 +4,7 @@
  * onto the set_led tool's arguments (tools/led.json) directly: a colour from
  * the caller's (English) list, flash or solid, a duration and a blink period.
  *
- * One table covers Whistle's seven languages (en de fr es it nl pl), so the
- * parser need not know which one was spoken. Colours and flash verbs match by
- * word or by stem, which covers inflection ("verte", "rojas", "czerwonym",
- * "strobed", "blinkt"); a few homophones Whistle wrote in testing fold onto
- * colours ("read" -> red, "blew" -> blue). If several colours are named, the
- * last one wins. "every / toutes les / alle / cada / ogni / elke / co N
- * seconds" is a blink period: it means flash, not a duration.
+ * English colour and blink words only. The last named colour wins.
  */
 #ifndef ND_LEDCMD_H
 #define ND_LEDCMD_H
@@ -31,13 +25,10 @@ typedef struct {
 int nd_led_parse(const char *text, const char *const *colors, int n_colors,
                  float default_s, nd_led_cmd *out);
 
-/* Words worth biasing Whistle towards for language `lang` (index into
- * "en de fr es it nl pl"), newline-separated: the colours in their common
- * forms and the blink verbs. NULL for an unknown index. */
+/* English keywords for lang 0; NULL for every other index. */
 const char *nd_led_keywords(int lang);
 
-/* Lowercase UTF-8 in place: ASCII, Latin-1 and Latin Extended-A capitals
- * (À-Þ, Ą Ć Ę Ł Ń Ś Ź Ż ...), keeping the byte length. */
+/* Lowercase ASCII in place, preserving other UTF-8 bytes. */
 void nd_utf8_lower(char *s);
 
 #ifdef __cplusplus

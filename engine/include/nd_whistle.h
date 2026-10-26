@@ -31,9 +31,11 @@
 extern "C" {
 #endif
 
-#define ND_WH_LANGS       7
+#define ND_WH_LANGS       1
 #define ND_WH_MAX_LAYERS  16
-#define ND_WH_MAX_KW      192    /* keyword token sequences for biasing */
+#ifndef ND_WH_MAX_KW
+#define ND_WH_MAX_KW      32     /* English demo needs at most 16 sequences */
+#endif
 #define ND_WH_KW_TOKENS   8      /* tokens per phrase */
 
 /* Per-phase microsecond counters, filled when ND_PROFILE is compiled in.
@@ -73,25 +75,10 @@ typedef struct {
     uint32_t      n_kw, n_groups, kw_len[ND_WH_MAX_KW];
     uint32_t      kw[ND_WH_MAX_KW][ND_WH_KW_TOKENS];
     uint16_t      kw_group[ND_WH_MAX_KW];   /* spellings of one phrase */
-    int8_t        kw_lang[ND_WH_MAX_KW];    /* language it applies to, -1 = all */
     char          kw_text[ND_WH_MAX_KW][24]; /* each group's phrase, lowercase */
     float         kw_bonus;
     int           lang;         /* language of the last decode (detected or forced) */
-    float         lang_logit[ND_WH_LANGS];   /* the detection's scores */
-    float         score;        /* mean log-prob of the last transcript (unbiased) */
-    float         score_first;  /* ... of the first pass, before any retry */
-    float         retry_margin; /* a retry must score >= score_first - this */
-
-    /* Detection on a short command is often confidently wrong (Dutch read as
-     * English). When `accept` is set and rejects the first transcript (the
-     * LED demo: "no colour in it"), the next `retry_langs` languages by
-     * detection score are decoded in turn and the first transcript `accept`
-     * likes replaces it; if none does, the first transcript stands. `lang_mask`
-     * (bit i = language i, default all) limits detection to some languages. */
-    int         (*accept)(const char *text, void *ctx);
-    void         *accept_ctx;
-    uint32_t      retry_langs;
-    uint32_t      lang_mask;
+    float         score;        /* mean log-prob of the transcript (unbiased) */
 
     /* decoder session (allocated by nd_whistle_decode) */
     uint32_t      enc_T;
@@ -136,9 +123,7 @@ int  nd_whistle_encode(nd_whistle *w, const float *x, uint32_t n, float *out);
  * NULL or bonus 0 clears. Returns the number of token sequences stored. */
 int  nd_whistle_set_keywords(nd_whistle *w, const char *list, float bonus);
 
-/* Add phrases that only apply when the decode's language is `lang` (index
- * into "en de fr es it nl pl"), so French colour words are not pushed into an
- * English transcript. Keeps what is already set. Returns sequences stored. */
+/* Add English phrases (lang must be 0). */
 int  nd_whistle_add_keywords(nd_whistle *w, int lang, const char *list);
 
 /* Speech gate. Whistle hallucinates on a clip of microphone noise (the
@@ -153,11 +138,8 @@ int  nd_whistle_find_speech(const float *x, uint32_t n, float floor_rms,
                             float min_db, uint32_t margin_ms,
                             uint32_t *s0, uint32_t *s1);
 
-/* Greedy decode over an encoder output. `lang` forces a language (index into
- * "en de fr es it nl pl"); -1 detects it the way the official engine does:
- * the decoder's own choice among the 7 language tokens after BOS. The
- * language used is left in w->lang. Writes up to `cap` token ids, returns the
- * count or a negative error. */
+/* English greedy decode. lang 0 or -1 selects English; others return -1.
+ * Writes at most cap token ids, returning count or a negative error. */
 int  nd_whistle_decode(nd_whistle *w, const float *enc, uint32_t T, int lang,
                        uint32_t *ids, uint32_t cap);
 

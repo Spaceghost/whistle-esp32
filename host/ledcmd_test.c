@@ -17,43 +17,19 @@ static const struct { const char *text; int color, flash; float secs, period; } 
     { "Blinking green, every second.",              1, 1, 3.0f, 1.0f },
     { "What is the capital of France?",            -1, 0, 3.0f, 0.0f },
     { "Turn it white for 3 seconds",                5, 0, 3.0f, 0.0f },
-    /* French: real transcripts from the host engine, then phrasings */
-    { "Il humine la lumière verte.",                1, 0, 3.0f, 0.0f },
-    { "Mais la lumière en bleu pendant 5 secondes.", 2, 0, 5.0f, 0.0f },
-    { "Fais clignoter la lumière rouge toutes les deux secondes.", 0, 1, 3.0f, 2.0f },
-    { "Allume la lumière BLANCHE.",                 5, 0, 3.0f, 0.0f },
-    /* German */
-    { "Lass das Licht zwei Sekunden lang rot blinken.", 0, 1, 2.0f, 0.0f },
-    { "Mach das Licht Weiß.",                       5, 0, 3.0f, 0.0f },
-    { "Blau, alle 0,5 Sekunden.",                   2, 1, 3.0f, 0.5f },
-    /* Spanish */
-    { "Haz parpadear la luz roja durante dos segundos.", 0, 1, 2.0f, 0.0f },
-    { "Pon la luz amarilla, por favor.",            3, 0, 3.0f, 0.0f },
-    { "¿Verdad que es bonito?",                    -1, 0, 3.0f, 0.0f },
-    /* Italian */
-    { "Fai lampeggiare la luce gialla per due secondi.", 3, 1, 2.0f, 0.0f },
-    { "Accendi la luce viola ogni secondo.",        4, 1, 3.0f, 1.0f },
-    /* Dutch */
-    { "Laat het licht twee seconden groen knipperen.", 1, 1, 2.0f, 0.0f },
-    { "Zet de lamp op wit alsjeblieft.",            5, 0, 3.0f, 0.0f },
-    /* Polish */
-    { "Niech światło miga na czerwono przez dwie sekundy.", 0, 1, 2.0f, 0.0f },
-    { "Zmień światło na ŻÓŁTE.",                    3, 0, 3.0f, 0.0f },
-    { "Ustaw lampę na kolor fioletowy co trzy sekundy.", 4, 1, 3.0f, 3.0f },
+    /* Removed command languages must no longer dispatch an LED action. */
+    { "Fais clignoter la lumière rouge.",          -1, 0, 3.0f, 0.0f },
+    { "Lass das Licht rot blinken.",              -1, 0, 3.0f, 0.0f },
+    { "Pon la luz amarilla.",                     -1, 0, 3.0f, 0.0f },
+    { "Fai lampeggiare la luce viola.",           -1, 0, 3.0f, 0.0f },
+    { "Laat het licht groen knipperen.",          -1, 0, 3.0f, 0.0f },
+    { "Niech światło miga na czerwono.",          -1, 0, 3.0f, 0.0f },
     /* The README's examples */
     { "Make it red.",                               0, 0, 3.0f, 0.0f },
     { "Turn the light green for five seconds.",     1, 0, 5.0f, 0.0f },
     { "Flash the light blue.",                      2, 1, 3.0f, 0.0f },
     { "Blink purple every half a second.",          4, 1, 3.0f, 0.5f },
-    { "Fais clignoter la lumière en violet.",       4, 1, 3.0f, 0.0f },
-    { "Fais clignoter la lumière en blanc toutes les deux secondes.", 5, 1, 3.0f, 2.0f },
-    { "Clignote en rouge toutes les demi-secondes.", 0, 1, 3.0f, 0.5f },
-    { "Mets la LED en bleu.",                       2, 0, 3.0f, 0.0f },
-    { "Lass das Licht rot blinken.",                0, 1, 3.0f, 0.0f },
-    { "Blau blinken, alle zwei Sekunden.",          2, 1, 3.0f, 2.0f },
-    { "Fai lampeggiare la luce verde.",             1, 1, 3.0f, 0.0f },
-    { "Laat het licht blauw knipperen.",            2, 1, 3.0f, 0.0f },
-    { "Niech światło miga na czerwono.",            0, 1, 3.0f, 0.0f },
+
 };
 
 int main(int argc, char **argv)

@@ -57,23 +57,13 @@
 #define KW_BONUS       3.0f          /* tuned on 360 clips: tools/eval_whistle.py */
 
 static const char *const COLORS[] = { "red", "green", "blue", "yellow", "purple", "white" };
-static const char *const LANGS[] = { "en", "de", "fr", "es", "it", "nl", "pl" };
+static const char *const LANGS[] = { "en" };
 #define N_COLORS (sizeof(COLORS) / sizeof(COLORS[0]))
 static const uint8_t RGB[][3] = {
     { 64, 0, 0 }, { 0, 64, 0 }, { 0, 0, 64 }, { 48, 40, 0 }, { 40, 0, 56 }, { 40, 40, 40 },
 };
 
 static nd_whistle s_w;
-
-/* A transcript is a command if it names a colour, in any of the seven
- * languages. When the first language Whistle detects gives none, it tries the
- * next ones (nd_whistle.h, accept). */
-static int has_command(const char *text, void *ctx)
-{
-    nd_led_cmd c;
-    (void)ctx;
-    return nd_led_parse(text, COLORS, N_COLORS, 3.0f, &c);
-}
 
 static void *psram_alloc(size_t n) { return heap_caps_malloc(n, MALLOC_CAP_SPIRAM); }
 
@@ -386,7 +376,7 @@ static void whistle_task(void *arg)
     printf("\nEVT ==================================================\n");
     printf("EVT  READY - hold the button on GPIO%d and say a command\n", BUTTON_GPIO);
     printf("EVT  e.g. \"flash the light blue\", \"allume la lumière verte\"\n");
-    printf("EVT  languages: en de fr es it nl pl (detected)\n");
+    printf("EVT  language: en (fixed)\n");
     printf("EVT ==================================================\n\n");
     fflush(stdout);
 
@@ -490,14 +480,12 @@ void app_main(void)
         led_blink(64, 0, 0, 5, 300, 300);
         return;
     }
-    {   /* Colour and blink words for all seven languages; each list only
-         * biases a transcript in its own language. */
+    {   /* English colour and blink words for the LED demo only. */
         int k;
         nd_whistle_set_keywords(&s_w, NULL, 0.0f);
         s_w.kw_bonus = KW_BONUS;
         for (k = 0; k < ND_WH_LANGS; k++)
             nd_whistle_add_keywords(&s_w, k, nd_led_keywords(k));
-        s_w.accept = has_command;
     }
     {
         int64_t t = esp_timer_get_time();

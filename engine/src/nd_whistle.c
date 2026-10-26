@@ -1216,12 +1216,11 @@ static void bias_keywords(const nd_whistle *w, const uint32_t *ids, uint32_t n,
         text[0] = '\0';
     memset(done, 0, sizeof(done));
     for (q = 0; q < w->n_kw; q++)
-        if ((w->kw_lang[q] < 0 || w->kw_lang[q] == w->lang) &&
-            said(text, w->kw_text[w->kw_group[q]]))
+        if (said(text, w->kw_text[w->kw_group[q]]))
             done[w->kw_group[q]] = 1;
     for (q = 0; q < w->n_kw; q++) {
         uint32_t m = w->kw_len[q], best = 0;
-        if (done[w->kw_group[q]] || (w->kw_lang[q] >= 0 && w->kw_lang[q] != w->lang))
+        if (done[w->kw_group[q]])
             continue;
         for (k = (m - 1 < n ? m - 1 : n); k > 0; k--) {
             for (j = 0; j < k && ids[n - k + j] == w->kw[q][j]; j++)
@@ -1235,7 +1234,7 @@ static void bias_keywords(const nd_whistle *w, const uint32_t *ids, uint32_t n,
     }
 }
 
-static int add_keywords(nd_whistle *w, int lang, const char *list)
+static int add_keywords(nd_whistle *w, const char *list)
 {
     const char *p = list;
     while (*p) {
@@ -1286,7 +1285,6 @@ static int add_keywords(nd_whistle *w, int lang, const char *list)
                 if (nt > 0 && nt <= ND_WH_KW_TOKENS && w->n_kw < ND_WH_MAX_KW) {
                     memcpy(w->kw[w->n_kw], ids, (size_t)nt * sizeof(uint32_t));
                     w->kw_group[w->n_kw] = (uint16_t)g;
-                    w->kw_lang[w->n_kw]  = (int8_t)lang;
                     w->kw_len[w->n_kw++] = (uint32_t)nt;
                 }
             }
@@ -1302,14 +1300,14 @@ int nd_whistle_set_keywords(nd_whistle *w, const char *list, float bonus)
     w->kw_bonus = bonus;
     if (!list || bonus == 0.0f)
         return 0;
-    return add_keywords(w, -1, list);
+    return add_keywords(w, list);
 }
 
 int nd_whistle_add_keywords(nd_whistle *w, int lang, const char *list)
 {
     if (!list || lang < 0 || lang >= ND_WH_LANGS)
         return (int)w->n_kw;
-    return add_keywords(w, lang, list);
+    return add_keywords(w, list);
 }
 
 int nd_whistle_find_speech(const float *x, uint32_t n, float floor_rms,
@@ -1432,64 +1430,18 @@ int nd_whistle_decode(nd_whistle *w, const float *enc, uint32_t T, int lang,
     uint32_t budget = 8 + T / 2;
     float   *lg  = (float *)ND_ALLOC(w->vocab * sizeof(float));
     float   *raw = (float *)ND_ALLOC(w->vocab * sizeof(float));
-    uint32_t n = 0, k;
+    uint32_t n = 0;
 
-    if (lang >= ND_WH_LANGS || !lg || !raw || session_begin(w, enc, T) != 0) {
+    /* -1 remains an English alias for source compatibility. Reject every
+     * unsupported language before starting a decoder session. */
+    if (lang < -1 || lang > 0 || !lg || !raw || session_begin(w, enc, T) != 0) {
         ND_FREE(lg);
         ND_FREE(raw);
         return -1;
     }
     {
         ND_T0(t0);
-        if (lang >= 0) {
-            n = decode_pass(w, lang, ids, cap, budget, lg, raw, &w->score);
-        } else {
-            /* Detect: the decoder's own ranking of the language tokens after
-             * BOS, over the enabled languages. */
-            int      order[ND_WH_LANGS], no = 0, i, j;
-            float    hid[512];
-            uint32_t mask = w->lang_mask ? w->lang_mask : 0x7Fu;
-            dec_step(w, BOS_ID, 0, hid);
-            logits_all(w, hid, lg);
-            for (k = 0; k < ND_WH_LANGS; k++) {
-                w->lang_logit[k] = lg[LANG_BASE + k];
-                if (mask & (1u << k))
-                    order[no++] = (int)k;
-            }
-            for (i = 1; i < no; i++)
-                for (j = i; j > 0 && w->lang_logit[order[j]] > w->lang_logit[order[j - 1]]; j--) {
-                    int t = order[j]; order[j] = order[j - 1]; order[j - 1] = t;
-                }
-            n = decode_pass(w, order[0], ids, cap, budget, lg, raw, &w->score);
-            w->score_first = w->score;
-            if (w->accept && no > 1) {
-                char text[512];
-                nd_whistle_detok(w, ids, n, text, sizeof(text));
-                if (!w->accept(text, w->accept_ctx)) {
-                    /* Re-decode in the next languages and take the first
-                     * transcript `accept` likes. Otherwise keep the first one:
-                     * choosing by score instead turned 4 of 10 plain English
-                     * questions into garbled other languages. */
-                    uint32_t *alt = (uint32_t *)ND_ALLOC(cap * sizeof(uint32_t));
-                    int       best = order[0];
-                    for (i = 1; i <= (int)w->retry_langs && i < no && alt; i++) {
-                        float    sc;
-                        uint32_t m = decode_pass(w, order[i], alt, cap, budget, lg, raw, &sc);
-                        nd_whistle_detok(w, alt, m, text, sizeof(text));
-                        if (sc >= w->score_first - w->retry_margin &&
-                            w->accept(text, w->accept_ctx)) {
-                            w->score = sc;
-                            best = order[i];
-                            n = m;
-                            memcpy(ids, alt, m * sizeof(uint32_t));
-                            break;
-                        }
-                    }
-                    w->lang = best;
-                    ND_FREE(alt);
-                }
-            }
-        }
+        n = decode_pass(w, 0, ids, cap, budget, lg, raw, &w->score);
         ND_T1(t0, ND_WP_DECODER);
     }
     session_end(w);
@@ -1674,12 +1626,6 @@ int nd_whistle_open(nd_whistle *w, const void *blob, size_t size)
     w->lut   = (float *)ND_ALLOC(nd_cq_lut_floats(2048) * sizeof(float));
     if (!w->lane || !w->xh || !w->lut)
         return -7;
-    w->retry_langs = 2;
-    /* Tuned on 1,020 command clips and 137 sentences without one
-     * (tools/eval_languages.py): 0.2 nats keeps most rescues and adds no
-     * false commands; a looser margin let garbage like "żół białe żół" in. */
-    w->retry_margin = 0.2f;
-    w->lang_mask   = 0x7Fu;
     return nd_whistle_set_depth(w, w->dec_layers);
 }
 
