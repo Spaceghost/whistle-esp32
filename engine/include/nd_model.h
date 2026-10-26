@@ -27,6 +27,7 @@
 
 #include "nd_cact.h"
 #include "nd_tokenizer.h"
+#include "nd_alloc.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -47,7 +48,7 @@ extern "C" {
 /* Small per-token scratch is touched on every weight; keeping it in internal
  * SRAM instead of PSRAM matters far more than its size does. */
 #ifndef ND_ALLOC_FAST
-#define ND_ALLOC_FAST(n) heap_caps_malloc((n), MALLOC_CAP_INTERNAL | MALLOC_CAP_8BIT)
+#define ND_ALLOC_FAST(n) nd_alloc_fast(n)
 #endif
 #ifndef ND_FREE_FAST
 #define ND_FREE_FAST(p) heap_caps_free(p)

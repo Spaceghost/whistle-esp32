@@ -1,4 +1,5 @@
 #include "nd_quant.h"
+#include "nd_alloc.h"
 
 #include <math.h>
 #include <stdlib.h>
@@ -7,7 +8,7 @@
 #include "sdkconfig.h"
 /* Decoded rows and the byte table are read once per multiply-add: keep them
  * in internal SRAM, not PSRAM. */
-#define ND_QUANT_ALLOC(n) heap_caps_malloc((n), MALLOC_CAP_INTERNAL | MALLOC_CAP_8BIT)
+#define ND_QUANT_ALLOC(n) nd_alloc_fast(n)
 #define ND_QUANT_FREE(p)  heap_caps_free(p)
 #else
 #define ND_QUANT_ALLOC(n) malloc(n)
