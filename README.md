@@ -28,8 +28,10 @@ The checker compares all retained logits, encoder bytes, greedy token IDs and
 transcript on the supplied synthetic 16 kHz mono PCM16 fixture. Model scores may
 change after removing candidates from the softmax denominator.
 
-Tokenizer lookup/marker metadata also requests 65,440 fewer heap bytes for the
-original model. These changes do not require Nelibc or remapping token IDs.
+Tokenizer metadata requests 98,236 fewer heap bytes for the original model:
+32,768 from lookup buckets, 32,672 from marker IDs and 32,796 from reading
+immutable scores in place. Internal piece records are now 8 rather than 12
+bytes; rebuild the static engine and its clients together. These changes do not require Nelibc or remapping token IDs.
 `ctest` runs allocation, English API, tokenizer and synthetic model pruning
 regressions without downloading a model; Python 3 is required for the host suite.
 
@@ -347,3 +349,7 @@ Whistle, Needle 2 and their weights are by
 [Cactus Compute](https://github.com/cactus-compute/needle), Apache 2.0. The
 weights are not included here: step 2 of the setup downloads them from
 Hugging Face. This code is Apache 2.0 too.
+
+Compare a previously built tokenizer with a new build using
+`python3 tools/check_tokenizer_compat.py old/nd_dump build/nd_dump model.cact`.
+The deterministic corpus checks token IDs and decoded bytes without downloads.

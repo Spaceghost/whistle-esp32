@@ -88,6 +88,35 @@ static void compare_legacy(nd_tokenizer *small)
     free(legacy.bucket);
 }
 
+static void check_score_order(void)
+{
+    const char *pieces[] = {"<unk>", "a", "b", "c", "d", "ab", "bc", "cd"};
+    const float variants[][3] = {{1,10,5}, {10,10,5}, {-3,-1,-2}};
+    const uint32_t expected[][3] = {{1,6,4}, {5,7,0}, {1,6,4}};
+    const int counts[] = {3,2,3};
+    for (unsigned v = 0; v < 3; v++) {
+        uint8_t blob[256] = {0}; size_t off = 24;
+        put32(blob, 8);
+        for (unsigned i = 0; i < 8; i++) {
+            float score = i < 5 ? -100.0f : variants[v][i-5];
+            uint32_t bits; memcpy(&bits, &score, sizeof(bits)); put32(blob+off, bits);
+            size_t len = strlen(pieces[i]);
+            blob[off+4] = i ? ND_TK_NORMAL : ND_TK_UNKNOWN;
+            blob[off+5] = len; blob[off+6] = 0;
+            memcpy(blob+off+7, pieces[i], len); off += 7+len;
+        }
+        nd_tokenizer t; uint32_t ids[8];
+        assert(nd_tok_init(&t, blob, off) == 0);
+        /* bc's RAW score deliberately begins at an unaligned address. */
+        assert((t.pieces[6].off-7)%4 != 0);
+        int n = nd_tok_encode(&t, "abcd", 4, ids, 8);
+        assert(n == counts[v]);
+        assert(!memcmp(ids, expected[v], (size_t)n*sizeof(*ids)));
+        assert(nd_tok_encode(&t, "abcd", 4, ids, 1) == -1);
+        nd_tok_free(&t);
+    }
+}
+
 static void check_model(const char *path)
 {
     FILE *f = fopen(path, "rb");
@@ -111,7 +140,8 @@ static void check_model(const char *path)
     assert(nd_tok_init(&t, nd_cact_data(&model, &tensor), tensor.nbytes) == 0);
     size_t before = 1;
     while (before < t.n_pieces * 2) before <<= 1;
-    size_t saved = (before - (t.mask + 1)) * sizeof(uint16_t) +
+    size_t saved = t.n_pieces * (12 - sizeof(nd_piece)) +
+                   (before - (t.mask + 1)) * sizeof(uint16_t) +
                    (t.n_pieces - t.n_markers) * sizeof(uint32_t);
     compare_legacy(&t);
     printf("PASS actual model: %u pieces, %u markers; %zu metadata bytes saved; all lookups and corpus identical\n",
@@ -129,8 +159,10 @@ int main(int argc, char **argv)
     allocated = calls = 0;
     assert(nd_tok_init(&t, blob, size) == 0);
     assert(t.n_markers == 31 && t.mask + 1 == 16384);
-    size_t saved = (32768 - 16384) * sizeof(uint16_t) + (8199 - 31) * sizeof(uint32_t);
-    assert(saved == 65440);
+    assert(sizeof(nd_piece) == 8);
+    size_t saved = 8199 * (12 - sizeof(nd_piece)) +
+                   (32768 - 16384) * sizeof(uint16_t) + (8199 - 31) * sizeof(uint32_t);
+    assert(saved == 98236);
     assert(allocated == 8199 * sizeof(nd_piece) + 16384 * sizeof(uint16_t) + 31 * sizeof(uint32_t));
     for (uint32_t i = 1; i < t.n_markers; i++)
         assert(t.pieces[t.markers[i - 1]].len >= t.pieces[t.markers[i]].len);
@@ -150,6 +182,7 @@ int main(int argc, char **argv)
     compare_legacy(&t);
     nd_tok_free(&t);
     free(blob);
+    check_score_order();
     if (argc == 2) check_model(argv[1]);
     printf("PASS tokenizer: %zu metadata bytes saved; lookup/encoding parity; allocation failures; zero markers\n", saved);
 }

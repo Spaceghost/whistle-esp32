@@ -120,7 +120,6 @@ int nd_tok_init(nd_tokenizer *t, const void *blob, size_t size)
         uint16_t slen;
         if (off + 7 > size)
             goto bad;
-        t->pieces[i].score = rd_f32(b + off);
         t->pieces[i].type  = b[off + 4];
         if (t->pieces[i].type == ND_TK_USER_DEFINED)
             marker_count++;
@@ -266,9 +265,12 @@ static int bpe_segment(const nd_tokenizer *t, const char *buf, uint32_t off,
             int32_t  id    = lookup(t, buf + syms[a].off, total);
             if (id < 0)
                 continue;
-            if (best < 0 || t->pieces[id].score > best_score) {
+            /* The score precedes the surface by f32 + u8 + u16. Decode
+             * bytes rather than casting: records need not be float-aligned. */
+            float score = rd_f32(t->blob + t->pieces[id].off - 7);
+            if (best < 0 || score > best_score) {
                 best       = a;
-                best_score = t->pieces[id].score;
+                best_score = score;
             }
         }
         if (best < 0)

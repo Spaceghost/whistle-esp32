@@ -44,7 +44,7 @@ typedef struct {
     uint32_t off;   /* offset of the surface bytes within the blob */
     uint16_t len;
     uint8_t  type;
-    float    score;
+    /* Scores stay in the immutable RAW blob; do not cache one float per ID. */
 } nd_piece;
 
 typedef struct {
