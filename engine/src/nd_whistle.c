@@ -1323,24 +1323,22 @@ int nd_whistle_find_speech(const float *x, uint32_t n, float floor_rms,
 {
     const uint32_t W = 320;                       /* 20 ms windows */
     uint32_t       nw = n / W, i, loud = 0, first = 0, last = 0;
-    float         *r, thr;
+    float          thr;
 
     if (nw < 5)
         return 0;
-    r = (float *)ND_ALLOC(nw * sizeof(float));
-    if (!r)
-        return 0;
-    for (i = 0; i < nw; i++) {
-        float    e = 0.0f;
-        uint32_t k;
-        for (k = 0; k < W; k++)
-            e += x[i * W + k] * x[i * W + k];
-        r[i] = sqrtf(e / (float)W);
-    }
     if (floor_rms <= 0.0f) {                      /* 10th-percentile window */
         float   *sorted = (float *)ND_ALLOC(nw * sizeof(float));
         uint32_t a, b;
-        memcpy(sorted, r, nw * sizeof(float));
+        if (!sorted)
+            return 0;
+        for (i = 0; i < nw; i++) {
+            float e = 0.0f;
+            uint32_t k;
+            for (k = 0; k < W; k++)
+                e += x[i * W + k] * x[i * W + k];
+            sorted[i] = sqrtf(e / (float)W);
+        }
         for (a = 1; a < nw; a++)
             for (b = a; b > 0 && sorted[b - 1] > sorted[b]; b--) {
                 float t = sorted[b]; sorted[b] = sorted[b - 1]; sorted[b - 1] = t;
@@ -1349,14 +1347,21 @@ int nd_whistle_find_speech(const float *x, uint32_t n, float floor_rms,
         ND_FREE(sorted);
     }
     thr = (floor_rms > 1e-7f ? floor_rms : 1e-7f) * powf(10.0f, min_db / 20.0f);
-    for (i = 0; i < nw; i++)
-        if (r[i] > thr) {
+    for (i = 0; i < nw; i++) {
+        /* Recompute in temporal order instead of retaining a second RMS
+         * array while sorting the percentile. The same operations preserve
+         * the threshold/boundaries; a supplied floor needs no allocation. */
+        float e = 0.0f;
+        uint32_t k;
+        for (k = 0; k < W; k++)
+            e += x[i * W + k] * x[i * W + k];
+        if (sqrtf(e / (float)W) > thr) {
             if (!loud)
                 first = i;
             last = i;
             loud++;
         }
-    ND_FREE(r);
+    }
     if (loud < 5)                                 /* under 100 ms of signal */
         return 0;
     {

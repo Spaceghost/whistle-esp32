@@ -49,6 +49,12 @@ target_include_directories(tokenizer_memory_test PRIVATE ../engine/include)
 target_compile_options(tokenizer_memory_test PRIVATE -UNDEBUG)
 add_test(NAME tokenizer_memory COMMAND tokenizer_memory_test)
 
+add_executable(speech_gate_test speech_gate_test.c)
+target_link_libraries(speech_gate_test PRIVATE needle_engine)
+target_link_options(speech_gate_test PRIVATE -Wl,--wrap=malloc -Wl,--wrap=free)
+target_compile_options(speech_gate_test PRIVATE -UNDEBUG)
+add_test(NAME speech_gate_memory COMMAND speech_gate_test)
+
 find_package(Python3 REQUIRED COMPONENTS Interpreter)
 add_test(NAME english_model_pruning
          COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/english_model_test.py)
