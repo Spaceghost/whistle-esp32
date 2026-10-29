@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "date": "2026-10-29",
+  "status": "tooling_milestone_complete_temporarily_paused_by_parent",
+  "standalone_guard_tests_passed": 15,
+  "cmake_ctest_suites_passed": 8,
+  "full_corpus_preparation_run": false,
+  "real_tokenizer_training_run": false,
+  "neural_training_run": false,
+  "firmware_or_model_changed": false,
+  "verified_downloads": [
+    {
+      "file": "dev-clean.tar.gz",
+      "source": "https://openslr.trmal.net/resources/12/dev-clean.tar.gz",
+      "bytes": 337926286,
+      "upstream_md5": "42e2234ba48799c1f50f24a7926300a1",
+      "sha256": "76f87d090650617fca0cac8f88b9416e0ebf80350acb97b343a85fa903728ab3"
+    },
+    {
+      "file": "test-clean.tar.gz",
+      "source": "https://openslr.trmal.net/resources/12/test-clean.tar.gz",
+      "bytes": 346663984,
+      "upstream_md5": "32fa31d27d2e1cad72775fee3f4849a9",
+      "sha256": "39fde525e59672dc6d1551919b1478f724438a95aa55f874b576be21967e6c23"
+    }
+  ],
+  "training_download": {
+    "file": "train-clean-100.tar.gz.part",
+    "bytes_preserved": 4341647941,
+    "complete": false,
+    "process_stopped_for_pause": true
+  },
+  "sentencepiece_build": {
+    "requested_version": "0.2.2",
+    "installed": false,
+    "process_terminal": true,
+    "failure": "Missing Python.h for Python 3.14; native dependency build completed but Python binding failed",
+    "log": "bak:/srv/ai/artifacts/ackerman-os/english-corpus-20261029/tokenizer-build-native-cmake.log"
+  },
+  "source_sha256": {
+    "tools/prepare_english_corpus.py": "a4ce295e01762f74852f8415564be7a48caaa33a5bd7f4e7a40b6120b5809534",
+    "tools/train_english_tokenizer.py": "65965e48a4eda556ab8e75a7a264b873584235873064618f687318cad092088b",
+    "tests/test_english_corpus.py": "2b8c301c3784cb4d18c8d492e122b9529f27286b57e8c497320d67bcbf128edb",
+    "tests/test_english_tokenizer.py": "e87e6d35b4271887a7206fe990a0d075ed3bd2f80f07d52fd3ab94ea72def182"
+  },
+  "resume_requires_explicit_parent_instruction": true
+}

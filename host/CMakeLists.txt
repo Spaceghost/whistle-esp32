@@ -64,3 +64,7 @@ add_executable(decoder_score_test decoder_score_test.c)
 target_link_libraries(decoder_score_test PRIVATE needle_engine)
 target_compile_options(decoder_score_test PRIVATE -UNDEBUG)
 add_test(NAME decoder_confidence_memory COMMAND decoder_score_test)
+
+# Corpus and tokenizer admission guards need only the Python standard library.
+add_test(NAME english_corpus_guards
+         COMMAND ${Python3_EXECUTABLE} -m unittest discover -s ${CMAKE_CURRENT_SOURCE_DIR}/../tests -p test_english_*.py)

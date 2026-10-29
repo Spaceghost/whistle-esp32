@@ -44,6 +44,12 @@ additional bytes in the decoder-pass frame and 17 extra object text bytes.
 Physical stack margin and full firmware rollout remain unverified.
 [Design, tests and reproduction](docs/decoder-memory.md).
 
+## English student research
+
+A source-verified English corpus builder and smaller BPE vocabulary experiment
+are available in [the research guide](docs/english-corpus.md). These prepare
+training/evaluation data; they do not produce a deployable replacement model.
+
 ## What you need
 
 | Part | Notes |
