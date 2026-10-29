@@ -58,3 +58,9 @@ add_test(NAME speech_gate_memory COMMAND speech_gate_test)
 find_package(Python3 REQUIRED COMPONENTS Interpreter)
 add_test(NAME english_model_pruning
          COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/english_model_test.py)
+
+# Static scorer access exercises production sparse undo against the prior algorithm.
+add_executable(decoder_score_test decoder_score_test.c)
+target_link_libraries(decoder_score_test PRIVATE needle_engine)
+target_compile_options(decoder_score_test PRIVATE -UNDEBUG)
+add_test(NAME decoder_confidence_memory COMMAND decoder_score_test)

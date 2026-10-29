@@ -1210,15 +1210,19 @@ static int said(const char *text_in, const char *phrase)
     return 0;
 }
 
-static void bias_keywords(const nd_whistle *w, const uint32_t *ids, uint32_t n,
-                          float *lg)
+/* At most one logit per keyword sequence changes. Keep exact originals:
+ * subtracting the bonus later would not reverse floating-point rounding. */
+typedef struct { uint32_t token; float original; } keyword_undo;
+
+static uint32_t bias_keywords(const nd_whistle *w, const uint32_t *ids, uint32_t n,
+                              float *lg, keyword_undo *undo)
 {
     uint8_t  done[ND_WH_MAX_KW];      /* phrase group already said */
-    uint32_t q, k, j;
+    uint32_t q, k, j, touched = 0;
     char     text[512];
 
     if (!w->n_kw)
-        return;
+        return 0;
     if (nd_tok_decode(&w->tok, ids, n, text, sizeof(text)) < 0)
         text[0] = '\0';
     memset(done, 0, sizeof(done));
@@ -1237,8 +1241,16 @@ static void bias_keywords(const nd_whistle *w, const uint32_t *ids, uint32_t n,
                 break;
             }
         }
-        lg[w->kw[q][best]] += w->kw_bonus;
+        uint32_t token = w->kw[q][best];
+        for (j = 0; j < touched && undo[j].token != token; j++)
+            ;
+        if (j == touched) {
+            undo[touched].token = token;
+            undo[touched++].original = lg[token];
+        }
+        lg[token] += w->kw_bonus;
     }
+    return touched;
 }
 
 static int add_keywords(nd_whistle *w, const char *list)
@@ -1392,9 +1404,10 @@ static uint32_t tail_loop(const uint32_t *ids, uint32_t n)
  * log-prob of the chosen tokens (EOS included) is computed from the logits
  * before keyword bias, so it measures fit, not bias. */
 static uint32_t decode_pass(nd_whistle *w, int lang, uint32_t *ids, uint32_t cap,
-                            uint32_t budget, float *lg, float *raw, float *score)
+                            uint32_t budget, float *lg, float *score)
 {
     float    hid[512], sum = 0.0f;
+    keyword_undo undo[ND_WH_MAX_KW];
     uint32_t pos = 0, n = 0, tok, k;
 
     dec_step(w, BOS_ID, pos++, hid);
@@ -1405,19 +1418,21 @@ static uint32_t decode_pass(nd_whistle *w, int lang, uint32_t *ids, uint32_t cap
         float    mx, se = 0.0f, lse;
         dec_step(w, tok, pos++, hid);
         logits_all(w, hid, lg);
-        memcpy(raw, lg, w->vocab * sizeof(float));
-        mx = raw[0];
+        mx = lg[0];
         for (k = 1; k < w->vocab; k++)
-            if (raw[k] > mx)
-                mx = raw[k];
+            if (lg[k] > mx)
+                mx = lg[k];
         for (k = 0; k < w->vocab; k++)
-            se += nd_expf(raw[k] - mx);
+            se += nd_expf(lg[k] - mx);
         lse = mx + logf(se);
-        bias_keywords(w, ids, n, lg);
+        uint32_t touched = bias_keywords(w, ids, n, lg, undo);
         for (k = 1; k < w->vocab; k++)
             if (lg[k] > lg[best])
                 best = k;
-        sum += raw[best] - lse;
+        /* Restore before confidence scoring, including duplicate boosts. */
+        for (k = 0; k < touched; k++)
+            lg[undo[k].token] = undo[k].original;
+        sum += lg[best] - lse;
         if (best == EOS_ID || n >= cap || n >= budget)
             break;
         ids[n++] = best;
@@ -1441,24 +1456,21 @@ int nd_whistle_decode(nd_whistle *w, const float *enc, uint32_t T, int lang,
      * than ~6 tokens per second of audio (an encoder frame is 80 ms). */
     uint32_t budget = 8 + T / 2;
     float   *lg  = (float *)ND_ALLOC(w->vocab * sizeof(float));
-    float   *raw = (float *)ND_ALLOC(w->vocab * sizeof(float));
     uint32_t n = 0;
 
     /* -1 remains an English alias for source compatibility. Reject every
      * unsupported language before starting a decoder session. */
-    if (lang < -1 || lang > 0 || !lg || !raw || session_begin(w, enc, T) != 0) {
+    if (lang < -1 || lang > 0 || !lg || session_begin(w, enc, T) != 0) {
         ND_FREE(lg);
-        ND_FREE(raw);
         return -1;
     }
     {
         ND_T0(t0);
-        n = decode_pass(w, 0, ids, cap, budget, lg, raw, &w->score);
+        n = decode_pass(w, 0, ids, cap, budget, lg, &w->score);
         ND_T1(t0, ND_WP_DECODER);
     }
     session_end(w);
     ND_FREE(lg);
-    ND_FREE(raw);
     return (int)n;
 }
 

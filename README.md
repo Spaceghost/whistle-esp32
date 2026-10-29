@@ -35,6 +35,15 @@ bytes; rebuild the static engine and its clients together. These changes do not 
 `ctest` runs allocation, English API, tokenizer and synthetic model pruning
 regressions without downloading a model; Python 3 is required for the host suite.
 
+## Decoder memory candidate
+
+A bounded keyword undo list removes the second full-vocabulary logit allocation:
+**32,772 fewer decode heap bytes** on the locked English model, with exact
+synthetic transcript/token/confidence parity. The Xtensa compiler reports 256
+additional bytes in the decoder-pass frame and 17 extra object text bytes.
+Physical stack margin and full firmware rollout remain unverified.
+[Design, tests and reproduction](docs/decoder-memory.md).
+
 ## What you need
 
 | Part | Notes |

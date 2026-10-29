@@ -1,0 +1,88 @@
+{
+  "schema": 1,
+  "baseline_commit": "4542da71aa628a3381b4fcbec7ea52353f4487bd",
+  "model_sha256": "8c956a951107b03a1832a3c6d665c88e52cc59fadcf91397077416f22f5dca9b",
+  "fixture_sha256": "785d48072929e815484b13545926dbc8dd214ff93eb081acc86ef202dff8c3a0",
+  "host_only": true,
+  "no_firmware_or_model_deployed": true,
+  "monolingual_neural_pruning_proven": false,
+  "cases": [
+    {
+      "name": "plain",
+      "transcript_identical": true,
+      "token_ids_identical": true,
+      "score_float_bits_identical": true,
+      "before": {
+        "peak": 1046344,
+        "live": 0,
+        "logits_calls": 2,
+        "allocations": 771
+      },
+      "after": {
+        "peak": 1013572,
+        "live": 0,
+        "logits_calls": 1,
+        "allocations": 770
+      },
+      "decode_peak_heap_bytes_saved": 32772
+    },
+    {
+      "name": "keywords",
+      "transcript_identical": true,
+      "token_ids_identical": true,
+      "score_float_bits_identical": true,
+      "before": {
+        "peak": 1046344,
+        "live": 0,
+        "logits_calls": 2,
+        "allocations": 771
+      },
+      "after": {
+        "peak": 1013572,
+        "live": 0,
+        "logits_calls": 1,
+        "allocations": 770
+      },
+      "decode_peak_heap_bytes_saved": 32772
+    }
+  ],
+  "target_object_check": {
+    "schema": 1,
+    "compiler": "xtensa-esp-elf GCC14.2.0_20260121",
+    "sdk_image": "209569617d40dc2190907bfa7508aa5dfc0823698663fc28a4405ef8012a78b0",
+    "actual_watch66_compile_flags_reused": true,
+    "full_firmware_build": false,
+    "physical_stack_high_water_verified": false,
+    "measurements": {
+      "before": {
+        "object_text_bytes": 19229,
+        "object_rodata_bytes": 0,
+        "object_data_bss_bytes": 4168,
+        "stack": {
+          "decode_pass.constprop": 3184,
+          "nd_whistle_decode": 64
+        }
+      },
+      "after": {
+        "object_text_bytes": 19246,
+        "object_rodata_bytes": 0,
+        "object_data_bss_bytes": 4168,
+        "stack": {
+          "decode_pass.constprop": 3440,
+          "nd_whistle_decode": 48
+        }
+      }
+    }
+  },
+  "candidate_source_sha256": "ac99de143cec9c0ca0b808b5598093c58209a562f96d7980214e771475b27f69",
+  "regression_checks": {
+    "full_vocabulary_comparisons": 4096,
+    "full_keyword_capacity_cases": 372,
+    "address_and_undefined_sanitizers_passed_on_bak": true,
+    "existing_host_executables_passed": 5,
+    "exporter_structural_tests_passed": 5,
+    "ctest_driver_run": false
+  },
+  "original_fixture_sha256": "11ea14c0c80c05a07c5ae7990152619dcb725d45d0825d329d55ae05770334d3",
+  "fixture_conversion": "ffmpeg -i greeting-qwen-smooth.wav -ar 16000 -ac 1 -c:a pcm_s16le greeting-qwen-smooth-16k.wav"
+}
