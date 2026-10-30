@@ -1,0 +1,516 @@
+{
+  "schema": 1,
+  "date": "2026-10-30",
+  "scope": "Full-parameter CPU pipeline probe, two short training clips; not a usable speech recognizer",
+  "status": "paused at parent request after successful cross-process resume",
+  "focused_guard_tests_passed": 22,
+  "runs": [
+    {
+      "name": "step1-v4",
+      "training": {
+        "schema": 1,
+        "scope": "Bounded full-parameter CPU training check; not an accepted speech model",
+        "source_commit": "b4fc11b04f1852888d375c8c6dfbaca44572d014",
+        "signature": {
+          "corpus_sha256": "0dedae607af955f07c74e0db68cb8e506c4c9d6f16d131dbc1ed4b37e163da4e",
+          "tokenizer_sha256": "70b605e6951bf8460742ed3756019ad5e57a940a0d0b0e14d07b4b2f96fc6885",
+          "train_manifest_sha256": "ceb2f15fd1d406006d7aa5ec53b38b905c655e5d182e032d7cf0e12c7f8eab00",
+          "source_receipt_sha256": "0217a8bdd09d45d31f2e3ed3db1bfba04fb72c63aa124ec3b35ff98d5836963c",
+          "config": {
+            "text": 2048,
+            "languages": [
+              "en"
+            ],
+            "dim": 512,
+            "kv_heads": 2,
+            "qk_dim": 48,
+            "v_dim": 64,
+            "enc_layers": 8,
+            "dec_layers": 2,
+            "conv_kernel": 9,
+            "taps": 3,
+            "lanes": 4,
+            "enc_lanes": 4,
+            "sites": [
+              1
+            ],
+            "orders": [
+              2,
+              3
+            ],
+            "slots": 18432,
+            "hashes": 2,
+            "stem": 128,
+            "stem_stages": 3,
+            "rope": 100000.0,
+            "mels": 80,
+            "rate": 16000,
+            "fft": 512,
+            "win": 400,
+            "hop": 160,
+            "max_tokens": 320,
+            "pad": 0,
+            "eos": 1,
+            "bos": 2,
+            "dtype": "float32",
+            "flash": false,
+            "remat": true,
+            "scan_unroll": 1
+          },
+          "training_script_sha256": "45805c0d0cd5a3d3bddbd764864f34e0c76c1d5051ad25fdd2784d909b2a800b",
+          "packages": {
+            "jax": "0.12.0.1",
+            "jaxlib": "0.12.0.1",
+            "flax": "0.12.12",
+            "optax": "0.2.8",
+            "numpy": "2.5.4",
+            "safetensors": "0.8.0",
+            "sentencepiece": "0.2.2",
+            "soundfile": "0.14.0"
+          },
+          "python": "3.12.14",
+          "sampler": "Random(seed+epoch) shuffle with global-step offset",
+          "seed": 0,
+          "batch_size": 1,
+          "maximum_samples": 32000,
+          "batch_tokens": 32,
+          "qat_bits": 4,
+          "lr": 0.0001,
+          "selected_train_ids_sha256": "1800d5726190483634a25096a9fcae13e26111f2956cc16f62ea12c9607aac7d",
+          "optimizer": "clip1.0 + optax.adamw(default weight_decay)"
+        },
+        "parameters": 29537627,
+        "all_parameters_trainable": true,
+        "frozen_parameters": 0,
+        "initial_step": 0,
+        "final_step": 1,
+        "resumed": false,
+        "selection": {
+          "eligible": 2,
+          "excluded_duration": 28513,
+          "excluded_tokens": 0,
+          "limit": 2
+        },
+        "steps": [
+          {
+            "step": 1,
+            "loss": 9.127789497375488,
+            "gradient_norm": 295.3498229980469,
+            "update_norm": 0.3983422517776489,
+            "all_gradients_finite": true
+          }
+        ],
+        "checkpoint": "step-00000001",
+        "checkpoint_manifest_sha256": "193634fb52ddfe0fd466afb1f5548d5d45a5511c3cc9209a92a85002ef9021f3",
+        "peak_rss_bytes": 2368479232,
+        "backend": "cpu",
+        "neural_accuracy_verified": false,
+        "native_export_compatibility_verified": false,
+        "deployment_permitted": false
+      },
+      "guard": {
+        "exit_code": 0,
+        "stop_reason": null,
+        "peak_child_rss_bytes": 2368262144,
+        "elapsed_seconds": 62.646,
+        "gpu_used": false,
+        "rss_limit_bytes": 4294967296,
+        "minimum_system_available_bytes": 1073741824,
+        "system_available_bytes_at_launch": 7269060608
+      },
+      "checkpoint": {
+        "metadata": {
+          "config": {
+            "text": 2048,
+            "languages": [
+              "en"
+            ],
+            "dim": 512,
+            "kv_heads": 2,
+            "qk_dim": 48,
+            "v_dim": 64,
+            "enc_layers": 8,
+            "dec_layers": 2,
+            "conv_kernel": 9,
+            "taps": 3,
+            "lanes": 4,
+            "enc_lanes": 4,
+            "sites": [
+              1
+            ],
+            "orders": [
+              2,
+              3
+            ],
+            "slots": 18432,
+            "hashes": 2,
+            "stem": 128,
+            "stem_stages": 3,
+            "rope": 100000.0,
+            "mels": 80,
+            "rate": 16000,
+            "fft": 512,
+            "win": 400,
+            "hop": 160,
+            "max_tokens": 320,
+            "pad": 0,
+            "eos": 1,
+            "bos": 2,
+            "dtype": "float32",
+            "flash": false,
+            "remat": true,
+            "scan_unroll": 1
+          },
+          "step": 1,
+          "signature": {
+            "corpus_sha256": "0dedae607af955f07c74e0db68cb8e506c4c9d6f16d131dbc1ed4b37e163da4e",
+            "tokenizer_sha256": "70b605e6951bf8460742ed3756019ad5e57a940a0d0b0e14d07b4b2f96fc6885",
+            "train_manifest_sha256": "ceb2f15fd1d406006d7aa5ec53b38b905c655e5d182e032d7cf0e12c7f8eab00",
+            "source_receipt_sha256": "0217a8bdd09d45d31f2e3ed3db1bfba04fb72c63aa124ec3b35ff98d5836963c",
+            "config": {
+              "text": 2048,
+              "languages": [
+                "en"
+              ],
+              "dim": 512,
+              "kv_heads": 2,
+              "qk_dim": 48,
+              "v_dim": 64,
+              "enc_layers": 8,
+              "dec_layers": 2,
+              "conv_kernel": 9,
+              "taps": 3,
+              "lanes": 4,
+              "enc_lanes": 4,
+              "sites": [
+                1
+              ],
+              "orders": [
+                2,
+                3
+              ],
+              "slots": 18432,
+              "hashes": 2,
+              "stem": 128,
+              "stem_stages": 3,
+              "rope": 100000.0,
+              "mels": 80,
+              "rate": 16000,
+              "fft": 512,
+              "win": 400,
+              "hop": 160,
+              "max_tokens": 320,
+              "pad": 0,
+              "eos": 1,
+              "bos": 2,
+              "dtype": "float32",
+              "flash": false,
+              "remat": true,
+              "scan_unroll": 1
+            },
+            "training_script_sha256": "45805c0d0cd5a3d3bddbd764864f34e0c76c1d5051ad25fdd2784d909b2a800b",
+            "packages": {
+              "jax": "0.12.0.1",
+              "jaxlib": "0.12.0.1",
+              "flax": "0.12.12",
+              "optax": "0.2.8",
+              "numpy": "2.5.4",
+              "safetensors": "0.8.0",
+              "sentencepiece": "0.2.2",
+              "soundfile": "0.14.0"
+            },
+            "python": "3.12.14",
+            "sampler": "Random(seed+epoch) shuffle with global-step offset",
+            "seed": 0,
+            "batch_size": 1,
+            "maximum_samples": 32000,
+            "batch_tokens": 32,
+            "qat_bits": 4,
+            "lr": 0.0001,
+            "selected_train_ids_sha256": "1800d5726190483634a25096a9fcae13e26111f2956cc16f62ea12c9607aac7d",
+            "optimizer": "clip1.0 + optax.adamw(default weight_decay)"
+          },
+          "initialization": "fresh random, no inherited model weights",
+          "all_parameters_trainable": true,
+          "trainable_parameters": 29537627,
+          "neural_accuracy_verified": false,
+          "deployment_permitted": false
+        },
+        "files": {
+          "model": {
+            "file": "model.safetensors",
+            "bytes": 118165108,
+            "sha256": "d44e76847223726b30e9df3a16de46eb50375f55355e09ace9395d1cddb2cf89"
+          },
+          "optimizer": {
+            "file": "optimizer.msgpack",
+            "bytes": 236308569,
+            "sha256": "435adf5c3eb4b4c2f760e5c3c33e0bdcabd7d5fc8e22b6cf069248bd91b99df0"
+          }
+        }
+      }
+    },
+    {
+      "name": "step2-resume",
+      "training": {
+        "schema": 1,
+        "scope": "Bounded full-parameter CPU training check; not an accepted speech model",
+        "source_commit": "b4fc11b04f1852888d375c8c6dfbaca44572d014",
+        "signature": {
+          "corpus_sha256": "0dedae607af955f07c74e0db68cb8e506c4c9d6f16d131dbc1ed4b37e163da4e",
+          "tokenizer_sha256": "70b605e6951bf8460742ed3756019ad5e57a940a0d0b0e14d07b4b2f96fc6885",
+          "train_manifest_sha256": "ceb2f15fd1d406006d7aa5ec53b38b905c655e5d182e032d7cf0e12c7f8eab00",
+          "source_receipt_sha256": "0217a8bdd09d45d31f2e3ed3db1bfba04fb72c63aa124ec3b35ff98d5836963c",
+          "config": {
+            "text": 2048,
+            "languages": [
+              "en"
+            ],
+            "dim": 512,
+            "kv_heads": 2,
+            "qk_dim": 48,
+            "v_dim": 64,
+            "enc_layers": 8,
+            "dec_layers": 2,
+            "conv_kernel": 9,
+            "taps": 3,
+            "lanes": 4,
+            "enc_lanes": 4,
+            "sites": [
+              1
+            ],
+            "orders": [
+              2,
+              3
+            ],
+            "slots": 18432,
+            "hashes": 2,
+            "stem": 128,
+            "stem_stages": 3,
+            "rope": 100000.0,
+            "mels": 80,
+            "rate": 16000,
+            "fft": 512,
+            "win": 400,
+            "hop": 160,
+            "max_tokens": 320,
+            "pad": 0,
+            "eos": 1,
+            "bos": 2,
+            "dtype": "float32",
+            "flash": false,
+            "remat": true,
+            "scan_unroll": 1
+          },
+          "training_script_sha256": "45805c0d0cd5a3d3bddbd764864f34e0c76c1d5051ad25fdd2784d909b2a800b",
+          "packages": {
+            "jax": "0.12.0.1",
+            "jaxlib": "0.12.0.1",
+            "flax": "0.12.12",
+            "optax": "0.2.8",
+            "numpy": "2.5.4",
+            "safetensors": "0.8.0",
+            "sentencepiece": "0.2.2",
+            "soundfile": "0.14.0"
+          },
+          "python": "3.12.14",
+          "sampler": "Random(seed+epoch) shuffle with global-step offset",
+          "seed": 0,
+          "batch_size": 1,
+          "maximum_samples": 32000,
+          "batch_tokens": 32,
+          "qat_bits": 4,
+          "lr": 0.0001,
+          "selected_train_ids_sha256": "1800d5726190483634a25096a9fcae13e26111f2956cc16f62ea12c9607aac7d",
+          "optimizer": "clip1.0 + optax.adamw(default weight_decay)"
+        },
+        "parameters": 29537627,
+        "all_parameters_trainable": true,
+        "frozen_parameters": 0,
+        "initial_step": 1,
+        "final_step": 2,
+        "resumed": true,
+        "selection": {
+          "eligible": 2,
+          "excluded_duration": 28513,
+          "excluded_tokens": 0,
+          "limit": 2
+        },
+        "steps": [
+          {
+            "step": 2,
+            "loss": 8.732322692871094,
+            "gradient_norm": 76.38385009765625,
+            "update_norm": 0.3073427677154541,
+            "all_gradients_finite": true
+          }
+        ],
+        "checkpoint": "step-00000002",
+        "checkpoint_manifest_sha256": "1789117db29ee3e9309a073a150a746950c5030eee2240fcad8a457f599642eb",
+        "peak_rss_bytes": 2454315008,
+        "backend": "cpu",
+        "neural_accuracy_verified": false,
+        "native_export_compatibility_verified": false,
+        "deployment_permitted": false
+      },
+      "guard": {
+        "exit_code": 0,
+        "stop_reason": null,
+        "peak_child_rss_bytes": 2454536192,
+        "elapsed_seconds": 64.243,
+        "gpu_used": false,
+        "rss_limit_bytes": 4294967296,
+        "minimum_system_available_bytes": 1073741824,
+        "system_available_bytes_at_launch": 7266230272
+      },
+      "checkpoint": {
+        "metadata": {
+          "config": {
+            "text": 2048,
+            "languages": [
+              "en"
+            ],
+            "dim": 512,
+            "kv_heads": 2,
+            "qk_dim": 48,
+            "v_dim": 64,
+            "enc_layers": 8,
+            "dec_layers": 2,
+            "conv_kernel": 9,
+            "taps": 3,
+            "lanes": 4,
+            "enc_lanes": 4,
+            "sites": [
+              1
+            ],
+            "orders": [
+              2,
+              3
+            ],
+            "slots": 18432,
+            "hashes": 2,
+            "stem": 128,
+            "stem_stages": 3,
+            "rope": 100000.0,
+            "mels": 80,
+            "rate": 16000,
+            "fft": 512,
+            "win": 400,
+            "hop": 160,
+            "max_tokens": 320,
+            "pad": 0,
+            "eos": 1,
+            "bos": 2,
+            "dtype": "float32",
+            "flash": false,
+            "remat": true,
+            "scan_unroll": 1
+          },
+          "step": 2,
+          "signature": {
+            "corpus_sha256": "0dedae607af955f07c74e0db68cb8e506c4c9d6f16d131dbc1ed4b37e163da4e",
+            "tokenizer_sha256": "70b605e6951bf8460742ed3756019ad5e57a940a0d0b0e14d07b4b2f96fc6885",
+            "train_manifest_sha256": "ceb2f15fd1d406006d7aa5ec53b38b905c655e5d182e032d7cf0e12c7f8eab00",
+            "source_receipt_sha256": "0217a8bdd09d45d31f2e3ed3db1bfba04fb72c63aa124ec3b35ff98d5836963c",
+            "config": {
+              "text": 2048,
+              "languages": [
+                "en"
+              ],
+              "dim": 512,
+              "kv_heads": 2,
+              "qk_dim": 48,
+              "v_dim": 64,
+              "enc_layers": 8,
+              "dec_layers": 2,
+              "conv_kernel": 9,
+              "taps": 3,
+              "lanes": 4,
+              "enc_lanes": 4,
+              "sites": [
+                1
+              ],
+              "orders": [
+                2,
+                3
+              ],
+              "slots": 18432,
+              "hashes": 2,
+              "stem": 128,
+              "stem_stages": 3,
+              "rope": 100000.0,
+              "mels": 80,
+              "rate": 16000,
+              "fft": 512,
+              "win": 400,
+              "hop": 160,
+              "max_tokens": 320,
+              "pad": 0,
+              "eos": 1,
+              "bos": 2,
+              "dtype": "float32",
+              "flash": false,
+              "remat": true,
+              "scan_unroll": 1
+            },
+            "training_script_sha256": "45805c0d0cd5a3d3bddbd764864f34e0c76c1d5051ad25fdd2784d909b2a800b",
+            "packages": {
+              "jax": "0.12.0.1",
+              "jaxlib": "0.12.0.1",
+              "flax": "0.12.12",
+              "optax": "0.2.8",
+              "numpy": "2.5.4",
+              "safetensors": "0.8.0",
+              "sentencepiece": "0.2.2",
+              "soundfile": "0.14.0"
+            },
+            "python": "3.12.14",
+            "sampler": "Random(seed+epoch) shuffle with global-step offset",
+            "seed": 0,
+            "batch_size": 1,
+            "maximum_samples": 32000,
+            "batch_tokens": 32,
+            "qat_bits": 4,
+            "lr": 0.0001,
+            "selected_train_ids_sha256": "1800d5726190483634a25096a9fcae13e26111f2956cc16f62ea12c9607aac7d",
+            "optimizer": "clip1.0 + optax.adamw(default weight_decay)"
+          },
+          "initialization": "fresh random, no inherited model weights",
+          "all_parameters_trainable": true,
+          "trainable_parameters": 29537627,
+          "neural_accuracy_verified": false,
+          "deployment_permitted": false
+        },
+        "files": {
+          "model": {
+            "file": "model.safetensors",
+            "bytes": 118165108,
+            "sha256": "818c6b92dfa0e520d99807787494baf0181aa7e8c94c9988c93f738490aafab0"
+          },
+          "optimizer": {
+            "file": "optimizer.msgpack",
+            "bytes": 236308569,
+            "sha256": "709c6b1a73268ededb6074436a189772d887f19ba4ec051edbca966c13902497"
+          }
+        }
+      }
+    }
+  ],
+  "acceptance": {
+    "finite_full_parameter_update": true,
+    "checkpoint_files_rehashed": true,
+    "model_and_optimizer_cross_process_resume": true,
+    "bit_exact_uninterrupted_equivalence_tested": false,
+    "full_corpus_trained": false,
+    "speech_accuracy_verified": false,
+    "native_export_verified": false,
+    "watch_acceptance_verified": false,
+    "deployment_permitted": false
+  },
+  "earlier_attempts": {
+    "step1": "Remote origin path remapped incorrectly; fixed with lexical origin paths and regression guard",
+    "step1-v2": "Stopped by 3 GiB RSS guard before a completed step",
+    "step1-v3": "Stopped by 3 GiB RSS guard before a completed step"
+  },
+  "preserved_hardware": "No firmware or production model changed; occupied GPU serving models untouched"
+}

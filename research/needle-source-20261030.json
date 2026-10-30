@@ -1,0 +1,19 @@
+{
+  "commit": "b4fc11b04f1852888d375c8c6dfbaca44572d014",
+  "archive_sha256": "74c157ce6fd599691dd4fd3ae0a2218b03507a9ec3fcbc57adc798767fb49f86",
+  "files": {
+    "needle/model/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "needle/model/architecture.py": "9f69668218b339ad46ff90867979b23104e9dff317417b2c4768c2adbafecb3a",
+    "needle/model/architecture_mlx.py": "18bf11b795e583d1d3b481c663e4be7a722d60ecce3c1cc37fcc0b9dc7c60bda",
+    "needle/model/build.py": "8957ce23efedfb6eca788a2eb51b09348c418a883efa4a04dbe3ddc24a94784d",
+    "needle/model/checkpoints.py": "5e9583c648e9c444805989506ccd24a3e5a2b937baca7f3bcbd913aea82e6631",
+    "needle/model/export.py": "c4463b2b362cb55743c8036546f23ada7d6ca583a4703e3bd811acf879adcf36",
+    "needle/model/finetune.py": "049ed4e050b104e4a7572425ee54d3f8d18a68adb860af11d1c81d6fc181f6a5",
+    "needle/model/quantize.py": "27d77491f41af60f75fd43bf7b003695ac05173b30e91dff69cafc30c7737d61",
+    "needle/model/quantize_mlx.py": "7dbd6dbe0126374477bfc02c3f9778a0a9d151a6fd59266dca268fac78915538",
+    "needle/model/run.py": "38a602d70e2021e686073c9d27386b44efb5d337391e667d3a6db4a408d47349",
+    "needle/model/tokenizer.py": "ad348fce5d93c99ce310eca41f60ac80c83cb958cca31363e515767d2ae91bce",
+    "needle/model/whistle.py": "33f5e34ebcdd6b891f3d61660d7b3524234ad9e74eb0082b2533e8901badb20e",
+    "needle/model/whistle_finetune.py": "7e49e287adfbde5f6be24313590cc143279dccb0f33029670b4c56f1905f029b"
+  }
+}
