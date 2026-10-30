@@ -1,0 +1,119 @@
+{
+  "schema": 1,
+  "date": "2026-10-30",
+  "status": "resumed_environment_ready_corpus_preparation_running",
+  "environment": {
+    "python": "3.12.16",
+    "sentencepiece": "0.2.2",
+    "uv_bootstrap": "0.13.6",
+    "native_api_smoke_passed": true,
+    "standalone_guard_tests_passed": 15,
+    "system_python_changed": false,
+    "system_dns_changed": false,
+    "research_zfs_mount_restored": true,
+    "bootstrap_receipt": "/srv/ai/cache/ackerman-english-bootstrap-20261030/receipt.json",
+    "build_inputs": "sentencepiece-bundled-build-inputs-20261030.json",
+    "compiler_override": {
+      "CC": "/usr/bin/cc",
+      "CXX": "/usr/bin/c++",
+      "LDSHARED": "/usr/bin/c++ -shared"
+    }
+  },
+  "bootstrap_packages": [
+    {
+      "file": "cpython-3.12.16+20261026-x86_64-unknown-linux-musl-install_only_stripped.tar.gz",
+      "source": "https://github.com/astral-sh/python-build-standalone/releases/download/20261026/cpython-3.12.16%2B20261026-x86_64-unknown-linux-musl-install_only_stripped.tar.gz",
+      "sha256": "ee15bf696af4bd210efad7e5558c0eca20383a5e625ccf9c03e3695657e18ede",
+      "bytes": 27977438
+    },
+    {
+      "file": "sentencepiece-0.2.2.tar.gz",
+      "source": "https://files.pythonhosted.org/packages/cc/33/ea3cb3839607eb175da835244a798f797f478c5ddf0e8ecdf57ea85a4c70/sentencepiece-0.2.2.tar.gz",
+      "sha256": "3d2b5e824b5622038dc7b490897efe05ebbbb9e7350fc142f3ecc8789ef9bdf6",
+      "bytes": 8218435
+    },
+    {
+      "file": "pybind11-3.1.0-py3-none-any.whl",
+      "source": "https://files.pythonhosted.org/packages/33/fd/8762f7ee3e4e4be6d1d846cffb4916dd9bb02b2f800d3603718a0efe494c/pybind11-3.1.0-py3-none-any.whl",
+      "sha256": "b8488090f8acffbcb6b5d6a85571a6827a0a2981ffb75e5a0b27b87c4a6b7dd0",
+      "bytes": 319402
+    },
+    {
+      "file": "setuptools-84.2.1-py3-none-any.whl",
+      "source": "https://files.pythonhosted.org/packages/ef/55/6dc6d6bb953bdfc52519a0059592c52b6e3b8ad51cf8256dffceb55b0610/setuptools-84.2.1-py3-none-any.whl",
+      "sha256": "ca140b45d5325a9478f880e351484f62fef15f336462e449ca0c03c873d589c2",
+      "bytes": 876263
+    },
+    {
+      "file": "wheel-0.48.0-py3-none-any.whl",
+      "source": "https://files.pythonhosted.org/packages/2e/29/69cfbb602cd91690c55d38ba9fe53e6a7e76a6fa647bf38f19c138d25449/wheel-0.48.0-py3-none-any.whl",
+      "sha256": "3217dcc807155e45db462d7ef2431f5ddda0d7273b700d05a67b271ceb1287ab",
+      "bytes": 33320
+    },
+    {
+      "file": "packaging-26.3-py3-none-any.whl",
+      "source": "https://files.pythonhosted.org/packages/63/34/ba1c580383c9eada3711951fef0795c80b829a078d72188184bcab9dd527/packaging-26.3-py3-none-any.whl",
+      "sha256": "d7193f7c8e4e93f444fde0262bf90af30e16fa0ad0ad44cb553c87339b23cd1c",
+      "bytes": 129956
+    }
+  ],
+  "offline_build": {
+    "source_archive_sha256": "3d2b5e824b5622038dc7b490897efe05ebbbb9e7350fc142f3ecc8789ef9bdf6",
+    "cmake_original_sha256": "4e121b824a08fb084ac259d3f3f87d9dc417c00c437046c990baf3df480d4c8f",
+    "cmake_offline_sha256": "4ea71ae7facfb4796bb625a011a6b983afe45d5ff2be34e4e5c3da70639ac9d4",
+    "removed_fetch_block": "  FetchContent_Populate(abseil-cpp\n        GIT_REPOSITORY  https://github.com/abseil/abseil-cpp.git\n        SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/third_party/abseil-cpp\n        GIT_PROGRESS TRUE\n        GIT_TAG 20260526.0)",
+    "replacement": "  if (NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/third_party/abseil-cpp/CMakeLists.txt)\n    message(FATAL_ERROR \"Bundled Abseil missing; offline build refuses a download\")\n  endif()",
+    "library_sources_modified": false,
+    "reason": "Direct FetchContent_Populate ignores FULLY_DISCONNECTED; use source already bundled in verified sdist"
+  },
+  "native_smoke": {
+    "scope": "Artificial English text API integration check; not speech or corpus fitting",
+    "python": "3.12.16",
+    "sentencepiece": "0.2.2",
+    "options": {
+      "model_type": "bpe",
+      "character_coverage": 1.0,
+      "byte_fallback": true,
+      "pad_id": 0,
+      "eos_id": 1,
+      "bos_id": 2,
+      "unk_id": 3,
+      "normalization_rule_name": "identity",
+      "num_threads": 1,
+      "shuffle_input_sentence": false,
+      "input_sentence_size": 0,
+      "max_sentence_length": 65,
+      "hard_vocab_limit": true
+    },
+    "vocabulary": 512,
+    "model_sha256": "dea456578ce0e858bfe96ff8761c9635c7b4304d3b5a946b21ac70fdd5b7a7b0",
+    "unseen_names_utf8_and_apostrophe_roundtrip": true,
+    "unknown_tokens": 0
+  },
+  "training_archive": {
+    "file": "train-clean-100.tar.gz",
+    "source": "https://openslr.trmal.net/resources/12/train-clean-100.tar.gz",
+    "bytes": 6387309499,
+    "resume_offset": 4341647941,
+    "upstream_md5": "2a93770f6d5c6c964bc36631d331a522",
+    "sha256": "d4ddd1d5a6ab303066f14971d768ee43278a5f2a0aa43dc716b0e64ecbbbf6e2",
+    "per_request_dns_address": "136.243.171.4",
+    "tls_hostname_verified": true,
+    "system_dns_changed": false
+  },
+  "source_fixture_flac": {
+    "source_member": "LibriSpeech/dev-clean/2277/149896/2277-149896-0026.flac",
+    "sample_rate": 16000,
+    "samples_from_streaminfo": 78720,
+    "ffmpeg_full_clip_decode_passed": true,
+    "playback_performed": false,
+    "scope": "One real public evaluation clip; not full-corpus decode or speech accuracy"
+  },
+  "standalone_guards_passed": 15,
+  "ctest_suites_passed": 9,
+  "ctest_log_sha256": "d9c9b8a57a269b151b190e5d1b18e34e5c3b50215fe81fd0f6ec58064556e5dd",
+  "corpus_preparation_finished": false,
+  "corpus_tokenizers_fitted": false,
+  "neural_weights_trained": false,
+  "firmware_or_installed_model_changed": false
+}

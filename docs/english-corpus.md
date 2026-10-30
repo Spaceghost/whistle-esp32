@@ -1,15 +1,15 @@
 # Smaller English model: data and vocabulary work
 
-**Temporarily paused by parent · No replacement speech model produced or deployed.**
+**Research resumed 2026-10-30 · No replacement speech model produced or deployed.**
 
-See [pause checkpoint](../PAUSED.md). Commands below are resume instructions, not
-authorization to restart work during the pause.
+The parent reactivated the Watch/English goal. [The previous pause checkpoint](../PAUSED.md)
+is retained as history; unrelated holds remain in force.
 
 | Stage | State | Completion evidence |
 | :--- | :--- | :--- |
 | ✅ Corpus preparation code | Checks official archive checksums, paired text/audio and disjoint splits | Nine focused corpus tests |
-| ✅ Tokenizer admission code | Rejects changed manifests, non-English metadata and split leakage | Six focused tokenizer tests |
-| ⏸️ English speech corpus | Evaluation archives verified; training download intentionally stopped and retained | Resume and verify remaining archive before extraction |
+| ✅ Tokenizer admission code | Rejects changed manifests, non-English metadata and split leakage; actual native trainer smoke passes | Six admission tests plus native integration; all nine CTest suites pass |
+| ⏳ English speech corpus | All three archives downloaded and checksum-verified; preparation is running | Full extraction and disjoint-split report required |
 | ☐ Smaller English vocabularies | Fit 8,192 / 4,096 / 2,048-piece candidates on training text only | Held-out token counts and exact text round trips required |
 | ☐ Real English speech model | Neural retraining, export, native compatibility and accuracy acceptance remain | No candidate may replace the locked firmware model yet |
 
@@ -61,16 +61,23 @@ public corpus data, never family conversations or notebook uploads.
 
 ## Vocabulary experiment
 
-Install `sentencepiece==0.2.2` in an isolated environment. Bak's Python 3.14
-has no compatible wheel. The source build failed because Python.h development headers are missing;
-no further build will run during the pause. CMake 3.31.6 is installed in that
-environment only.
-Pip build isolation must find CMake's native `cmake/data/bin` directory, rather
-than its Python entrypoint. Limit the build to two CPUs. No global packages or
-production voice services need changing.
+The working isolated environment is Python 3.12.16 with SentencePiece 0.2.2,
+under `/srv/ai/cache/venvs/ackerman-english-py312-20261030/`. System Python and
+global DNS were not changed. Package/interpreter hashes, the compiler overrides
+and the offline build patch are in [the resumed evidence](../evidence/english-research-resumed-20261030.json).
+The patch makes CMake use Abseil already bundled in the verified source archive;
+no library C++ source was changed. `CC`, `CXX` and `LDSHARED` explicitly select
+Bak's installed GCC rather than the interpreter's original Clang build defaults.
+
+`tools/check_english_tokenizer.py` exercises the real trainer with the same
+options as the corpus job. It catches native assertions that pure metadata
+tests cannot detect. Byte fallback passes unseen-name, UTF-8 and apostrophe
+round trips with zero unknown tokens. Do not add unused `required_chars`: the
+pinned BPE implementation asserts when those characters have zero frequency.
+The CTest driver includes this integration check when SentencePiece is available.
 
 ```sh
-python3 tools/train_english_tokenizer.py \
+/srv/ai/cache/venvs/ackerman-english-py312-20261030/bin/python tools/train_english_tokenizer.py \
   --corpus /srv/ai/artifacts/ackerman-os/english-corpus-20261029/prepared \
   --output /srv/ai/artifacts/ackerman-os/english-corpus-20261029/tokenizers
 ```

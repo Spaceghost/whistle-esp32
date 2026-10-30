@@ -1,3 +1,9 @@
+# English-model research resumed — 2026-10-30
+
+The parent reactivated the Watch/English-model goal. Its prior temporary pause
+is lifted for this scope. The checkpoint below is retained as history. Preserve
+other owners and all source, cache and evidence.
+
 # Watch and English-model work temporarily paused
 
 Parent requested a pause on 2026-10-29 after the nearest completable milestone.

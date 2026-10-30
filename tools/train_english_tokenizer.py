@@ -8,7 +8,6 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
-import string
 
 
 def sha(path):
@@ -45,6 +44,17 @@ def text_views(text):
     return list(dict.fromkeys((text, text.lower(), text.capitalize())))
 
 
+def training_options(views):
+    # Byte fallback covers unseen characters. Do not force zero-frequency
+    # required_chars: SentencePiece 0.2.2 BPE asserts on those candidates.
+    return {'model_type': 'bpe', 'character_coverage': 1.0, 'byte_fallback': True,
+            'pad_id': 0, 'eos_id': 1, 'bos_id': 2, 'unk_id': 3,
+            'normalization_rule_name': 'identity', 'num_threads': 1,
+            'shuffle_input_sentence': False, 'input_sentence_size': 0,
+            'max_sentence_length': max(len(x.encode('utf-8')) for x in views) + 1,
+            'hard_vocab_limit': True}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--corpus', type=Path, required=True)
@@ -61,13 +71,7 @@ def main():
     views = [view for row in splits['train'] for view in text_views(row['text'])]
     training.write_text('\n'.join(views) + '\n')
     import sentencepiece as spm
-    options = {'model_type': 'bpe', 'character_coverage': 1.0, 'byte_fallback': True,
-               'pad_id': 0, 'eos_id': 1, 'bos_id': 2, 'unk_id': 3,
-               'normalization_rule_name': 'identity', 'num_threads': 1,
-               'shuffle_input_sentence': False, 'input_sentence_size': 0,
-               'required_chars': string.ascii_letters + string.digits + "'.,!?-:;()",
-               'max_sentence_length': max(len(x.encode('utf-8')) for x in views) + 1,
-               'hard_vocab_limit': True}
+    options = training_options(views)
     report = {'schema': 1, 'scope': 'English-only training-text tokenizer research; not speech-model training',
               'sentencepiece_version': spm.__version__, 'corpus_sha256': sha(args.corpus / 'corpus.json'),
               'source': corpus['source'], 'license': corpus['license'],

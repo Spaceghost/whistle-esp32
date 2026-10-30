@@ -68,3 +68,13 @@ add_test(NAME decoder_confidence_memory COMMAND decoder_score_test)
 # Corpus and tokenizer admission guards need only the Python standard library.
 add_test(NAME english_corpus_guards
          COMMAND ${Python3_EXECUTABLE} -m unittest discover -s ${CMAKE_CURRENT_SOURCE_DIR}/../tests -p test_english_*.py)
+
+# Exercise the native BPE trainer when this optional research dependency exists.
+if(UNIX)
+  execute_process(COMMAND ${Python3_EXECUTABLE} -c "import sentencepiece"
+                  RESULT_VARIABLE SPM_IMPORT_RESULT OUTPUT_QUIET ERROR_QUIET)
+  if(SPM_IMPORT_RESULT EQUAL 0)
+    add_test(NAME english_tokenizer_native_api
+             COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../tools/check_english_tokenizer.py)
+  endif()
+endif()
