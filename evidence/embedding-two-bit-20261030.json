@@ -1,0 +1,115 @@
+{
+  "schema": 1,
+  "date": "2026-10-30",
+  "status": "rejected_for_deployment_due_to_recognition_regression",
+  "conversion": {
+    "scope": "Research-only lossy tied embedding quantization; not a release",
+    "source_sha256": "8c956a951107b03a1832a3c6d665c88e52cc59fadcf91397077416f22f5dca9b",
+    "candidate_sha256": "7aa41043462cb4d41069715726ac36d9aa7e6075f9f1e573540bbb0a967770e8",
+    "source_bytes": 10662177,
+    "candidate_bytes": 9613473,
+    "flash_bytes_saved": 1048704,
+    "embedding_bits_before": 4,
+    "embedding_bits_after": 2,
+    "index_mapping": [
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      2,
+      2,
+      2,
+      2,
+      3,
+      3,
+      3,
+      3
+    ],
+    "token_ids_unchanged": true,
+    "codebooks_unchanged": true,
+    "group_norm_bytes_unchanged": true,
+    "other_tensor_bytes_unchanged": true,
+    "recognition_accuracy_verified": false,
+    "neural_training_run": false,
+    "monolingual_neural_model_proven": false,
+    "deployment_permitted": false
+  },
+  "benchmark": {
+    "scope": "Four fixed natural clips; host decode only, not microphone or general acceptance",
+    "runner_sha256": "cb0f96c0ca58e7e4247530c36597d192f10e14da4b82eadae0a000a5f30a0763",
+    "models": {
+      "baseline": "8c956a951107b03a1832a3c6d665c88e52cc59fadcf91397077416f22f5dca9b",
+      "embedding2": "7aa41043462cb4d41069715726ac36d9aa7e6075f9f1e573540bbb0a967770e8"
+    },
+    "padding_ms_each_side": 750,
+    "gate_db": 12,
+    "deployment_permitted": false,
+    "results": [
+      {
+        "id": "cohen-want-make-app",
+        "model": "baseline",
+        "reference_words": 6,
+        "word_edits": 0,
+        "fixture_sha256": "8545bb49d4bb7715a3eda61884af801be24338692a9716eec87b6e5bb022d416"
+      },
+      {
+        "id": "cohen-want-make-app",
+        "model": "embedding2",
+        "reference_words": 6,
+        "word_edits": 0,
+        "fixture_sha256": "8545bb49d4bb7715a3eda61884af801be24338692a9716eec87b6e5bb022d416"
+      },
+      {
+        "id": "adalo-want-make-app",
+        "model": "baseline",
+        "reference_words": 6,
+        "word_edits": 1,
+        "fixture_sha256": "eb01ffbd64e65efd23316403c67758c87acd9b2048e92bc9ba53cd9d90d8e7d6"
+      },
+      {
+        "id": "adalo-want-make-app",
+        "model": "embedding2",
+        "reference_words": 6,
+        "word_edits": 1,
+        "fixture_sha256": "eb01ffbd64e65efd23316403c67758c87acd9b2048e92bc9ba53cd9d90d8e7d6"
+      },
+      {
+        "id": "raroque-get-started",
+        "model": "baseline",
+        "reference_words": 13,
+        "word_edits": 0,
+        "fixture_sha256": "1ee4209e04d379a1b6e70f6a5593fbd0418cc4552a46f3e2edf09c5f3ab701cd"
+      },
+      {
+        "id": "raroque-get-started",
+        "model": "embedding2",
+        "reference_words": 13,
+        "word_edits": 0,
+        "fixture_sha256": "1ee4209e04d379a1b6e70f6a5593fbd0418cc4552a46f3e2edf09c5f3ab701cd"
+      },
+      {
+        "id": "levi-introduction",
+        "model": "baseline",
+        "reference_words": 12,
+        "word_edits": 2,
+        "fixture_sha256": "187abf6e5a6181f1f249c0e20aa35da8ffecfe1171662f73ffed1a6d9ed11f3f"
+      },
+      {
+        "id": "levi-introduction",
+        "model": "embedding2",
+        "reference_words": 12,
+        "word_edits": 5,
+        "fixture_sha256": "187abf6e5a6181f1f249c0e20aa35da8ffecfe1171662f73ffed1a6d9ed11f3f"
+      }
+    ]
+  },
+  "regressed_cases": [
+    "levi-introduction"
+  ],
+  "decision": "Retain as experiment; do not select this untuned conversion for firmware or model migration",
+  "full_two_bit_training_ruled_out": false
+}

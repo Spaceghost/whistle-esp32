@@ -1,0 +1,216 @@
+{
+  "schema": 1,
+  "date": "2026-10-30",
+  "status": "english_corpus_and_three_text_vocabularies_ready",
+  "corpus": {
+    "schema": 1,
+    "source": "https://www.openslr.org/12/",
+    "license": "CC-BY-4.0",
+    "attribution": "LibriSpeech: Vassil Panayotov, Guoguo Chen, Daniel Povey, Sanjeev Khudanpur (2015)",
+    "source_declared_language": "en",
+    "text_case": "source preserved",
+    "maximum_seconds": 30,
+    "audio_or_text_truncated": false,
+    "flac_streaminfo_verified": true,
+    "all_audio_fully_decoded": false,
+    "speaker_and_id_and_encoded_audio_disjoint": true,
+    "archives": [
+      {
+        "split": "train",
+        "name": "train-clean-100",
+        "file": "train-clean-100.tar.gz",
+        "upstream_md5": "2a93770f6d5c6c964bc36631d331a522",
+        "sha256": "d4ddd1d5a6ab303066f14971d768ee43278a5f2a0aa43dc716b0e64ecbbbf6e2",
+        "bytes": 6387309499
+      },
+      {
+        "split": "validation",
+        "name": "dev-clean",
+        "file": "dev-clean.tar.gz",
+        "upstream_md5": "42e2234ba48799c1f50f24a7926300a1",
+        "sha256": "76f87d090650617fca0cac8f88b9416e0ebf80350acb97b343a85fa903728ab3",
+        "bytes": 337926286
+      },
+      {
+        "split": "test",
+        "name": "test-clean",
+        "file": "test-clean.tar.gz",
+        "upstream_md5": "32fa31d27d2e1cad72775fee3f4849a9",
+        "sha256": "39fde525e59672dc6d1551919b1478f724438a95aa55f874b576be21967e6c23",
+        "bytes": 346663984
+      }
+    ],
+    "manifests": {
+      "train": {
+        "file": "train.jsonl",
+        "sha256": "ceb2f15fd1d406006d7aa5ec53b38b905c655e5d182e032d7cf0e12c7f8eab00"
+      },
+      "validation": {
+        "file": "validation.jsonl",
+        "sha256": "ced3a748020f74265d89fe12cd77f96768541c21d77f1b3709c767d761668f41"
+      },
+      "test": {
+        "file": "test.jsonl",
+        "sha256": "ed0aba92d97d14ac996f0404fafc09f4ab47533ab93b89ff85f97a031e19bf3a"
+      }
+    },
+    "splits": {
+      "train": {
+        "source_utterances": 28539,
+        "retained": 28539,
+        "excluded_over_limit": 0,
+        "speakers": 251,
+        "retained_hours": 100.59087965277777,
+        "watch_eight_second_utterances": 3861
+      },
+      "validation": {
+        "source_utterances": 2703,
+        "retained": 2694,
+        "excluded_over_limit": 9,
+        "speakers": 40,
+        "retained_hours": 5.307591875,
+        "watch_eight_second_utterances": 1813
+      },
+      "test": {
+        "source_utterances": 2620,
+        "retained": 2611,
+        "excluded_over_limit": 9,
+        "speakers": 40,
+        "retained_hours": 5.323121006944445,
+        "watch_eight_second_utterances": 1761
+      }
+    },
+    "training_run": false,
+    "monolingual_model_proven": false
+  },
+  "tokenizers": {
+    "schema": 1,
+    "scope": "English-only training-text tokenizer research; not speech-model training",
+    "sentencepiece_version": "0.2.2",
+    "corpus_sha256": "0dedae607af955f07c74e0db68cb8e506c4c9d6f16d131dbc1ed4b37e163da4e",
+    "source": "https://www.openslr.org/12/",
+    "license": "CC-BY-4.0",
+    "training_source": "train only; original, lowercase and sentence-case text views",
+    "training_text_sha256": "10490b19ecef01c4a3946e519e1c1854850b627d731e713c44dcd476e117add3",
+    "options": {
+      "model_type": "bpe",
+      "character_coverage": 1.0,
+      "byte_fallback": true,
+      "pad_id": 0,
+      "eos_id": 1,
+      "bos_id": 2,
+      "unk_id": 3,
+      "normalization_rule_name": "identity",
+      "num_threads": 1,
+      "shuffle_input_sentence": false,
+      "input_sentence_size": 0,
+      "max_sentence_length": 399,
+      "hard_vocab_limit": true
+    },
+    "validation_or_test_used_for_fitting": false,
+    "neural_weights_trained": false,
+    "firmware_compatible": false,
+    "deployment_permitted": false,
+    "candidates": [
+      {
+        "vocabulary": 8192,
+        "model": "english-bpe-8192.model",
+        "sha256": "04435228946ae9e6022d62cd6a68907c0815509854e2d64035b452227384446a",
+        "model_file_bytes": 129835,
+        "scores": {
+          "train": {
+            "tokens": 3817035,
+            "words": 2970303,
+            "tokens_per_word": 1.2850658670176074,
+            "maximum_tokens": 107,
+            "unknown_tokens": 0
+          },
+          "validation": {
+            "tokens": 210591,
+            "words": 160905,
+            "tokens_per_word": 1.3087909014635966,
+            "maximum_tokens": 116,
+            "unknown_tokens": 0
+          },
+          "test": {
+            "tokens": 204648,
+            "words": 155709,
+            "tokens_per_word": 1.314297824788548,
+            "maximum_tokens": 126,
+            "unknown_tokens": 0
+          }
+        },
+        "estimated_tied_embedding_bytes_saved_at_existing_row_format": 0,
+        "estimated_logits_bytes_saved": 0,
+        "estimate_scope": "Only rows/logits at current geometry; not full-model size or runtime acceptance"
+      },
+      {
+        "vocabulary": 4096,
+        "model": "english-bpe-4096.model",
+        "sha256": "7405219b94b43b5aec42c782a063f411174c3a9238158f2d331145a5c4837b85",
+        "model_file_bytes": 61576,
+        "scores": {
+          "train": {
+            "tokens": 4353455,
+            "words": 2970303,
+            "tokens_per_word": 1.4656602373562562,
+            "maximum_tokens": 127,
+            "unknown_tokens": 0
+          },
+          "validation": {
+            "tokens": 238585,
+            "words": 160905,
+            "tokens_per_word": 1.4827693359435692,
+            "maximum_tokens": 138,
+            "unknown_tokens": 0
+          },
+          "test": {
+            "tokens": 232842,
+            "words": 155709,
+            "tokens_per_word": 1.495366356472651,
+            "maximum_tokens": 143,
+            "unknown_tokens": 0
+          }
+        },
+        "estimated_tied_embedding_bytes_saved_at_existing_row_format": 1081344,
+        "estimated_logits_bytes_saved": 16384,
+        "estimate_scope": "Only rows/logits at current geometry; not full-model size or runtime acceptance"
+      },
+      {
+        "vocabulary": 2048,
+        "model": "english-bpe-2048.model",
+        "sha256": "70b605e6951bf8460742ed3756019ad5e57a940a0d0b0e14d07b4b2f96fc6885",
+        "model_file_bytes": 29608,
+        "scores": {
+          "train": {
+            "tokens": 5097032,
+            "words": 2970303,
+            "tokens_per_word": 1.7159973241787116,
+            "maximum_tokens": 147,
+            "unknown_tokens": 0
+          },
+          "validation": {
+            "tokens": 278703,
+            "words": 160905,
+            "tokens_per_word": 1.7320965787265779,
+            "maximum_tokens": 156,
+            "unknown_tokens": 0
+          },
+          "test": {
+            "tokens": 272402,
+            "words": 155709,
+            "tokens_per_word": 1.749430026523836,
+            "maximum_tokens": 172,
+            "unknown_tokens": 0
+          }
+        },
+        "estimated_tied_embedding_bytes_saved_at_existing_row_format": 1622016,
+        "estimated_logits_bytes_saved": 24576,
+        "estimate_scope": "Only rows/logits at current geometry; not full-model size or runtime acceptance"
+      }
+    ]
+  },
+  "neural_training_run": false,
+  "native_model_compatibility_proven": false,
+  "installed_model_changed": false
+}

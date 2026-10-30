@@ -9,8 +9,8 @@ is retained as history; unrelated holds remain in force.
 | :--- | :--- | :--- |
 | ✅ Corpus preparation code | Checks official archive checksums, paired text/audio and disjoint splits | Nine focused corpus tests |
 | ✅ Tokenizer admission code | Rejects changed manifests, non-English metadata and split leakage; actual native trainer smoke passes | Six admission tests plus native integration; all nine CTest suites pass |
-| ⏳ English speech corpus | All three archives downloaded and checksum-verified; preparation is running | Full extraction and disjoint-split report required |
-| ☐ Smaller English vocabularies | Fit 8,192 / 4,096 / 2,048-piece candidates on training text only | Held-out token counts and exact text round trips required |
+| ✅ English speech corpus | 28,539 train / 2,694 validation / 2,611 test clips admitted | Source hashes and speaker/utterance/encoded-audio overlap checks pass |
+| ✅ Smaller English vocabularies | 8,192 / 4,096 / 2,048-piece candidates fitted on training text only | All scored text views round-trip exactly with zero unknown tokens |
 | ☐ Real English speech model | Neural retraining, export, native compatibility and accuracy acceptance remain | No candidate may replace the locked firmware model yet |
 
 ```mermaid
@@ -41,8 +41,8 @@ not a firmware trust/signing mechanism.
 ```sh
 python3 tools/prepare_english_corpus.py \
   --archive-dir /srv/ai/cache/datasets/librispeech \
-  --audio-dir /srv/ai/cache/datasets/librispeech/english-corpus-20261029 \
-  --output /srv/ai/artifacts/ackerman-os/english-corpus-20261029/prepared
+  --audio-dir /srv/ai/cache/datasets/librispeech/english-corpus-20261030 \
+  --output /srv/ai/artifacts/ackerman-os/english-corpus-20261029/prepared-20261030
 ```
 
 Use fresh output paths; interrupted attempts are retained with `INCOMPLETE` and
@@ -78,8 +78,8 @@ The CTest driver includes this integration check when SentencePiece is available
 
 ```sh
 /srv/ai/cache/venvs/ackerman-english-py312-20261030/bin/python tools/train_english_tokenizer.py \
-  --corpus /srv/ai/artifacts/ackerman-os/english-corpus-20261029/prepared \
-  --output /srv/ai/artifacts/ackerman-os/english-corpus-20261029/tokenizers
+  --corpus /srv/ai/artifacts/ackerman-os/english-corpus-20261029/prepared-20261030 \
+  --output /srv/ai/artifacts/ackerman-os/english-corpus-20261029/tokenizers-20261030
 ```
 
 This trains new BPE tokenizers using training-split text with deterministic
@@ -104,3 +104,28 @@ does not prove that multilingual neural knowledge has been removed.
 
 Physical speech tests continue to use the separately cached YouTube clips.
 Read-audiobook results do not establish spontaneous child-speech accuracy.
+
+## Measured vocabulary trade-off
+
+| Text vocabulary | Validation tokens/word | Test tokens/word | Maximum test tokens | Same-format embedding estimate saved |
+| :--- | ---: | ---: | ---: | ---: |
+| 8,192 | 1.309 | 1.314 | 126 | 0 bytes |
+| 4,096 | 1.483 | 1.495 | 143 | 1,081,344 bytes |
+| 2,048 | 1.732 | 1.749 | 172 | 1,622,016 bytes |
+
+[Complete corpus and tokenizer evidence](../evidence/english-vocabularies-20261030.json).
+Training retains 100.59 hours from 251 speakers. Validation and test each use
+40 different speakers; nine over-30-second clips per evaluation split were
+excluded whole. Source transcripts and audio were preserved.
+
+These are new English-text vocabularies, not pretrained speech models. Their
+IDs differ even where their size equals the original tokenizer. Fewer rows
+reduce an embedding estimate, while more tokens can increase decoder work.
+Neural training, actual export size, recognition quality, latency and target
+RAM/stack measurements must decide between them. No vocabulary is selected
+for deployment from these text statistics alone. Output hashes also include
+training paths/tool metadata; a new run records new immutable receipts.
+
+A separate [untuned two-bit embedding experiment](embedding-quantization.md)
+saved 1,048,704 model bytes while worsening the Levi introduction. That candidate
+is rejected for deployment. Proper quantization-aware training remains open.
