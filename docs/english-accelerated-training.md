@@ -34,6 +34,32 @@ backend smoke on that GPU. Checker/lock/admission hashes and installed package
 versions must match. Missing proof, CPU fallback and drift are refused before
 JAX import. A validated GPU backend does not establish Whistle training accuracy.
 
+## Full-shape recovery and compute choice
+
+| Backend | Verified work | Measured update time |
+| :--- | :--- | :--- |
+| CPU, two low-priority cores | ✅ Three fresh full-shape updates and three verified READY checkpoints | Warm7.927s and7.901s |
+| CUDA, bounded diagnostic | ✅ Restore full-shape checkpoint1 in a new process; updates/checkpoints2 and3 complete; guard exit0 | First execution70.110s; one warm call0.086s |
+
+Both select all28,539 training rows with25-second audio/160-token padding and
+zero duration/token exclusions. CPU update calls alone imply roughly62.74h per
+epoch at this setting. The single warm GPU call is promising, but is not a
+sustained throughput benchmark: that run spent340.054s verifying inputs under
+disk contention and250.540s in cleanup after training completed. Keep startup,
+audio loading, saves, cleanup and contention separate from update-call timing.
+CPU/CUDA have distinct execution signatures; their arrays/gradients are not
+claimed bit-identical and their checkpoints are not silently interchanged.
+
+The first full epoch is queued from verified GPU checkpoint3, continuing28,536
+updates to global28,539, checkpointing every1,000 steps. Full training retains
+its10% admission ceiling;35% was used only for the two-update diagnostic. Other
+workloads stay running. Epoch completion, held-out native recognition and
+physical Watch memory/latency/microphone acceptance remain open.
+
+Evidence: [CPU probe](../research/english-cpu-fullshape-probe-20261031.json),
+[GPU recovery](../research/english-fullshape-gpu-recovery-20261031.json).
+Current process/report handles live in [the handoff](../PAUSED.md).
+
 ## Checkpoint behavior
 
 | Option | Behavior |

@@ -4,11 +4,11 @@
 
 | Requirement | State | Evidence |
 | :--- | :--- | :--- |
-| Full local corpus | ✅ Complete | Training 28,539; validation 2,694; test 2,611 hashes pass |
+| Full retained local corpus | ✅ Complete | Training 28,539; validation 2,694; test 2,611 hashes pass |
 | Local source acquisition | ✅ Complete | All three archives passed exact size + MD5 + SHA-256 before extraction |
 | Separate CUDA environment | ✅ Installed; all 51 versions match | CPU environment preserved; actual backend checks pass |
-| GPU execution and recovery | ✅ Short-clip path verified | Two fresh CUDA updates, READY snapshots and new-process resumed update 3 pass |
-| First complete training epoch | ⏳ Guard admission waiting | Continues full-shape checkpoint 1 through all 28,539 rows; quality/device gates remain open |
+| GPU execution and recovery | ✅ Short-clip and full-shape paths verified | Full25s/160-token checkpoint1 restores in a new process; updates/checkpoints2/3 and terminal0 pass |
+| First complete training epoch | ⏳ Guard admission waiting | Continues full-shape checkpoint 3 through all 28,539 rows; quality/device gates remain open |
 
 ```mermaid
 flowchart TD

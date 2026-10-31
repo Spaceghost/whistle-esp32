@@ -1,3 +1,43 @@
+## Full-shape GPU recovery verified; first epoch queued — 2026-10-31
+
+| Work | Current state |
+| :--- | :--- |
+| Production-model baseline | ✅ Audited 8.46% WER over all2,694 retained validation clips |
+| Full-shape CPU fallback | ✅ Three updates + READY snapshots; ~7.9s warm update |
+| Full-shape GPU recovery | ✅ New process restored checkpoint1, completed updates2/3 and saved verified READY snapshots; terminal0 |
+| First complete epoch | ⏳ Admission guard live, waiting above10% utilization limit; no child at this observation |
+| Watch80 reading candidate | ✅ Target build and exact USB parity pass; unsigned/uninstalled, Watch79 boot/control remains separately owned |
+
+**Poll session28705, guard1511822** (confirmed live in `/proc`).
+Report: `build/training-readiness-20261031/gpu-full-epoch1-v2.json`.
+Intent: `build/english-full-campaign-20261031/epoch1-v2-intent.json`.
+Output, when admitted: `build/english-full-campaign-20261031/epoch1-v2`.
+Frozen trainer7577539, verified GPU full-shape checkpoint3 +28,536 updates to
+final28,539. Every training row remains selected. Checkpoint-every1000,
+32GiB spare disk; about10.3GB of new checkpoint payload.
+Full training keeps10% admission ceiling,30s dwell/3600s wait/43200s child cap,
+host4GiB cap+1.5GiB reserve/1GiB floor, GPU2GiB pool/3GiB observed cap/2GiB reserve.
+Other workloads continue. Never duplicate because observation expires.
+
+The bounded GPU diagnostic session30596/guard1442926/child1447505 is
+**terminal0**, both PIDs absent. Guard elapsed832.255s; training completed581.715s,
+then250.540s process cleanup. Cold input verification took340.054s. Update2
+(first execution after restore)70.110s; one warm update3 measured0.086s.
+That is a diagnostic sample, not sustained throughput or epoch wall time.
+Peak sampled host2,846,228,480B; ownedGPU2,296,381,440B.
+[Audited full-shape GPU recovery](research/english-fullshape-gpu-recovery-20261031.json).
+All model/Adam file hashes, source signatures, step metadata and all28,539-row
+selection verified. CPU/CUDA signatures remain separate; no cross-backend
+bit-identical gradient/weight claim. Original admission attemptv1 is terminal130,
+never launched a child. No long CPU training job is running.
+
+The baseline covers all retained validation clips; nine original long clips
+were excluded during corpus preparation. No newly trained model has passed
+recognition/native numeric/physical Watch gates or been deployed. The whole
+goal remains **active and incomplete**. No Bak/audio/device/TUF operation here.
+
+---
+
 ## English baseline complete; full-shape recovery probe running — 2026-10-31
 
 | Work | Current state |
