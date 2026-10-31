@@ -1,4 +1,4 @@
-## First GPU update proven; streamed checkpoint retry waiting — 2026-10-31
+## Streamed GPU checkpoint retry admitted — 2026-10-31
 
 | Milestone | Status |
 | :--- | :--- |
@@ -6,9 +6,12 @@
 | First CUDA student update | ✅ Finite gradients; nonzero update across all 29,537,627 trainable parameters |
 | Original save attempt | ⛔ Host cap reached while serializing optimizer; partial checkpoint refused |
 | Streaming optimizer writer | ✅ Five controls pass, exact Flax bytes and bit-identical next Adam update |
-| Actual streamed GPU save/resume | ⏳ Guard admission waiting; not verified |
+| Actual streamed GPU save/resume | 🔄 Admitted and running; save/resume not yet verified |
 
-Poll **session 47919**, guard **1181715**. No child at the latest observation.
+Poll **session 47919**, guard **1181715**, child **1189780**. Both are confirmed
+live after admission. The full-geometry CPU comparison saved about 294 MiB
+peak RSS and produced byte-identical 236 MB files; the actual GPU result is
+still required.
 Report: `build/training-readiness-20261031/gpu-student-stream-v1.json`.
 Output if admitted: `build/accelerated-student-20261031/gpu-step2-stream-v1`.
 Frozen source **7577539**, with `--stream-checkpoints` plus the existing optional

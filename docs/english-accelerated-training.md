@@ -110,3 +110,19 @@ host optimizer tree and complete packed payload. This bounds that part of
 serialization by its largest leaf; the model writer, live state and compiler
 allocations still contribute to total RSS.
 [Five CPU controls and resource receipt](../research/english-checkpoint-stream-controls-20261031.json).
+
+
+Separate guarded CPU processes now compare the full student geometry with
+synthetic initial Adam moments. Both produce exactly 236,308,569 bytes with the
+same SHA-256. Observed process peak RSS falls from 1,102,770,176 to 794,017,792
+bytes: about 294 MiB less. Only one optimizer leaf (largest encoded leaf
+37,748,763 bytes) is serialized at a time. The optimizer state digest remains
+unchanged. These are CPU writer measurements, not actual trained-GPU save/resume
+acceptance.
+[Full-geometry memory and exact-file evidence](../research/english-checkpoint-stream-memory-20261031.json).
+
+Reproduce with separate guarded invocations of
+`tools/check_english_checkpoint_memory.py --mode legacy` and `--mode stream`,
+supplying the same model, pinned Needle source and fresh output directories.
+A readable model from the failed save is used only for its array geometry; this
+measurement does not turn that incomplete directory into a resumable snapshot.

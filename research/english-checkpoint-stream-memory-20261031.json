@@ -1,0 +1,61 @@
+{
+  "schema": 1,
+  "scope": "Separate CPU processes, full 29,537,627-parameter geometry, synthetic initial Adam moments; not GPU save/resume acceptance",
+  "legacy": {
+    "schema": 1,
+    "scope": "CPU serialization of full model geometry with synthetic initial Adam moments; not trained-state recovery",
+    "mode": "legacy",
+    "parameters": 29537627,
+    "optimizer_bytes": 236301020,
+    "optimizer_leaves": 225,
+    "optimizer_state_sha256": "351c500eca757adcc3a713ea5b78353867020ac38be30854e0a2eecd48954443",
+    "state_bit_identical": true,
+    "model_sha256": "484b5d68e2b4136ff3323a217d7f6e7fb22bef949934677b176519ad402bc1c5",
+    "source_receipt_sha256": "0217a8bdd09d45d31f2e3ed3db1bfba04fb72c63aa124ec3b35ff98d5836963c",
+    "writer_sha256": "ed6b4d6a44d8a18cc923d765f3a7eff8da6e2672cb2f098ab115ddc017194489",
+    "file_bytes": 236308569,
+    "file_sha256": "186c1e0f3fc2cb3f2493300f0e9572c6f0f85379b11f265cdb8475cbfadc25d9",
+    "baseline_rss_bytes": 611360768,
+    "rss_after_write_bytes": 630398976,
+    "peak_rss_bytes": 1102770176,
+    "write_seconds": 1.1895421980007086,
+    "writer": {
+      "format": "flax-to-bytes",
+      "bytes": 236308569
+    },
+    "training_performed": false,
+    "deployment_permitted": false
+  },
+  "stream": {
+    "schema": 1,
+    "scope": "CPU serialization of full model geometry with synthetic initial Adam moments; not trained-state recovery",
+    "mode": "stream",
+    "parameters": 29537627,
+    "optimizer_bytes": 236301020,
+    "optimizer_leaves": 225,
+    "optimizer_state_sha256": "351c500eca757adcc3a713ea5b78353867020ac38be30854e0a2eecd48954443",
+    "state_bit_identical": true,
+    "model_sha256": "484b5d68e2b4136ff3323a217d7f6e7fb22bef949934677b176519ad402bc1c5",
+    "source_receipt_sha256": "0217a8bdd09d45d31f2e3ed3db1bfba04fb72c63aa124ec3b35ff98d5836963c",
+    "writer_sha256": "ed6b4d6a44d8a18cc923d765f3a7eff8da6e2672cb2f098ab115ddc017194489",
+    "file_bytes": 236308569,
+    "file_sha256": "186c1e0f3fc2cb3f2493300f0e9572c6f0f85379b11f265cdb8475cbfadc25d9",
+    "baseline_rss_bytes": 611667968,
+    "rss_after_write_bytes": 643219456,
+    "peak_rss_bytes": 794017792,
+    "write_seconds": 1.015073647002282,
+    "writer": {
+      "format": "flax-msgpack-stream-v1",
+      "bytes": 236308569,
+      "leaves": 225,
+      "largest_encoded_leaf_bytes": 37748763,
+      "array_bytes": 236301020
+    },
+    "training_performed": false,
+    "deployment_permitted": false
+  },
+  "file_bytes_identical": true,
+  "observed_peak_rss_reduction_bytes": 308752384,
+  "gpu_save_verified": false,
+  "deployment_permitted": false
+}
