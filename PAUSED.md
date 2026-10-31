@@ -1,3 +1,40 @@
+## Watch80 installed; English student blocked on training window — 2026-10-31
+
+**The controller is blocked; the existing admission queue remains live.**
+The same unavailable training window was verified across three consecutive goal
+turns. New English weights, native numeric/accuracy checks and physical speech
+acceptance remain incomplete. This is not a completed or parent-paused goal.
+
+At 2026-10-31T23:32:30.340541+00:00, session **28705**, guard **1511822** was
+confirmed live in `/proc`, state **waiting**, training child **none**. GPU usage
+was 23%, above the unchanged10% full-training start limit.
+The original admission window ends **2026-10-31T23:56:23.608305+00:00**
+(about24minutes remained at this observation). Do not extend or
+duplicate it automatically. It may still launch the bounded epoch if its
+existing GPU/RAM checks pass; otherwise inspect its actual terminal report.
+
+Report: `build/training-readiness-20261031/gpu-full-epoch1-v2.json`.
+Controller snapshot: `build/training-readiness-20261031/gpu-full-epoch1-v2-controller-blocked-snapshot.json`.
+Intent/output: `build/english-full-campaign-20261031/epoch1-v2-intent.json` /
+`build/english-full-campaign-20261031/epoch1-v2`.
+If training starts, its original12h cap, periodic READY snapshots and resource
+limits still apply. Nothing automatically exports, accepts or deploys weights.
+On resume, poll the **same** session/PID/report first; a timeout is not a reason
+to start another job. If terminal, audit the last verified READY checkpoint.
+
+The optional scheduling question asks whether training may share desktop GPU
+activity up to35% at launch. There is **no answer yet**. Keep10%, all RAM/VRAM
+limits, the Bak hold and all other workloads unchanged. Do not treat elapsed
+time, the preselected choice or this blocked status as consent to change limits.
+
+Installed Watch0.1.80/seq81 is healthy and OTA_VALID, with productionmodel8c,
+three apps, conversation, journal and peer security preserved. All own device,
+TUF writer and target holds were released. Receipts are pushed as private
+AckermanOSf4a0510. No new research model was installed. Other firmware owners'
+new reservations still require fresh shared COORDINATION review.
+
+---
+
 ## Full-shape GPU recovery verified; first epoch queued — 2026-10-31
 
 | Work | Current state |
