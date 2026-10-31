@@ -54,6 +54,25 @@ def select_rows(splits, split, limit, seed):
     return rows[:limit] if limit else rows
 
 
+def source_coverage(corpus, split, retained, selected):
+    stats = corpus.get('splits', {}).get(split)
+    maximum = corpus.get('maximum_seconds')
+    result = dict(known=stats is not None, maximum_seconds=maximum,
+                  retained_utterances=retained, selected_utterances=selected,
+                  source_utterances=None, excluded_over_limit=None, complete_original_split=None)
+    if stats is None:
+        return result
+    values = [stats.get(key) for key in ('source_utterances', 'retained', 'excluded_over_limit')]
+    if (any(type(value) is not int or value < 0 for value in values) or
+            values[1] != retained or values[0] != values[1]+values[2]):
+        raise ValueError('Source coverage counts differ from the retained manifest')
+    if maximum is not None and (type(maximum) not in (int, float) or not math.isfinite(maximum) or maximum <= 0):
+        raise ValueError('Invalid source preparation duration limit')
+    result.update(source_utterances=values[0], excluded_over_limit=values[2],
+                  complete_original_split=selected==values[0] and values[2]==0)
+    return result
+
+
 def freeze(source, target, executable=False):
     checksum = sha(source)
     shutil.copyfile(source, target)
@@ -124,6 +143,7 @@ def evaluate(args):
         raise ValueError('Invalid evaluation bounds')
     splits, corpus = load_splits(args.corpus)
     rows = select_rows(splits, args.split, args.limit, args.seed)
+    coverage = source_coverage(corpus, args.split, len(splits[args.split]), len(rows))
     args.output.mkdir(parents=True, exist_ok=False)
     marker = args.output/'INCOMPLETE'
     marker.write_text('Held-out evaluation is not complete.\n')
@@ -137,6 +157,7 @@ def evaluate(args):
         model_sha = freeze(args.model, model)
         plan = dict(schema=1, split=args.split, split_clips=len(splits[args.split]), selected_clips=len(rows),
             full_split=len(rows)==len(splits[args.split]), limit=args.limit, seed=args.seed,
+            source_coverage=coverage,
             selected_ids_sha256=hashlib.sha256(json.dumps([r['id'] for r in rows], separators=(',', ':')).encode()).hexdigest(),
             corpus_sha256=sha(args.corpus/'corpus.json'), corpus_source=corpus.get('source'),
             manifest_sha256=corpus['manifests'][args.split]['sha256'], engine_sha256=engine_sha,
@@ -198,7 +219,7 @@ def main():
     parser.add_argument('--timeout', type=float, default=120)
     args = parser.parse_args()
     report = evaluate(args)
-    print(json.dumps({key: report[key] for key in ('split', 'clips', 'full_split', 'wer', 'complete', 'deployment_permitted')}))
+    print(json.dumps({key: report[key] for key in ('split', 'clips', 'full_split', 'source_coverage', 'wer', 'complete', 'deployment_permitted')}))
 
 
 if __name__ == '__main__':

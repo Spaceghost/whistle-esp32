@@ -1,0 +1,41 @@
+{
+  "schema": 1,
+  "scope": "Source preparation exclusions are distinct from complete retained-manifest evaluation",
+  "stdlib_discovered": 97,
+  "stdlib_passed": 78,
+  "stdlib_dependency_skips": 19,
+  "locked_cpu_evaluation_passed": 11,
+  "locked_cpu_skipped": 0,
+  "guard": {
+    "schema": 1,
+    "state": "complete",
+    "command": [
+      "bash",
+      "-c",
+      "set -e\npython3 -S -m unittest discover -s tests -p \"test_english_*.py\" -v\n/var/home/jack/Projects/.system-cache/venvs/ackerman-english-training-20261030/bin/python -m unittest discover -s tests -p test_english_evaluation.py -v"
+    ],
+    "guard_pid": 1394749,
+    "child_pid": 1395083,
+    "rss_limit_bytes": 1073741824,
+    "launch_available_memory_bytes": 2147483648,
+    "host_available_memory_floor_bytes": 1073741824,
+    "cpu_only": true,
+    "cpus": 2,
+    "nice_increment": 10,
+    "maximum_job_seconds": 180.0,
+    "peak_observed_process_group_rss_bytes": 53911552,
+    "admitted": true,
+    "available_at_launch_bytes": 7052218368,
+    "admission_wait_seconds": 3.001,
+    "cpu_affinity": [
+      0,
+      1
+    ],
+    "reason": null,
+    "exit_code": 0,
+    "job_elapsed_seconds": 31.49
+  },
+  "score_normalization_changed": false,
+  "model_or_training_changed": false,
+  "deployment_permitted": false
+}

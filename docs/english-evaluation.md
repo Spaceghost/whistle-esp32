@@ -8,12 +8,12 @@
 | Original audio | ✅ Controls pass | Exact audio hash, mono 16 kHz PCM16, every sample retained |
 | Engine errors | ✅ Controls pass | Crash/nonzero exit/timeout stops evaluation and retains `INCOMPLETE` |
 | Honest totals | ✅ Controls pass | Corpus-weighted word error rate; empty speech output counts as errors |
-| Native integration | ✅ Four real validation clips completed | Existing model only; subset, not full-split or model acceptance |
+| Native baseline | ✅ All 2,694 retained validation clips audited | Existing model: 8.46% WER; not new-student or physical-watch acceptance |
 
-Nine synthetic controls exercise these rules. They are not speech-recognition
-results. A separate guarded GCC build of the actual native engine completed
-the four-clip integration run. Its existing-model result is a pipeline baseline,
-not evidence for the new student's quality.
+Eleven synthetic controls exercise these rules, including preparation coverage.
+They are not speech-recognition results. A separate guarded GCC build of the
+actual native engine completed both the four-clip integration check and the
+complete retained validation baseline. Neither establishes the new student's quality.
 
 ```mermaid
 flowchart TD
@@ -45,7 +45,10 @@ python tools/eval_english_native.py \
   --output "$FRESH_EVALUATION_OUTPUT"
 ```
 
-Default `--limit 0` scores the complete selected split. A bounded integration
+Default `--limit 0` scores the complete retained split manifest.
+`source_coverage` separately reports original source counts, preparation
+limits/exclusions and whether the original split is complete. An unknown
+source count is not treated as proof of complete original coverage. A bounded integration
 check can use `--limit 4 --seed 0`; the report explicitly marks it as a subset.
 The deterministic selection can be reused when comparing models. Use validation
 while iterating and reserve the test split for the chosen candidate. The corpus
@@ -86,13 +89,29 @@ physical microphone, latency, power or release gates.
 The scorer controls use the native project's `test_english_*.py` discovery
 pattern. Standard-library-only discovery runs the pure metric checks and
 reports missing research dependencies as explicit skips. The locked CPU
-environment runs all nine scorer and five checkpoint controls without skips.
-The current discovery check runs 77 tests with 18 dependency skips; those skips
+environment runs all eleven scorer controls without skips; the five checkpoint
+controls also passed separately. Current discovery runs 78 tests with 19
+dependency skips; those skips
 do not establish model or audio acceptance.
 [Discovery and complete research-environment controls](../research/english-native-evaluation-discovery-20261031.json).
 
-A complete validation baseline of the existing model is now running under a
-two-core, 1 GiB CPU guard. It includes all 2,694 validation clips, uses the same
-seed and normalization as the four-clip integration check, and preserves every
-clip. Its output is private ignored build storage until the run completes.
-Partial WER remains progress only. This baseline will not approve new weights.
+The existing model's baseline completed under a two-core, 1 GiB CPU guard.
+Every retained validation clip, source reference, audio identity and word-error
+total was audited. A second edit-distance implementation reproduced the totals;
+frozen engine/model and ledger hashes match.
+
+| Audited baseline | Result |
+| :--- | ---: |
+| Retained validation clips | 2,694 / 2,694 |
+| Reference words | 53,635 |
+| Word edits | 4,538 |
+| Corpus-weighted WER | 8.46% |
+| Elapsed host time | About 18.5 minutes |
+
+The original 30-second preparation retained 2,694 of 2,703 validation
+utterances; nine longer utterances are outside this benchmark. All 28,539
+training clips were retained without duration exclusions. The evaluator did
+not trim audio or omit additional clips. This is host-native inference of the
+existing model, not watch-microphone quality or approval for new weights.
+[Audited complete retained-manifest baseline](../research/english-production-validation-baseline-20261031.json).
+[Explicit source-coverage controls](../research/english-evaluation-source-coverage-controls-20261031.json).

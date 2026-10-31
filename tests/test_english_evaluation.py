@@ -25,6 +25,13 @@ class WordMetricTests(unittest.TestCase):
         self.assertEqual(scoring.word_errors(['one', 'two'], []), 2)
         self.assertEqual(scoring.word_errors(['one', 'two'], ['one', 'three', 'four']), 2)
 
+    def test_source_counts_refuse_inconsistent_receipt(self):
+        corpus = {'maximum_seconds': 30, 'splits': {'validation':
+            {'source_utterances': 4, 'retained': 2, 'excluded_over_limit': 1}}}
+        with self.assertRaisesRegex(ValueError, 'coverage counts differ'):
+            scoring.source_coverage(corpus, 'validation', 2, 2)
+        self.assertIsNone(scoring.source_coverage({}, 'validation', 2, 2)['complete_original_split'])
+
 
 @unittest.skipIf(sf is None, 'Run audio/engine controls in the locked CPU research environment')
 class HeldOutNativeTests(unittest.TestCase):
@@ -93,6 +100,18 @@ class HeldOutNativeTests(unittest.TestCase):
         self.assertFalse(first['full_split'])
         self.assertEqual(first['selected_ids_sha256'], second['selected_ids_sha256'])
         self.assertEqual(first['clips'], 1)
+
+    def test_complete_retained_manifest_reports_original_duration_exclusions(self):
+        path = self.corpus/'corpus.json'; meta = json.loads(path.read_text())
+        meta.update(maximum_seconds=30, splits={'validation':
+            {'source_utterances': 3, 'retained': 2, 'excluded_over_limit': 1}})
+        path.write_text(json.dumps(meta))
+        report = scoring.evaluate(self.args())
+        self.assertTrue(report['full_split'])
+        self.assertFalse(report['source_coverage']['complete_original_split'])
+        self.assertEqual(report['source_coverage']['source_utterances'], 3)
+        self.assertEqual(report['source_coverage']['excluded_over_limit'], 1)
+        self.assertEqual(report['source_coverage']['maximum_seconds'], 30)
 
     def test_failed_engine_output_is_not_scored_as_a_transcript(self):
         self.set_engine("print('one two');sys.stderr.write('decode failed');sys.exit(7)")
