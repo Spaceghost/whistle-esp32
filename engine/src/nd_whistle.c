@@ -716,7 +716,7 @@ static uint32_t stem(nd_whistle *w, const float *lm, uint32_t M, float *out)
     ND_FREE(k0); ND_FREE(k1); ND_FREE(k2); ND_FREE(b1); ND_FREE(b2); ND_FREE(flat);
 
     /* Sinusoidal position, gated by sigmoid(pe_gate) (~0.002 in this blob). */
-    {
+    if (hv(w, w->i_audio_cfg, 1) == 1.0f) {
         float g = sigm(hv(w, w->i_pe_gate, 0));
         for (t = 0; t < T3; t++)
             for (c = 0; c < w->d; c += 2) {
@@ -1086,11 +1086,14 @@ static void dec_block(nd_whistle *w, uint32_t layer, float *x, uint32_t T, void 
     mlp_residual(w, x, 1, L + D_PRE_HADA, L + D_MLP, 1.0f);
 }
 
+static void session_end(nd_whistle *w);
+
 static int session_begin(nd_whistle *w, const float *enc, uint32_t T)
 {
     uint32_t nh = w->nh, qk = w->qk, vd = w->vd, L = w->dec_layers, i, h, s;
     uint32_t nraw = nh * qk + w->nkv * (qk + vd);
-    float   *k, *v, tmp[64];
+    float   *k, *v, *memory = NULL, tmp[64];
+    int training_profile = hv(w, w->i_audio_cfg, 1) >= 2.0f;
     ND_T0(t0);
 
     w->enc_T    = T;
@@ -1102,19 +1105,47 @@ static int session_begin(nd_whistle *w, const float *enc, uint32_t T)
     w->eg_hist  = (float *)ND_ALLOC((size_t)w->n_sites * EG_HIST * w->d * sizeof(float));
     w->tmp      = (float *)ND_ALLOC((size_t)(T > w->max_seq ? T : w->max_seq) * sizeof(float));
     if (!w->cross_k || !w->cross_v || !w->k_cache || !w->v_cache ||
-        !w->qkv_hist || !w->eg_hist || !w->tmp)
+        !w->qkv_hist || !w->eg_hist || !w->tmp) {
+        session_end(w);
         return -1;
+    }
     memset(w->hist, 0, sizeof(w->hist));
 
     k = (float *)ND_ALLOC((size_t)T * nh * qk * sizeof(float));
     v = (float *)ND_ALLOC((size_t)T * nh * vd * sizeof(float));
+    if (training_profile)
+        memory = (float *)ND_ALLOC(w->d * sizeof(float));
+    if (!k || !v || (training_profile && !memory)) {
+        ND_FREE(k); ND_FREE(v); ND_FREE(memory);
+        session_end(w);
+        return -1;
+    }
     for (i = 0; i < w->depth; i++) {
         uint32_t l = w->active[i], X = w->i_cross + l * X_N;
         shared_in si;
-        sh_begin(w, &si, X + X_K, enc, T);
-        sh_lin(w, &si, X + X_K, k);
-        sh_lin(w, &si, X + X_V, v);
-        sh_end(&si);
+        if (training_profile) {
+            /* The pinned trainer adds non-interleaved sin/cos to decoder
+             * memory, never to the encoder input. One row of scratch avoids
+             * keeping a second full clip buffer in PSRAM. */
+            float gain = sigm(hv(w, w->i_pe_gate, 0));
+            uint32_t half = w->d / 2;
+            for (s = 0; s < T; s++) {
+                for (uint32_t c = 0; c < half; c++) {
+                    float angle = (float)s * expf(-logf(10000.0f) * (float)c / (float)(half - 1));
+                    memory[c] = enc[(size_t)s * w->d + c] + gain * sinf(angle);
+                    memory[c + half] = enc[(size_t)s * w->d + c + half] + gain * cosf(angle);
+                }
+                sh_begin(w, &si, X + X_K, memory, 1);
+                sh_lin(w, &si, X + X_K, k + (size_t)s * nh * qk);
+                sh_lin(w, &si, X + X_V, v + (size_t)s * nh * vd);
+                sh_end(&si);
+            }
+        } else {
+            sh_begin(w, &si, X + X_K, enc, T);
+            sh_lin(w, &si, X + X_K, k);
+            sh_lin(w, &si, X + X_V, v);
+            sh_end(&si);
+        }
         for (s = 0; s < T; s++)
             for (h = 0; h < nh; h++) {
                 zc(w, k + ((size_t)s * nh + h) * qk, qk, X + X_KN, tmp);
@@ -1125,6 +1156,7 @@ static int session_begin(nd_whistle *w, const float *enc, uint32_t T)
     }
     ND_FREE(k);
     ND_FREE(v);
+    ND_FREE(memory);
     ND_T1(t0, ND_WP_CROSS_KV);
     return 0;
 }

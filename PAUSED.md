@@ -12,6 +12,13 @@ native/sanitized execution, six frontend comparisons and legacy regression pass.
 Whole-network numerical parity, meaningful training/accuracy and physical Watch
 acceptance remain open. No research firmware/model was installed.
 
+Follow-on whole-network comparison found and fixed research position encoding:
+the encoder now passes the original numerical threshold on all four clips.
+Decoder logits still exceed 0.002; do not relax the threshold. Preserve
+`build/network-profile3-v{1,2}/` including tested binaries and reports. The
+next bounded task is to isolate that decoder discrepancy. Neither comparison
+used a GPU or disturbed other workloads.
+
 Local preserved outputs beneath this worktree:
 `build/english-native-training-20261031/stable-mixed-step{1-v4,2-resume}/`,
 `build/student-mixed-profile3-v1/`, `build/frontend-mixed-profile3-v1/`,

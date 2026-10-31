@@ -8,7 +8,7 @@
 | Train, save, restart | ✅ | Two real optimizer steps; model and optimizer restored in a new process |
 | Model partition fit | ✅ | 8,832,915 bytes; 3,618,925 bytes spare in the 12,451,840-byte partition |
 | Native execution | ✅ | Loads, encodes and decodes; prefix checks pass with native and sanitized builds |
-| Speech quality + Watch acceptance | ☐ | Full training, held-out scores, target memory and physical tests remain open |
+| Network agreement + speech acceptance | ☐ | Encoder now agrees; decoder still exceeds the numerical threshold; full training and Watch tests remain open |
 
 ## The route to a release
 
@@ -82,6 +82,29 @@ entire JAX network against C. GCC sanitizer libraries were unavailable on this
 host; Zig supplied the sanitizer runtime. Host state size remains 8,552 bytes;
 Watch RAM, stack, speed and power have not been measured for this model.
 
+### Network check: encoder fixed, decoder still open
+
+The new full-network checker caught an architectural difference that successful
+execution alone could not expose. Legacy C adds interleaved sin/cos positions
+before the encoder. The fresh trainer adds non-interleaved positions to decoder
+memory, using a different frequency spacing. Research profiles now follow the
+trainer; profile 1 keeps its original path.
+
+| Float comparison on four natural clips | Before | After |
+| :--- | :--- | :--- |
+| Encoder relative L2 error | 1.31–1.36 | Below 0.0002 threshold on every clip |
+| Decoder logits | Failed | Still exceeds the 0.002 absolute threshold |
+| Release acceptance | ☐ | ☐ |
+
+No tolerances were relaxed. The checker also feeds native encoder outputs into
+JAX to isolate the remaining decoder difference. It uses matched quantized
+weights, FP16-rounded other parameters and float execution; A8/KV8 simulation
+needs its own comparison. The position fix uses one heap row of scratch
+(2,048 bytes at this model width), avoiding a second full clip buffer; target
+peak RAM and speed remain unmeasured. Both failed comparison receipts and
+their tested binaries remain preserved. Do not begin release qualification or
+interpret unchanged argmax IDs on these random-weight probes as speech quality.
+
 [Numeric receipts and exact hashes](../research/english-native-20261031.json)
 include both training steps, the export, frontend, quantization, admission and
 legacy comparisons. Raw audio, optimizer files and model weights stay outside Git.
@@ -97,7 +120,7 @@ bound. Step one peaked at 3,304,222,720 bytes; resumed step two peaked at
 2,469,711,872 bytes. Both completed with finite gradients and nonzero updates.
 Two losses on different examples do not establish learning quality.
 
-1. Compare full-network trainer and native outputs before investing in full training.
+1. Resolve the decoder discrepancy and pass full-network comparison before full training.
 2. Train meaningfully when resources and the complete corpus are available.
 3. Score held-out English, app requests and character names against the baseline.
 4. Measure Watch memory/stack and test real microphone interactions.
@@ -110,7 +133,7 @@ Two losses on different examples do not establish learning quality.
 | Features + quantization | `tools/english_features.py`, `tools/english_precision.py` |
 | Train + export | `tools/train_english_student.py`, `tools/export_english_student.py` |
 | Native loader/frontend/decode probe | `host/profile_probe.c` |
-| Checks | `tools/check_english_{frontend,precision,native_admission,native_legacy}.py` |
+| Checks | `tools/check_english_{frontend,precision,network,native_admission,native_legacy}.py` |
 | Size planning | `tools/estimate_english_precision.py` |
 
 Use a fresh output directory for every attempt. Preserve the exact trainer,

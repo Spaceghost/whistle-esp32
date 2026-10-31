@@ -744,6 +744,236 @@
       "focused_python_tests": 26,
       "host_ctests": 10,
       "all_passed": true
+    },
+    "network_before_position_fix": {
+      "schema": 1,
+      "scope": "Float execution with matched CQ weights and FP16-rounded other parameters; no A8/KV8, accuracy or device acceptance",
+      "model_sha256": "97b590477e48f04c2b1cafd3ceab2347355b999c77a3523cf24c4adb1abcf779",
+      "native_binary_sha256": "40d72ff83d6a31d1380b699a1bf1ef9758fb8185c64cc908eff173faaae98a3b",
+      "checker_sha256": "e55b28033752b3b07d4e357dc2f3d2f7646c9db5d08d4a446106abb66e9cbfc5",
+      "checkpoint_manifest_sha256": "c781f2be72e9a2c908df05c96be748897adb2774c8a979a10e484a20322ac8e3",
+      "encoder_relative_tolerance": 0.0002,
+      "logits_absolute_tolerance": 0.002,
+      "tokens": [
+        2,
+        2048,
+        42,
+        101,
+        7,
+        1023,
+        33,
+        99
+      ],
+      "cases": [
+        {
+          "id": "cohen-want-make-app",
+          "audio_sha256": "8545bb49d4bb7715a3eda61884af801be24338692a9716eec87b6e5bb022d416",
+          "frames": 17,
+          "encoder_relative_l2_error": 1.3594180345535278,
+          "logits_max_absolute_error": 1.0428330898284912,
+          "native_memory_logits_max_absolute_error": 0.1747983992099762,
+          "argmax_identical": true,
+          "all_finite": true,
+          "within_tolerance": false
+        },
+        {
+          "id": "adalo-want-make-app",
+          "audio_sha256": "eb01ffbd64e65efd23316403c67758c87acd9b2048e92bc9ba53cd9d90d8e7d6",
+          "frames": 18,
+          "encoder_relative_l2_error": 1.3565467596054077,
+          "logits_max_absolute_error": 0.9958918690681458,
+          "native_memory_logits_max_absolute_error": 0.17610332369804382,
+          "argmax_identical": true,
+          "all_finite": true,
+          "within_tolerance": false
+        },
+        {
+          "id": "raroque-get-started",
+          "audio_sha256": "1ee4209e04d379a1b6e70f6a5593fbd0418cc4552a46f3e2edf09c5f3ab701cd",
+          "frames": 33,
+          "encoder_relative_l2_error": 1.344516634941101,
+          "logits_max_absolute_error": 0.9949178695678711,
+          "native_memory_logits_max_absolute_error": 0.18739360570907593,
+          "argmax_identical": true,
+          "all_finite": true,
+          "within_tolerance": false
+        },
+        {
+          "id": "levi-introduction",
+          "audio_sha256": "187abf6e5a6181f1f249c0e20aa35da8ffecfe1171662f73ffed1a6d9ed11f3f",
+          "frames": 63,
+          "encoder_relative_l2_error": 1.312240481376648,
+          "logits_max_absolute_error": 0.9835335612297058,
+          "native_memory_logits_max_absolute_error": 0.16629451513290405,
+          "argmax_identical": true,
+          "all_finite": true,
+          "within_tolerance": false
+        }
+      ],
+      "all_passed": false,
+      "deployment_permitted": false
+    },
+    "network_after_position_fix": {
+      "schema": 1,
+      "scope": "Float execution with matched CQ weights and FP16-rounded other parameters; no A8/KV8, accuracy or device acceptance",
+      "model_sha256": "97b590477e48f04c2b1cafd3ceab2347355b999c77a3523cf24c4adb1abcf779",
+      "native_binary_sha256": "d555ffa9401469f67af7400ef7aaab534557fdbf908dfbf56892a04755d99463",
+      "checker_sha256": "e55b28033752b3b07d4e357dc2f3d2f7646c9db5d08d4a446106abb66e9cbfc5",
+      "checkpoint_manifest_sha256": "c781f2be72e9a2c908df05c96be748897adb2774c8a979a10e484a20322ac8e3",
+      "encoder_relative_tolerance": 0.0002,
+      "logits_absolute_tolerance": 0.002,
+      "tokens": [
+        2,
+        2048,
+        42,
+        101,
+        7,
+        1023,
+        33,
+        99
+      ],
+      "cases": [
+        {
+          "id": "cohen-want-make-app",
+          "audio_sha256": "8545bb49d4bb7715a3eda61884af801be24338692a9716eec87b6e5bb022d416",
+          "frames": 17,
+          "encoder_relative_l2_error": 3.855335307889618e-06,
+          "logits_max_absolute_error": 0.006464153528213501,
+          "native_memory_logits_max_absolute_error": 0.00646442174911499,
+          "argmax_identical": true,
+          "all_finite": true,
+          "within_tolerance": false
+        },
+        {
+          "id": "adalo-want-make-app",
+          "audio_sha256": "eb01ffbd64e65efd23316403c67758c87acd9b2048e92bc9ba53cd9d90d8e7d6",
+          "frames": 18,
+          "encoder_relative_l2_error": 2.7006108211935498e-06,
+          "logits_max_absolute_error": 0.006874144077301025,
+          "native_memory_logits_max_absolute_error": 0.006874114274978638,
+          "argmax_identical": true,
+          "all_finite": true,
+          "within_tolerance": false
+        },
+        {
+          "id": "raroque-get-started",
+          "audio_sha256": "1ee4209e04d379a1b6e70f6a5593fbd0418cc4552a46f3e2edf09c5f3ab701cd",
+          "frames": 33,
+          "encoder_relative_l2_error": 3.2723576168791624e-06,
+          "logits_max_absolute_error": 0.00686529278755188,
+          "native_memory_logits_max_absolute_error": 0.006865501403808594,
+          "argmax_identical": true,
+          "all_finite": true,
+          "within_tolerance": false
+        },
+        {
+          "id": "levi-introduction",
+          "audio_sha256": "187abf6e5a6181f1f249c0e20aa35da8ffecfe1171662f73ffed1a6d9ed11f3f",
+          "frames": 63,
+          "encoder_relative_l2_error": 1.9992978650407167e-06,
+          "logits_max_absolute_error": 0.006894707679748535,
+          "native_memory_logits_max_absolute_error": 0.00689464807510376,
+          "argmax_identical": true,
+          "all_finite": true,
+          "within_tolerance": false
+        }
+      ],
+      "all_passed": false,
+      "deployment_permitted": false
+    },
+    "network_guard_before": {
+      "exit_code": 1,
+      "stop_reason": null,
+      "peak_child_rss_bytes": 1427197952,
+      "elapsed_seconds": 65.601,
+      "rss_limit_bytes": 3221225472,
+      "cpu_only": true
+    },
+    "network_guard_after": {
+      "exit_code": 1,
+      "stop_reason": null,
+      "peak_child_rss_bytes": 1439870976,
+      "elapsed_seconds": 62.1,
+      "rss_limit_bytes": 3221225472,
+      "cpu_only": true
+    },
+    "legacy_regression_after_position_fix": {
+      "schema": 1,
+      "model_sha256": "8c956a951107b03a1832a3c6d665c88e52cc59fadcf91397077416f22f5dca9b",
+      "baseline_binary_sha256": "74d0b39516e09ad757e8b4344ed9071640ae09070f810b0dd90f63369cfc7053",
+      "candidate_binary_sha256": "0010459e75a99e061dd964c0209f0bfc0c999388c557bbb59080e99a13137996",
+      "cases": [
+        {
+          "id": "cohen-want-make-app",
+          "fixture_sha256": "8545bb49d4bb7715a3eda61884af801be24338692a9716eec87b6e5bb022d416",
+          "prefix": 8192,
+          "token_ids_identical": true,
+          "unbiased_score_hex_identical": true,
+          "encoder_bit_identical": true,
+          "all_prefix_logits_bit_identical": true,
+          "prefix_positions": 9,
+          "vocabulary_rows_per_position": 8193
+        },
+        {
+          "id": "adalo-want-make-app",
+          "fixture_sha256": "eb01ffbd64e65efd23316403c67758c87acd9b2048e92bc9ba53cd9d90d8e7d6",
+          "prefix": 8192,
+          "token_ids_identical": true,
+          "unbiased_score_hex_identical": true,
+          "encoder_bit_identical": true,
+          "all_prefix_logits_bit_identical": true,
+          "prefix_positions": 10,
+          "vocabulary_rows_per_position": 8193
+        },
+        {
+          "id": "raroque-get-started",
+          "fixture_sha256": "1ee4209e04d379a1b6e70f6a5593fbd0418cc4552a46f3e2edf09c5f3ab701cd",
+          "prefix": 8192,
+          "token_ids_identical": true,
+          "unbiased_score_hex_identical": true,
+          "encoder_bit_identical": true,
+          "all_prefix_logits_bit_identical": true,
+          "prefix_positions": 17,
+          "vocabulary_rows_per_position": 8193
+        },
+        {
+          "id": "levi-introduction",
+          "fixture_sha256": "187abf6e5a6181f1f249c0e20aa35da8ffecfe1171662f73ffed1a6d9ed11f3f",
+          "prefix": 8192,
+          "token_ids_identical": true,
+          "unbiased_score_hex_identical": true,
+          "encoder_bit_identical": true,
+          "all_prefix_logits_bit_identical": true,
+          "prefix_positions": 25,
+          "vocabulary_rows_per_position": 8193
+        }
+      ],
+      "all_cases_identical": true,
+      "scope": "Host regression on four cached natural clips; not a microphone or new-model accuracy claim",
+      "fixture_references_human_reviewed": false,
+      "deployment_performed": false
+    },
+    "sanitizers_after_position_fix": {
+      "prefix_exit_code": 0,
+      "decode_exit_code": 0,
+      "binary_sha256": "07bea291c800604f4bd6d461d35feaf7ae0d062794eedcf02dbbdef6b8f68404",
+      "prefix_result": {
+        "prefix": 2048,
+        "first_token_matches_teacher_forcing": true,
+        "confidence_matches_teacher_forcing": true,
+        "expected_score_hex": "-0x1.015f4p-3",
+        "actual_score_hex": "-0x1.015f4p-3"
+      },
+      "decode_result": {
+        "vocabulary": 2049,
+        "prefix": 2048,
+        "score_hex": "-0x1.c5aacp-3",
+        "tokens": [
+          2048
+        ]
+      },
+      "scope": "ASAN/UBSAN real-clip and prefix smoke; all terminal zero, not ASR acceptance"
     }
-  }
+  },
+  "remaining_network_difference": "Encoder now within existing tolerance; decoder maximum absolute logit error remains above 0.002. Do not loosen tolerance or start release qualification."
 }
