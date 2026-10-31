@@ -7,6 +7,7 @@ matching backend receipt. The original CPU trainer stays byte-for-byte intact.
 import argparse
 from dataclasses import asdict
 from functools import partial
+import hashlib
 import importlib.metadata
 import json
 import math
