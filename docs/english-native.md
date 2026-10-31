@@ -84,10 +84,12 @@ absolute/relative tolerance (0.002) was retained. Profile 1 keeps its original
 arithmetic, confirmed by the legacy regression.
 
 The native probe passes prefix/teacher-forcing consistency and real-clip
-execution in release and Zig ASAN/UBSAN builds. A separate whole-network float
-comparison now passes too, as detailed below. GCC sanitizer libraries were unavailable on this
-host; Zig supplied the sanitizer runtime. Host state size remains 8,552 bytes;
-Watch RAM, stack, speed and power have not been measured for this model.
+execution in release and Zig UBSan builds (earlier ASan coverage is unverified). A separate whole-network float
+comparison now passes too, as detailed below. Real GCC ASan/UBSan runtimes are now cached and fault-canary verified. The
+[host heap probe and sanitizer correction](english-memory.md) record the new
+scope: eight-second inference requests 4,169,028 bytes at peak, with no tracked
+leaks. Host state size remains 8,552 bytes; physical Watch heap placement, stack,
+speed and power remain unmeasured for this model.
 
 ### Network check: two causes found, float comparison passes
 

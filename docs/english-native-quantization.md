@@ -1,5 +1,7 @@
 # Fast English inference: measure what the Watch runs
 
+> ⚠️ Earlier Zig builds do not prove ASan coverage. See the [verified runtime correction](english-memory.md#sanitizer-coverage-correction-and-replacement).
+
 **✅ Kernel simulation works. ☐ Full fast-path acceptance is still open.**
 
 **Runtime restoration corrected:** earlier network/decoder comparisons used the
@@ -116,7 +118,7 @@ The resulting export is 8,832,915 bytes, SHA-256
 `37a8d6e407c7ffbc64fb46a8340cb41b29447a528fb836590e91800b94fc819b`.
 It fits the Watch's **11,010,048-byte effective model budget**, preserving the
 signed app store, with 2,177,133 bytes spare. Native prefix/one-clip execution
-passes ASAN/UBSAN; physical and accuracy acceptance remain open.
+passes UBSan (ASan unverified); physical and accuracy acceptance remain open.
 
 [Training, restart, export and resource receipts](../research/english-native-training-20261031.json)
 also include the controlled rounding study. The physical model partition is
@@ -159,7 +161,7 @@ Set the path variables to the verified inputs from the
 `host/stage_probe.c` includes the existing engine implementation to reach
 static stages without adding a production API or device state.
 `tools/english_stage_diagnostics.py` compares cumulative and shared-input stages.
-Actual C stage execution passes Zig ASAN/UBSAN. No production engine arithmetic,
+Actual C stage execution passes Zig UBSan (ASan unverified). No production engine arithmetic,
 firmware, device model or service changed in the kernel-diagnosis milestone.
 The subsequent training-policy source change is described above; its first
 native-policy step and cross-process restart now pass.

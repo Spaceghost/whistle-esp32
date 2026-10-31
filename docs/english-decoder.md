@@ -1,5 +1,7 @@
 # English decoder: where fast inference diverges
 
+> ⚠️ Earlier Zig builds do not prove ASan coverage. See the [verified runtime correction](english-memory.md#sanitizer-coverage-correction-and-replacement).
+
 **Scope update:** the earlier numbers below used the loader's default
 `flash=True` reference. This checkpoint trained with `flash=False`. The checker
 now restores the recorded runtime; [current component controls and remaining
@@ -78,7 +80,7 @@ hidden-state error to 0.00028843, and passed all eight float hidden states.
 The layer probe narrows that finding further.
 
 The expanded probe passes actual-model execution and malformed-input/output
-preservation checks under Zig ASAN/UBSAN. The float layer control passes all
+preservation checks under Zig UBSan (ASan unverified). The float layer control passes all
 32 comparisons. CPU guards were bounded to two cores, 3 GiB and five minutes;
 all jobs completed without eviction or GPU allocation.
 
@@ -96,7 +98,7 @@ The capture subclass uses the pinned training operations and refuses attribution
 unless its output agrees with the original block at every token within 2e-6.
 Both fast and float controls are exact in this run. Native logits still reproduce
 the previous run bit for bit. The generated probe also passes eight actual-model,
-malformed-input and output-preservation checks under Zig ASAN/UBSAN.
+malformed-input and output-preservation checks under Zig UBSan (ASan unverified).
 
 ## Next action
 

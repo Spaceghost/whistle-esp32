@@ -1,5 +1,7 @@
 # English evaluation: restore what actually trained
 
+> ⚠️ Earlier Zig builds do not prove ASan coverage. See the [verified runtime correction](english-memory.md#sanitizer-coverage-correction-and-replacement).
+
 **Fixed: evaluation now restores the checkpoint's recorded attention mode.**
 
 The pinned source's `WhistleConfig.from_saved()` restores geometry but discards
@@ -66,7 +68,7 @@ The host generator now adds thirteen capture calls, including actual C Q8
 preparation replay. Five tests verify capture-only source changes and refuse
 stale/ambiguous anchors; four runtime tests cover the loader-default regression,
 missing settings, geometry mismatch and malformed settings. Eight generated
-probe checks pass Zig ASAN/UBSAN. Raw tensors stay outside Git.
+probe checks pass Zig UBSan (ASan unverified). Raw tensors stay outside Git.
 
 **Composed-path result:** the actual C projection reproduces the observed jump
 from a tiny context perturbation. A normalization barrier does not fix it.

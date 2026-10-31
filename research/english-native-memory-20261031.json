@@ -1,0 +1,490 @@
+{
+  "schema": 1,
+  "scope": "Host requested-heap evidence and corrected sanitizer coverage; not physical Watch acceptance",
+  "release": {
+    "schema": 1,
+    "scope": "Measure native requested heap on synthetic silence; no device acceptance.",
+    "model_sha256": "37a8d6e407c7ffbc64fb46a8340cb41b29447a528fb836590e91800b94fc819b",
+    "export_receipt_sha256": "ebfdc93dac0dc4b60d4b4c4f68e14d120ce149767a3ea636aedf5c15f26f5d2d",
+    "binary_sha256": "4e52f66a9b6648d4cb075d31ddae54156ca77466e732240a4fc30be7c4331574",
+    "checker_sha256": "d814174de5fe5e7919fd83de3b2a3c1723dc0d13985aa903ea26b4bd9bac238c",
+    "cases": [
+      {
+        "seconds": 1,
+        "model_state_host_bytes": 8552,
+        "model_open_live_bytes": 131988,
+        "model_open_peak_bytes": 131988,
+        "encoded_output_bytes": 26624,
+        "encode_peak_bytes": 1824500,
+        "decode_peak_bytes": 972536,
+        "one_pcm_buffer_bytes": 64000,
+        "final_live_bytes": 0,
+        "allocation_calls": 600,
+        "allocation_failures": 0,
+        "decode_tokens": 1,
+        "passed": true,
+        "requested_heap_peak_bytes": 1824500,
+        "heap_peak_plus_two_128000_sample_capture_buffers_bytes": 2848500
+      },
+      {
+        "seconds": 4,
+        "model_state_host_bytes": 8552,
+        "model_open_live_bytes": 131988,
+        "model_open_peak_bytes": 131988,
+        "encoded_output_bytes": 102400,
+        "encode_peak_bytes": 2139004,
+        "decode_peak_bytes": 1402600,
+        "one_pcm_buffer_bytes": 256000,
+        "final_live_bytes": 0,
+        "allocation_calls": 881,
+        "allocation_failures": 0,
+        "decode_tokens": 1,
+        "passed": true,
+        "requested_heap_peak_bytes": 2139004,
+        "heap_peak_plus_two_128000_sample_capture_buffers_bytes": 3163004
+      },
+      {
+        "seconds": 8,
+        "model_state_host_bytes": 8552,
+        "model_open_live_bytes": 131988,
+        "model_open_peak_bytes": 131988,
+        "encoded_output_bytes": 204800,
+        "encode_peak_bytes": 4169028,
+        "decode_peak_bytes": 2042600,
+        "one_pcm_buffer_bytes": 512000,
+        "final_live_bytes": 0,
+        "allocation_calls": 1279,
+        "allocation_failures": 0,
+        "decode_tokens": 1,
+        "passed": true,
+        "requested_heap_peak_bytes": 4169028,
+        "heap_peak_plus_two_128000_sample_capture_buffers_bytes": 5193028
+      }
+    ],
+    "stimulus": "synthetic digital silence",
+    "decode_token_cap": 128,
+    "model_weights_mmap_not_counted_as_heap": true,
+    "excludes": [
+      "allocator metadata and fragmentation",
+      "stack and task memory",
+      "UI/network/app heaps",
+      "physical PSRAM/internal heap placement"
+    ],
+    "all_tracked_allocations_released": true,
+    "watch_memory_acceptance_verified": false,
+    "neural_accuracy_verified": false,
+    "deployment_permitted": false
+  },
+  "actual_gcc_asan_ubsan": {
+    "schema": 1,
+    "scope": "Measure native requested heap on synthetic silence; no device acceptance.",
+    "model_sha256": "37a8d6e407c7ffbc64fb46a8340cb41b29447a528fb836590e91800b94fc819b",
+    "export_receipt_sha256": "ebfdc93dac0dc4b60d4b4c4f68e14d120ce149767a3ea636aedf5c15f26f5d2d",
+    "binary_sha256": "b7f049c4b1ad53d13e9e4770898ec403d51c9adf3921aefc550c530f14ef11f8",
+    "checker_sha256": "d814174de5fe5e7919fd83de3b2a3c1723dc0d13985aa903ea26b4bd9bac238c",
+    "cases": [
+      {
+        "seconds": 1,
+        "model_state_host_bytes": 8552,
+        "model_open_live_bytes": 131988,
+        "model_open_peak_bytes": 131988,
+        "encoded_output_bytes": 26624,
+        "encode_peak_bytes": 1824500,
+        "decode_peak_bytes": 972536,
+        "one_pcm_buffer_bytes": 64000,
+        "final_live_bytes": 0,
+        "allocation_calls": 600,
+        "allocation_failures": 0,
+        "decode_tokens": 1,
+        "passed": true,
+        "requested_heap_peak_bytes": 1824500,
+        "heap_peak_plus_two_128000_sample_capture_buffers_bytes": 2848500
+      },
+      {
+        "seconds": 4,
+        "model_state_host_bytes": 8552,
+        "model_open_live_bytes": 131988,
+        "model_open_peak_bytes": 131988,
+        "encoded_output_bytes": 102400,
+        "encode_peak_bytes": 2139004,
+        "decode_peak_bytes": 1402600,
+        "one_pcm_buffer_bytes": 256000,
+        "final_live_bytes": 0,
+        "allocation_calls": 881,
+        "allocation_failures": 0,
+        "decode_tokens": 1,
+        "passed": true,
+        "requested_heap_peak_bytes": 2139004,
+        "heap_peak_plus_two_128000_sample_capture_buffers_bytes": 3163004
+      },
+      {
+        "seconds": 8,
+        "model_state_host_bytes": 8552,
+        "model_open_live_bytes": 131988,
+        "model_open_peak_bytes": 131988,
+        "encoded_output_bytes": 204800,
+        "encode_peak_bytes": 4169028,
+        "decode_peak_bytes": 2042600,
+        "one_pcm_buffer_bytes": 512000,
+        "final_live_bytes": 0,
+        "allocation_calls": 1279,
+        "allocation_failures": 0,
+        "decode_tokens": 1,
+        "passed": true,
+        "requested_heap_peak_bytes": 4169028,
+        "heap_peak_plus_two_128000_sample_capture_buffers_bytes": 5193028
+      }
+    ],
+    "stimulus": "synthetic digital silence",
+    "decode_token_cap": 128,
+    "model_weights_mmap_not_counted_as_heap": true,
+    "excludes": [
+      "allocator metadata and fragmentation",
+      "stack and task memory",
+      "UI/network/app heaps",
+      "physical PSRAM/internal heap placement"
+    ],
+    "all_tracked_allocations_released": true,
+    "watch_memory_acceptance_verified": false,
+    "neural_accuracy_verified": false,
+    "deployment_permitted": false
+  },
+  "release_and_gcc_sanitized_metrics_identical": true,
+  "sanitizer_canaries": {
+    "schema": 1,
+    "scope": "Require actual ASan and UBSan fault detection, not accepted compiler flags.",
+    "checker_sha256": "544b45c954707d8595f80aa3067b333a351fe812af5cff11c848bc288f95e79b",
+    "compiler_command": "/usr/bin/gcc",
+    "cases": [
+      {
+        "case": "heap",
+        "sanitizer": "address",
+        "source_sha256": "4c46bfdb4fd33d491b794a032ff521af841c1b7720b37024acf25f7a423ac224",
+        "compile_exit_code": 0,
+        "expected_error_reported": true,
+        "exit_code": 1,
+        "binary_sha256": "646aa0db9c257e32cfa58013be00462a6bff339635fcfda52b860bcb92b7895b"
+      },
+      {
+        "case": "overflow",
+        "sanitizer": "undefined",
+        "source_sha256": "cd59806e7f044f268471b68c6b9e137e39e9df62aabddb19a42f4fd72e1a908d",
+        "compile_exit_code": 0,
+        "expected_error_reported": true,
+        "exit_code": 1,
+        "binary_sha256": "69b97e47ee1217e3ad650d7de3cd38c4e56a99f7272d6ae10919c3230a17af29"
+      }
+    ],
+    "all_passed": true
+  },
+  "zig_canary_rejection": {
+    "schema": 1,
+    "scope": "Require actual ASan and UBSan fault detection, not accepted compiler flags.",
+    "checker_sha256": "544b45c954707d8595f80aa3067b333a351fe812af5cff11c848bc288f95e79b",
+    "compiler_command": "/var/home/jack/Projects/.agent-tmp/ackerman-english-native/zigcc",
+    "cases": [
+      {
+        "case": "heap",
+        "sanitizer": "address",
+        "source_sha256": "4c46bfdb4fd33d491b794a032ff521af841c1b7720b37024acf25f7a423ac224",
+        "compile_exit_code": 1,
+        "expected_error_reported": false
+      },
+      {
+        "case": "overflow",
+        "sanitizer": "undefined",
+        "source_sha256": "cd59806e7f044f268471b68c6b9e137e39e9df62aabddb19a42f4fd72e1a908d",
+        "compile_exit_code": 0,
+        "expected_error_reported": true,
+        "exit_code": -6,
+        "binary_sha256": "59ec5615c8386c8dbf9d5808b714d9ce5169eb1a9db081d11afd58b9b7076f0e"
+      }
+    ],
+    "all_passed": false
+  },
+  "older_current_zig_binary_inspection": [
+    {
+      "name": "profile_probe",
+      "binary_sha256": "ece927da0d0ec6ff74584adef6b3649b5369d6b3d0308ae04556e26cb4d3f936",
+      "has_asan_symbols": false,
+      "has_ubsan_symbols": true
+    },
+    {
+      "name": "stage_probe",
+      "binary_sha256": "be3abc6934cc51f504301f357eddbdefc037a36b34166cd7880c6822865a9afc",
+      "has_asan_symbols": false,
+      "has_ubsan_symbols": true
+    },
+    {
+      "name": "decoder_probe",
+      "binary_sha256": "aa5d063b997d118bcdb4218387798092be5f47adfe2a67f0a5d414a0ce6b55f5",
+      "has_asan_symbols": false,
+      "has_ubsan_symbols": true
+    }
+  ],
+  "runtime_cache": {
+    "schema": 1,
+    "system_install_performed": false,
+    "packages": [
+      {
+        "name": "libasan",
+        "identity": "libasan 16.2.1-2.fc44 x86_64",
+        "rpm_sha256": "c348876f1cb3128b47b15d1ca30f73c139db11ba6c226c34b69b0bbe5d2d9c71",
+        "rpm_digests_verified": true,
+        "rpm_signature_verified": false,
+        "source_url": "https://kojipkgs.fedoraproject.org/packages/gcc/16.2.1/2.fc44/x86_64/libasan-16.2.1-2.fc44.x86_64.rpm",
+        "library_sha256": "e4a7dbd1207e0140f2ddedecdf6ffaba87e542693247d9f51b5ec1e9b320da9f"
+      },
+      {
+        "name": "libubsan",
+        "identity": "libubsan 16.2.1-2.fc44 x86_64",
+        "rpm_sha256": "28f1a298aab47836da86d58746a68e56cac02086dd186b6f46aa7c4eeb243c3a",
+        "rpm_digests_verified": true,
+        "rpm_signature_verified": false,
+        "source_url": "https://kojipkgs.fedoraproject.org/packages/gcc/16.2.1/2.fc44/x86_64/libubsan-16.2.1-2.fc44.x86_64.rpm",
+        "library_sha256": "7a86e4af33a636ea89cc64295e04bb02fc067d8f2f929d87475d971f852b4f17"
+      }
+    ]
+  },
+  "guards": {
+    "native-memory-build-v1": {
+      "schema": 1,
+      "state": "stopped",
+      "command": [
+        "bash",
+        "-c",
+        "cmake -S host -B build/english-memory-cmake-20261031 -DCMAKE_BUILD_TYPE=Release && cmake --build build/english-memory-cmake-20261031 --target wh_memory -j2"
+      ],
+      "guard_pid": 757563,
+      "child_pid": 758292,
+      "rss_limit_bytes": 1073741824,
+      "launch_available_memory_bytes": 3221225472,
+      "host_available_memory_floor_bytes": 1073741824,
+      "cpu_only": true,
+      "cpus": 2,
+      "nice_increment": 10,
+      "maximum_job_seconds": 180.0,
+      "peak_observed_process_group_rss_bytes": 0,
+      "admitted": true,
+      "available_at_launch_bytes": 5216763904,
+      "admission_wait_seconds": 3.001,
+      "cpu_affinity": [
+        0,
+        1
+      ],
+      "reason": null,
+      "exit_code": 127,
+      "job_elapsed_seconds": 0.279
+    },
+    "native-memory-build-v2": {
+      "schema": 1,
+      "state": "complete",
+      "command": [
+        "bash",
+        "-c",
+        "cmake -S host -B build/english-memory-cmake-20261031 -DCMAKE_BUILD_TYPE=Release && cmake --build build/english-memory-cmake-20261031 --target wh_memory -j2"
+      ],
+      "guard_pid": 761243,
+      "child_pid": 761543,
+      "rss_limit_bytes": 1073741824,
+      "launch_available_memory_bytes": 3221225472,
+      "host_available_memory_floor_bytes": 1073741824,
+      "cpu_only": true,
+      "cpus": 2,
+      "nice_increment": 10,
+      "maximum_job_seconds": 180.0,
+      "peak_observed_process_group_rss_bytes": 41095168,
+      "admitted": true,
+      "available_at_launch_bytes": 3799035904,
+      "admission_wait_seconds": 3.001,
+      "cpu_affinity": [
+        0,
+        1
+      ],
+      "reason": null,
+      "exit_code": 0,
+      "job_elapsed_seconds": 18.506
+    },
+    "native-memory-window-v1": {
+      "schema": 1,
+      "state": "complete",
+      "command": [
+        "/var/home/jack/Projects/.system-cache/venvs/ackerman-english-training-20261030/bin/python",
+        "tools/check_english_memory.py",
+        "--binary",
+        "build/english-memory-cmake-20261031/wh_memory",
+        "--export-root",
+        "build/native-policy-training-20261031/export-step2-v1",
+        "--output",
+        "build/english-memory-20261031/run-v1"
+      ],
+      "guard_pid": 768909,
+      "child_pid": 769215,
+      "rss_limit_bytes": 536870912,
+      "launch_available_memory_bytes": 2684354560,
+      "host_available_memory_floor_bytes": 1073741824,
+      "cpu_only": true,
+      "cpus": 2,
+      "nice_increment": 10,
+      "maximum_job_seconds": 900.0,
+      "peak_observed_process_group_rss_bytes": 27971584,
+      "admitted": true,
+      "available_at_launch_bytes": 4646449152,
+      "admission_wait_seconds": 3.003,
+      "cpu_affinity": [
+        0,
+        1
+      ],
+      "reason": null,
+      "exit_code": 0,
+      "job_elapsed_seconds": 1.292
+    },
+    "native-memory-sanitizer-build-v1": {
+      "schema": 1,
+      "state": "complete",
+      "command": [
+        "bash",
+        "-c",
+        "cmake -S host -B build/english-memory-zig-asan-20261031 -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=/home/jack/Projects/.agent-tmp/ackerman-english-native/zigcc -DCMAKE_C_FLAGS=\"-fsanitize=address,undefined -fno-omit-frame-pointer\" -DCMAKE_C_FLAGS_RELEASE=\"-O1 -DNDEBUG\" && cmake --build build/english-memory-zig-asan-20261031 --target wh_memory -j2"
+      ],
+      "guard_pid": 774393,
+      "child_pid": 774674,
+      "rss_limit_bytes": 1073741824,
+      "launch_available_memory_bytes": 3221225472,
+      "host_available_memory_floor_bytes": 1073741824,
+      "cpu_only": true,
+      "cpus": 2,
+      "nice_increment": 10,
+      "maximum_job_seconds": 240.0,
+      "peak_observed_process_group_rss_bytes": 278810624,
+      "admitted": true,
+      "available_at_launch_bytes": 4958978048,
+      "admission_wait_seconds": 3.001,
+      "cpu_affinity": [
+        0,
+        1
+      ],
+      "reason": null,
+      "exit_code": 0,
+      "job_elapsed_seconds": 11.106
+    },
+    "native-memory-sanitizer-window-v1": {
+      "schema": 1,
+      "state": "complete",
+      "command": [
+        "/var/home/jack/Projects/.system-cache/venvs/ackerman-english-training-20261030/bin/python",
+        "tools/check_english_memory.py",
+        "--binary",
+        "build/english-memory-zig-asan-20261031/wh_memory",
+        "--export-root",
+        "build/native-policy-training-20261031/export-step2-v1",
+        "--output",
+        "build/english-memory-20261031/sanitizer-v1"
+      ],
+      "guard_pid": 776640,
+      "child_pid": 776932,
+      "rss_limit_bytes": 1073741824,
+      "launch_available_memory_bytes": 3221225472,
+      "host_available_memory_floor_bytes": 1073741824,
+      "cpu_only": true,
+      "cpus": 2,
+      "nice_increment": 10,
+      "maximum_job_seconds": 180.0,
+      "peak_observed_process_group_rss_bytes": 29396992,
+      "admitted": true,
+      "available_at_launch_bytes": 5155434496,
+      "admission_wait_seconds": 3.001,
+      "cpu_affinity": [
+        0,
+        1
+      ],
+      "reason": null,
+      "exit_code": 0,
+      "job_elapsed_seconds": 8.196
+    },
+    "native-memory-gcc-sanitizer-build-v1": {
+      "schema": 1,
+      "state": "complete",
+      "command": [
+        "bash",
+        "-c",
+        "cmake -S host -B build/english-memory-gcc-asan-20261031 -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=/usr/bin/gcc -DCMAKE_C_FLAGS=\"-fsanitize=address,undefined -fno-omit-frame-pointer\" -DCMAKE_C_FLAGS_RELEASE=\"-O1 -DNDEBUG\" -DCMAKE_EXE_LINKER_FLAGS=\"-L/var/home/jack/Projects/.system-cache/rpm/ackerman-sanitizers-20261031/runtime/usr/lib64 -Wl,-rpath,/var/home/jack/Projects/.system-cache/rpm/ackerman-sanitizers-20261031/runtime/usr/lib64\" && cmake --build build/english-memory-gcc-asan-20261031 --target wh_memory -j2"
+      ],
+      "guard_pid": 785712,
+      "child_pid": 785813,
+      "rss_limit_bytes": 1073741824,
+      "launch_available_memory_bytes": 3221225472,
+      "host_available_memory_floor_bytes": 1073741824,
+      "cpu_only": true,
+      "cpus": 2,
+      "nice_increment": 10,
+      "maximum_job_seconds": 240.0,
+      "peak_observed_process_group_rss_bytes": 193667072,
+      "admitted": true,
+      "available_at_launch_bytes": 5177626624,
+      "admission_wait_seconds": 3.001,
+      "cpu_affinity": [
+        0,
+        1
+      ],
+      "reason": null,
+      "exit_code": 0,
+      "job_elapsed_seconds": 3.45
+    },
+    "native-memory-gcc-sanitizer-window-v1": {
+      "schema": 1,
+      "state": "complete",
+      "command": [
+        "/var/home/jack/Projects/.system-cache/venvs/ackerman-english-training-20261030/bin/python",
+        "tools/check_english_memory.py",
+        "--binary",
+        "build/english-memory-gcc-asan-20261031/wh_memory",
+        "--export-root",
+        "build/native-policy-training-20261031/export-step2-v1",
+        "--output",
+        "build/english-memory-20261031/gcc-sanitizer-v1"
+      ],
+      "guard_pid": 788085,
+      "child_pid": 788395,
+      "rss_limit_bytes": 1073741824,
+      "launch_available_memory_bytes": 3221225472,
+      "host_available_memory_floor_bytes": 1073741824,
+      "cpu_only": true,
+      "cpus": 2,
+      "nice_increment": 10,
+      "maximum_job_seconds": 180.0,
+      "peak_observed_process_group_rss_bytes": 79958016,
+      "admitted": true,
+      "available_at_launch_bytes": 5134635008,
+      "admission_wait_seconds": 3.001,
+      "cpu_affinity": [
+        0,
+        1
+      ],
+      "reason": null,
+      "exit_code": 0,
+      "job_elapsed_seconds": 7.115
+    }
+  },
+  "source_sha256": {
+    "host/wh_memory.c": "fffe85b8a0d9c66fa3ac94bf169c63b3f18f736238ab2b3d9d82b0f9b3f004c1",
+    "host/CMakeLists.txt": "c053eea8f5c9844221b319632e9a97011ae052e76346d31c946efbfa0a6ecb4c",
+    "tools/check_english_memory.py": "d814174de5fe5e7919fd83de3b2a3c1723dc0d13985aa903ea26b4bd9bac238c",
+    "tools/check_sanitizer_runtime.py": "544b45c954707d8595f80aa3067b333a351fe812af5cff11c848bc288f95e79b",
+    "engine/src/nd_cact.c": "4a462d3a7edc2d1492d5096ea0b08098551fab392d0d91e0da3961e8ffad0c9f",
+    "engine/src/nd_grammar.c": "4856092892dad75a462d3e1c449ea16ea6d83c31936b2d78402acd12d73bdfdb",
+    "engine/src/nd_ledcmd.c": "24fad1dee02d297bdfe682bc30b91d033933b891aec65f0f8665b3fff79abcba",
+    "engine/src/nd_model.c": "d80cc505f17413a11993c6f6b141fee561a94fc6ea9f644065c938152c61ffb0",
+    "engine/src/nd_quant.c": "e74138f6fcffac699b3626292a10040bd00414ab83a035fc3daf522b9f8e601b",
+    "engine/src/nd_sample.c": "cbed3cde6590f93c03464d783a6d1e973734eacafadd4834165485c0825a3770",
+    "engine/src/nd_tokenizer.c": "7412748e73af4fec931a2dfffbbc48683cdc4f8edfecb6a955728eab5ded8fc1",
+    "engine/src/nd_whistle.c": "dca48cf6d2c9b6e02059f00b849d8b7adfb15151abe0bfc7317a510e0d200b10"
+  },
+  "watch_firmware_pin_inspected": "5d1fc976b0b630406b1511161707c74f37348030",
+  "pinned_firmware_accepts_awe1": false,
+  "watch_capture_samples_per_buffer": 128000,
+  "watch_capture_buffers": 2,
+  "watch_memory_acceptance_verified": false,
+  "neural_accuracy_verified": false,
+  "deployment_permitted": false
+}

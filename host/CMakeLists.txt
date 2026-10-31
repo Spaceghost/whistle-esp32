@@ -27,6 +27,11 @@ target_link_libraries(nd_gtest PRIVATE needle_engine)
 add_executable(wh_run wh_run.c)
 target_link_libraries(wh_run PRIVATE needle_engine)
 
+# Host requested-heap evidence; no model or firmware is changed.
+add_executable(wh_memory wh_memory.c)
+target_link_libraries(wh_memory PRIVATE needle_engine)
+target_link_options(wh_memory PRIVATE -Wl,--wrap=malloc -Wl,--wrap=calloc -Wl,--wrap=free)
+
 add_executable(ledcmd_test ledcmd_test.c)
 target_link_libraries(ledcmd_test PRIVATE needle_engine)
 

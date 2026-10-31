@@ -1,3 +1,42 @@
+## Native requested heap measured / sanitizer evidence corrected — 2026-10-31
+
+✅ New host wh_memory and checker run actual8,832,915B native-policy export on
+1/4/8s synthetic silence through open/encode/decode/close. Requested heap peaks
+1,824,500 /2,139,004 /4,169,028B; final tracked live0, no allocation failures.
+8s plus Watch two128000-float capture buffers =5,193,028B arithmetic, NOT physical
+PSRAM/headroom acceptance. Static hostmodelstate8552B, stack/allocator/UI/network/
+apps and physical heap placement excluded. Silence emits1token; not ASR quality
+or long-decoder coverage. Exact research/english-native-memory-20261031.json;
+human table/graph docs/english-memory.md. Original engine/trainer untouched.
+
+⚠️ Found earlier Zig ASAN claims unsupported: combinedflags heap-overflowcanary
+exits0; current old profile/stage/decoder binaries have UBSan symbols, no ASan.
+Single-ASan Zig canary failslink; signed-overflow UBSan canary aborts correctly.
+Earlier docs corrected; historical receipts retained, their ASAN scope needs
+revalidation (new probe does not retroactively cover generated/malformed cases).
+✅ Real GCC16.2.1-2.fc44 ASan/UBSan runtimes extracted to workdata cache, noOS
+install. OfficialKoji identity/digests/SHA checked; no RPM signature claim. New
+check_sanitizer_runtime.py detects BOTH intentionalfaults, core dumps disabled.
+Actual model1/4/8s GCC ASan+UBSan run terminal0, all metrics EXACT release match,
+no sanitizer errors. Guards93263 terminal127 missing cmakePATH retained; corrected
+97988 build0,47372 run0,79664 ZigUB build0,79690 ZigUB run0,27181 GCCsanbuild0,
+10794 GCCsanrun0. All owned native profiling jobs terminal.
+
+Larger GPU admission wait46639 is still LIVE, guardPID738565 reverified, report
+build/training-readiness-20261031/gpu-student-window-v4.json, no child admitted.
+Needs4GiBhost budget+2GiBreserve; wait up to3600s, childmax900s. Otherlimits and
+short-diagnostic35percent graphics tolerance unchanged, cacheclearOFF. Poll same
+handle/livePID, never duplicate on observation timeout. Full training still
+default10percent and NOT started.
+
+Watch source inspection: vendor engine5d1fc976b0b630406b1511161707c74f37348030
+predatesAWE1. Future target integration/pin+model compatibility/migration needed
+AFTER trained quality evidence; no firmware/model/app/device/TUF changes here.
+GPU student/save/resume/full-shape, full native numeric, held-out speech and
+physical Watch RAM/stack/speed/mic gates remain OPEN; goal active.
+
+---
+
 ## Cache experiment terminal; larger diagnostic admission wait LIVE — 2026-10-31
 
 GPUv3 exec72921 TERMINAL1, child-9 on owned RSS cap after87.30s, no completed
