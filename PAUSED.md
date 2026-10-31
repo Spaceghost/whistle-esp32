@@ -1,3 +1,41 @@
+## First epoch queued; complete validation baseline running — 2026-10-31
+
+| Work | Status |
+| :--- | :--- |
+| Watch 77 | ✅ OTA VALID; no device/control hold |
+| GPU updates, recovery and full-shape checkpoint | ✅ Verified, frozen trainer7577539 |
+| First complete epoch | ⏳ GPU admission waiting; no campaign child |
+| Existing-model validation baseline | 🔄 238 /2694 clips at last observation; partial WER is not a final result |
+| New-model quality and physical acceptance | ⬜ Still required; no research model deployed |
+
+**Training:** session **19119**, guard **1251119**; report
+`build/training-readiness-20261031/gpu-full-epoch1-v1.json`. Preserve 10% full-training
+admission ceiling, other workloads, 30-second dwell and original3600swait.
+Expected campaign continues verifiedfullshape checkpoint1 for28538updates,
+checkpoint1000/sparedisk32GiB. Do not duplicate or lower a threshold to force admission.
+
+**Baseline:** session **75240**, guard **1305361**, child **1305454**; all confirmed
+live. Report `build/training-readiness-20261031/production-validation-full-v1.json`.
+Output `build/heldout-native-20261031/production-validation-full-v1`.
+Existing model8c956a95 only, complete validation split2694, no hints/truncation/
+resampling. CPU1GiBcap/1GiBreserve/1GiBfloor/twoCPU/nice10/10800schildcap.
+The actual nativeengine source matches3f1a1d8; model/engine frozen for the run.
+No acoustic playback, microphone or device access.
+
+New scorer `tools/eval_english_native.py` has9 complete locked-CPU controls and
+actualfour-clip nativeintegration PASS. New test filename joins native discovery;
+stdlib95discovered/77pass/18explicitdependency-skips, lockedCPU9scorer+5checkpoint
+controls pass withnoskips. Skips do not establish audio/model acceptance.
+Source66da322 contains the frozen scorer; later7b785d1 adds discovery compatibility.
+[Evaluation method and controls](docs/english-evaluation.md).
+
+Poll these exact handles/processes; never restart because observation expires.
+Both original quality and fulltraining scope remain open. Corpus/test data have
+not entered parameter fitting. Other workloads continue; no Bak/TUF/device changes.
+The full Watch/English goal remains active and incomplete.
+
+---
+
 ## Full-shape checkpoint passes; first epoch waiting — 2026-10-31
 
 | Milestone | Status |
