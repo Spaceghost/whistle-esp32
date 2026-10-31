@@ -1,0 +1,71 @@
+{
+  "schema": 1,
+  "date": "2026-10-31",
+  "scope": "Installed isolated CUDA environment and supervised GPU admission; no verified GPU backend or neural training yet",
+  "new_environment_installed": true,
+  "locked_package_count": 51,
+  "all_locked_versions_match": true,
+  "cpu_environment_pins_preserved": true,
+  "cpu_environment_cuda_plugin_absent": true,
+  "test_evidence": {
+    "guard_cases_passed": 13,
+    "backend_context_cases_passed": 4,
+    "gpu_telemetry_simulated_in_tests": true,
+    "process_isolation_uses_real_children": true,
+    "other_process_preserved_on_withdrawal": true
+  },
+  "first_live_admission": {
+    "schema": 1,
+    "state": "not-started",
+    "guard_pid": 512179,
+    "child_pid": null,
+    "admitted": false,
+    "device_index": 0,
+    "command": [
+      "/var/home/jack/Projects/.system-cache/venvs/ackerman-english-gpu-20261031/bin/python",
+      "tools/check_english_gpu_backend.py",
+      "--output",
+      "build/training-readiness-20261031/gpu-backend-smoke-v1"
+    ],
+    "required_idle_seconds": 30.0,
+    "max_admission_utilization": 10,
+    "gpu_observed_limit_bytes": 3221225472,
+    "gpu_free_floor_bytes": 2147483648,
+    "host_rss_limit_bytes": 3221225472,
+    "host_free_floor_bytes": 1073741824,
+    "jax_pool_bytes": 2147483648,
+    "limits_are_sampled_not_hardware_partition": true,
+    "peak_owned_gpu_bytes": 0,
+    "peak_group_rss_bytes": 0,
+    "reason": "gpu_utilization_above_admission_limit",
+    "device_fingerprint": "e1a7db351af277ca",
+    "gpu_total_bytes": 8589934592,
+    "observed_gpu_utilization": 23,
+    "observed_gpu_free_bytes": 7679770624,
+    "observed_host_available_bytes": 5831651328,
+    "observed_compute_processes": 0,
+    "sustained_idle_seconds": 0,
+    "admission_wait_seconds": 180.63265269300064
+  },
+  "environment_installation": {
+    "schema": 1,
+    "new_environment_installed": true,
+    "all_51_locked_versions_match": true,
+    "gpu_backend_initialized": false,
+    "gpu_backend_verified": false,
+    "training_started": false,
+    "deployment_permitted": false
+  },
+  "backend_smoke_verified_at_checkpoint": false,
+  "training_started": false,
+  "deployment_permitted": false,
+  "source_sha256": {
+    "tools/guard_english_gpu_job.py": "d6d8d90d6858fa7eddcf8da12c7b3868fb09ae410cf3e898a4c22942913765c6",
+    "tools/check_english_gpu_backend.py": "8fb5af31f0b4ba9349f90987ba007361fff8cdc000cea2e1c94c69822132fdb6",
+    "tests/test_english_gpu_guard.py": "d62371154663cdd31640e3c4d457db706422db5ceeb72bc481f640b8744b3ee6",
+    "tests/test_english_gpu_backend.py": "453d333ac05ac38e06f78e95e26fe8efa2be15e593ecb0e2f6957eb72c6aa670"
+  },
+  "lock_sha256": "73c7ed80db818034e79f9c7b3c48a9540a2e2c4c2ad74271a135b29180db1c43",
+  "next_admission_report": "build/training-readiness-20261031/gpu-backend-guard-v2.json",
+  "next_admission_max_wait_seconds": 3600
+}

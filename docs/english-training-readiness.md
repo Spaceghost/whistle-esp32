@@ -6,8 +6,8 @@
 | :--- | :--- | :--- |
 | Full local corpus | ⬇️ Training archive downloading | Validation 2,694 / 2,694 and test 2,611 / 2,611 hashes pass |
 | Local source acquisition | ⬇️ Active | Official HTTPS archives; exact size + MD5 + SHA-256 before extraction |
-| Separate CUDA environment | ✅ 51 packages resolved and hash-locked | No installation or GPU execution yet |
-| GPU training runner | ☐ Needed | Existing trainer intentionally forces CPU |
+| Separate CUDA environment | ✅ Installed; all 51 versions match | CPU environment preserved; backend admission pending |
+| GPU execution guard | ✅ Implemented and tested | Backend smoke waits for resources; student trainer remains CPU-only |
 | Meaningful training and acceptance | ☐ Not started | Requires full data, resource admission and later accuracy/device gates |
 
 ```mermaid
@@ -76,8 +76,9 @@ download alone does not establish that every required local clip is ready.
 The [51-package lock](../research/english-gpu-cuda13-linux-x86_64-py312.lock.txt)
 was resolved from official PyPI for Linux x86_64 / Python 3.12. It retains the
 CPU environment's exact JAX, jaxlib, Flax, Optax, NumPy, safetensors,
-SentencePiece and SoundFile versions. Wheel hashes are required. The resolver
-cached dependencies but did not install them or acquire a GPU.
+SentencePiece and SoundFile versions. Wheel hashes are required. The initial resolver
+only cached dependencies. A separate environment is now installed and all 51
+versions match; no GPU execution follows from installation alone.
 
 [Dependency-plan receipt](../research/english-gpu-dependency-plan-20261031.json).
 
@@ -88,6 +89,7 @@ admission guard and an explicit allocation policy: JAX normally preallocates
 75% of device memory. Its pool fraction is not a hard cap on all process GPU
 allocations. See the [JAX memory guide](https://docs.jax.dev/en/latest/gpu_memory_allocation.html).
 
-**Next:** implement bounded GPU admission and a separate locked environment,
-then verify a backend smoke test only when resources are free. Preserve other
-workloads. Full numeric, held-out speech and physical Watch gates remain open.
+**GPU admission is implemented:** [guard behavior and backend smoke →](english-gpu.md).
+Next verify the backend only when resources are free, then add GPU student
+training. Preserve other workloads. Full numeric, held-out speech and physical
+Watch gates remain open.

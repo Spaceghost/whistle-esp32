@@ -1,3 +1,32 @@
+## Isolated CUDA environment / GPU guard active — 2026-10-31
+
+New GPU environment installation8818 TERMINAL0, all51 locked versions verified;
+existing CPU core pins and absent CUDA plugin rechecked unchanged. No GPU backend
+was initialized during installation. Paths/docs: docs/english-gpu.md and
+research/english-gpu-admission-20261031.json.13 GPU guard tests (simulated GPU
+telemetry, real owned/foreign process isolation) +4 context-binding tests pass.
+Default admission:30s sampled idle <=10% utilization, no existing compute process,
+GPU3GiB+2GiB reserve and host3GiB+2GiB launch reserve. Child JAXpool2GiB, usage
+withdrawal thresholds sampled, not a hardware partition. Explicit compilation,
+CUDA, Triton and XDG caches stay on workdata. Parent/device/receipt/pool/package
+checks precede JAX import; backend smoke tests matmul, gradient and convolution.
+
+First real window6471 TERMINAL75/not-started after180s, no child launched because
+GPU0 stayed around24-25% utilization. Preserved receipt gpu-backend-guard-v1.json.
+A NEW bounded one-hour wait is LIVE under exec61553, report
+build/training-readiness-20261031/gpu-backend-guard-v2.json. Poll this exact handle
+or verify its live guard PID; do not restart due to observation timeout. This is
+not an admitted compute job yet. Child, if admitted, uses the new GPU environment
+and writes gpu-backend-smoke-v2; observe its final guard AND numeric result before
+claiming backend success. Other compute arrivals make this guard wait or stop
+only its own group. No other workload is evicted.
+
+Data stager exec2838/PID468768 remains LIVE, training archive still downloading;
+validation+test5305 clips hash verified. Watch/Deck/model/checkpoints untouched.
+Next finish admitted backend verification and add a GPU student path/checkpoint
+acceptance; current student trainer remains CPU-only and training has NOT begun.
+All original accuracy/numeric/physical gates remain open; goal remains active.
+
 ## Training readiness and full audio staging active — 2026-10-31
 
 Goal remains active. New read-only auditor verifies every local file against the
