@@ -28,6 +28,7 @@ def compare(a, model, params, cfg, whistle, tokens, enc, full_hidden):
     body = whistle._LaneBody(partial(whistle.DecoderBlock, cfg, cfg.jax_dtype), cfg.jax_dtype)
     stack = params['stack']
     records = []
+    sublayers = None
     def record(layer, mode, expected, actual):
         expected = np.asarray(expected)[0]
         if actual.shape != expected.shape or not np.isfinite(actual).all() or not np.isfinite(expected).all():
@@ -54,6 +55,9 @@ def compare(a, model, params, cfg, whistle, tokens, enc, full_hidden):
         native_input = read('init' if layer == 0 else f'layer-{layer-1}')
         isolated = execute(block, jnp.asarray(native_input[None, :]), hc)
         record(layer, 'shared-input', isolated, actual)
+        if layer == 0 and a.sublayers:
+            import english_decoder_sublayers
+            sublayers = english_decoder_sublayers.compare(a, cfg, whistle, block, kwargs, flags)
     pooled = jnp.mean(x, axis=2)
     final = (1+stack['final_norm']['scale']) * pooled / jnp.sqrt(jnp.mean(pooled**2, axis=-1, keepdims=True)+1e-6)
     final = np.asarray(final)
@@ -62,6 +66,7 @@ def compare(a, model, params, cfg, whistle, tokens, enc, full_hidden):
                          for a, b in zip(final[0], full_hidden[0])]
     final.tofile(a.output / 'layer-trace-final-hidden.f32')
     return dict(scope='Decoder layer boundaries on retained native encoder memory; fixed forced tokens, not speech accuracy',
+                sublayers=sublayers,
                 rows=records, traced_vs_original_jax_hidden_relative_l2_error=control,
                 original_jax_control_within_existing_threshold=bool(np.isfinite(control) and control < 2e-4),
                 traced_vs_original_jax_per_token_relative_l2_error=per_token_control,

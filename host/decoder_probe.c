@@ -1,6 +1,15 @@
 /* Host-only decoder boundary access. Production code and APIs are unchanged. */
 #include <stdio.h>
+#include <stdint.h>
+static void trace_boundary(unsigned layer, unsigned pos, const char *name, const float *x, unsigned d);
+#ifdef ACK_DECODER_TRACE_FILE
+#include ACK_DECODER_TRACE_FILE
+#else
 #include "../engine/src/nd_whistle.c"
+#endif
+
+static const char *trace_root;
+static int trace_failed;
 
 static void *load(const char *path, size_t *size) {
     FILE *f = fopen(path, "rb"); void *p = NULL;
@@ -18,6 +27,12 @@ static int save(const char *root, const char *name, const float *data, size_t co
     FILE *f = fopen(path, "wbx"); if (!f) return 1;
     int rc = fwrite(data, sizeof(float), count, f) != count;
     return fclose(f) != 0 || rc;
+}
+static void trace_boundary(unsigned layer, unsigned pos, const char *name, const float *x, unsigned d) {
+    char label[128];
+    if (!trace_root || trace_failed) return;
+    snprintf(label, sizeof(label), "token-%u-block-%u-%s", pos, layer, name);
+    trace_failed = save(trace_root, label, x, d);
 }
 /* Host copy of dec_step's orchestration, with snapshots between the unchanged
  * production operations. The checker requires bit-identical final logits. */
@@ -63,13 +78,14 @@ int main(int argc, char **argv) {
     logits = malloc((size_t)n*w.vocab*sizeof(float));
     if (!hidden || !logits || session_begin(&w, enc, T)) goto done;
     session = 1;
+    trace_root = argv[4];
     if (save(argv[4], "cross-k", w.cross_k, (size_t)w.dec_layers*w.nh*T*w.qk) ||
         save(argv[4], "cross-v", w.cross_v, (size_t)w.dec_layers*w.nh*T*w.vd)) goto done;
     for (unsigned i = 0; i < n; i++) {
         if (traced_step(&w, tokens[i], i, hidden+(size_t)i*w.d, argv[4])) goto done;
         logits_all(&w, hidden+(size_t)i*w.d, logits+(size_t)i*w.vocab);
     }
-    rc = save(argv[4], "hidden", hidden, (size_t)n*w.d) ||
+    rc = trace_failed || save(argv[4], "hidden", hidden, (size_t)n*w.d) ||
          save(argv[4], "logits", logits, (size_t)n*w.vocab);
 done:
     if (session) session_end(&w);

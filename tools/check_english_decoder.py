@@ -24,7 +24,10 @@ def main():
     p.add_argument('--case-index', type=int, default=3)
     p.add_argument('--float', dest='floating', action='store_true')
     p.add_argument('--layers', action='store_true', help='Compare native and simulated decoder layer boundaries')
+    p.add_argument('--sublayers', action='store_true', help='Also compare first-block self/cross-attention and feed-forward boundaries')
     a = p.parse_args()
+    if a.sublayers:
+        a.layers = True
     if a.output.exists():
         p.error('Preserve evidence; choose a fresh output directory')
     if not a.binary.is_file() or not os.access(a.binary, os.X_OK):
@@ -118,9 +121,16 @@ def main():
         import english_decoder_layers
         report['layers'] = english_decoder_layers.compare(a, model, params, cfg, whistle, tokens, enc, expected_hidden)
         report['layer_checker_sha256'] = sha(Path(english_decoder_layers.__file__))
+        if a.sublayers:
+            import english_decoder_sublayers
+            report['sublayer_checker_sha256'] = sha(Path(english_decoder_sublayers.__file__))
+            provenance = a.binary.parent / 'decoder-trace-source.json'
+            report['native_trace_source'] = json.loads(provenance.read_text())
     (a.output / 'decoder.json').write_text(json.dumps(report, indent=2)+'\n')
     if a.layers and not report['layers']['original_jax_control_passed']:
         raise ValueError('Layer trace changed the JAX baseline; preserve evidence, do not attribute it to native execution')
+    if a.sublayers and not report['layers']['sublayers']['original_module_control_passed']:
+        raise ValueError('Sublayer trace changed the original block; preserve evidence')
     (a.output / 'INCOMPLETE').unlink()
     print(json.dumps(report), flush=True)
 

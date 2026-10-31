@@ -1,3 +1,18 @@
+## Cross-attention localized — 2026-10-31
+
+The first-layer eighth-token discrepancy is now local to cross-attention:
+shared-input relative error 0.000644707. Self-attention maximum 3.982e-7 and
+feed-forward maximum 1.938e-8 pass. All 64 float sublayer comparisons pass.
+Captured vs original training block output is exact in both modes; native
+logits remain bit-identical. No acceptance limit changed. The next boundary
+is cross-attention Q/K/V, cached clip memory and output projection.
+
+Host-only generated source adds exactly five captures; four integrity tests
+verify roundtrip-only-capture changes and stale/ambiguous anchor refusal.
+Eight generated-probe ASAN/UBSAN checks pass. Numeric guards9446/95194 and
+sanitizer build46255 are terminal0. No device, model, GPU or training-policy
+change. Exact receipts: research/english-decoder-sublayers-20261031.json.
+
 ## Decoder layers localized — 2026-10-31
 
 Active research narrows the eighth-token mismatch to decoder layer zero (the

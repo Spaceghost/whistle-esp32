@@ -192,14 +192,14 @@ Observed process-group peaks were 1.63 GB (fast), 1.45 GB (float) and 1.02 GB
 ## Decoder mismatch localized ✅
 
 The actual native probe reproduces prior logits bit for bit. The first decoder
-layer diverges at the eighth fixed token; the second layer and output head
-agree when given identical inputs. Full fast-network acceptance remains open.
+layer's cross-attention diverges at the eighth fixed token; self-attention,
+feed-forward, the second layer and output head agree with identical inputs. Full fast-network acceptance remains open.
 
 [Layer diagram, measured errors and next probe →](english-decoder.md)
 
 ## Next work
 
-1. Trace self-attention, cross-attention and feed-forward boundaries inside the first decoder layer at the eighth fixed token.
+1. Compare first-layer cross-attention Q/K/V, cached memory and output projection at the eighth fixed token.
 2. Prepare meaningful native-policy training when resources and full audio are available.
 3. Preserve signature-checked checkpoint/restart behavior for the longer run.
 4. Train meaningfully when resources are free, then score held-out speech.

@@ -85,7 +85,15 @@ target_link_libraries(profile_probe PRIVATE needle_engine)
 add_executable(stage_probe stage_probe.c)
 target_link_libraries(stage_probe PRIVATE needle_engine)
 
-add_executable(decoder_probe decoder_probe.c)
+set(DECODER_TRACE ${CMAKE_CURRENT_BINARY_DIR}/nd_whistle_decoder_trace.inc)
+add_custom_command(OUTPUT ${DECODER_TRACE} ${CMAKE_CURRENT_BINARY_DIR}/decoder-trace-source.json
+  COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../tools/prepare_decoder_trace.py
+    --source ${ENGINE_DIR}/src/nd_whistle.c --output ${DECODER_TRACE}
+    --receipt ${CMAKE_CURRENT_BINARY_DIR}/decoder-trace-source.json
+  DEPENDS ${ENGINE_DIR}/src/nd_whistle.c ${CMAKE_CURRENT_SOURCE_DIR}/../tools/prepare_decoder_trace.py
+  VERBATIM)
+add_executable(decoder_probe decoder_probe.c ${DECODER_TRACE})
+target_compile_definitions(decoder_probe PRIVATE ACK_DECODER_TRACE_FILE="${DECODER_TRACE}")
 target_link_libraries(decoder_probe PRIVATE needle_engine)
 
 add_executable(frontend_silence_test frontend_silence_test.c)

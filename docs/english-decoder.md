@@ -1,7 +1,31 @@
 # English decoder: where fast inference diverges
 
-**The first decoder layer diverges at the eighth tested token.** The second
-layer agrees when given identical input. The output head also agrees.
+**Cross-attention in the first decoder layer diverges at the eighth tested token.**
+Self-attention and feed-forward agree when given identical inputs.
+
+| First-layer operation, identical inputs | Result | Maximum relative error |
+| :--- | :--- | :--- |
+| Self-attention | ✅ Pass | 3.99e-7 |
+| Cross-attention | ☐ Token eight fails | 0.00064471 |
+| Feed-forward | ✅ Pass | 1.94e-8 |
+| Float control, all 64 comparisons | ✅ Pass | 7.22e-7 |
+| Captured vs original training block | ✅ Exact | 0 |
+
+```mermaid
+flowchart LR
+    A[Same native block input] --> B[Self-attention agrees]
+    B --> C[Cross-attention diverges at token eight]
+    C --> D[Feed-forward inherits drift]
+    E[Same feed-forward input] --> F[Feed-forward agrees]
+```
+
+The isolated cross-attention comparison includes the clip memory and its cached
+K/V construction. It does not yet distinguish a projection cutoff from a query,
+key, value, normalization or memory-construction difference.
+
+[Exact sublayer, source-integrity, sanitizer and resource receipts](../research/english-decoder-sublayers-20261031.json).
+
+## Layer boundary controls
 
 | Boundary | Result | What it establishes |
 | :--- | :--- | :--- |
@@ -54,8 +78,22 @@ all jobs completed without eviction or GPU allocation.
 
 [Exact layer, token, sanitizer and resource receipts](../research/english-decoder-layers-20261031.json).
 
+## Host-only operation captures
+
+`tools/prepare_decoder_trace.py` creates a build-local engine copy with exactly
+five capture calls inside the decoder block. Production engine source is never
+edited. Four source-integrity tests prove that removing those calls restores
+the original bytes and refuse missing or ambiguous anchors. Build receipts hash
+the engine, generator and generated source.
+
+The capture subclass uses the pinned training operations and refuses attribution
+unless its output agrees with the original block at every token within 2e-6.
+Both fast and float controls are exact in this run. Native logits still reproduce
+the previous run bit for bit. The generated probe also passes eight actual-model,
+malformed-input and output-preservation checks under Zig ASAN/UBSAN.
+
 ## Next action
 
-Trace the eighth token **inside the first decoder layer**: self-attention,
-cross-attention and feed-forward boundaries. Do not change acceptance limits
-or attribute the discrepancy to the second layer/output head.
+Compare cross-attention Q/K/V, cached memory and output projection at the eighth
+token. Preserve the passing self-attention, feed-forward and output-head controls;
+do not change acceptance limits.
