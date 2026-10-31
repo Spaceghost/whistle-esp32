@@ -1,3 +1,44 @@
+## English baseline complete; full-shape recovery probe running — 2026-10-31
+
+| Work | Current state |
+| :--- | :--- |
+| Production-model baseline | ✅ Audited 8.46% WER: 4,538 edits / 53,635 words |
+| Validation coverage | ✅ All 2,694 retained clips; nine longer original clips were excluded during preparation |
+| CPU fallback | ✅ Three full-shape updates; terminal guard exit 0; all three checkpoint hashes verified |
+| GPU full-shape recovery | 🔄 Bounded new-process checkpoint1 → updates2/3 probe running |
+| First complete epoch | ⬜ Not started; original admission-only guard was terminated before launching a child |
+
+GPU probe session **30596**, guard **1442926**, child **1447505** were confirmed
+live in `/proc` at this handoff. Report:
+`build/training-readiness-20261031/gpu-fullshape-resume3-v1.json`.
+Frozen trainer source **7577539** and checkpoint1 are unchanged. This diagnostic
+uses the existing 35% short-probe admission ceiling; full training retains 10%.
+Two updates only, checkpoint every update, maximum 900 seconds execution.
+Do not duplicate because observation expires. Inspect the exact guard and child.
+
+CPU audit session69882 is terminal0: all three READY checkpoints, source hashes,
+selected training rows and step/signature metadata verified.
+[Audited CPU probe](research/english-cpu-fullshape-probe-20261031.json).
+The training probe itself is terminal0, report
+`build/training-readiness-20261031/cpu-fullshape-stream-v1.json`.
+Steady CPU updates measured 7.927 and 7.901 seconds; roughly63 hours of update
+calls alone per epoch. No long CPU epoch is running. CPU/CUDA execution
+signatures differ; do not silently mix checkpoints across backends.
+
+The older GPU campaign session19119 is terminal130/guard_interrupted, no child
+was ever admitted. It was stopped to serialize our own heavy RAM jobs before
+the CPU probe. The full goal remains **active and incomplete**, not paused.
+Restore a uniquely named full-epoch admission attempt after the probe is terminal,
+using the verified GPU checkpoint and unchanged 10% full-training threshold.
+Other workloads stay running; no Bak work or research model deployment.
+
+Watch77 remains the healthy fallback after another owner's Watch78 boot rollback.
+That owner retains control and Watch79/seq80 boot-fix ownership. The reading UI
+patch c66c86d is pushed separately with30Watch/27Deck/2notice fixtures passing;
+no renderer firmware has been signed or installed. Preserve their release holds.
+
+---
+
 ## First epoch queued; complete validation baseline running — 2026-10-31
 
 | Work | Status |
