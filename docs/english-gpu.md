@@ -165,3 +165,11 @@ opt-in trim flag are part of checkpoint compatibility. Old checkpoints still
 require their recorded source revision. No change to the model, dataset,
 quantization policy, gradient calculation or original CPU trainer is intended.
 A successful small CPU control alone is not evidence of full-model RAM savings.
+
+
+The actual full GPU initialization experiment now measures a 293,376,000-byte
+immediate RSS reduction after trimming. All 337 live arrays (354,451,528
+bytes) retain the exact earlier control digest. Compilation is still running
+under the old failed 2.75 GiB host cap; this is not yet a verified update,
+checkpoint, full-run peak reduction or speech result.
+[Measured state and live guard snapshot](../research/english-heap-trim-live-state-20261031.json).

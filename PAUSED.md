@@ -1,3 +1,35 @@
+## Watch 77 installed; full GPU student experiment live — 2026-10-31
+
+✅ Private Watch 77/seq78 signed OTA is VALID. Its release preserves production
+model, three apps, conversation profile, peer identity/security and journal.
+Watch USB/control and target holds are released. No new microphone/speaker test
+ran; no English research weights were deployed.
+
+✅ New actual GPU initialization measurement: allocator trim returned
+293,376,000 bytes (about 280 MiB), preserving all 337 model/optimizer leaves,
+354,451,528 bytes, bit for bit. The digest also matches the earlier cache-only
+control. Cache clearing alone did not reduce RSS. This proves immediate savings,
+not the full training peak or speech quality.
+
+⏳ Session **30534**, guard **1135513**, child **1137099** are confirmed live.
+Source **2210081**, report
+`build/training-readiness-20261031/gpu-student-heap-trim-v2.json`, output
+`build/accelerated-student-20261031/gpu-step2-heap-trim-v2`.
+First update is compiling; no update or READY checkpoint has been verified.
+The stricter 2.75 GiB host cap matches the old failed compilation control;
+1.5 GiB admission reserve and 1 GiB runtime floor remain. Same full model,
+data, precision and math; no other workload interrupted. GPU limits remain
+2 GiB pool / 3 GiB observed cap / 2 GiB reserve, 35% short-diagnostic admission,
+900-second child cap. Full training remains unstarted.
+
+Next: poll **30534** and these exact PIDs/report. Do not restart because an
+observation times out. Check the terminal guard, update records and READY
+checkpoint integrity before a new-process resume or full-shape probe.
+[Actual initialization evidence](research/english-heap-trim-live-state-20261031.json).
+Full Watch/English-model goal remains active and incomplete.
+
+---
+
 ## Heap-trim GPU admission terminal; Watch 77 OTA underway — 2026-10-31
 
 | Milestone | Status |
