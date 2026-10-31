@@ -13,7 +13,7 @@ identical ordered selection to30s/320tokens. No exclusions/truncation; longest
 24.525s/150tokens. One batch1 epoch28,539 updates visits each clip once.
 Exact plan research/english-full-training-plan-20261031.json.
 
-A bounded two-update GPU student diagnostic is queued under exec65627, report
+A bounded two-update GPU student diagnostic is RUNNING under exec65627, report
 build/training-readiness-20261031/gpu-student-window-v2.json. Prior student
 window19266 was superseded before a child, terminal130. Diagnostic v2 uses
 35percent graphics tolerance and a tighter2.75GiB host cap with2GiB reserve;
