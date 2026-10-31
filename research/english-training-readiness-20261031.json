@@ -1,0 +1,215 @@
+{
+  "schema": 1,
+  "scope": "Audit full local English audio and GPU metadata without loading JAX.\n\nNo remote access, downloads, model allocation or training launch. Missing audio\nis listed for later staging, never silently reduced to the small cached probe.\n",
+  "audit_complete": true,
+  "full_local_audio_hash_verified": false,
+  "split_audio": {
+    "train": {
+      "required": 28539,
+      "present": 2,
+      "missing": 28537,
+      "hash_verified": 2,
+      "hash_mismatch": 0,
+      "bytes_present": 72659,
+      "samples_required": 5794034668,
+      "samples_verified": 54400,
+      "hours_required": 100.59087965277777,
+      "hours_verified": 0.0009444444444444444,
+      "complete": false
+    },
+    "validation": {
+      "required": 2694,
+      "present": 2,
+      "missing": 2692,
+      "hash_verified": 2,
+      "hash_mismatch": 0,
+      "bytes_present": 80967,
+      "samples_required": 305717292,
+      "samples_verified": 58400,
+      "hours_required": 5.307591875,
+      "hours_verified": 0.0010138888888888888,
+      "complete": false
+    },
+    "test": {
+      "required": 2611,
+      "present": 0,
+      "missing": 2611,
+      "hash_verified": 0,
+      "hash_mismatch": 0,
+      "bytes_present": 0,
+      "samples_required": 306611770,
+      "samples_verified": 0,
+      "hours_required": 5.323121006944445,
+      "hours_verified": 0.0,
+      "complete": false
+    }
+  },
+  "input_receipts": {
+    "corpus_sha256": "0dedae607af955f07c74e0db68cb8e506c4c9d6f16d131dbc1ed4b37e163da4e",
+    "tokenizer_sha256": "70b605e6951bf8460742ed3756019ad5e57a940a0d0b0e14d07b4b2f96fc6885",
+    "train_manifest_sha256": "ceb2f15fd1d406006d7aa5ec53b38b905c655e5d182e032d7cf0e12c7f8eab00"
+  },
+  "needle_source_receipt_sha256": "0217a8bdd09d45d31f2e3ed3db1bfba04fb72c63aa124ec3b35ff98d5836963c",
+  "tokenizer_sha256": "70b605e6951bf8460742ed3756019ad5e57a940a0d0b0e14d07b4b2f96fc6885",
+  "auditor_sha256": "7695e50322a797cd4c23251ad5bc3db84cf76e9f65f886d8cf4351e487833179",
+  "trainer_sha256": "1914c2beaf28aafcb5306f1719ef566a28d847fc532ea48499ea5889504e9b1d",
+  "packages": {
+    "jaxlib": "0.12.0.1",
+    "jax": "0.12.0.1"
+  },
+  "gpu_snapshot": {
+    "query_complete": true,
+    "devices": [
+      {
+        "index": 0,
+        "name": "NVIDIA GeForce RTX 3070",
+        "total_memory_mib": 8192,
+        "free_memory_mib": 7324,
+        "utilization_percent": 20,
+        "driver_version": "615.78.08",
+        "compute_processes": 0,
+        "compute_memory_mib": 0
+      },
+      {
+        "index": 1,
+        "name": "NVIDIA GeForce RTX 4060",
+        "total_memory_mib": 8188,
+        "free_memory_mib": 3571,
+        "utilization_percent": 0,
+        "driver_version": "615.78.08",
+        "compute_processes": 1,
+        "compute_memory_mib": 4298
+      }
+    ],
+    "sustained_idle_admission_verified": false
+  },
+  "jax_cuda_plugin_installed": false,
+  "gpu_backend_verified": false,
+  "gpu_launch_permitted": false,
+  "missing_audio_list_sha256": "5050bcc33df288f42c26647019f28cd3cf5c855ee39c356c290e819d394efcbd",
+  "corrupt_audio_list_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "training_started": false,
+  "deployment_permitted": false,
+  "staging_started": true,
+  "staging_complete_at_this_checkpoint": false,
+  "staging_source": "https://openslr.trmal.net/resources/12/",
+  "staging_source_sha256": "2692f8a50b19493f39926628f9ad09952c3a794613f971a62f889a8767c86275",
+  "followup_new_audio_root_audit": {
+    "schema": 1,
+    "scope": "Audit full local English audio and GPU metadata without loading JAX.\n\nNo remote access, downloads, model allocation or training launch. Missing audio\nis listed for later staging, never silently reduced to the small cached probe.\n",
+    "audit_complete": true,
+    "full_local_audio_hash_verified": false,
+    "split_audio": {
+      "train": {
+        "required": 28539,
+        "present": 0,
+        "missing": 28539,
+        "hash_verified": 0,
+        "hash_mismatch": 0,
+        "bytes_present": 0,
+        "samples_required": 5794034668,
+        "samples_verified": 0,
+        "hours_required": 100.59087965277777,
+        "hours_verified": 0.0,
+        "complete": false
+      },
+      "validation": {
+        "required": 2694,
+        "present": 2694,
+        "missing": 0,
+        "hash_verified": 2694,
+        "hash_mismatch": 0,
+        "bytes_present": 353658740,
+        "samples_required": 305717292,
+        "samples_verified": 305717292,
+        "hours_required": 5.307591875,
+        "hours_verified": 5.307591875,
+        "complete": true
+      },
+      "test": {
+        "required": 2611,
+        "present": 2611,
+        "missing": 0,
+        "hash_verified": 2611,
+        "hash_mismatch": 0,
+        "bytes_present": 361930253,
+        "samples_required": 306611770,
+        "samples_verified": 306611770,
+        "hours_required": 5.323121006944445,
+        "hours_verified": 5.323121006944445,
+        "complete": true
+      }
+    },
+    "input_receipts": {
+      "corpus_sha256": "0dedae607af955f07c74e0db68cb8e506c4c9d6f16d131dbc1ed4b37e163da4e",
+      "tokenizer_sha256": "70b605e6951bf8460742ed3756019ad5e57a940a0d0b0e14d07b4b2f96fc6885",
+      "train_manifest_sha256": "ceb2f15fd1d406006d7aa5ec53b38b905c655e5d182e032d7cf0e12c7f8eab00"
+    },
+    "needle_source_receipt_sha256": "0217a8bdd09d45d31f2e3ed3db1bfba04fb72c63aa124ec3b35ff98d5836963c",
+    "tokenizer_sha256": "70b605e6951bf8460742ed3756019ad5e57a940a0d0b0e14d07b4b2f96fc6885",
+    "auditor_sha256": "7695e50322a797cd4c23251ad5bc3db84cf76e9f65f886d8cf4351e487833179",
+    "trainer_sha256": "1914c2beaf28aafcb5306f1719ef566a28d847fc532ea48499ea5889504e9b1d",
+    "packages": {
+      "jaxlib": "0.12.0.1",
+      "jax": "0.12.0.1"
+    },
+    "gpu_snapshot": {
+      "query_complete": true,
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 3070",
+          "total_memory_mib": 8192,
+          "free_memory_mib": 7323,
+          "utilization_percent": 32,
+          "driver_version": "615.78.08",
+          "compute_processes": 0,
+          "compute_memory_mib": 0
+        },
+        {
+          "index": 1,
+          "name": "NVIDIA GeForce RTX 4060",
+          "total_memory_mib": 8188,
+          "free_memory_mib": 3571,
+          "utilization_percent": 0,
+          "driver_version": "615.78.08",
+          "compute_processes": 1,
+          "compute_memory_mib": 4298
+        }
+      ],
+      "sustained_idle_admission_verified": false
+    },
+    "jax_cuda_plugin_installed": false,
+    "gpu_backend_verified": false,
+    "gpu_launch_permitted": false,
+    "missing_audio_list_sha256": "9394f340af504186fdcc58bcafa9059250f816c5d620c99f29a7f11d92f28109",
+    "corrupt_audio_list_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "training_started": false,
+    "deployment_permitted": false
+  },
+  "completed_archives_at_checkpoint": [
+    {
+      "split": "validation",
+      "file": "dev-clean.tar.gz",
+      "bytes": 337926286,
+      "sha256": "76f87d090650617fca0cac8f88b9416e0ebf80350acb97b343a85fa903728ab3",
+      "archive_verified": true,
+      "extracted": true
+    },
+    {
+      "split": "test",
+      "file": "test-clean.tar.gz",
+      "bytes": 346663984,
+      "sha256": "39fde525e59672dc6d1551919b1478f724438a95aa55f874b576be21967e6c23",
+      "archive_verified": true,
+      "extracted": true
+    }
+  ],
+  "heldout_clips_hash_verified": 5305,
+  "training_archive_complete_at_checkpoint": false,
+  "tests": {
+    "audio_audit_cases_passed": 4,
+    "archive_integrity_cases_passed": 4
+  },
+  "staging_running_source_sha256": "2692f8a50b19493f39926628f9ad09952c3a794613f971a62f889a8767c86275"
+}

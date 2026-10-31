@@ -1,3 +1,31 @@
+## Training readiness and full audio staging active — 2026-10-31
+
+Goal remains active. New read-only auditor verifies every local file against the
+full pinned corpus:4/33844 clips initially present (train2/validation2/test0),
+all4 hashes correct. Missing33840 paths retained in build/training-readiness-20261031/audit-v1.
+Four sparse/corrupt/escape audit tests and4 archive-integrity tests pass.
+
+Official-PyPI CUDA13 dependency dry run6196 is TERMINAL0. Exact core CPU pins
+preserved;51 wheel hashes committed in research/english-gpu-cuda13-linux-x86_64-py312.lock.txt.
+No environment installation, GPU context, training or other-workload eviction.
+
+Full corpus acquisition is LIVE under exec2838, stagerPID468768. Poll this exact
+handle or live process; do not start a duplicate because a tool observation ends.
+Status build/training-readiness-20261031/staging-v1/status.json gives the current
+curl child PID and actual byte count. Official HTTPS archives validation->test->train,
+8MiB/s ceiling, pinned bytes+MD5+SHA256 before regular-only extraction. Existing
+probe cache preserved. New archive cache .system-cache/datasets/librispeech-20261031;
+new audio .system-cache/ackerman-english-training/full-audio-20261031. Validation and test archives are now size/MD5/SHA-verified and extracted;
+follow-up audit34066 TERMINAL0 verifies all2694 validation +2611 test clips
+(10.63hours). Training archive download is live; full corpus is not ready yet.
+All writes are on verified Alienware workdata; Bak untouched and its English hold respected.
+
+Next implement GPU admission/separate locked environment while monitoring this
+existing staging job; then repeat the full auditor on new audio after extraction.
+The current trainer still forces CPU. Full training, strict numeric, held-out
+speech, native memory/stack and physical Watch acceptance all remain open.
+Read docs/english-training-readiness.md for the current human checklist.
+
 ## Composed-path C replay completed — 2026-10-31
 
 Observed context perturbation5.071e-7 relative produces native projection change

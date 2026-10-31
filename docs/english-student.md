@@ -1,5 +1,10 @@
 # English student: training and restart
 
+**Current training readiness:** full local audio staging is active, and a
+separate 51-package CUDA dependency lock is prepared. The existing trainer is
+still CPU-only; no GPU training has started.
+[Read the current checklist and data flow →](english-training-readiness.md)
+
 > ▶️ Research resumed. Read [the current native milestone](english-native.md)
 > for the 2026-10-31 mixed-precision export, measured partition fit and remaining
 > gates. Wait for free Alienware resources; leave other workloads running.

@@ -47,6 +47,8 @@ model or device state changed.
 
 [Exact numeric, source and resource receipts](../research/english-cross-composition-20261031.json).
 
+[Training-readiness audit, local corpus staging and CUDA lock →](english-training-readiness.md).
+
 ## Next milestone
 
 Prepare meaningful native-policy training when Alienware resources are free,
