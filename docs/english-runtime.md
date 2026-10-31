@@ -68,6 +68,8 @@ stale/ambiguous anchors; four runtime tests cover the loader-default regression,
 missing settings, geometry mismatch and malformed settings. Eight generated
 probe checks pass Zig ASAN/UBSAN. Raw tensors stay outside Git.
 
-**Next:** compare composed normalization/quantization execution while preserving
-passing primitive and component controls. Full training, held-out recognition
-accuracy and physical Watch acceptance remain open.
+**Composed-path result:** the actual C projection reproduces the observed jump
+from a tiny context perturbation. A normalization barrier does not fix it.
+[Controlled replay and next training milestone →](english-composition.md)
+
+Full training, held-out recognition accuracy and physical Watch acceptance remain open.

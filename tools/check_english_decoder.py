@@ -26,8 +26,11 @@ def main():
     p.add_argument('--layers', action='store_true', help='Compare native and simulated decoder layer boundaries')
     p.add_argument('--sublayers', action='store_true', help='Also compare first-block self/cross-attention and feed-forward boundaries')
     p.add_argument('--cross-attention', action='store_true', help='Compare first-block cross-attention projections, cache and Q8 decisions')
+    p.add_argument('--cross-composition', action='store_true', help='Compare composed normalization/attention and a diagnostic optimization barrier')
     p.add_argument('--linear-binary', type=Path, help='Native profile_probe used for controlled query projection replay')
     a = p.parse_args()
+    if a.cross_composition:
+        a.cross_attention = True
     if a.cross_attention:
         a.sublayers = True
         if a.linear_binary is None or not a.linear_binary.is_file():
@@ -138,6 +141,9 @@ def main():
         if a.cross_attention:
             import english_cross_attention
             report['cross_checker_sha256'] = sha(Path(english_cross_attention.__file__))
+        if a.cross_composition:
+            import english_cross_composition
+            report['composition_checker_sha256'] = sha(Path(english_cross_composition.__file__))
     (a.output / 'decoder.json').write_text(json.dumps(report, indent=2)+'\n')
     if a.layers and not report['layers']['original_jax_control_passed']:
         raise ValueError('Layer trace changed the JAX baseline; preserve evidence, do not attribute it to native execution')
@@ -145,6 +151,8 @@ def main():
         raise ValueError('Sublayer trace changed the original block; preserve evidence')
     if a.cross_attention and not report['layers']['cross_attention']['original_module_control_passed']:
         raise ValueError('Cross-attention trace changed the original module; preserve evidence')
+    if a.cross_composition and not report['layers']['cross_attention']['composition']['original_module_control_passed']:
+        raise ValueError('Composed trace changed the original normalization/attention module; preserve evidence')
     (a.output / 'INCOMPLETE').unlink()
     print(json.dumps(report), flush=True)
 

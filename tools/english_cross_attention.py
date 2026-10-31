@@ -124,7 +124,11 @@ def compare(a, cfg, whistle, block, kwargs):
             norm_rows.append(dict(position=pos,normalized_input_relative_l2_change=float(np.linalg.norm(source-normalized[0,pos])/max(float(np.linalg.norm(source)),1e-12)),
                                   native_query_relative_l2_change=float(np.linalg.norm(baseline-shifted)/max(float(np.linalg.norm(baseline)),1e-12)),
                                   native_query_max_absolute_change=float(np.max(np.abs(baseline-shifted)))))
-    return dict(scope=__doc__,rows=rows,q8_codes=code_rows,normalization_replay=norm_rows,
+    composition = None
+    if a.cross_composition:
+        import english_cross_composition
+        composition = english_cross_composition.compare(a,cfg,whistle,block,kwargs,TraceCross,post_self,native['projection'])
+    return dict(scope=__doc__,rows=rows,q8_codes=code_rows,normalization_replay=norm_rows,composition=composition,
                 query_replay_baseline_bit_identical=bool(quant),
                 traced_vs_original_per_token_relative_l2_error=controls,
                 original_module_control_tolerance=2e-6,original_module_control_passed=all(np.isfinite(v) and v<2e-6 for v in controls),

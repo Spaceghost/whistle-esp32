@@ -1,3 +1,20 @@
+## Composed-path C replay completed — 2026-10-31
+
+Observed context perturbation5.071e-7 relative produces native projection change
+0.00104577 at the eighth fixed decoder token. Reference vs perturbed-native
+output differs3.453e-7 relative; error-vector cosine0.999999946. Native baseline
+replay is bit-identical. The composed reference has one changed context code;
+capturing intermediates is exact against original composition. Barrier after
+normalization fails the same case and is NOT adopted as a fix.
+
+Guards84805/57455 terminal0, peak composed process group1.40GB. New host tools
+and exact receipts in research/english-cross-composition-20261031.json; human
+scope and diagram in docs/english-composition.md. This supports cutoff sensitivity
+for this case, not whole-model numeric/accuracy acceptance. Full fast gate stays
+false. Move meaningful training preparation forward while retaining all controls;
+no further subdivision of this one proven projection replay is required first.
+No checkpoint, optimizer, policy, model/device or other-workload change.
+
 ## Recorded runtime restored / cross components controlled — 2026-10-31
 
 A real evaluation mismatch was found: pinned WhistleConfig.from_saved drops
