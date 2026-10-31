@@ -115,9 +115,34 @@ Run under the retained resource guard. To continue, pass
 Do not overwrite earlier output or change the trainer between checkpoint and
 resume. Run `python -m unittest discover -s tests -p 'test_english_*.py'` for guards.
 
+## Check a checkpoint before packing
+
+`export_english_student.py --preflight-only` checks the complete checkpoint's
+file hashes, pinned source, tokenizer, English-only configuration and training
+policy without loading JAX or making a model. Metadata and training-signature
+geometry must agree. The checkpoint step must be a positive integer; a later
+epoch is no longer mislabeled as a two-step export.
+
+```sh
+python3 tools/export_english_student.py \
+  --checkpoint "$CHECKPOINT" --needle-source "$NEEDLE_SOURCE" \
+  --tokenizer "$TOKENIZERS/english-bpe-2048.model" \
+  --output "$NEW_PREFLIGHT_OUTPUT" --preflight-only
+```
+
+Use a new output directory. Success produces `preflight.json`, with packing,
+native validation, speech accuracy and deployment acceptance still false.
+Actual packing later also checks the saved tensor metadata. A preflight cannot
+establish model size, numerical agreement or recognition quality.
+
+The real full-shape GPU checkpoint3 passed this path using about25MiB sampled
+process memory, with no JAX/Flax/NumPy import and no model created. Nine controls
+cover frontend tags, checkpoint steps, signature drift, foreign vocabulary and
+full-parameter initialization. See the [audited receipt](../research/english-export-preflight-20261031.json).
+
 ## Next acceptance gates
 
-1. Finish the live 25-second / 160-token resource probe, then use free Alienware resources for full training; Bak remains held off.
+1. Complete the queued first epoch on free Alienware resources. Full25-second/160-token recovery has passed; Bak remains held off.
 2. Train beyond this tiny pipeline probe and score held-out English speech and real names.
 3. Export learned weights with the existing native-vocabulary pipeline; pass strict numeric and held-out native speech gates.
 4. Pass Watch RAM/stack, microphone and accuracy gates before any release.

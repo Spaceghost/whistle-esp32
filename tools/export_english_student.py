@@ -14,6 +14,24 @@ def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def research_metadata(manifest):
+    """Reject inconsistent training geometry before loading numerical runtimes."""
+    metadata = manifest['metadata']
+    if (metadata.get('all_parameters_trainable') is not True or
+            metadata.get('initialization') != 'fresh random, no inherited model weights'):
+        raise ValueError('Expected fresh, full-parameter English research checkpoint')
+    step = metadata.get('step')
+    if type(step) is not int or step < 1:
+        raise ValueError('Expected a positive completed checkpoint step')
+    signature = metadata['signature']
+    config = metadata['config']
+    if json.dumps(config, sort_keys=True) != json.dumps(signature['config'], sort_keys=True):
+        raise ValueError('Checkpoint configuration differs from training signature')
+    if config.get('languages') not in (['en'], ('en',)) or config.get('text') not in (2048, 4096, 8192):
+        raise ValueError('Expected English-only research vocabulary')
+    return metadata
+
+
 def mark_training_frontend(blob, profile=2):
     """Version the audio manifest explicitly; upstream emits legacy version 1."""
     if profile not in (2, 3):
@@ -43,6 +61,8 @@ def main():
         p.add_argument('--' + name, type=Path, required=True)
     p.add_argument('--model-budget-bytes', type=int, default=11010048,
                    help='Watch model limit with its signed app store preserved')
+    p.add_argument('--preflight-only', action='store_true',
+                   help='Verify checkpoint hashes/source/policy/metadata without loading JAX or packing a model')
     a = p.parse_args()
     if a.output.exists():
         p.error('Preserve prior output; choose a fresh directory')
@@ -54,9 +74,7 @@ def main():
     helper = runpy.run_path(str(Path(__file__).with_name('train_english_student.py')))
     helper['verify_source'](a.needle_source)
     manifest = helper['checkpoint_manifest'](a.checkpoint)
-    metadata = manifest['metadata']
-    if not metadata.get('all_parameters_trainable') or metadata.get('initialization') != 'fresh random, no inherited model weights':
-        raise ValueError('Expected fresh, full-parameter English research checkpoint')
+    metadata = research_metadata(manifest)
     signature = metadata['signature']
     if sha(a.tokenizer) != signature['tokenizer_sha256'] or signature['qat_bits'] not in (2, 4):
         raise ValueError('Tokenizer or QAT width differs from the verified checkpoint')
@@ -71,6 +89,23 @@ def main():
     if policy == 'native-fast':
         import english_native_quant
     helper['verify_deployment_signature'](signature, english_native_quant if policy == 'native-fast' else None)
+    if a.preflight_only:
+        a.output.mkdir(parents=True, exist_ok=False)
+        marker = a.output / 'INCOMPLETE'
+        marker.write_text('Checkpoint metadata preflight not complete.\n')
+        report = {'schema': 1, 'scope': 'Checkpoint metadata preflight; no model packed or accepted',
+                  'checkpoint_manifest_sha256': sha(a.checkpoint / 'manifest.json'),
+                  'checkpoint_step': metadata['step'], 'tokenizer_sha256': sha(a.tokenizer),
+                  'source_commit': helper['NEEDLE_COMMIT'],
+                  'export_script_sha256': sha(Path(__file__)), 'training_signature': signature,
+                  'metadata_preflight_complete': True, 'packing_complete': False,
+                  'native_validation_complete': False, 'neural_accuracy_verified': False,
+                  'deployment_permitted': False}
+        with (a.output / 'preflight.json').open('x') as target:
+            target.write(json.dumps(report, indent=2) + '\n'); target.flush(); os.fsync(target.fileno())
+        marker.unlink()
+        print(json.dumps(report), flush=True)
+        return
     whistle, quantize, checkpoints = helper['source_modules'](a.needle_source)
     export = importlib.import_module('_ack_needle.model.export')
     from sentencepiece import sentencepiece_model_pb2
@@ -96,7 +131,7 @@ def main():
     artifact = a.output / 'english-student-research.cact'
     with artifact.open('xb') as target:
         target.write(blob);target.flush();os.fsync(target.fileno())
-    report = {'schema': 1, 'scope': 'Two-step research checkpoint export; not an accepted recognizer',
+    report = {'schema': 1, 'scope': f'Research checkpoint export at step {metadata["step"]}; not an accepted recognizer',
               'checkpoint_manifest_sha256': sha(a.checkpoint / 'manifest.json'),
               'checkpoint_step': metadata['step'], 'tokenizer_sha256': sha(a.tokenizer),
               'config': metadata['config'], 'training_signature': signature,

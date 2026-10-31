@@ -2,6 +2,7 @@ import importlib.util
 from pathlib import Path
 import struct
 import unittest
+from copy import deepcopy
 spec=importlib.util.spec_from_file_location('english_export',Path(__file__).parents[1]/'tools/export_english_student.py')
 mod=importlib.util.module_from_spec(spec);spec.loader.exec_module(mod)
 
@@ -16,6 +17,38 @@ def fixture(layers=2,sites=1,version=1):
 
 
 class EnglishExportTest(unittest.TestCase):
+    def checkpoint(self, step=28539):
+        config = {'languages': ['en'], 'text': 2048, 'dim': 512}
+        return {'metadata': {'step': step, 'initialization': 'fresh random, no inherited model weights',
+                             'all_parameters_trainable': True, 'config': config,
+                             'signature': {'config': deepcopy(config)}}}
+
+    def test_metadata_accepts_actual_step_instead_of_assuming_two(self):
+        for step in (1, 2, 3, 28539):
+            self.assertEqual(mod.research_metadata(self.checkpoint(step))['step'], step)
+
+    def test_invalid_checkpoint_step_is_refused(self):
+        for step in (0, -1, True, 3.0, '3', None):
+            with self.assertRaises(ValueError): mod.research_metadata(self.checkpoint(step))
+
+    def test_checkpoint_signature_geometry_drift_is_refused(self):
+        m = self.checkpoint(); m['metadata']['signature']['config']['dim'] = 256
+        with self.assertRaises(ValueError): mod.research_metadata(m)
+
+    def test_foreign_or_unexpected_vocabulary_is_refused(self):
+        for config in ({'languages': ['en', 'ja'], 'text': 2048},
+                       {'languages': ['ja'], 'text': 2048},
+                       {'languages': ['en'], 'text': 32000}):
+            m = self.checkpoint(); m['metadata']['config'] = config
+            m['metadata']['signature']['config'] = deepcopy(config)
+            with self.assertRaises(ValueError): mod.research_metadata(m)
+
+    def test_unproven_full_parameter_initialization_is_refused(self):
+        for key, value in [('all_parameters_trainable', 1), ('all_parameters_trainable', False),
+                           ('initialization', 'inherited')]:
+            m = self.checkpoint(); m['metadata'][key] = value
+            with self.assertRaises(ValueError): mod.research_metadata(m)
+
     def test_explicit_profile_changes_only_tag_and_version_words(self):
         for layers in (2,4,8):
             for sites in (0,1,2):
