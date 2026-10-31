@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "attempts": [
+    {
+      "state": "not-started",
+      "child_pid": null,
+      "admitted": false,
+      "reason": "host_memory_headroom",
+      "host_rss_limit_bytes": 4294967296,
+      "host_free_floor_bytes": 1073741824,
+      "observed_host_available_bytes": 5433823232,
+      "admission_wait_seconds": 3600.288392487002
+    },
+    {
+      "state": "not-started",
+      "child_pid": null,
+      "admitted": false,
+      "reason": "host_memory_headroom",
+      "host_rss_limit_bytes": 3758096384,
+      "host_free_floor_bytes": 1073741824,
+      "observed_host_available_bytes": 4437856256,
+      "admission_wait_seconds": 300.16999562899946
+    }
+  ],
+  "training_started": false,
+  "other_workloads_interrupted": false
+}

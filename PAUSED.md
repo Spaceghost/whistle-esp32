@@ -1,3 +1,25 @@
+## GPU admission finished; Watch integration continues — 2026-10-31
+
+| Work | Status | What this proves |
+| :--- | :--- | :--- |
+| One-hour GPU window (v4) | ⏸️ Not started | Spare host RAM never met the 6 GiB launch threshold |
+| Five-minute GPU window (v5) | ⏸️ Not started | Spare host RAM never met the 5 GiB launch threshold |
+| Other workloads | ✅ Preserved | Neither window launched a training child or interrupted other work |
+| Watch 77 integration | 🔨 Building in the private firmware repo | Current native engine, existing production model, preserved UI |
+| New English model | ⬜ Not trained or deployed | GPU student updates, resume, full-shape sizing and held-out quality remain open |
+
+Both admission reports are terminal `not-started` with `host_memory_headroom`.
+The older entries below describing live guard 738565 are historical; no GPU
+admission process remains from these two attempts. Do not restart either
+finished handle. The v5 host cap was 3.5 GiB plus 1.5 GiB admission reserve;
+the 1 GiB runtime floor stayed unchanged. No student checkpoint was created.
+
+Next: finish the bounded Watch 77 compatibility build. Wait for free Alienware
+resources before another explicitly scoped GPU job; keep other workloads running.
+The complete English-model goal remains active and incomplete.
+
+---
+
 ## Current decoder and C API sanitizer revalidation complete — 2026-10-31
 
 ✅ Rebuilt profile/stage/generateddecoder with real GCC ASan/UBSan. Current
