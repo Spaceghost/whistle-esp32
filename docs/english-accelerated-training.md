@@ -9,7 +9,7 @@ The original CPU trainer remains unchanged for its existing checkpoints.
 | Real periodic saving | ✅ CPU checkpoints 1 and 2 complete | Full 29,537,627-parameter model + Adam state |
 | Training arithmetic preserved | ✅ Exact CPU reference match | Every parameter array and optimizer bytes match step two |
 | New-process resume | ✅ CPU update 3 complete | Model + optimizer restored from checkpoint 2; checkpoint 3 verified |
-| Guarded CUDA training path | ☐ Hardware validation pending | Successful matching backend smoke required before JAX import |
+| Guarded CUDA training path | ✅ First finite full-parameter update completed | Actual recoverable GPU checkpoint and new-process resume still pending |
 
 ```mermaid
 flowchart TD

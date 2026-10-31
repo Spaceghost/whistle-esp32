@@ -1,3 +1,34 @@
+## First GPU update proven; streamed checkpoint retry waiting — 2026-10-31
+
+| Milestone | Status |
+| :--- | :--- |
+| Watch 77 | ✅ Installed OTA VALID; device/control holds released |
+| First CUDA student update | ✅ Finite gradients; nonzero update across all 29,537,627 trainable parameters |
+| Original save attempt | ⛔ Host cap reached while serializing optimizer; partial checkpoint refused |
+| Streaming optimizer writer | ✅ Five controls pass, exact Flax bytes and bit-identical next Adam update |
+| Actual streamed GPU save/resume | ⏳ Guard admission waiting; not verified |
+
+Poll **session 47919**, guard **1181715**. No child at the latest observation.
+Report: `build/training-readiness-20261031/gpu-student-stream-v1.json`.
+Output if admitted: `build/accelerated-student-20261031/gpu-step2-stream-v1`.
+Frozen source **7577539**, with `--stream-checkpoints` plus the existing optional
+cache/heap-trim flags. The original CPU trainer is unchanged. The new flag and
+writer hash are in the accelerated compatibility signature; do not resume an
+older run under this new source. The old failed step has no valid READY snapshot.
+
+Same 3.5 GiB owned host cap, now 1.5 GiB launch reserve and unchanged 1 GiB
+runtime floor. GPU limits remain 2 GiB pool / 3 GiB observed cap / 2 GiB reserve;
+35% applies only to this diagnostic, 30-second dwell and 900-second child cap.
+Reuse the previous v3 compiler cache, since that actual update compiled, while
+preserving all old partial artifacts. Other workloads continue uninterrupted.
+
+Next: poll the same live handle/report. Verify two finite updates, terminal
+guard and READY manifests before a new-process resume. Full 25s/160-token sizing,
+meaningful training, native numeric/held-out speech and Watch physical gates
+remain open. No research weights were deployed. Full goal remains active.
+
+---
+
 ## Larger GPU diagnostic admitted; prior cap failure confirmed — 2026-10-31
 
 | Work | Status |

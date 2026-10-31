@@ -1,13 +1,13 @@
 # English GPU runner: wait first, then verify
 
-**CUDA works. Full GPU student updates are not yet verified.**
+**The first full CUDA student update passed; durable GPU saving is still open.**
 
 | Current milestone | Status |
 | :--- | :--- |
 | Backend numerics and 51 locked packages | ✅ Verified on the RTX 3070 |
 | Initialization heap trim | ✅ Saves 280 MiB with all 337 arrays unchanged |
-| Training under the old 2.75 GiB host cap | ⛔ Compilation exceeds the cap; no checkpoint |
-| Larger bounded retry | ⏳ 3.5 GiB host cap, 1 GiB launch reserve and runtime floor |
+| First full-parameter CUDA update | ✅ Finite gradients and nonzero update |
+| Recoverable GPU checkpoint | ⏳ Streamed writer tested; actual GPU save/resume pending |
 | Full training and speech quality | ⬜ Still required |
 
 The larger retry preserves the model, precision, data and gradient calculation.
@@ -23,7 +23,7 @@ training retains the default 10% admission ceiling.
 | GPU admission/process guard | ✅ 13 tests pass | Simulated GPU telemetry + real process isolation |
 | Backend parent/device binding | ✅ 4 tests pass | Refuses unadmitted processes, wrong devices and allocation overrides |
 | Real GPU backend smoke | ✅ Actual guarded execution passes | Terminal guard exit 0; no CPU fallback |
-| Guarded student runner | ☐ First compile exceeded host cap | Full model initialized; no completed student update |
+| Guarded student runner | ✅ First CUDA update completed | Saving the optimizer then exceeded its cap; no READY checkpoint |
 
 ```mermaid
 flowchart TD
@@ -196,3 +196,12 @@ and preserved the full state, but update-one compilation later reached
 owned process; no update, training report or READY checkpoint was created.
 **Trimming alone does not solve this cap.**
 [Terminal resource and state evidence](../research/english-heap-trim-terminal-20261031.json).
+
+
+The larger 3.5 GiB run completed update one at 318.934 seconds (loss
+9.0693674, all gradients finite, nonzero update norm 0.4286316). It stopped
+at the cap during optimizer serialization, with a model file but an empty
+optimizer file and no READY. Preserve that partial evidence; it is not resumable.
+The [optional streaming writer](english-accelerated-training.md#save-the-optimizer-without-a-full-host-copy)
+now passes five compatibility/recovery controls. Actual GPU save and resume
+remain required.
