@@ -1,3 +1,12 @@
+# English native research resumed — parent goal active, 2026-10-30
+
+The parent explicitly reactivated the full Watch goal. English-model native
+compatibility research is resumed here. Preserve prior checkpoints and exact
+training scripts, installed firmware and other owners' work. Bak shutdown and
+service holds remain in force; do not start work there. The pause below is a
+historical checkpoint for this scope. No research export is deployable without
+held-out accuracy, format, memory and physical gates.
+
 # Temporary pause — parent instruction, 2026-10-30
 
 Stop after the completed English training/checkpoint milestone. No new work

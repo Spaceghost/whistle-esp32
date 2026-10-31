@@ -1,6 +1,19 @@
-# English student: training checkpoint
+# English student: training and restart
 
-> ⏸️ Parent requested a temporary pause on 2026-10-30. Resume explicitly before starting more work.
+> ▶️ Research resumed. Read [the current native milestone](english-native.md)
+> for the 2026-10-31 mixed-precision export, measured partition fit and remaining
+> gates. Wait for free Alienware resources; leave other workloads running.
+
+The current trainer defaults to **two-bit body / four-bit tied embedding** and
+stable frontend profile 3. Exact source/module hashes are part of checkpoint
+compatibility. The commands below describe the same bounded probe, but produce
+new checkpoints with that current signature. Do not resume an older four-bit
+checkpoint with this changed trainer.
+
+## Historical four-bit milestone — 2026-10-30
+
+The temporary pause recorded below was explicitly lifted. These earlier numbers
+remain evidence for the original four-bit trainer; they are not the new run's results.
 
 | Feature | Status |
 | :--- | :--- |

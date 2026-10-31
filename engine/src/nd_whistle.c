@@ -31,7 +31,6 @@ uint64_t nd_wprof[ND_WP_COUNT];
 #define EG_PRIME     0x01000193u
 #define BOS_ID       2u
 #define EOS_ID       1u
-#define LANG_BASE    8192u       /* English prefix follows shared text IDs */
 
 /* Front-end constants, established against the official engine (see
  * tools/whistle_ref.py DEFAULTS): the clip is scaled to peak 1, then
@@ -537,11 +536,15 @@ void nd_whistle_logmel(const nd_whistle *w, const float *x, uint32_t n, float *o
     const float *fb = (const float *)dat(w, w->i_melfb);      /* [nb][mels] */
     float        peak = 0.0f, gain, re[512], im[512], pw[257];
     float       *mean, *var;
+    unsigned audio_profile = (unsigned)hv(w, w->i_audio_cfg, 1);
+    int training_frontend = audio_profile >= 2;
+    float log_eps = training_frontend ? 0x1p-24f : LOG_EPS;
+    float norm_eps = training_frontend ? 1e-5f : NORM_EPS;
 
     for (k = 0; k < n; k++)
         if (fabsf(x[k]) > peak)
             peak = fabsf(x[k]);
-    gain = peak > 1e-9f ? 1.0f / peak : 1.0f;
+    gain = training_frontend ? 1.0f : peak > 1e-9f ? 1.0f / peak : 1.0f;
 
     for (t = 0; t < M; t++) {
         /* Centred frame: n_fft samples around t*hop, zero padded at the
@@ -558,7 +561,7 @@ void nd_whistle_logmel(const nd_whistle *w, const float *x, uint32_t n, float *o
             float s = 0.0f;
             for (k = w->fb_lo[b]; k < w->fb_hi[b]; k++)
                 s += pw[k] * fb[k * mels + b];
-            out[(size_t)t * mels + b] = logf(s + LOG_EPS);
+            out[(size_t)t * mels + b] = audio_profile == 3 ? log1pf(s / log_eps) : logf(s + log_eps);
         }
     }
 
@@ -567,9 +570,20 @@ void nd_whistle_logmel(const nd_whistle *w, const float *x, uint32_t n, float *o
     var  = (float *)ND_ALLOC(mels * sizeof(float));
     for (b = 0; b < mels; b++) {
         float s = 0.0f, q = 0.0f;
-        for (t = 0; t < M; t++)
-            s += out[(size_t)t * mels + b];
-        s /= (float)(M ? M : 1);
+        if (training_frontend && M) {
+            /* Center the reduction to keep constant silence exactly zero.
+             * Summing ~-16.6 a hundred times loses enough precision for the
+             * 1e-5 normalizer to amplify it into a false feature. */
+            float anchor = out[b];
+            for (t = 0; t < M; t++)
+                s += out[(size_t)t * mels + b] - anchor;
+            s = anchor + s / (float)M;
+        } else {
+            /* Preserve installed profile-1 arithmetic order exactly. */
+            for (t = 0; t < M; t++)
+                s += out[(size_t)t * mels + b];
+            s /= (float)(M ? M : 1);
+        }
         for (t = 0; t < M; t++) {
             float dd = out[(size_t)t * mels + b] - s;
             q += dd * dd;
@@ -579,7 +593,7 @@ void nd_whistle_logmel(const nd_whistle *w, const float *x, uint32_t n, float *o
     }
     for (t = 0; t < M; t++)
         for (b = 0; b < mels; b++)
-            out[(size_t)t * mels + b] = (out[(size_t)t * mels + b] - mean[b]) / (var[b] + NORM_EPS);
+            out[(size_t)t * mels + b] = (out[(size_t)t * mels + b] - mean[b]) / (var[b] + norm_eps);
     ND_FREE(mean);
     ND_FREE(var);
 }
@@ -1412,7 +1426,9 @@ static uint32_t decode_pass(nd_whistle *w, int lang, uint32_t *ids, uint32_t cap
 
     dec_step(w, BOS_ID, pos++, hid);
     w->lang = lang;
-    tok = LANG_BASE + (uint32_t)lang;
+    /* audio.manifest carries the text vocabulary size, including for the
+     * smaller English tokenizer. Open validates its English tag. */
+    tok = (uint32_t)hv(w, w->i_audio_cfg, 2);
     while (pos < w->max_seq) {
         uint32_t best = 0;
         float    mx, se = 0.0f, lse;
@@ -1594,13 +1610,33 @@ int nd_whistle_open(nd_whistle *w, const void *blob, size_t size)
     w->i_audio_cfg = x++;
     w->i_cross = x;                  x += w->dec_layers * X_N;
     w->i_pe_gate = x++;
-    if (w->t[w->i_audio_cfg].dtype != ND_DT_FP32 || w->t[w->i_audio_cfg].shape[0] != 13)
+    if (w->i_audio_cfg >= nt || w->t[w->i_audio_cfg].dtype != ND_DT_FP32 ||
+        w->t[w->i_audio_cfg].shape[0] != 13 || w->t[w->i_audio_cfg].nbytes != 13 * sizeof(float))
         return -10;
+    /* Profile 1 is the installed engine's frontend. Profile 2 uses the
+     * pinned trainer's symmetric Hann/raw gain; profile 3 stabilizes its
+     * quiet-feature arithmetic in both trainer and native code. */
+    if (hv(w,w->i_audio_cfg,0) != 3246.0f ||
+        !((h->tag == ND_CACT_TAG4 && hv(w,w->i_audio_cfg,1) == 1.0f) ||
+          (h->tag == ND_CACT_TAG_ENGLISH1 && (hv(w,w->i_audio_cfg,1) == 2.0f || hv(w,w->i_audio_cfg,1) == 3.0f))))
+        return -10;
+    {
+        float text = hv(w,w->i_audio_cfg,2);
+        if (!isfinite(text) || text < 4.0f || text >= (float)w->vocab || text != floorf(text) ||
+            (h->tag == ND_CACT_TAG4 && text != 8192.0f) ||
+            (h->tag == ND_CACT_TAG_ENGLISH1 && text + 1.0f != (float)w->vocab) ||
+            w->t[w->i_emb].ndim != 2 || w->t[w->i_emb].shape[0] != w->vocab ||
+            w->t[w->i_emb].shape[1] != w->d)
+            return -10;
+    }
     w->enc_layers = (uint32_t)hv(w, w->i_audio_cfg, 3);
     w->mels  = (uint32_t)hv(w, w->i_audio_cfg, 8);
     w->n_fft = (uint32_t)hv(w, w->i_audio_cfg, 10);
     w->win   = (uint32_t)hv(w, w->i_audio_cfg, 11);
     w->hop   = (uint32_t)hv(w, w->i_audio_cfg, 12);
+    if (!w->hop || w->win < 2 || w->win > w->n_fft || !w->mels || w->mels > 128 ||
+        !w->enc_layers || w->enc_layers > ND_WH_MAX_LAYERS)
+        return -11;
     w->i_enc = x;                    x += w->enc_layers * E_N;
     w->i_enc_mhc = x;                x += 9;
     w->i_enc_final = x++;
@@ -1618,7 +1654,7 @@ int nd_whistle_open(nd_whistle *w, const void *blob, size_t size)
     for (i = 0; i < 512; i++) {
         uint32_t off = (w->n_fft - w->win) / 2;
         w->hann[i] = (i >= off && i < off + w->win)
-            ? 0.5f - 0.5f * cosf(2.0f * (float)M_PI * (float)(i - off) / (float)w->win) : 0.0f;
+            ? 0.5f - 0.5f * cosf(2.0f * (float)M_PI * (float)(i - off) / (float)(w->win - (hv(w,w->i_audio_cfg,1) >= 2.0f ? 1 : 0))) : 0.0f;
     }
     if (w->mels > 128)
         return -11;
@@ -1644,6 +1680,16 @@ int nd_whistle_open(nd_whistle *w, const void *blob, size_t size)
     }
     if (nd_tok_init(&w->tok, dat(w, w->i_tok), (size_t)w->t[w->i_tok].nbytes) != 0)
         return -12;
+
+    {
+        uint32_t english = (uint32_t)hv(w,w->i_audio_cfg,2);
+        uint16_t len = 0;
+        const char *tag = nd_tok_piece(&w->tok, english, &len);
+        if (w->tok.n_pieces != w->vocab || w->tok.pad_id != 0 || w->tok.eos_id != EOS_ID ||
+            w->tok.bos_id != BOS_ID || w->tok.unk_id != 3 || !tag || len != 6 ||
+            memcmp(tag,"<|en|>",6) || w->tok.pieces[english].type != ND_TK_USER_DEFINED)
+            return -12;
+    }
 
     w->lane  = (float *)ND_ALLOC((size_t)w->lanes * w->d * sizeof(float));
     w->xh    = (float *)ND_ALLOC(2048 * sizeof(float));

@@ -30,6 +30,7 @@ extern "C" {
 
 #define ND_CACT_TAG      0x05E12A83u   /* v3, Needle 2 */
 #define ND_CACT_TAG4     0x05E12A84u   /* v4, Needle 3 / Whistle */
+#define ND_CACT_TAG_ENGLISH1 0x31455741u /* AWE1: fork English research, v4 geometry */
 #define ND_CACT_ALIGN    64
 #define ND_CACT_REC_SIZE 44
 
@@ -119,7 +120,7 @@ typedef struct {
 typedef struct {
     const uint8_t   *base;      /* start of the blob */
     size_t           size;
-    uint32_t         version;   /* 3 or 4 */
+    uint32_t         version;   /* layout 3 or 4; AWE1 reuses layout 4 */
     nd_cact_header   h;         /* valid when version == 3 */
     nd_cact_header4  h4;        /* valid when version == 4 */
     const float     *codebook;  /* cb2 | cb3 | cb4, already scaled by 1/sqrt(group) */

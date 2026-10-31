@@ -1,0 +1,749 @@
+{
+  "schema": 1,
+  "date": "2026-10-31",
+  "scope": "English mixed-precision native research checkpoint; two optimizer steps, not an accepted recognizer",
+  "deployment_permitted": false,
+  "whole_network_training_native_numerical_parity_verified": false,
+  "watch_memory_or_physical_acceptance_verified": false,
+  "evidence": {
+    "export": {
+      "schema": 1,
+      "scope": "Two-step research checkpoint export; not an accepted recognizer",
+      "checkpoint_manifest_sha256": "c781f2be72e9a2c908df05c96be748897adb2774c8a979a10e484a20322ac8e3",
+      "checkpoint_step": 2,
+      "tokenizer_sha256": "70b605e6951bf8460742ed3756019ad5e57a940a0d0b0e14d07b4b2f96fc6885",
+      "config": {
+        "text": 2048,
+        "languages": [
+          "en"
+        ],
+        "dim": 512,
+        "kv_heads": 2,
+        "qk_dim": 48,
+        "v_dim": 64,
+        "enc_layers": 8,
+        "dec_layers": 2,
+        "conv_kernel": 9,
+        "taps": 3,
+        "lanes": 4,
+        "enc_lanes": 4,
+        "sites": [
+          1
+        ],
+        "orders": [
+          2,
+          3
+        ],
+        "slots": 18432,
+        "hashes": 2,
+        "stem": 128,
+        "stem_stages": 3,
+        "rope": 100000.0,
+        "mels": 80,
+        "rate": 16000,
+        "fft": 512,
+        "win": 400,
+        "hop": 160,
+        "max_tokens": 320,
+        "pad": 0,
+        "eos": 1,
+        "bos": 2,
+        "dtype": "float32",
+        "flash": false,
+        "remat": true,
+        "scan_unroll": 1
+      },
+      "training_signature": {
+        "corpus_sha256": "0dedae607af955f07c74e0db68cb8e506c4c9d6f16d131dbc1ed4b37e163da4e",
+        "tokenizer_sha256": "70b605e6951bf8460742ed3756019ad5e57a940a0d0b0e14d07b4b2f96fc6885",
+        "train_manifest_sha256": "ceb2f15fd1d406006d7aa5ec53b38b905c655e5d182e032d7cf0e12c7f8eab00",
+        "source_receipt_sha256": "0217a8bdd09d45d31f2e3ed3db1bfba04fb72c63aa124ec3b35ff98d5836963c",
+        "config": {
+          "text": 2048,
+          "languages": [
+            "en"
+          ],
+          "dim": 512,
+          "kv_heads": 2,
+          "qk_dim": 48,
+          "v_dim": 64,
+          "enc_layers": 8,
+          "dec_layers": 2,
+          "conv_kernel": 9,
+          "taps": 3,
+          "lanes": 4,
+          "enc_lanes": 4,
+          "sites": [
+            1
+          ],
+          "orders": [
+            2,
+            3
+          ],
+          "slots": 18432,
+          "hashes": 2,
+          "stem": 128,
+          "stem_stages": 3,
+          "rope": 100000.0,
+          "mels": 80,
+          "rate": 16000,
+          "fft": 512,
+          "win": 400,
+          "hop": 160,
+          "max_tokens": 320,
+          "pad": 0,
+          "eos": 1,
+          "bos": 2,
+          "dtype": "float32",
+          "flash": false,
+          "remat": true,
+          "scan_unroll": 1
+        },
+        "training_script_sha256": "61e2a9d4b23cdfe7e26fcd1debf833287ffaf9c9164eb6e2e1b6d830f5898455",
+        "packages": {
+          "jax": "0.12.0.1",
+          "jaxlib": "0.12.0.1",
+          "flax": "0.12.12",
+          "optax": "0.2.8",
+          "numpy": "2.5.4",
+          "safetensors": "0.8.0",
+          "sentencepiece": "0.2.2",
+          "soundfile": "0.14.0"
+        },
+        "python": "3.12.14",
+        "sampler": "Random(seed+epoch) shuffle with global-step offset",
+        "seed": 0,
+        "batch_size": 1,
+        "maximum_samples": 32000,
+        "batch_tokens": 32,
+        "qat_bits": 2,
+        "lr": 0.0001,
+        "tied_embedding_bits": 4,
+        "audio_frontend_profile": 3,
+        "frontend_module_sha256": "de4839fc6b47057cce479c55fc4f5c90ea16bbe2b3b4d27affd8eac935a0eaa9",
+        "precision_module_sha256": "811b288d955927843e3366bdbdfa4ba9d4673885e9228c0770c2d122478b98ef",
+        "selected_train_ids_sha256": "1800d5726190483634a25096a9fcae13e26111f2956cc16f62ea12c9607aac7d",
+        "optimizer": "clip1.0 + optax.adamw(default weight_decay)"
+      },
+      "source_commit": "b4fc11b04f1852888d375c8c6dfbaca44572d014",
+      "export_script_sha256": "9ac3290c7ccc77b26fc8ade7c8ae5d34a97ed50573369fae039c8bcf4357a681",
+      "bytes": 8832915,
+      "sha256": "97b590477e48f04c2b1cafd3ceab2347355b999c77a3523cf24c4adb1abcf779",
+      "tensors": 455,
+      "text_vocabulary": 2048,
+      "english_prefix_id": 2048,
+      "embedding_rows": 2049,
+      "body_weight_bits": 2,
+      "tied_embedding_bits": 4,
+      "audio_frontend_profile": 3,
+      "native_format": "AWE1",
+      "native_validation_complete": false,
+      "neural_accuracy_verified": false,
+      "deployment_permitted": false
+    },
+    "frontend": {
+      "schema": 1,
+      "scope": "Frontend feature parity only; numerical fixtures are not synthetic voice tests",
+      "model_sha256": "97b590477e48f04c2b1cafd3ceab2347355b999c77a3523cf24c4adb1abcf779",
+      "native_binary_sha256": "474b1f7eea56c7fac039b1ec9592c1c62964ab42b73b1b18d4f26ac5b2a28639",
+      "audio_frontend_profile": 3,
+      "frontend_only_fixture": false,
+      "relative_tolerance": 0.002,
+      "absolute_tolerance": 0.002,
+      "examples": [
+        {
+          "name": "cohen-want-make-app",
+          "source_audio_sha256": "8545bb49d4bb7715a3eda61884af801be24338692a9716eec87b6e5bb022d416",
+          "frames": 136,
+          "max_absolute_error": 5.924701690673828e-05,
+          "rms_error": 1.5530285963905044e-06,
+          "all_finite": true,
+          "within_tolerance": true
+        },
+        {
+          "name": "adalo-want-make-app",
+          "source_audio_sha256": "eb01ffbd64e65efd23316403c67758c87acd9b2048e92bc9ba53cd9d90d8e7d6",
+          "frames": 142,
+          "max_absolute_error": 6.341934204101562e-05,
+          "rms_error": 2.1217001631157473e-06,
+          "all_finite": true,
+          "within_tolerance": true
+        },
+        {
+          "name": "raroque-get-started",
+          "source_audio_sha256": "1ee4209e04d379a1b6e70f6a5593fbd0418cc4552a46f3e2edf09c5f3ab701cd",
+          "frames": 260,
+          "max_absolute_error": 5.6624412536621094e-05,
+          "rms_error": 3.4600288927322254e-06,
+          "all_finite": true,
+          "within_tolerance": true
+        },
+        {
+          "name": "levi-introduction",
+          "source_audio_sha256": "187abf6e5a6181f1f249c0e20aa35da8ffecfe1171662f73ffed1a6d9ed11f3f",
+          "frames": 500,
+          "max_absolute_error": 5.316734313964844e-05,
+          "rms_error": 1.5533821624558186e-06,
+          "all_finite": true,
+          "within_tolerance": true
+        },
+        {
+          "name": "silence-numerical",
+          "source_audio_sha256": null,
+          "frames": 100,
+          "max_absolute_error": 0.0,
+          "rms_error": 0.0,
+          "all_finite": true,
+          "within_tolerance": true
+        },
+        {
+          "name": "quiet-noise-numerical",
+          "source_audio_sha256": null,
+          "frames": 100,
+          "max_absolute_error": 2.384185791015625e-06,
+          "rms_error": 2.637067382238456e-07,
+          "all_finite": true,
+          "within_tolerance": true
+        }
+      ],
+      "all_passed": true,
+      "deployment_permitted": false
+    },
+    "quantization": {
+      "schema": 1,
+      "four_bit_bytes_identical": true,
+      "two_and_four_bit_qat_export_parity": [
+        {
+          "shape": [
+            7,
+            128
+          ],
+          "bits": 2,
+          "max_absolute_error": 3.3527612686157227e-08
+        },
+        {
+          "shape": [
+            7,
+            128
+          ],
+          "bits": 4,
+          "max_absolute_error": 2.2351741790771484e-08
+        },
+        {
+          "shape": [
+            3,
+            513
+          ],
+          "bits": 2,
+          "max_absolute_error": 0.0
+        },
+        {
+          "shape": [
+            3,
+            513
+          ],
+          "bits": 4,
+          "max_absolute_error": 0.0
+        },
+        {
+          "shape": [
+            5,
+            512
+          ],
+          "bits": 2,
+          "max_absolute_error": 0.0
+        },
+        {
+          "shape": [
+            5,
+            512
+          ],
+          "bits": 4,
+          "max_absolute_error": 0.0
+        }
+      ],
+      "mixed_head_body_policy_verified": true,
+      "parameters_not_mutated": true,
+      "fixture_straight_through_gradients_are_identity": true,
+      "scope": "Quantization math only; no speech accuracy or deployment acceptance"
+    },
+    "legacy_regression": {
+      "schema": 1,
+      "model_sha256": "8c956a951107b03a1832a3c6d665c88e52cc59fadcf91397077416f22f5dca9b",
+      "baseline_binary_sha256": "74d0b39516e09ad757e8b4344ed9071640ae09070f810b0dd90f63369cfc7053",
+      "candidate_binary_sha256": "474b1f7eea56c7fac039b1ec9592c1c62964ab42b73b1b18d4f26ac5b2a28639",
+      "cases": [
+        {
+          "id": "cohen-want-make-app",
+          "fixture_sha256": "8545bb49d4bb7715a3eda61884af801be24338692a9716eec87b6e5bb022d416",
+          "prefix": 8192,
+          "token_ids_identical": true,
+          "unbiased_score_hex_identical": true,
+          "encoder_bit_identical": true,
+          "all_prefix_logits_bit_identical": true,
+          "prefix_positions": 9,
+          "vocabulary_rows_per_position": 8193
+        },
+        {
+          "id": "adalo-want-make-app",
+          "fixture_sha256": "eb01ffbd64e65efd23316403c67758c87acd9b2048e92bc9ba53cd9d90d8e7d6",
+          "prefix": 8192,
+          "token_ids_identical": true,
+          "unbiased_score_hex_identical": true,
+          "encoder_bit_identical": true,
+          "all_prefix_logits_bit_identical": true,
+          "prefix_positions": 10,
+          "vocabulary_rows_per_position": 8193
+        },
+        {
+          "id": "raroque-get-started",
+          "fixture_sha256": "1ee4209e04d379a1b6e70f6a5593fbd0418cc4552a46f3e2edf09c5f3ab701cd",
+          "prefix": 8192,
+          "token_ids_identical": true,
+          "unbiased_score_hex_identical": true,
+          "encoder_bit_identical": true,
+          "all_prefix_logits_bit_identical": true,
+          "prefix_positions": 17,
+          "vocabulary_rows_per_position": 8193
+        },
+        {
+          "id": "levi-introduction",
+          "fixture_sha256": "187abf6e5a6181f1f249c0e20aa35da8ffecfe1171662f73ffed1a6d9ed11f3f",
+          "prefix": 8192,
+          "token_ids_identical": true,
+          "unbiased_score_hex_identical": true,
+          "encoder_bit_identical": true,
+          "all_prefix_logits_bit_identical": true,
+          "prefix_positions": 25,
+          "vocabulary_rows_per_position": 8193
+        }
+      ],
+      "all_cases_identical": true,
+      "scope": "Host regression on four cached natural clips; not a microphone or new-model accuracy claim",
+      "fixture_references_human_reviewed": false,
+      "deployment_performed": false
+    },
+    "admission": {
+      "schema": 1,
+      "scope": "Container admission only; changing a legacy artifact to profile 2 or 3 does not make its weights suitable for that frontend",
+      "source_sha256": "8c956a951107b03a1832a3c6d665c88e52cc59fadcf91397077416f22f5dca9b",
+      "native_binary_sha256": "474b1f7eea56c7fac039b1ec9592c1c62964ab42b73b1b18d4f26ac5b2a28639",
+      "checks": [
+        {
+          "name": "legacy-profile-1",
+          "expected_accepted": true,
+          "actual_accepted": true,
+          "exit_code": 0
+        },
+        {
+          "name": "profile-2-format-only",
+          "expected_accepted": true,
+          "actual_accepted": true,
+          "exit_code": 0
+        },
+        {
+          "name": "profile-3-format-only",
+          "expected_accepted": true,
+          "actual_accepted": true,
+          "exit_code": 0
+        },
+        {
+          "name": "unknown-profile-0.0",
+          "expected_accepted": false,
+          "actual_accepted": false,
+          "exit_code": 4
+        },
+        {
+          "name": "unknown-profile-4.0",
+          "expected_accepted": false,
+          "actual_accepted": false,
+          "exit_code": 4
+        },
+        {
+          "name": "unknown-profile-nan",
+          "expected_accepted": false,
+          "actual_accepted": false,
+          "exit_code": 4
+        },
+        {
+          "name": "unknown-profile-inf",
+          "expected_accepted": false,
+          "actual_accepted": false,
+          "exit_code": 4
+        },
+        {
+          "name": "text-prefix-fractional",
+          "expected_accepted": false,
+          "actual_accepted": false,
+          "exit_code": 4
+        },
+        {
+          "name": "text-prefix-out-of-vocabulary",
+          "expected_accepted": false,
+          "actual_accepted": false,
+          "exit_code": 4
+        },
+        {
+          "name": "text-prefix-not-English-tag",
+          "expected_accepted": false,
+          "actual_accepted": false,
+          "exit_code": 4
+        },
+        {
+          "name": "text-prefix-nan",
+          "expected_accepted": false,
+          "actual_accepted": false,
+          "exit_code": 4
+        },
+        {
+          "name": "stock-tag-with-profile-2",
+          "expected_accepted": false,
+          "actual_accepted": false,
+          "exit_code": 4
+        },
+        {
+          "name": "wrong-manifest-magic",
+          "expected_accepted": false,
+          "actual_accepted": false,
+          "exit_code": 4
+        },
+        {
+          "name": "wrong-English-marker",
+          "expected_accepted": false,
+          "actual_accepted": false,
+          "exit_code": 4
+        },
+        {
+          "name": "wrong-tokenizer-bos",
+          "expected_accepted": false,
+          "actual_accepted": false,
+          "exit_code": 4
+        },
+        {
+          "name": "wrong-tokenizer-vocabulary",
+          "expected_accepted": false,
+          "actual_accepted": false,
+          "exit_code": 4
+        },
+        {
+          "name": "wrong-embedding-rows",
+          "expected_accepted": false,
+          "actual_accepted": false,
+          "exit_code": 4
+        },
+        {
+          "name": "zero-window",
+          "expected_accepted": false,
+          "actual_accepted": false,
+          "exit_code": 4
+        },
+        {
+          "name": "zero-hop",
+          "expected_accepted": false,
+          "actual_accepted": false,
+          "exit_code": 4
+        }
+      ],
+      "older_engine_refused_research_tag": true,
+      "all_passed": true,
+      "deployment_performed": false
+    },
+    "training_step_one": {
+      "schema": 1,
+      "scope": "Bounded full-parameter CPU training check; not an accepted speech model",
+      "source_commit": "b4fc11b04f1852888d375c8c6dfbaca44572d014",
+      "signature": {
+        "corpus_sha256": "0dedae607af955f07c74e0db68cb8e506c4c9d6f16d131dbc1ed4b37e163da4e",
+        "tokenizer_sha256": "70b605e6951bf8460742ed3756019ad5e57a940a0d0b0e14d07b4b2f96fc6885",
+        "train_manifest_sha256": "ceb2f15fd1d406006d7aa5ec53b38b905c655e5d182e032d7cf0e12c7f8eab00",
+        "source_receipt_sha256": "0217a8bdd09d45d31f2e3ed3db1bfba04fb72c63aa124ec3b35ff98d5836963c",
+        "config": {
+          "text": 2048,
+          "languages": [
+            "en"
+          ],
+          "dim": 512,
+          "kv_heads": 2,
+          "qk_dim": 48,
+          "v_dim": 64,
+          "enc_layers": 8,
+          "dec_layers": 2,
+          "conv_kernel": 9,
+          "taps": 3,
+          "lanes": 4,
+          "enc_lanes": 4,
+          "sites": [
+            1
+          ],
+          "orders": [
+            2,
+            3
+          ],
+          "slots": 18432,
+          "hashes": 2,
+          "stem": 128,
+          "stem_stages": 3,
+          "rope": 100000.0,
+          "mels": 80,
+          "rate": 16000,
+          "fft": 512,
+          "win": 400,
+          "hop": 160,
+          "max_tokens": 320,
+          "pad": 0,
+          "eos": 1,
+          "bos": 2,
+          "dtype": "float32",
+          "flash": false,
+          "remat": true,
+          "scan_unroll": 1
+        },
+        "training_script_sha256": "61e2a9d4b23cdfe7e26fcd1debf833287ffaf9c9164eb6e2e1b6d830f5898455",
+        "packages": {
+          "jax": "0.12.0.1",
+          "jaxlib": "0.12.0.1",
+          "flax": "0.12.12",
+          "optax": "0.2.8",
+          "numpy": "2.5.4",
+          "safetensors": "0.8.0",
+          "sentencepiece": "0.2.2",
+          "soundfile": "0.14.0"
+        },
+        "python": "3.12.14",
+        "sampler": "Random(seed+epoch) shuffle with global-step offset",
+        "seed": 0,
+        "batch_size": 1,
+        "maximum_samples": 32000,
+        "batch_tokens": 32,
+        "qat_bits": 2,
+        "lr": 0.0001,
+        "tied_embedding_bits": 4,
+        "audio_frontend_profile": 3,
+        "frontend_module_sha256": "de4839fc6b47057cce479c55fc4f5c90ea16bbe2b3b4d27affd8eac935a0eaa9",
+        "precision_module_sha256": "811b288d955927843e3366bdbdfa4ba9d4673885e9228c0770c2d122478b98ef",
+        "selected_train_ids_sha256": "1800d5726190483634a25096a9fcae13e26111f2956cc16f62ea12c9607aac7d",
+        "optimizer": "clip1.0 + optax.adamw(default weight_decay)"
+      },
+      "parameters": 29537627,
+      "all_parameters_trainable": true,
+      "frozen_parameters": 0,
+      "initial_step": 0,
+      "final_step": 1,
+      "resumed": false,
+      "selection": {
+        "eligible": 2,
+        "excluded_duration": 28513,
+        "excluded_tokens": 0,
+        "limit": 2
+      },
+      "steps": [
+        {
+          "step": 1,
+          "loss": 9.056278228759766,
+          "gradient_norm": 294.0642395019531,
+          "update_norm": 0.398476779460907,
+          "all_gradients_finite": true
+        }
+      ],
+      "checkpoint": "step-00000001",
+      "checkpoint_manifest_sha256": "433cc51e184be2b2cb844c904bdcc4325c684695054a00951d852e1980f7bb6c",
+      "peak_rss_bytes": 3304214528,
+      "backend": "cpu",
+      "neural_accuracy_verified": false,
+      "native_export_compatibility_verified": false,
+      "deployment_permitted": false
+    },
+    "training_resume": {
+      "schema": 1,
+      "scope": "Bounded full-parameter CPU training check; not an accepted speech model",
+      "source_commit": "b4fc11b04f1852888d375c8c6dfbaca44572d014",
+      "signature": {
+        "corpus_sha256": "0dedae607af955f07c74e0db68cb8e506c4c9d6f16d131dbc1ed4b37e163da4e",
+        "tokenizer_sha256": "70b605e6951bf8460742ed3756019ad5e57a940a0d0b0e14d07b4b2f96fc6885",
+        "train_manifest_sha256": "ceb2f15fd1d406006d7aa5ec53b38b905c655e5d182e032d7cf0e12c7f8eab00",
+        "source_receipt_sha256": "0217a8bdd09d45d31f2e3ed3db1bfba04fb72c63aa124ec3b35ff98d5836963c",
+        "config": {
+          "text": 2048,
+          "languages": [
+            "en"
+          ],
+          "dim": 512,
+          "kv_heads": 2,
+          "qk_dim": 48,
+          "v_dim": 64,
+          "enc_layers": 8,
+          "dec_layers": 2,
+          "conv_kernel": 9,
+          "taps": 3,
+          "lanes": 4,
+          "enc_lanes": 4,
+          "sites": [
+            1
+          ],
+          "orders": [
+            2,
+            3
+          ],
+          "slots": 18432,
+          "hashes": 2,
+          "stem": 128,
+          "stem_stages": 3,
+          "rope": 100000.0,
+          "mels": 80,
+          "rate": 16000,
+          "fft": 512,
+          "win": 400,
+          "hop": 160,
+          "max_tokens": 320,
+          "pad": 0,
+          "eos": 1,
+          "bos": 2,
+          "dtype": "float32",
+          "flash": false,
+          "remat": true,
+          "scan_unroll": 1
+        },
+        "training_script_sha256": "61e2a9d4b23cdfe7e26fcd1debf833287ffaf9c9164eb6e2e1b6d830f5898455",
+        "packages": {
+          "jax": "0.12.0.1",
+          "jaxlib": "0.12.0.1",
+          "flax": "0.12.12",
+          "optax": "0.2.8",
+          "numpy": "2.5.4",
+          "safetensors": "0.8.0",
+          "sentencepiece": "0.2.2",
+          "soundfile": "0.14.0"
+        },
+        "python": "3.12.14",
+        "sampler": "Random(seed+epoch) shuffle with global-step offset",
+        "seed": 0,
+        "batch_size": 1,
+        "maximum_samples": 32000,
+        "batch_tokens": 32,
+        "qat_bits": 2,
+        "lr": 0.0001,
+        "tied_embedding_bits": 4,
+        "audio_frontend_profile": 3,
+        "frontend_module_sha256": "de4839fc6b47057cce479c55fc4f5c90ea16bbe2b3b4d27affd8eac935a0eaa9",
+        "precision_module_sha256": "811b288d955927843e3366bdbdfa4ba9d4673885e9228c0770c2d122478b98ef",
+        "selected_train_ids_sha256": "1800d5726190483634a25096a9fcae13e26111f2956cc16f62ea12c9607aac7d",
+        "optimizer": "clip1.0 + optax.adamw(default weight_decay)"
+      },
+      "parameters": 29537627,
+      "all_parameters_trainable": true,
+      "frozen_parameters": 0,
+      "initial_step": 1,
+      "final_step": 2,
+      "resumed": true,
+      "selection": {
+        "eligible": 2,
+        "excluded_duration": 28513,
+        "excluded_tokens": 0,
+        "limit": 2
+      },
+      "steps": [
+        {
+          "step": 2,
+          "loss": 8.80563735961914,
+          "gradient_norm": 143.0096893310547,
+          "update_norm": 0.30310502648353577,
+          "all_gradients_finite": true
+        }
+      ],
+      "checkpoint": "step-00000002",
+      "checkpoint_manifest_sha256": "c781f2be72e9a2c908df05c96be748897adb2774c8a979a10e484a20322ac8e3",
+      "peak_rss_bytes": 2470137856,
+      "backend": "cpu",
+      "neural_accuracy_verified": false,
+      "native_export_compatibility_verified": false,
+      "deployment_permitted": false
+    },
+    "training_guard": {
+      "exit_code": 0,
+      "stop_reason": null,
+      "peak_child_rss_bytes": 3304222720,
+      "elapsed_seconds": 51.081,
+      "gpu_used": false,
+      "rss_limit_bytes": 3758096384.0,
+      "minimum_system_available_bytes": 1073741824,
+      "system_available_bytes_at_launch": 6265143296,
+      "launch_headroom_bytes": 1610612736
+    },
+    "export_guard": {
+      "exit_code": 0,
+      "stop_reason": null,
+      "peak_child_rss_bytes": 674242560,
+      "elapsed_seconds": 8.022,
+      "rss_limit_bytes": 2147483648,
+      "cpu_only": true
+    },
+    "frontend_guard": {
+      "exit_code": 0,
+      "stop_reason": null,
+      "peak_child_rss_bytes": 340262912,
+      "elapsed_seconds": 7.015,
+      "rss_limit_bytes": 805306368,
+      "cpu_only": true
+    },
+    "native_execution": {
+      "scope": "Native consistency and memory-sanitizer smoke only; not training/native numerical parity or speech accuracy",
+      "model_sha256": "97b590477e48f04c2b1cafd3ceab2347355b999c77a3523cf24c4adb1abcf779",
+      "cases": [
+        {
+          "build": "release",
+          "mode": "inspect",
+          "exit_code": 0,
+          "stdout": "{\"vocabulary\":2049,\"model_state_bytes\":8552}",
+          "stderr": "",
+          "binary_sha256": "474b1f7eea56c7fac039b1ec9592c1c62964ab42b73b1b18d4f26ac5b2a28639"
+        },
+        {
+          "build": "release",
+          "mode": "prefix",
+          "exit_code": 0,
+          "stdout": "{\"prefix\":2048,\"first_token_matches_teacher_forcing\":true,\"confidence_matches_teacher_forcing\":true,\"expected_score_hex\":\"-0x1.102fp-4\",\"actual_score_hex\":\"-0x1.102fp-4\"}",
+          "stderr": "",
+          "binary_sha256": "474b1f7eea56c7fac039b1ec9592c1c62964ab42b73b1b18d4f26ac5b2a28639"
+        },
+        {
+          "build": "release",
+          "mode": "decode-pcm",
+          "exit_code": 0,
+          "stdout": "{\"vocabulary\":2049,\"prefix\":2048,\"score_hex\":\"-0x1.79fp-3\",\"tokens\":[2048]}",
+          "stderr": "",
+          "binary_sha256": "474b1f7eea56c7fac039b1ec9592c1c62964ab42b73b1b18d4f26ac5b2a28639"
+        },
+        {
+          "build": "asan-ubsan",
+          "mode": "inspect",
+          "exit_code": 0,
+          "stdout": "{\"vocabulary\":2049,\"model_state_bytes\":8552}",
+          "stderr": "",
+          "binary_sha256": "52ff0570a84eaa835876d997a157702d5760abaacf4be9f17e337561950564ba"
+        },
+        {
+          "build": "asan-ubsan",
+          "mode": "prefix",
+          "exit_code": 0,
+          "stdout": "{\"prefix\":2048,\"first_token_matches_teacher_forcing\":true,\"confidence_matches_teacher_forcing\":true,\"expected_score_hex\":\"-0x1.102fp-4\",\"actual_score_hex\":\"-0x1.102fp-4\"}",
+          "stderr": "",
+          "binary_sha256": "52ff0570a84eaa835876d997a157702d5760abaacf4be9f17e337561950564ba"
+        },
+        {
+          "build": "asan-ubsan",
+          "mode": "decode-pcm",
+          "exit_code": 0,
+          "stdout": "{\"vocabulary\":2049,\"prefix\":2048,\"score_hex\":\"-0x1.79f04p-3\",\"tokens\":[2048]}",
+          "stderr": "",
+          "binary_sha256": "52ff0570a84eaa835876d997a157702d5760abaacf4be9f17e337561950564ba"
+        }
+      ],
+      "all_passed": true
+    },
+    "checks": {
+      "focused_python_tests": 26,
+      "host_ctests": 10,
+      "all_passed": true
+    }
+  }
+}

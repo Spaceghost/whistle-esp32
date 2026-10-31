@@ -215,7 +215,7 @@ def main():
     parser.add_argument('--limit-train-clips', type=int, default=0)
     parser.add_argument('--seed', type=int, default=0)
     parser.add_argument('--lr', type=float, default=1e-4)
-    parser.add_argument('--qat-bits', type=int, choices=(0, 4), default=4)
+    parser.add_argument('--qat-bits', type=int, choices=(0, 2, 4), default=2)
     parser.add_argument('--parameter-budget-bytes', type=int, default=256 * 1024 * 1024)
     parser.add_argument('--resume', type=Path)
     args = parser.parse_args()
@@ -255,6 +255,9 @@ def main():
     rows, selection = eligible_rows(splits['train'], tokenizer, int(args.max_seconds * 16000), args.batch_tokens, args.limit_train_clips)
     ids_hash = hashlib.sha256(canonical([row['id'] for row in rows]).encode()).hexdigest()
     whistle, quantize, checkpoints = source_modules(args.needle_source)
+    import english_features
+    import english_precision
+    english_features.install(whistle)
     cfg = whistle.WhistleConfig(text=args.vocabulary, languages=('en',), dim=512,
         enc_layers=8, dec_layers=2, sites=(1,), slots=18432, flash=False, remat=True)
     model = whistle.Whistle(cfg)
@@ -275,6 +278,10 @@ def main():
         'python': sys.version.split()[0], 'sampler': 'Random(seed+epoch) shuffle with global-step offset',
         'seed': args.seed, 'batch_size': args.batch_size, 'maximum_samples': maximum_samples,
         'batch_tokens': args.batch_tokens, 'qat_bits': args.qat_bits, 'lr': args.lr,
+        'tied_embedding_bits': english_precision.TIED_EMBEDDING_BITS,
+        'audio_frontend_profile': english_features.PROFILE,
+        'frontend_module_sha256': sha(Path(english_features.__file__)),
+        'precision_module_sha256': sha(Path(english_precision.__file__)),
         'selected_train_ids_sha256': ids_hash, 'optimizer': 'clip1.0 + optax.adamw(default weight_decay)'}
     with (args.output / 'plan.json').open('x') as output:
         output.write(json.dumps({'signature': signature, 'parameters': count,
@@ -310,7 +317,7 @@ def main():
     # each donated leaf its own buffer; this does not change parameter values.
     params, opt_state = jax.tree.map(lambda value: jnp.array(value, copy=True), (params, opt_state))
     def loss_fn(parameters, wav, lengths, tokens):
-        deployed = quantize.cq_ste_params(parameters, args.qat_bits) if args.qat_bits else parameters
+        deployed = english_precision.qat_params(parameters, quantize, args.qat_bits) if args.qat_bits else parameters
         logits = model.apply({'params': deployed}, wav, lengths, tokens[:, :-1], quant=bool(args.qat_bits))
         mask = tokens[:, 1:] != cfg.pad
         loss = optax.softmax_cross_entropy_with_integer_labels(logits, tokens[:, 1:])

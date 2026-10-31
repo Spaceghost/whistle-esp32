@@ -78,3 +78,11 @@ if(UNIX)
              COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../tools/check_english_tokenizer.py)
   endif()
 endif()
+
+add_executable(profile_probe profile_probe.c)
+target_link_libraries(profile_probe PRIVATE needle_engine)
+
+add_executable(frontend_silence_test frontend_silence_test.c)
+target_link_libraries(frontend_silence_test PRIVATE needle_engine)
+target_compile_options(frontend_silence_test PRIVATE -UNDEBUG)
+add_test(NAME research_frontend_silence COMMAND frontend_silence_test)

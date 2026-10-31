@@ -76,7 +76,7 @@ int nd_cact_open(nd_cact *c, const void *blob, size_t size)
     c->base = b;
     c->size = size;
 
-    if (rd_u32(b) == ND_CACT_TAG4)
+    if (rd_u32(b) == ND_CACT_TAG4 || rd_u32(b) == ND_CACT_TAG_ENGLISH1)
         return open_v4(c);
 
     /* Decode the header word by word rather than casting: the blob is only

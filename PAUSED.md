@@ -1,3 +1,35 @@
+# English native research resumed — parent goal active, 2026-10-30
+
+## Current checkpoint — 2026-10-31
+
+Research remains active. Parent resource choice: wait for free Alienware
+resources; keep other workloads running. Bak remains held off.
+
+Read [current feature/status guide](docs/english-native.md) and
+`research/english-native-20261031.json`. The actual profile-3 mixed export is
+8,832,915 bytes and fits the model partition. Two training steps and restart,
+native/sanitized execution, six frontend comparisons and legacy regression pass.
+Whole-network numerical parity, meaningful training/accuracy and physical Watch
+acceptance remain open. No research firmware/model was installed.
+
+Local preserved outputs beneath this worktree:
+`build/english-native-training-20261031/stable-mixed-step{1-v4,2-resume}/`,
+`build/student-mixed-profile3-v1/`, `build/frontend-mixed-profile3-v1/`,
+`build/legacy-profile-comparison-v3/`, `build/admission-v4/`.
+Resource launchers/logs remain in
+`~/Projects/.agent-tmp/ackerman-english-native/`.
+
+Trainer SHA `61e2a9d4b23cdfe7e26fcd1debf833287ffaf9c9164eb6e2e1b6d830f5898455`
+must match when resuming step two. Feature and precision module hashes are in
+the receipt. Preserve those source files, checkpoints and failed prior attempts.
+
+The parent explicitly reactivated the full Watch goal. English-model native
+compatibility research is resumed here. Preserve prior checkpoints and exact
+training scripts, installed firmware and other owners' work. Bak shutdown and
+service holds remain in force; do not start work there. The pause below is a
+historical checkpoint for this scope. No research export is deployable without
+held-out accuracy, format, memory and physical gates.
+
 # Temporary pause — 2026-10-30
 
 The parent requested a pause after the nearest completable milestone.
