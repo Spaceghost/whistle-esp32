@@ -19,6 +19,31 @@ static int save(const char *root, const char *name, const float *data, size_t co
     int rc = fwrite(data, sizeof(float), count, f) != count;
     return fclose(f) != 0 || rc;
 }
+/* Host copy of dec_step's orchestration, with snapshots between the unchanged
+ * production operations. The checker requires bit-identical final logits. */
+static int traced_step(nd_whistle *w, uint32_t tok, uint32_t pos, float *hid, const char *root) {
+    float x[512], row[512], *kv = ND_ALLOC(8*512*sizeof(float));
+    dec_ctx dc; char name[64]; int rc = 1;
+    if (!kv) return 1;
+    dc.pos = pos;
+    for (unsigned i = 0; i < 4; i++) {
+        dc.ek[i] = kv+i*512; dc.ev[i] = kv+(4+i)*512;
+    }
+    nd_cq_dequant_row(&w->c, &w->t[w->i_emb], dat(w, w->i_emb), tok, row, x);
+    for (unsigned c = 0; c < w->d; c++) x[c] *= sqrtf((float)w->d);
+    engram_step(w, tok, pos, &dc);
+    lanes_init(x, 1, w->lanes, w->d, w->lane);
+    snprintf(name, sizeof(name), "token-%u-init", pos);
+    if (save(root, name, w->lane, (size_t)w->lanes*w->d)) goto done;
+    for (unsigned i = 0; i < w->depth; i++) {
+        mhc_step(w, w->i_dec_mhc, w->active[i], i, w->lane, 1, dec_block, &dc);
+        snprintf(name, sizeof(name), "token-%u-layer-%u", pos, i);
+        if (save(root, name, w->lane, (size_t)w->lanes*w->d)) goto done;
+    }
+    lanes_out(w, w->lane, 1, w->i_dec_final, hid);
+    rc = 0;
+done: ND_FREE(kv); return rc;
+}
 int main(int argc, char **argv) {
     if (argc != 5 && argc != 6) return 2;
     if (argc == 6) { if (strcmp(argv[5], "--float")) return 2; nd_cq_int8 = 0; }
@@ -41,7 +66,7 @@ int main(int argc, char **argv) {
     if (save(argv[4], "cross-k", w.cross_k, (size_t)w.dec_layers*w.nh*T*w.qk) ||
         save(argv[4], "cross-v", w.cross_v, (size_t)w.dec_layers*w.nh*T*w.vd)) goto done;
     for (unsigned i = 0; i < n; i++) {
-        dec_step(&w, tokens[i], i, hidden+(size_t)i*w.d);
+        if (traced_step(&w, tokens[i], i, hidden+(size_t)i*w.d, argv[4])) goto done;
         logits_all(&w, hidden+(size_t)i*w.d, logits+(size_t)i*w.vocab);
     }
     rc = save(argv[4], "hidden", hidden, (size_t)n*w.d) ||

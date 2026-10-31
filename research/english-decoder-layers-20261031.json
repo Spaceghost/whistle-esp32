@@ -1,0 +1,900 @@
+{
+  "schema": 1,
+  "date": "2026-10-31",
+  "scope": "Layer localization on the Levi introduction and native-policy two-step research checkpoint; no speech accuracy or deployment acceptance",
+  "native_replay_bit_identical": true,
+  "first_failing_shared_input_layer": 0,
+  "first_failing_shared_input_token_position": 7,
+  "second_layer_shared_input_passed": true,
+  "float_all_layers_and_tokens_passed": true,
+  "per_token_original_simulation_control_passed": true,
+  "full_fast_network_gate_passed": false,
+  "deployment_permitted": false,
+  "evidence": {
+    "fast": {
+      "schema": 1,
+      "scope": "Localize decoder/head differences using retained native encoder memory.\n\nRun under guard_english_job.py. This is diagnosis, never deployment acceptance.\nThe selected network receipt must match the checkpoint, model and execution mode.\n",
+      "case": "levi-introduction",
+      "audio_sha256": "187abf6e5a6181f1f249c0e20aa35da8ffecfe1171662f73ffed1a6d9ed11f3f",
+      "execution_mode": "cq-h128-a8-away-cb8-kv-f32-v1",
+      "model_sha256": "37a8d6e407c7ffbc64fb46a8340cb41b29447a528fb836590e91800b94fc819b",
+      "checkpoint_manifest_sha256": "f018c908c5249db8739e95aad7829d6939c2e1a7aac1d2af8ca173aa54d2ec64",
+      "network_receipt_sha256": "d2dd7b22ae351689de2228216e4c0f9c0c016cbea8ee7f6d7c82d66a3aa9acc6",
+      "encoder_input_sha256": "93bf56c9285301f7197e94645a1280854dd116ead1eb37a056765d20939b4810",
+      "native_binary_sha256": "66154d905a48da9497f053639e4d64d24c2aac62f112bc7bda4020ece3360008",
+      "checker_sha256": "59ea569f2f290d8f0c6dd2a73569234d91172f29969e55e64e20a5d1e71f8dfe",
+      "native_probe_logits_bit_identical": true,
+      "rows": [
+        {
+          "position": 0,
+          "input_token": 2,
+          "hidden_relative_l2_error": 3.9463841972064984e-07,
+          "logits_max_absolute_error": 2.86102294921875e-06,
+          "shared_hidden_head_max_absolute_error": 9.5367431640625e-07
+        },
+        {
+          "position": 1,
+          "input_token": 2048,
+          "hidden_relative_l2_error": 3.006012718742568e-07,
+          "logits_max_absolute_error": 9.5367431640625e-07,
+          "shared_hidden_head_max_absolute_error": 2.86102294921875e-06
+        },
+        {
+          "position": 2,
+          "input_token": 42,
+          "hidden_relative_l2_error": 6.294938543760509e-07,
+          "logits_max_absolute_error": 7.152557373046875e-07,
+          "shared_hidden_head_max_absolute_error": 8.344650268554688e-07
+        },
+        {
+          "position": 3,
+          "input_token": 101,
+          "hidden_relative_l2_error": 3.0080548185651423e-07,
+          "logits_max_absolute_error": 2.86102294921875e-06,
+          "shared_hidden_head_max_absolute_error": 2.86102294921875e-06
+        },
+        {
+          "position": 4,
+          "input_token": 7,
+          "hidden_relative_l2_error": 3.2856871712283464e-07,
+          "logits_max_absolute_error": 9.5367431640625e-07,
+          "shared_hidden_head_max_absolute_error": 9.5367431640625e-07
+        },
+        {
+          "position": 5,
+          "input_token": 1023,
+          "hidden_relative_l2_error": 3.8407441138588183e-07,
+          "logits_max_absolute_error": 1.430511474609375e-06,
+          "shared_hidden_head_max_absolute_error": 1.9073486328125e-06
+        },
+        {
+          "position": 6,
+          "input_token": 33,
+          "hidden_relative_l2_error": 3.7102225292073854e-07,
+          "logits_max_absolute_error": 1.0132789611816406e-06,
+          "shared_hidden_head_max_absolute_error": 1.9073486328125e-06
+        },
+        {
+          "position": 7,
+          "input_token": 99,
+          "hidden_relative_l2_error": 0.0002884287969209254,
+          "logits_max_absolute_error": 0.0037289857864379883,
+          "shared_hidden_head_max_absolute_error": 8.344650268554688e-07
+        }
+      ],
+      "thresholds_unchanged": true,
+      "deployment_permitted": false,
+      "layers": {
+        "scope": "Decoder layer boundaries on retained native encoder memory; fixed forced tokens, not speech accuracy",
+        "rows": [
+          {
+            "layer": 0,
+            "mode": "cumulative",
+            "position": 0,
+            "relative_l2_error": 3.203001597285038e-07,
+            "maximum_absolute_error": 1.1920928955078125e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 0,
+            "mode": "cumulative",
+            "position": 1,
+            "relative_l2_error": 3.139690534226247e-07,
+            "maximum_absolute_error": 1.3113021850585938e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 0,
+            "mode": "cumulative",
+            "position": 2,
+            "relative_l2_error": 3.031226469829562e-07,
+            "maximum_absolute_error": 1.2833625078201294e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 0,
+            "mode": "cumulative",
+            "position": 3,
+            "relative_l2_error": 3.371797845375113e-07,
+            "maximum_absolute_error": 1.2516975402832031e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 0,
+            "mode": "cumulative",
+            "position": 4,
+            "relative_l2_error": 3.4425329431542195e-07,
+            "maximum_absolute_error": 1.1920928955078125e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 0,
+            "mode": "cumulative",
+            "position": 5,
+            "relative_l2_error": 3.371388572759315e-07,
+            "maximum_absolute_error": 1.1920928955078125e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 0,
+            "mode": "cumulative",
+            "position": 6,
+            "relative_l2_error": 3.103752703736973e-07,
+            "maximum_absolute_error": 1.1324882507324219e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 0,
+            "mode": "cumulative",
+            "position": 7,
+            "relative_l2_error": 0.0004704996244981885,
+            "maximum_absolute_error": 0.000991225242614746,
+            "within_existing_threshold": false
+          },
+          {
+            "layer": 0,
+            "mode": "shared-input",
+            "position": 0,
+            "relative_l2_error": 2.5389914526385837e-07,
+            "maximum_absolute_error": 8.344650268554688e-07,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 0,
+            "mode": "shared-input",
+            "position": 1,
+            "relative_l2_error": 2.5162884753626713e-07,
+            "maximum_absolute_error": 1.4901161193847656e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 0,
+            "mode": "shared-input",
+            "position": 2,
+            "relative_l2_error": 2.7632790988718625e-07,
+            "maximum_absolute_error": 1.1920928955078125e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 0,
+            "mode": "shared-input",
+            "position": 3,
+            "relative_l2_error": 2.80669098629005e-07,
+            "maximum_absolute_error": 1.0132789611816406e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 0,
+            "mode": "shared-input",
+            "position": 4,
+            "relative_l2_error": 2.625316994908644e-07,
+            "maximum_absolute_error": 1.0132789611816406e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 0,
+            "mode": "shared-input",
+            "position": 5,
+            "relative_l2_error": 2.7146069214722957e-07,
+            "maximum_absolute_error": 9.5367431640625e-07,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 0,
+            "mode": "shared-input",
+            "position": 6,
+            "relative_l2_error": 2.574530242327455e-07,
+            "maximum_absolute_error": 9.98377799987793e-07,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 0,
+            "mode": "shared-input",
+            "position": 7,
+            "relative_l2_error": 0.00047049138811416924,
+            "maximum_absolute_error": 0.000991225242614746,
+            "within_existing_threshold": false
+          },
+          {
+            "layer": 1,
+            "mode": "cumulative",
+            "position": 0,
+            "relative_l2_error": 3.899778278082522e-07,
+            "maximum_absolute_error": 1.5497207641601562e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 1,
+            "mode": "cumulative",
+            "position": 1,
+            "relative_l2_error": 3.215573656234483e-07,
+            "maximum_absolute_error": 1.3113021850585938e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 1,
+            "mode": "cumulative",
+            "position": 2,
+            "relative_l2_error": 1.288665089305141e-06,
+            "maximum_absolute_error": 5.4836273193359375e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 1,
+            "mode": "cumulative",
+            "position": 3,
+            "relative_l2_error": 3.551340626017918e-07,
+            "maximum_absolute_error": 1.2516975402832031e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 1,
+            "mode": "cumulative",
+            "position": 4,
+            "relative_l2_error": 3.5909894791075203e-07,
+            "maximum_absolute_error": 1.1920928955078125e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 1,
+            "mode": "cumulative",
+            "position": 5,
+            "relative_l2_error": 3.4843552043639647e-07,
+            "maximum_absolute_error": 1.1920928955078125e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 1,
+            "mode": "cumulative",
+            "position": 6,
+            "relative_l2_error": 3.374800598976435e-07,
+            "maximum_absolute_error": 1.0132789611816406e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 1,
+            "mode": "cumulative",
+            "position": 7,
+            "relative_l2_error": 0.0003907604841515422,
+            "maximum_absolute_error": 0.000942230224609375,
+            "within_existing_threshold": false
+          },
+          {
+            "layer": 1,
+            "mode": "shared-input",
+            "position": 0,
+            "relative_l2_error": 2.9001668622186116e-07,
+            "maximum_absolute_error": 1.430511474609375e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 1,
+            "mode": "shared-input",
+            "position": 1,
+            "relative_l2_error": 1.9326165556776687e-07,
+            "maximum_absolute_error": 1.3113021850585938e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 1,
+            "mode": "shared-input",
+            "position": 2,
+            "relative_l2_error": 1.9662567751765891e-07,
+            "maximum_absolute_error": 9.5367431640625e-07,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 1,
+            "mode": "shared-input",
+            "position": 3,
+            "relative_l2_error": 2.130853715698322e-07,
+            "maximum_absolute_error": 1.1920928955078125e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 1,
+            "mode": "shared-input",
+            "position": 4,
+            "relative_l2_error": 2.2460527304701827e-07,
+            "maximum_absolute_error": 8.344650268554688e-07,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 1,
+            "mode": "shared-input",
+            "position": 5,
+            "relative_l2_error": 2.0914644949243666e-07,
+            "maximum_absolute_error": 1.0728836059570312e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 1,
+            "mode": "shared-input",
+            "position": 6,
+            "relative_l2_error": 2.4742740833971766e-07,
+            "maximum_absolute_error": 1.0132789611816406e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 1,
+            "mode": "shared-input",
+            "position": 7,
+            "relative_l2_error": 3.062418727495242e-07,
+            "maximum_absolute_error": 1.2218952178955078e-06,
+            "within_existing_threshold": true
+          }
+        ],
+        "traced_vs_original_jax_hidden_relative_l2_error": 1.1886820061590697e-07,
+        "original_jax_control_within_existing_threshold": true,
+        "traced_vs_original_jax_per_token_relative_l2_error": [
+          1.2110224645311973e-07,
+          1.0707196196335644e-07,
+          7.920201028355223e-08,
+          8.464703427080167e-08,
+          1.3675717980277113e-07,
+          1.1539836464180553e-07,
+          1.3928296027643228e-07,
+          1.4849203466837935e-07
+        ],
+        "original_jax_control_tolerance": 2e-06,
+        "original_jax_control_passed": true,
+        "relative_tolerance_unchanged": 0.0002,
+        "deployment_permitted": false
+      },
+      "layer_checker_sha256": "10b776cb88ef64c1305f23dacda591daa71762c755d19ba40ab6d08e5e98cde3"
+    },
+    "float": {
+      "schema": 1,
+      "scope": "Localize decoder/head differences using retained native encoder memory.\n\nRun under guard_english_job.py. This is diagnosis, never deployment acceptance.\nThe selected network receipt must match the checkpoint, model and execution mode.\n",
+      "case": "levi-introduction",
+      "audio_sha256": "187abf6e5a6181f1f249c0e20aa35da8ffecfe1171662f73ffed1a6d9ed11f3f",
+      "execution_mode": "float",
+      "model_sha256": "37a8d6e407c7ffbc64fb46a8340cb41b29447a528fb836590e91800b94fc819b",
+      "checkpoint_manifest_sha256": "f018c908c5249db8739e95aad7829d6939c2e1a7aac1d2af8ca173aa54d2ec64",
+      "network_receipt_sha256": "96d11bb170565786ca021b9f9973372030b7e045b84963bb124416bc95450626",
+      "encoder_input_sha256": "db2077c2319323b84c5167e1abe82991a0ccdbeb9eda86a659ac07054eea8e4f",
+      "native_binary_sha256": "66154d905a48da9497f053639e4d64d24c2aac62f112bc7bda4020ece3360008",
+      "checker_sha256": "59ea569f2f290d8f0c6dd2a73569234d91172f29969e55e64e20a5d1e71f8dfe",
+      "native_probe_logits_bit_identical": true,
+      "rows": [
+        {
+          "position": 0,
+          "input_token": 2,
+          "hidden_relative_l2_error": 4.0720991023590614e-07,
+          "logits_max_absolute_error": 1.0728836059570312e-06,
+          "shared_hidden_head_max_absolute_error": 1.9073486328125e-06
+        },
+        {
+          "position": 1,
+          "input_token": 2048,
+          "hidden_relative_l2_error": 3.43892679666169e-07,
+          "logits_max_absolute_error": 9.5367431640625e-07,
+          "shared_hidden_head_max_absolute_error": 9.5367431640625e-07
+        },
+        {
+          "position": 2,
+          "input_token": 42,
+          "hidden_relative_l2_error": 4.399707336233405e-07,
+          "logits_max_absolute_error": 1.1920928955078125e-06,
+          "shared_hidden_head_max_absolute_error": 8.344650268554688e-07
+        },
+        {
+          "position": 3,
+          "input_token": 101,
+          "hidden_relative_l2_error": 4.3383653292039526e-07,
+          "logits_max_absolute_error": 1.1920928955078125e-06,
+          "shared_hidden_head_max_absolute_error": 1.0728836059570312e-06
+        },
+        {
+          "position": 4,
+          "input_token": 7,
+          "hidden_relative_l2_error": 4.4640560759034997e-07,
+          "logits_max_absolute_error": 2.86102294921875e-06,
+          "shared_hidden_head_max_absolute_error": 1.9073486328125e-06
+        },
+        {
+          "position": 5,
+          "input_token": 1023,
+          "hidden_relative_l2_error": 5.052606297795137e-07,
+          "logits_max_absolute_error": 1.9073486328125e-06,
+          "shared_hidden_head_max_absolute_error": 9.5367431640625e-07
+        },
+        {
+          "position": 6,
+          "input_token": 33,
+          "hidden_relative_l2_error": 5.004793024454557e-07,
+          "logits_max_absolute_error": 1.0728836059570312e-06,
+          "shared_hidden_head_max_absolute_error": 9.5367431640625e-07
+        },
+        {
+          "position": 7,
+          "input_token": 99,
+          "hidden_relative_l2_error": 5.111524501444364e-07,
+          "logits_max_absolute_error": 1.9073486328125e-06,
+          "shared_hidden_head_max_absolute_error": 2.384185791015625e-06
+        }
+      ],
+      "thresholds_unchanged": true,
+      "deployment_permitted": false,
+      "layers": {
+        "scope": "Decoder layer boundaries on retained native encoder memory; fixed forced tokens, not speech accuracy",
+        "rows": [
+          {
+            "layer": 0,
+            "mode": "cumulative",
+            "position": 0,
+            "relative_l2_error": 4.2809290334844263e-07,
+            "maximum_absolute_error": 1.6689300537109375e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 0,
+            "mode": "cumulative",
+            "position": 1,
+            "relative_l2_error": 4.4530221998684283e-07,
+            "maximum_absolute_error": 1.6689300537109375e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 0,
+            "mode": "cumulative",
+            "position": 2,
+            "relative_l2_error": 4.971599310010788e-07,
+            "maximum_absolute_error": 1.6689300537109375e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 0,
+            "mode": "cumulative",
+            "position": 3,
+            "relative_l2_error": 4.934640855935868e-07,
+            "maximum_absolute_error": 1.8477439880371094e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 0,
+            "mode": "cumulative",
+            "position": 4,
+            "relative_l2_error": 5.475130251397786e-07,
+            "maximum_absolute_error": 1.9073486328125e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 0,
+            "mode": "cumulative",
+            "position": 5,
+            "relative_l2_error": 5.059401928519947e-07,
+            "maximum_absolute_error": 2.000480890274048e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 0,
+            "mode": "cumulative",
+            "position": 6,
+            "relative_l2_error": 5.47469596767769e-07,
+            "maximum_absolute_error": 1.6689300537109375e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 0,
+            "mode": "cumulative",
+            "position": 7,
+            "relative_l2_error": 5.1002956524826e-07,
+            "maximum_absolute_error": 1.5497207641601562e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 0,
+            "mode": "shared-input",
+            "position": 0,
+            "relative_l2_error": 3.608122085552168e-07,
+            "maximum_absolute_error": 1.9073486328125e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 0,
+            "mode": "shared-input",
+            "position": 1,
+            "relative_l2_error": 4.06365842309242e-07,
+            "maximum_absolute_error": 1.6093254089355469e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 0,
+            "mode": "shared-input",
+            "position": 2,
+            "relative_l2_error": 4.5971287931934057e-07,
+            "maximum_absolute_error": 1.430511474609375e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 0,
+            "mode": "shared-input",
+            "position": 3,
+            "relative_l2_error": 4.5143312377149414e-07,
+            "maximum_absolute_error": 1.6689300537109375e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 0,
+            "mode": "shared-input",
+            "position": 4,
+            "relative_l2_error": 4.891447815680294e-07,
+            "maximum_absolute_error": 2.086162567138672e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 0,
+            "mode": "shared-input",
+            "position": 5,
+            "relative_l2_error": 4.6477470050376724e-07,
+            "maximum_absolute_error": 1.6987323760986328e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 0,
+            "mode": "shared-input",
+            "position": 6,
+            "relative_l2_error": 5.080514711153228e-07,
+            "maximum_absolute_error": 1.5795230865478516e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 0,
+            "mode": "shared-input",
+            "position": 7,
+            "relative_l2_error": 4.858384272665717e-07,
+            "maximum_absolute_error": 1.4901161193847656e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 1,
+            "mode": "cumulative",
+            "position": 0,
+            "relative_l2_error": 4.6337586923073104e-07,
+            "maximum_absolute_error": 1.5497207641601562e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 1,
+            "mode": "cumulative",
+            "position": 1,
+            "relative_l2_error": 4.560580180168472e-07,
+            "maximum_absolute_error": 1.7881393432617188e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 1,
+            "mode": "cumulative",
+            "position": 2,
+            "relative_l2_error": 5.701474492525449e-07,
+            "maximum_absolute_error": 1.6689300537109375e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 1,
+            "mode": "cumulative",
+            "position": 3,
+            "relative_l2_error": 5.897482537875476e-07,
+            "maximum_absolute_error": 2.384185791015625e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 1,
+            "mode": "cumulative",
+            "position": 4,
+            "relative_l2_error": 5.886541316613148e-07,
+            "maximum_absolute_error": 1.7881393432617188e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 1,
+            "mode": "cumulative",
+            "position": 5,
+            "relative_l2_error": 5.732250087930879e-07,
+            "maximum_absolute_error": 2.5033950805664062e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 1,
+            "mode": "cumulative",
+            "position": 6,
+            "relative_l2_error": 6.341812763821508e-07,
+            "maximum_absolute_error": 1.9073486328125e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 1,
+            "mode": "cumulative",
+            "position": 7,
+            "relative_l2_error": 6.295042567217024e-07,
+            "maximum_absolute_error": 1.7881393432617188e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 1,
+            "mode": "shared-input",
+            "position": 0,
+            "relative_l2_error": 2.924037119100831e-07,
+            "maximum_absolute_error": 1.3113021850585938e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 1,
+            "mode": "shared-input",
+            "position": 1,
+            "relative_l2_error": 2.812803359120153e-07,
+            "maximum_absolute_error": 1.7285346984863281e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 1,
+            "mode": "shared-input",
+            "position": 2,
+            "relative_l2_error": 3.757314743779716e-07,
+            "maximum_absolute_error": 1.6689300537109375e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 1,
+            "mode": "shared-input",
+            "position": 3,
+            "relative_l2_error": 4.3289313111927186e-07,
+            "maximum_absolute_error": 2.1457672119140625e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 1,
+            "mode": "shared-input",
+            "position": 4,
+            "relative_l2_error": 3.7740349512205285e-07,
+            "maximum_absolute_error": 1.8477439880371094e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 1,
+            "mode": "shared-input",
+            "position": 5,
+            "relative_l2_error": 3.716709500167781e-07,
+            "maximum_absolute_error": 2.1457672119140625e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 1,
+            "mode": "shared-input",
+            "position": 6,
+            "relative_l2_error": 4.0113644672601367e-07,
+            "maximum_absolute_error": 1.6689300537109375e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 1,
+            "mode": "shared-input",
+            "position": 7,
+            "relative_l2_error": 4.11428345614695e-07,
+            "maximum_absolute_error": 1.9073486328125e-06,
+            "within_existing_threshold": true
+          }
+        ],
+        "traced_vs_original_jax_hidden_relative_l2_error": 1.464336492063012e-07,
+        "original_jax_control_within_existing_threshold": true,
+        "traced_vs_original_jax_per_token_relative_l2_error": [
+          1.4187551755640015e-07,
+          1.25741351553188e-07,
+          1.342709481377824e-07,
+          1.345500919569531e-07,
+          1.566036473832355e-07,
+          1.314550530651104e-07,
+          1.7643453986693203e-07,
+          1.6289931181745487e-07
+        ],
+        "original_jax_control_tolerance": 2e-06,
+        "original_jax_control_passed": true,
+        "relative_tolerance_unchanged": 0.0002,
+        "deployment_permitted": false
+      },
+      "layer_checker_sha256": "10b776cb88ef64c1305f23dacda591daa71762c755d19ba40ab6d08e5e98cde3"
+    },
+    "asan_ubsan": {
+      "schema": 1,
+      "scope": "New traced decoder orchestration: actual model and malformed-input/output-preservation checks under Zig ASAN/UBSAN",
+      "binary_sha256": "e20311d95306b7496311a6c59162a1e339aad492f9f6ee267a29660b84bd40ae",
+      "cases": [
+        {
+          "case": "valid",
+          "exit_code": 0,
+          "expected": 0
+        },
+        {
+          "case": "nan",
+          "exit_code": 1,
+          "expected": 1
+        },
+        {
+          "case": "misaligned",
+          "exit_code": 1,
+          "expected": 1
+        },
+        {
+          "case": "empty",
+          "exit_code": 1,
+          "expected": 1
+        },
+        {
+          "case": "out-of-vocabulary",
+          "exit_code": 1,
+          "expected": 1
+        },
+        {
+          "case": "empty-tokens",
+          "exit_code": 1,
+          "expected": 1
+        },
+        {
+          "case": "misaligned-tokens",
+          "exit_code": 1,
+          "expected": 1
+        },
+        {
+          "case": "existing-output-preserved",
+          "exit_code": 1,
+          "expected": 1
+        }
+      ],
+      "all_passed": true,
+      "deployment_permitted": false
+    },
+    "guards": {
+      "decoder-layers-window-v1": {
+        "schema": 1,
+        "state": "complete",
+        "command": [
+          "/var/home/jack/Projects/.system-cache/venvs/ackerman-english-training-20261030/bin/python",
+          "tools/check_english_decoder.py",
+          "--checkpoint",
+          "build/native-policy-training-20261031/step2-v1/step-00000002",
+          "--model",
+          "build/native-policy-training-20261031/export-step2-v1/english-student-research.cact",
+          "--needle-source",
+          "/var/home/jack/Projects/.system-cache/ackerman-english-training/needle-source",
+          "--network",
+          "build/native-policy-training-20261031/network-step2-v1",
+          "--binary",
+          "build/english-decoder-cmake-v1/decoder_probe",
+          "--output",
+          "build/native-policy-training-20261031/decoder-layers-step2-v1",
+          "--layers"
+        ],
+        "guard_pid": 374776,
+        "child_pid": 375337,
+        "rss_limit_bytes": 3221225472,
+        "launch_available_memory_bytes": 5368709120,
+        "host_available_memory_floor_bytes": 1073741824,
+        "cpu_only": true,
+        "cpus": 2,
+        "nice_increment": 10,
+        "maximum_job_seconds": 300.0,
+        "peak_observed_process_group_rss_bytes": 1380999168,
+        "admitted": true,
+        "available_at_launch_bytes": 8702492672,
+        "admission_wait_seconds": 3.001,
+        "cpu_affinity": [
+          0,
+          1
+        ],
+        "reason": null,
+        "exit_code": 0,
+        "job_elapsed_seconds": 32.356
+      },
+      "decoder-layers-window-v2": {
+        "schema": 1,
+        "state": "complete",
+        "command": [
+          "/var/home/jack/Projects/.system-cache/venvs/ackerman-english-training-20261030/bin/python",
+          "tools/check_english_decoder.py",
+          "--checkpoint",
+          "build/native-policy-training-20261031/step2-v1/step-00000002",
+          "--model",
+          "build/native-policy-training-20261031/export-step2-v1/english-student-research.cact",
+          "--needle-source",
+          "/var/home/jack/Projects/.system-cache/ackerman-english-training/needle-source",
+          "--network",
+          "build/native-policy-training-20261031/network-step2-v1",
+          "--binary",
+          "build/english-decoder-cmake-v1/decoder_probe",
+          "--output",
+          "build/native-policy-training-20261031/decoder-layers-step2-v2",
+          "--layers"
+        ],
+        "guard_pid": 378205,
+        "child_pid": 378428,
+        "rss_limit_bytes": 3221225472,
+        "launch_available_memory_bytes": 5368709120,
+        "host_available_memory_floor_bytes": 1073741824,
+        "cpu_only": true,
+        "cpus": 2,
+        "nice_increment": 10,
+        "maximum_job_seconds": 300.0,
+        "peak_observed_process_group_rss_bytes": 1361756160,
+        "admitted": true,
+        "available_at_launch_bytes": 8707780608,
+        "admission_wait_seconds": 3.001,
+        "cpu_affinity": [
+          0,
+          1
+        ],
+        "reason": null,
+        "exit_code": 0,
+        "job_elapsed_seconds": 33.722
+      },
+      "decoder-layers-float-window-v1": {
+        "schema": 1,
+        "state": "complete",
+        "command": [
+          "/var/home/jack/Projects/.system-cache/venvs/ackerman-english-training-20261030/bin/python",
+          "tools/check_english_decoder.py",
+          "--checkpoint",
+          "build/native-policy-training-20261031/step2-v1/step-00000002",
+          "--model",
+          "build/native-policy-training-20261031/export-step2-v1/english-student-research.cact",
+          "--needle-source",
+          "/var/home/jack/Projects/.system-cache/ackerman-english-training/needle-source",
+          "--network",
+          "build/native-policy-training-20261031/float-step2-v1",
+          "--binary",
+          "build/english-decoder-cmake-v1/decoder_probe",
+          "--output",
+          "build/native-policy-training-20261031/decoder-layers-float-step2-v1",
+          "--layers",
+          "--float"
+        ],
+        "guard_pid": 380424,
+        "child_pid": 380516,
+        "rss_limit_bytes": 3221225472,
+        "launch_available_memory_bytes": 5368709120,
+        "host_available_memory_floor_bytes": 1073741824,
+        "cpu_only": true,
+        "cpus": 2,
+        "nice_increment": 10,
+        "maximum_job_seconds": 300.0,
+        "peak_observed_process_group_rss_bytes": 1226665984,
+        "admitted": true,
+        "available_at_launch_bytes": 8344006656,
+        "admission_wait_seconds": 3.001,
+        "cpu_affinity": [
+          0,
+          1
+        ],
+        "reason": null,
+        "exit_code": 0,
+        "job_elapsed_seconds": 27.536
+      }
+    }
+  },
+  "source_sha256": {
+    "host/decoder_probe.c": "952a4bf0c454e3f91a8d7fe834a0cb68714178eda90c9028e59ce215c0d72f80",
+    "tools/check_english_decoder.py": "59ea569f2f290d8f0c6dd2a73569234d91172f29969e55e64e20a5d1e71f8dfe",
+    "tools/english_decoder_layers.py": "10b776cb88ef64c1305f23dacda591daa71762c755d19ba40ab6d08e5e98cde3"
+  },
+  "prior_attempt_preserved": "First layer run used a whole-sequence simulation control. Its outputs and source snapshot are retained; second run adds a stricter per-token 2e-6 control, without changing native gates."
+}

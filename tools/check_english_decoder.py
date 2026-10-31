@@ -23,6 +23,7 @@ def main():
         p.add_argument('--' + name, type=Path, required=True)
     p.add_argument('--case-index', type=int, default=3)
     p.add_argument('--float', dest='floating', action='store_true')
+    p.add_argument('--layers', action='store_true', help='Compare native and simulated decoder layer boundaries')
     a = p.parse_args()
     if a.output.exists():
         p.error('Preserve evidence; choose a fresh output directory')
@@ -113,7 +114,13 @@ def main():
                   native_binary_sha256=sha(a.binary), checker_sha256=sha(Path(__file__)),
                   native_probe_logits_bit_identical=True, rows=rows,
                   thresholds_unchanged=True, deployment_permitted=False)
+    if a.layers:
+        import english_decoder_layers
+        report['layers'] = english_decoder_layers.compare(a, model, params, cfg, whistle, tokens, enc, expected_hidden)
+        report['layer_checker_sha256'] = sha(Path(english_decoder_layers.__file__))
     (a.output / 'decoder.json').write_text(json.dumps(report, indent=2)+'\n')
+    if a.layers and not report['layers']['original_jax_control_passed']:
+        raise ValueError('Layer trace changed the JAX baseline; preserve evidence, do not attribute it to native execution')
     (a.output / 'INCOMPLETE').unlink()
     print(json.dumps(report), flush=True)
 

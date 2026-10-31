@@ -1,3 +1,18 @@
+## Decoder layers localized — 2026-10-31
+
+Active research narrows the eighth-token mismatch to decoder layer zero (the
+first layer): shared-input relative error 0.000470491. The second layer agrees
+on native input (maximum 3.063e-7); its cumulative drift is inherited. Expanded
+native trace still reproduces retained logits bit for bit. Per-token traced vs
+original simulation control passes stricter 2e-6 (measured max 1.485e-7).
+All 32 float-layer comparisons and eight Zig ASAN/UBSAN probe checks pass.
+Guards93453/63351/20746 and ASAN build79633 are terminal0. The first run's
+whole-sequence control and source snapshot are retained alongside the second
+run's stronger per-token check. No device/GPU/model/training-policy changes.
+Next trace self-attention, cross-attention and feed-forward boundaries inside
+first-layer eighth-token execution; native full-network gate still fails.
+See docs/english-decoder.md and research/english-decoder-layers-20261031.json.
+
 ## Decoder boundary diagnosis completed — 2026-10-31
 
 The actual C decoder reproduces retained logits bit for bit in fast and float
