@@ -126,3 +126,16 @@ The model, data, precision and gradient calculation are preserved. The new
 runner source/option/helper hashes are part of checkpoint compatibility. Use
 the recorded source revision for earlier accelerated checkpoints; the original
 CPU trainer remains unchanged.
+
+The controlled retry is now terminal: it again exceeded the host cap, reaching
+3,085,082,624 bytes sampled RSS during the first update compilation. All 337
+GPU model/optimizer leaves (354,451,528 bytes) were bit-identical across cache
+release, but immediate RSS rose by 700,416 bytes. **Cache release does not fix
+this cap** and remains optional, off by default. Three CPU controls pass,
+including a bit-identical next Adam update.
+[Final cache-state and failed resource evidence](../research/english-initialization-cache-control-20261031.json).
+
+A larger short diagnostic waits for 4 GiB host budget plus 2 GiB launch reserve.
+It must complete updates and checkpoint recovery before the full 25-second /
+160-token shape is tested. Neither short-clip execution nor successful backend
+numerics establishes the full-shape resource budget or speech quality.

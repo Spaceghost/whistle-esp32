@@ -1,3 +1,32 @@
+## Cache experiment terminal; larger diagnostic admission wait LIVE — 2026-10-31
+
+GPUv3 exec72921 TERMINAL1, child-9 on owned RSS cap after87.30s, no completed
+update/checkpoint. Clearing caches preserves ALL337 GPU model+Adam leaves /
+354,451,528 bytes, but does NOT fix2.75GiB cap. Immediate RSS2084913152 ->
+2085613568B; later sampled peak3,085,082,624B. It stays opt-in/off by default,
+not an adopted memory fix. Three CPU tests pass incl exact next Adam update.
+Final receipt research/english-initialization-cache-control-20261031.json.
+Earlier live student/CPU-test notes below are superseded. Source6486e8c pushed.
+
+A NEW bounded one-hour admission wait is LIVE under exec46639, report
+build/training-readiness-20261031/gpu-student-window-v4.json. Current guardPID
+is recorded in that receipt and was verified live at handoff. No child admitted.
+Diagnostic requests4GiB host RSS budget +2GiB launch reserve,1GiB host floor;
+retains2GiB JAX pool/3GiB observedGPU cap/2GiB VRAM reserve,2CPUsnice10,35percent
+short-diagnostic graphics ceiling,900s max child runtime. Cache release OFF.
+Full meaningful training retains10percent utilization default; NOT started.
+Poll46639 or exact live PID; do not restart because an observation expires.
+Child if admitted writes build/accelerated-student-20261031/gpu-step2-v4.
+Require final guard AND training/checkpoint evidence before claiming success.
+
+Next: short GPU updates/save/resume, then FULL25s/160token shape resource test
+covering all28,539training clips before meaningful training. All native numeric,
+held-out ASR, Watch RAM/stack/physical gates OPEN; backend CUDA proof remains
+valid. No other workload eviction, Bak action, device/model/app/TUF/conversation
+change. Full Watch/English goal active; no research deployment.
+
+---
+
 ## GPU student compiler memory measured — 2026-10-31
 
 Student exec65627 TERMINAL1, child exit-9 via owned-group RSS guard. First
