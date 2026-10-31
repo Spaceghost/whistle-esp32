@@ -1,3 +1,27 @@
+## Heap-trim experiment prepared; admission waiting — 2026-10-31
+
+✅ Source `2210081` adds an opt-in allocator trim after initialization-cache
+release. All 21 training audit/control/memory tests pass, including bit-identical
+next Adam updates and refusal on an unsupported allocator. The original CPU
+trainer and production firmware model remain unchanged. This is not yet a
+proven full-model memory reduction.
+
+⏳ Guard PID 1107977 / tool session 39416 is confirmed live, waiting for spare
+host RAM. Report: `build/training-readiness-20261031/gpu-student-heap-trim-v1.json`.
+No child at the latest observation. Same v5 budgets: 3.5 GiB host cap + 1.5 GiB
+admission reserve; 1 GiB runtime floor; GPU 2 GiB pool / 3 GiB observed cap /
+2 GiB reserve. The 35% utilization ceiling applies only to this short diagnostic.
+Two full-parameter short-clip updates and checkpoint saving are requested;
+full training remains unstarted. Other workloads keep running.
+
+Next: poll the same handle/report and verify actual terminal state. Never
+restart merely because an observation times out. If admitted, inspect all
+state/RSS evidence, actual updates and READY checkpoint integrity before resume.
+Watch 77 is built in the private repo; its release still awaits the other
+owner's paired-device interval release. The full Watch/English goal is active.
+
+---
+
 ## GPU admission finished; Watch integration continues — 2026-10-31
 
 | Work | Status | What this proves |
