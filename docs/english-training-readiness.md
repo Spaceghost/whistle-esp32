@@ -1,13 +1,13 @@
 # English training: make the full run possible
 
-**All 33,844 required clips are local and hash-verified. The real CUDA backend passes; student hardware validation is next.**
+**All audio is local. Short-clip GPU training and checkpoint recovery pass; the full-shape resource probe is running.**
 
 | Requirement | State | Evidence |
 | :--- | :--- | :--- |
 | Full local corpus | ✅ Complete | Training 28,539; validation 2,694; test 2,611 hashes pass |
 | Local source acquisition | ✅ Complete | All three archives passed exact size + MD5 + SHA-256 before extraction |
 | Separate CUDA environment | ✅ Installed; all 51 versions match | CPU environment preserved; actual backend checks pass |
-| GPU execution guard | ✅ Implemented and tested | Backend smoke passes; accelerated student GPU execution remains unverified |
+| GPU execution and recovery | ✅ Short-clip path verified | Two fresh CUDA updates, READY snapshots and new-process resumed update 3 pass |
 | Meaningful training and acceptance | ☐ Not started | Requires full data, resource admission and later accuracy/device gates |
 
 ```mermaid
@@ -60,9 +60,10 @@ remain outside the training selection. A resource window is not an epoch and
 must resume from its last complete checkpoint.
 
 [Exact full-selection and epoch-plan evidence](../research/english-full-training-plan-20261031.json).
-The GPU backend now passes. Student execution and resource sizing still need
-actual validation before this full-size run. The previous two-clip regression remains a machinery
-check, not the training dataset.
+The GPU backend and short-clip save/resume path now pass. A separate guarded
+25-second / 160-token update is testing the full shape before a training
+campaign. The two-clip regression remains a machinery check, not the training
+dataset. [Actual CUDA recovery evidence](../research/english-gpu-checkpoint-recovery-20261031.json).
 
 ## Full audio, without touching Bak
 

@@ -115,11 +115,11 @@ Run under the retained resource guard. To continue, pass
 Do not overwrite earlier output or change the trainer between checkpoint and
 resume. Run `python -m unittest discover -s tests -p 'test_english_*.py'` for guards.
 
-## Coming after the pause
+## Next acceptance gates
 
-1. Arrange an explicitly authorized GPU window or another training host; Bak is held off.
+1. Finish the live 25-second / 160-token resource probe, then use free Alienware resources for full training; Bak remains held off.
 2. Train beyond this tiny pipeline probe and score held-out English speech and real names.
-3. Implement and verify native export for the new vocabulary IDs; measure actual artifact size.
+3. Export learned weights with the existing native-vocabulary pipeline; pass strict numeric and held-out native speech gates.
 4. Pass Watch RAM/stack, microphone and accuracy gates before any release.
 
 Check `PAUSED.md` for exact retained output paths and the latest resume point.
