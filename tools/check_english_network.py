@@ -67,7 +67,8 @@ def main():
     if jax.default_backend() != 'cpu':
         raise ValueError('CPU only')
     saved = checkpoints.read_checkpoint(a.checkpoint / 'model.safetensors')
-    cfg = whistle.WhistleConfig.from_saved(saved['config'])
+    import english_runtime
+    cfg = english_runtime.configuration(whistle, saved['config'], signature)
     # Export stores non-CQ parameters in FP16. Match those stored values,
     # retaining FP32 computation, to isolate execution rather than rounding.
     deployed = (english_native_quant.parameters(saved['params'], quantize, signature['qat_bits']) if a.native_aware
@@ -140,6 +141,8 @@ def main():
         scope = 'Native-aware fast-kernel simulation applied to existing checkpoint; no new training, accuracy or device acceptance'
         mode = english_native_quant.POLICY
     report = dict(schema=1, scope=scope, execution_mode=mode,
+                  training_runtime_settings=english_runtime.describe(cfg),
+                  runtime_configuration_module_sha256=sha(Path(english_runtime.__file__)),
                   checkpoint_training_deploy_policy=signature.get('deploy_policy', 'upstream-a8-kv8'),
                   model_sha256=sha(a.model), native_binary_sha256=sha(a.binary), checker_sha256=sha(Path(__file__)),
                   checkpoint_manifest_sha256=sha(a.checkpoint / 'manifest.json'),

@@ -23,6 +23,27 @@ def instrument(source):
         block = block.replace(anchor, call+anchor)
     anchor = anchors['post-cross']
     block = block.replace(anchor, anchor+'\n    trace_boundary(layer, pos, "post-mlp", x, d);')
+    def after(anchor, calls):
+        nonlocal block
+        if block.count(anchor) != 1:
+            raise ValueError('Changed cross-attention source anchor: '+anchor)
+        block = block.replace(anchor, anchor+'\n'+calls)
+    after('    zc(w, x, d, X + X_NORM, xn);',
+          '    trace_boundary(layer, pos, "cross-normalized-input", xn, d);')
+    after('    sh_lin(w, &si, X + X_GATE, gt);',
+          '    trace_boundary(layer, pos, "cross-raw-query", raw, nq);\n'
+          '    trace_boundary(layer, pos, "cross-gate-logits", gt, nh * vd);')
+    after('        zc(w, raw + h * qk, qk, X + X_QN, tmp);',
+          '    trace_cross_head(layer, pos, h, tmp, qk);')
+    anchor = '    lin(w, X + X_OUT, o, 1, t2);'
+    if block.count(anchor) != 1:
+        raise ValueError('Changed cross-attention output projection anchor')
+    block = block.replace(anchor,
+          '    trace_boundary(layer, pos, "cross-gated-context", o, nh * vd);\n'
+          '    trace_projection_input(w, layer, pos, o);\n'+anchor)
+    after(anchor, '    trace_boundary(layer, pos, "cross-projection", t2, d);')
+    after('    zc(w, t2, d, X + X_POST, gt);',
+          '    trace_boundary(layer, pos, "cross-post-norm", gt, d);')
     return source[:start]+block+source[end:]
 
 

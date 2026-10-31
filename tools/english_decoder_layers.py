@@ -29,6 +29,7 @@ def compare(a, model, params, cfg, whistle, tokens, enc, full_hidden):
     stack = params['stack']
     records = []
     sublayers = None
+    cross_attention = None
     def record(layer, mode, expected, actual):
         expected = np.asarray(expected)[0]
         if actual.shape != expected.shape or not np.isfinite(actual).all() or not np.isfinite(expected).all():
@@ -58,6 +59,9 @@ def compare(a, model, params, cfg, whistle, tokens, enc, full_hidden):
         if layer == 0 and a.sublayers:
             import english_decoder_sublayers
             sublayers = english_decoder_sublayers.compare(a, cfg, whistle, block, kwargs, flags)
+        if layer == 0 and a.cross_attention:
+            import english_cross_attention
+            cross_attention = english_cross_attention.compare(a, cfg, whistle, block, kwargs)
     pooled = jnp.mean(x, axis=2)
     final = (1+stack['final_norm']['scale']) * pooled / jnp.sqrt(jnp.mean(pooled**2, axis=-1, keepdims=True)+1e-6)
     final = np.asarray(final)
@@ -67,6 +71,7 @@ def compare(a, model, params, cfg, whistle, tokens, enc, full_hidden):
     final.tofile(a.output / 'layer-trace-final-hidden.f32')
     return dict(scope='Decoder layer boundaries on retained native encoder memory; fixed forced tokens, not speech accuracy',
                 sublayers=sublayers,
+                cross_attention=cross_attention,
                 rows=records, traced_vs_original_jax_hidden_relative_l2_error=control,
                 original_jax_control_within_existing_threshold=bool(np.isfinite(control) and control < 2e-4),
                 traced_vs_original_jax_per_token_relative_l2_error=per_token_control,

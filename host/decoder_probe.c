@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <stdint.h>
 static void trace_boundary(unsigned layer, unsigned pos, const char *name, const float *x, unsigned d);
+static void trace_cross_head(unsigned layer, unsigned pos, unsigned head, const float *x, unsigned d);
+static void trace_projection_input(const void *ctx, unsigned layer, unsigned pos, const float *x);
 #ifdef ACK_DECODER_TRACE_FILE
 #include ACK_DECODER_TRACE_FILE
 #else
@@ -33,6 +35,22 @@ static void trace_boundary(unsigned layer, unsigned pos, const char *name, const
     if (!trace_root || trace_failed) return;
     snprintf(label, sizeof(label), "token-%u-block-%u-%s", pos, layer, name);
     trace_failed = save(trace_root, label, x, d);
+}
+static void trace_cross_head(unsigned layer, unsigned pos, unsigned head, const float *x, unsigned d) {
+    char name[64];
+    snprintf(name, sizeof(name), "cross-query-head-%u", head);
+    trace_boundary(layer, pos, name, x, d);
+}
+static void trace_projection_input(const void *ctx, unsigned layer, unsigned pos, const float *x) {
+    const nd_whistle *w = ctx;
+    nd_q8_act a = {0}; float codes[2048];
+    if (!nd_cq_int8 || !trace_root || trace_failed) return;
+    if (nd_cq_q8_prepare(&w->t[w->i_cross+layer*X_N+X_OUT], x, 1, &a)) { trace_failed = 1; return; }
+    if (a.in_pad > 2048) { trace_failed = 1; nd_cq_q8_free(&a); return; }
+    for (unsigned i = 0; i < a.in_pad; i++) codes[i] = a.xq[i];
+    trace_boundary(layer, pos, "cross-context-q8-codes", codes, a.in_pad);
+    trace_boundary(layer, pos, "cross-context-q8-scales", a.sx, a.in_pad/128);
+    nd_cq_q8_free(&a);
 }
 /* Host copy of dec_step's orchestration, with snapshots between the unchanged
  * production operations. The checker requires bit-identical final logits. */

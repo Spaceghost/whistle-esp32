@@ -2,6 +2,11 @@
 
 **✅ Kernel simulation works. ☐ Full fast-path acceptance is still open.**
 
+**Runtime restoration corrected:** earlier network/decoder comparisons used the
+checkpoint loader's default attention mode. Current checkers restore the recorded
+training settings; the full fast gate still fails.
+[Current results and configuration fix →](english-runtime.md)
+
 The previous [float milestone](english-native.md) passes. Fast inference adds
 different arithmetic. Upstream A8/KV8 is not an accurate simulation of this
 fork's kernel, even with correctly packed weights.

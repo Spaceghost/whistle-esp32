@@ -1,0 +1,3047 @@
+{
+  "schema": 1,
+  "date": "2026-10-31",
+  "scope": "Restore recorded reference execution settings and compare controlled cross-attention components; no trained recognizer or deployment acceptance",
+  "runtime_loader_default_mismatch_fixed": true,
+  "previous_default_attention_mode": true,
+  "recorded_training_attention_mode": false,
+  "geometry_and_runtime_regression_tests": {
+    "runtime_cases": 4,
+    "capture_integrity_cases": 5,
+    "all_passed": true,
+    "capture_calls_only": 13
+  },
+  "full_fast_network_gate_passed": false,
+  "whole_float_recorded_runtime_complete": true,
+  "component_agreement_is_not_composed_path_agreement": true,
+  "normalization_replay_did_not_reproduce_large_query_jump": true,
+  "deployment_permitted": false,
+  "source_sha256": {
+    "host/decoder_probe.c": "fe503d22f64fe0087c6fdc54b9dae71227b129056ed20e9be0cb753eddc4f0ac",
+    "host/CMakeLists.txt": "b8b62a0e9f6c1e82d8ccdb4a0b18b82e5468f34dc5f0260007dada8bbf428582",
+    "tools/prepare_decoder_trace.py": "48525e9b3166142baa9d2dac80984d603b97a2938da679804f82b68df65bce9e",
+    "tools/check_english_network.py": "ba3ea441d093becac2a4744b57ff9280a4055a22c27215ba6072ea95b674b982",
+    "tools/check_english_decoder.py": "eaa0fa2280cfc671db47540de096465b80f9ea85a43134f36c03768fa7adacdb",
+    "tools/english_decoder_layers.py": "6a28dd53867ccd96bcef1ff16adfab36999c577864945b97b741deed9f289958",
+    "tools/english_cross_attention.py": "61fd212c4b5fbd6c76c3dc400d50a1acfcf3fb05651e9eaeb20273377b1c9ba2",
+    "tools/english_runtime.py": "eadc9d67581f14b4c00eebfe618325f5d60dac3082eb6060ecd62433cb0cea39",
+    "tests/test_english_decoder_trace.py": "8331b0f141253941c7c838e6be9cb5d837f38a3564c86fe031bb62f6f374f819",
+    "tests/test_english_runtime.py": "9e4d2b0d909d30c9e12431a6b25a8ca159ef23ad2a0bca03f33a4c4b2476838f"
+  },
+  "linear_probe_sha256": "4347a7420559ce896b03e3085e9b1442a81012f3ea9f398d6eb84257e253b43e",
+  "evidence": {
+    "network_recorded_runtime": {
+      "schema": 1,
+      "scope": "Native-aware fast-kernel simulation applied to existing checkpoint; no new training, accuracy or device acceptance",
+      "execution_mode": "cq-h128-a8-away-cb8-kv-f32-v1",
+      "training_runtime_settings": {
+        "dtype": "float32",
+        "flash": false,
+        "remat": true,
+        "scan_unroll": 1
+      },
+      "runtime_configuration_module_sha256": "eadc9d67581f14b4c00eebfe618325f5d60dac3082eb6060ecd62433cb0cea39",
+      "checkpoint_training_deploy_policy": "native-fast",
+      "model_sha256": "37a8d6e407c7ffbc64fb46a8340cb41b29447a528fb836590e91800b94fc819b",
+      "native_binary_sha256": "9361da884d23b7fa33bbb1156c2ceaf057899a8b5f11d8b084475cda4c0352e3",
+      "checker_sha256": "ba3ea441d093becac2a4744b57ff9280a4055a22c27215ba6072ea95b674b982",
+      "checkpoint_manifest_sha256": "f018c908c5249db8739e95aad7829d6939c2e1a7aac1d2af8ca173aa54d2ec64",
+      "encoder_relative_tolerance": 0.0002,
+      "logits_absolute_tolerance": 0.002,
+      "tokens": [
+        2,
+        2048,
+        42,
+        101,
+        7,
+        1023,
+        33,
+        99
+      ],
+      "cases": [
+        {
+          "id": "cohen-want-make-app",
+          "audio_sha256": "8545bb49d4bb7715a3eda61884af801be24338692a9716eec87b6e5bb022d416",
+          "frames": 17,
+          "encoder_relative_l2_error": 0.007659358438104391,
+          "logits_max_absolute_error": 0.01631905883550644,
+          "native_memory_logits_max_absolute_error": 4.76837158203125e-06,
+          "argmax_identical": true,
+          "all_finite": true,
+          "within_tolerance": false
+        },
+        {
+          "id": "adalo-want-make-app",
+          "audio_sha256": "eb01ffbd64e65efd23316403c67758c87acd9b2048e92bc9ba53cd9d90d8e7d6",
+          "frames": 18,
+          "encoder_relative_l2_error": 0.00755980284884572,
+          "logits_max_absolute_error": 0.014731988310813904,
+          "native_memory_logits_max_absolute_error": 5.7220458984375e-06,
+          "argmax_identical": true,
+          "all_finite": true,
+          "within_tolerance": false
+        },
+        {
+          "id": "raroque-get-started",
+          "audio_sha256": "1ee4209e04d379a1b6e70f6a5593fbd0418cc4552a46f3e2edf09c5f3ab701cd",
+          "frames": 33,
+          "encoder_relative_l2_error": 0.006830125581473112,
+          "logits_max_absolute_error": 0.01759958267211914,
+          "native_memory_logits_max_absolute_error": 5.7220458984375e-06,
+          "argmax_identical": true,
+          "all_finite": true,
+          "within_tolerance": false
+        },
+        {
+          "id": "levi-introduction",
+          "audio_sha256": "187abf6e5a6181f1f249c0e20aa35da8ffecfe1171662f73ffed1a6d9ed11f3f",
+          "frames": 63,
+          "encoder_relative_l2_error": 0.006267312914133072,
+          "logits_max_absolute_error": 0.014064610004425049,
+          "native_memory_logits_max_absolute_error": 0.003728926181793213,
+          "argmax_identical": true,
+          "all_finite": true,
+          "within_tolerance": false
+        }
+      ],
+      "all_passed": false,
+      "deployment_permitted": false,
+      "simulation_sha256": "f540ca867fa5bca80e94f62f8bcce522449206430bd364cf8d6018ec6c413a23"
+    },
+    "decoder_and_cross_components": {
+      "schema": 1,
+      "scope": "Localize decoder/head differences using retained native encoder memory.\n\nRun under guard_english_job.py. This is diagnosis, never deployment acceptance.\nThe selected network receipt must match the checkpoint, model and execution mode.\n",
+      "case": "levi-introduction",
+      "audio_sha256": "187abf6e5a6181f1f249c0e20aa35da8ffecfe1171662f73ffed1a6d9ed11f3f",
+      "execution_mode": "cq-h128-a8-away-cb8-kv-f32-v1",
+      "training_runtime_settings": {
+        "dtype": "float32",
+        "flash": false,
+        "remat": true,
+        "scan_unroll": 1
+      },
+      "runtime_configuration_module_sha256": "eadc9d67581f14b4c00eebfe618325f5d60dac3082eb6060ecd62433cb0cea39",
+      "model_sha256": "37a8d6e407c7ffbc64fb46a8340cb41b29447a528fb836590e91800b94fc819b",
+      "checkpoint_manifest_sha256": "f018c908c5249db8739e95aad7829d6939c2e1a7aac1d2af8ca173aa54d2ec64",
+      "network_receipt_sha256": "6f0f8afbaaa82d02e5b2eb998c1e7c09175263215b97eedc3883c98d8d2d9238",
+      "encoder_input_sha256": "93bf56c9285301f7197e94645a1280854dd116ead1eb37a056765d20939b4810",
+      "native_binary_sha256": "3f629cb60c55348ff9a2d1bbdd237814eb7c7ddb6b29377a7560dc3463604295",
+      "checker_sha256": "eaa0fa2280cfc671db47540de096465b80f9ea85a43134f36c03768fa7adacdb",
+      "native_probe_logits_bit_identical": true,
+      "rows": [
+        {
+          "position": 0,
+          "input_token": 2,
+          "hidden_relative_l2_error": 4.050846200698288e-07,
+          "logits_max_absolute_error": 2.86102294921875e-06,
+          "shared_hidden_head_max_absolute_error": 9.5367431640625e-07
+        },
+        {
+          "position": 1,
+          "input_token": 2048,
+          "hidden_relative_l2_error": 2.8897233050884097e-07,
+          "logits_max_absolute_error": 1.9073486328125e-06,
+          "shared_hidden_head_max_absolute_error": 2.86102294921875e-06
+        },
+        {
+          "position": 2,
+          "input_token": 42,
+          "hidden_relative_l2_error": 2.6786040052684257e-07,
+          "logits_max_absolute_error": 9.5367431640625e-07,
+          "shared_hidden_head_max_absolute_error": 8.344650268554688e-07
+        },
+        {
+          "position": 3,
+          "input_token": 101,
+          "hidden_relative_l2_error": 2.934572478352493e-07,
+          "logits_max_absolute_error": 2.86102294921875e-06,
+          "shared_hidden_head_max_absolute_error": 2.86102294921875e-06
+        },
+        {
+          "position": 4,
+          "input_token": 7,
+          "hidden_relative_l2_error": 3.4285014294255234e-07,
+          "logits_max_absolute_error": 9.5367431640625e-07,
+          "shared_hidden_head_max_absolute_error": 9.5367431640625e-07
+        },
+        {
+          "position": 5,
+          "input_token": 1023,
+          "hidden_relative_l2_error": 3.7774776728838333e-07,
+          "logits_max_absolute_error": 1.1920928955078125e-06,
+          "shared_hidden_head_max_absolute_error": 1.9073486328125e-06
+        },
+        {
+          "position": 6,
+          "input_token": 33,
+          "hidden_relative_l2_error": 3.536514725510642e-07,
+          "logits_max_absolute_error": 1.1324882507324219e-06,
+          "shared_hidden_head_max_absolute_error": 1.9073486328125e-06
+        },
+        {
+          "position": 7,
+          "input_token": 99,
+          "hidden_relative_l2_error": 0.00028841712628491223,
+          "logits_max_absolute_error": 0.0037289857864379883,
+          "shared_hidden_head_max_absolute_error": 8.344650268554688e-07
+        }
+      ],
+      "thresholds_unchanged": true,
+      "deployment_permitted": false,
+      "layers": {
+        "scope": "Decoder layer boundaries on retained native encoder memory; fixed forced tokens, not speech accuracy",
+        "sublayers": {
+          "scope": "First decoder layer only; native block input and isolated sublayer boundaries",
+          "rows": [
+            {
+              "stage": "input",
+              "mode": "cumulative",
+              "position": 0,
+              "relative_l2_error": 0.0,
+              "maximum_absolute_error": 0.0,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "input",
+              "mode": "cumulative",
+              "position": 1,
+              "relative_l2_error": 0.0,
+              "maximum_absolute_error": 0.0,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "input",
+              "mode": "cumulative",
+              "position": 2,
+              "relative_l2_error": 0.0,
+              "maximum_absolute_error": 0.0,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "input",
+              "mode": "cumulative",
+              "position": 3,
+              "relative_l2_error": 0.0,
+              "maximum_absolute_error": 0.0,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "input",
+              "mode": "cumulative",
+              "position": 4,
+              "relative_l2_error": 0.0,
+              "maximum_absolute_error": 0.0,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "input",
+              "mode": "cumulative",
+              "position": 5,
+              "relative_l2_error": 0.0,
+              "maximum_absolute_error": 0.0,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "input",
+              "mode": "cumulative",
+              "position": 6,
+              "relative_l2_error": 0.0,
+              "maximum_absolute_error": 0.0,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "input",
+              "mode": "cumulative",
+              "position": 7,
+              "relative_l2_error": 0.0,
+              "maximum_absolute_error": 0.0,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-cross",
+              "mode": "cumulative",
+              "position": 0,
+              "relative_l2_error": 3.1980925996322185e-07,
+              "maximum_absolute_error": 8.940696716308594e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-cross",
+              "mode": "cumulative",
+              "position": 1,
+              "relative_l2_error": 3.1649165066482965e-07,
+              "maximum_absolute_error": 1.1920928955078125e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-cross",
+              "mode": "cumulative",
+              "position": 2,
+              "relative_l2_error": 3.6493054267339176e-07,
+              "maximum_absolute_error": 1.1920928955078125e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-cross",
+              "mode": "cumulative",
+              "position": 3,
+              "relative_l2_error": 3.6835899663856253e-07,
+              "maximum_absolute_error": 1.0728836059570312e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-cross",
+              "mode": "cumulative",
+              "position": 4,
+              "relative_l2_error": 3.729929574092239e-07,
+              "maximum_absolute_error": 1.1920928955078125e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-cross",
+              "mode": "cumulative",
+              "position": 5,
+              "relative_l2_error": 3.4220943234686274e-07,
+              "maximum_absolute_error": 1.0728836059570312e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-cross",
+              "mode": "cumulative",
+              "position": 6,
+              "relative_l2_error": 3.3858529491226363e-07,
+              "maximum_absolute_error": 8.344650268554688e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-cross",
+              "mode": "cumulative",
+              "position": 7,
+              "relative_l2_error": 4.169686462773825e-07,
+              "maximum_absolute_error": 1.3336539268493652e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-engram",
+              "mode": "cumulative",
+              "position": 0,
+              "relative_l2_error": 0.0,
+              "maximum_absolute_error": 0.0,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-engram",
+              "mode": "cumulative",
+              "position": 1,
+              "relative_l2_error": 0.0,
+              "maximum_absolute_error": 0.0,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-engram",
+              "mode": "cumulative",
+              "position": 2,
+              "relative_l2_error": 0.0,
+              "maximum_absolute_error": 0.0,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-engram",
+              "mode": "cumulative",
+              "position": 3,
+              "relative_l2_error": 0.0,
+              "maximum_absolute_error": 0.0,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-engram",
+              "mode": "cumulative",
+              "position": 4,
+              "relative_l2_error": 0.0,
+              "maximum_absolute_error": 0.0,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-engram",
+              "mode": "cumulative",
+              "position": 5,
+              "relative_l2_error": 0.0,
+              "maximum_absolute_error": 0.0,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-engram",
+              "mode": "cumulative",
+              "position": 6,
+              "relative_l2_error": 0.0,
+              "maximum_absolute_error": 0.0,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-engram",
+              "mode": "cumulative",
+              "position": 7,
+              "relative_l2_error": 0.0,
+              "maximum_absolute_error": 0.0,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-mlp",
+              "mode": "cumulative",
+              "position": 0,
+              "relative_l2_error": 3.2084847134683514e-07,
+              "maximum_absolute_error": 8.940696716308594e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-mlp",
+              "mode": "cumulative",
+              "position": 1,
+              "relative_l2_error": 3.170315494571696e-07,
+              "maximum_absolute_error": 1.1920928955078125e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-mlp",
+              "mode": "cumulative",
+              "position": 2,
+              "relative_l2_error": 3.6356237842483097e-07,
+              "maximum_absolute_error": 1.1920928955078125e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-mlp",
+              "mode": "cumulative",
+              "position": 3,
+              "relative_l2_error": 3.671035528896027e-07,
+              "maximum_absolute_error": 1.0728836059570312e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-mlp",
+              "mode": "cumulative",
+              "position": 4,
+              "relative_l2_error": 3.7431379951158306e-07,
+              "maximum_absolute_error": 1.1920928955078125e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-mlp",
+              "mode": "cumulative",
+              "position": 5,
+              "relative_l2_error": 3.4322854958190874e-07,
+              "maximum_absolute_error": 1.0728836059570312e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-mlp",
+              "mode": "cumulative",
+              "position": 6,
+              "relative_l2_error": 3.39382097536145e-07,
+              "maximum_absolute_error": 8.344650268554688e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-mlp",
+              "mode": "cumulative",
+              "position": 7,
+              "relative_l2_error": 4.159052195973345e-07,
+              "maximum_absolute_error": 1.3373792171478271e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-self",
+              "mode": "cumulative",
+              "position": 0,
+              "relative_l2_error": 3.0812628892817884e-07,
+              "maximum_absolute_error": 7.152557373046875e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-self",
+              "mode": "cumulative",
+              "position": 1,
+              "relative_l2_error": 3.4716165941972577e-07,
+              "maximum_absolute_error": 1.0728836059570312e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-self",
+              "mode": "cumulative",
+              "position": 2,
+              "relative_l2_error": 3.2472530619997997e-07,
+              "maximum_absolute_error": 6.556510925292969e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-self",
+              "mode": "cumulative",
+              "position": 3,
+              "relative_l2_error": 2.7656113843477215e-07,
+              "maximum_absolute_error": 7.152557373046875e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-self",
+              "mode": "cumulative",
+              "position": 4,
+              "relative_l2_error": 4.1065308664656186e-07,
+              "maximum_absolute_error": 9.5367431640625e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-self",
+              "mode": "cumulative",
+              "position": 5,
+              "relative_l2_error": 3.251133762205427e-07,
+              "maximum_absolute_error": 8.940696716308594e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-self",
+              "mode": "cumulative",
+              "position": 6,
+              "relative_l2_error": 2.9524576916628575e-07,
+              "maximum_absolute_error": 8.344650268554688e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-self",
+              "mode": "cumulative",
+              "position": 7,
+              "relative_l2_error": 3.7390330476227973e-07,
+              "maximum_absolute_error": 8.642673492431641e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-self",
+              "mode": "shared-input",
+              "position": 0,
+              "relative_l2_error": 3.0812628892817884e-07,
+              "maximum_absolute_error": 7.152557373046875e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-self",
+              "mode": "shared-input",
+              "position": 1,
+              "relative_l2_error": 3.4716165941972577e-07,
+              "maximum_absolute_error": 1.0728836059570312e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-self",
+              "mode": "shared-input",
+              "position": 2,
+              "relative_l2_error": 3.2472530619997997e-07,
+              "maximum_absolute_error": 6.556510925292969e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-self",
+              "mode": "shared-input",
+              "position": 3,
+              "relative_l2_error": 2.7656113843477215e-07,
+              "maximum_absolute_error": 7.152557373046875e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-self",
+              "mode": "shared-input",
+              "position": 4,
+              "relative_l2_error": 4.1065308664656186e-07,
+              "maximum_absolute_error": 9.5367431640625e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-self",
+              "mode": "shared-input",
+              "position": 5,
+              "relative_l2_error": 3.251133762205427e-07,
+              "maximum_absolute_error": 8.940696716308594e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-self",
+              "mode": "shared-input",
+              "position": 6,
+              "relative_l2_error": 2.9524576916628575e-07,
+              "maximum_absolute_error": 8.344650268554688e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-self",
+              "mode": "shared-input",
+              "position": 7,
+              "relative_l2_error": 3.7390330476227973e-07,
+              "maximum_absolute_error": 8.642673492431641e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-cross",
+              "mode": "shared-input",
+              "position": 0,
+              "relative_l2_error": 2.039270157183637e-07,
+              "maximum_absolute_error": 7.152557373046875e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-cross",
+              "mode": "shared-input",
+              "position": 1,
+              "relative_l2_error": 1.800647311256398e-07,
+              "maximum_absolute_error": 7.152557373046875e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-cross",
+              "mode": "shared-input",
+              "position": 2,
+              "relative_l2_error": 2.3672973270549846e-07,
+              "maximum_absolute_error": 8.344650268554688e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-cross",
+              "mode": "shared-input",
+              "position": 3,
+              "relative_l2_error": 3.084630861849291e-07,
+              "maximum_absolute_error": 1.1920928955078125e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-cross",
+              "mode": "shared-input",
+              "position": 4,
+              "relative_l2_error": 2.1186814080920158e-07,
+              "maximum_absolute_error": 7.301568984985352e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-cross",
+              "mode": "shared-input",
+              "position": 5,
+              "relative_l2_error": 2.0404249312377942e-07,
+              "maximum_absolute_error": 6.258487701416016e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-cross",
+              "mode": "shared-input",
+              "position": 6,
+              "relative_l2_error": 2.1480305179011339e-07,
+              "maximum_absolute_error": 7.152557373046875e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-cross",
+              "mode": "shared-input",
+              "position": 7,
+              "relative_l2_error": 0.0006447109044529498,
+              "maximum_absolute_error": 0.0009996891021728516,
+              "within_existing_threshold": false
+            },
+            {
+              "stage": "post-mlp",
+              "mode": "shared-input",
+              "position": 0,
+              "relative_l2_error": 1.7148778397313436e-08,
+              "maximum_absolute_error": 1.1920928955078125e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-mlp",
+              "mode": "shared-input",
+              "position": 1,
+              "relative_l2_error": 1.4270897352730572e-08,
+              "maximum_absolute_error": 1.1920928955078125e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-mlp",
+              "mode": "shared-input",
+              "position": 2,
+              "relative_l2_error": 1.7619809611346682e-08,
+              "maximum_absolute_error": 1.1920928955078125e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-mlp",
+              "mode": "shared-input",
+              "position": 3,
+              "relative_l2_error": 1.5404889808223743e-08,
+              "maximum_absolute_error": 1.1920928955078125e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-mlp",
+              "mode": "shared-input",
+              "position": 4,
+              "relative_l2_error": 1.5533688113578137e-08,
+              "maximum_absolute_error": 1.1920928955078125e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-mlp",
+              "mode": "shared-input",
+              "position": 5,
+              "relative_l2_error": 1.3742683435680192e-08,
+              "maximum_absolute_error": 1.1920928955078125e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-mlp",
+              "mode": "shared-input",
+              "position": 6,
+              "relative_l2_error": 1.9371874770968134e-08,
+              "maximum_absolute_error": 1.1920928955078125e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "post-mlp",
+              "mode": "shared-input",
+              "position": 7,
+              "relative_l2_error": 1.807226190919664e-08,
+              "maximum_absolute_error": 1.1920928955078125e-07,
+              "within_existing_threshold": true
+            }
+          ],
+          "traced_vs_original_per_token_relative_l2_error": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "original_module_control_tolerance": 2e-06,
+          "original_module_control_passed": true,
+          "native_threshold_unchanged": 0.0002,
+          "deployment_permitted": false
+        },
+        "cross_attention": {
+          "scope": "Cross-attention internals using native normalized input and kernel Q8 codes.",
+          "rows": [
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 0,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.6561127103595936e-07,
+              "maximum_absolute_error": 1.1920928955078125e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 1,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.533332630922814e-07,
+              "maximum_absolute_error": 1.1920928955078125e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 2,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.6066361985831463e-07,
+              "maximum_absolute_error": 1.1920928955078125e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 3,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.5102675610687584e-07,
+              "maximum_absolute_error": 1.1920928955078125e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 4,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.542458841820917e-07,
+              "maximum_absolute_error": 1.0728836059570312e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 5,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.708843507865822e-07,
+              "maximum_absolute_error": 1.5497207641601562e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 6,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.8465137208731903e-07,
+              "maximum_absolute_error": 1.3113021850585938e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 7,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.8019379644538276e-07,
+              "maximum_absolute_error": 1.6689300537109375e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 8,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.555116165898653e-07,
+              "maximum_absolute_error": 1.3709068298339844e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 9,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.852030658890726e-07,
+              "maximum_absolute_error": 1.1920928955078125e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 10,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.5551326504901226e-07,
+              "maximum_absolute_error": 1.430511474609375e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 11,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.6851773188573134e-07,
+              "maximum_absolute_error": 1.3113021850585938e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 12,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.7788399254168326e-07,
+              "maximum_absolute_error": 1.1920928955078125e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 13,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.781254918067134e-07,
+              "maximum_absolute_error": 1.7285346984863281e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 14,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.7117351325832715e-07,
+              "maximum_absolute_error": 1.430511474609375e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 15,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.4567315765343665e-07,
+              "maximum_absolute_error": 1.4677643775939941e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 16,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.476999665963376e-07,
+              "maximum_absolute_error": 1.1920928955078125e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 17,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.853991756841424e-07,
+              "maximum_absolute_error": 1.5497207641601562e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 18,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.6823618643211375e-07,
+              "maximum_absolute_error": 1.3113021850585938e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 19,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.7069085578878003e-07,
+              "maximum_absolute_error": 1.5795230865478516e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 20,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.769898739847122e-07,
+              "maximum_absolute_error": 1.4007091522216797e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 21,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.749147197140701e-07,
+              "maximum_absolute_error": 1.1920928955078125e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 22,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.547029905348609e-07,
+              "maximum_absolute_error": 1.430511474609375e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 23,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.3134526233880024e-07,
+              "maximum_absolute_error": 1.1920928955078125e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 24,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.7448140233209415e-07,
+              "maximum_absolute_error": 1.1920928955078125e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 25,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 4.031166440654488e-07,
+              "maximum_absolute_error": 1.1927622836083174e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 26,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.432006394632481e-07,
+              "maximum_absolute_error": 1.0728836059570312e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 27,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.7837747868252336e-07,
+              "maximum_absolute_error": 1.5208497643470764e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 28,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.554641239134071e-07,
+              "maximum_absolute_error": 1.1920928955078125e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 29,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.8162121995810594e-07,
+              "maximum_absolute_error": 1.6689300537109375e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 30,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.519283211517177e-07,
+              "maximum_absolute_error": 1.2516975402832031e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 31,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.529226830778498e-07,
+              "maximum_absolute_error": 1.300126314163208e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 32,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.654608917713631e-07,
+              "maximum_absolute_error": 1.0728836059570312e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 33,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.553729186478449e-07,
+              "maximum_absolute_error": 1.430511474609375e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 34,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.448531913363695e-07,
+              "maximum_absolute_error": 1.1920928955078125e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 35,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.717865126873221e-07,
+              "maximum_absolute_error": 1.1920928955078125e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 36,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.5225482974965416e-07,
+              "maximum_absolute_error": 1.5497207641601562e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 37,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 4.0538361645303667e-07,
+              "maximum_absolute_error": 1.1920928955078125e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 38,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.75001746988346e-07,
+              "maximum_absolute_error": 1.1920928955078125e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 39,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.638620000856463e-07,
+              "maximum_absolute_error": 1.0132789611816406e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 40,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.85987192430548e-07,
+              "maximum_absolute_error": 1.430511474609375e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 41,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 4.051113364766934e-07,
+              "maximum_absolute_error": 1.430511474609375e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 42,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.7362812577157456e-07,
+              "maximum_absolute_error": 1.1920928955078125e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 43,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.9627687442589377e-07,
+              "maximum_absolute_error": 1.3709068298339844e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 44,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 4.1728353039616195e-07,
+              "maximum_absolute_error": 1.6689300537109375e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 45,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.530084029534919e-07,
+              "maximum_absolute_error": 1.3113021850585938e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 46,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.948437381495751e-07,
+              "maximum_absolute_error": 1.2814998626708984e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 47,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.898743727859255e-07,
+              "maximum_absolute_error": 1.6689300537109375e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 48,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.447067911110935e-07,
+              "maximum_absolute_error": 1.341104507446289e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 49,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.822542282705399e-07,
+              "maximum_absolute_error": 1.1920928955078125e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 50,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.4884598676399037e-07,
+              "maximum_absolute_error": 1.1920928955078125e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 51,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.6079751453144127e-07,
+              "maximum_absolute_error": 1.430511474609375e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 52,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.7666762864319026e-07,
+              "maximum_absolute_error": 1.7881393432617188e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 53,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 4.0140452028936124e-07,
+              "maximum_absolute_error": 1.519918441772461e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 54,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.7918627526778437e-07,
+              "maximum_absolute_error": 1.6689300537109375e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 55,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.8738977536922903e-07,
+              "maximum_absolute_error": 1.430511474609375e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 56,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.7770766425637703e-07,
+              "maximum_absolute_error": 1.430511474609375e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 57,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.917652975360397e-07,
+              "maximum_absolute_error": 1.5497207641601562e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 58,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.707920939177711e-07,
+              "maximum_absolute_error": 1.3113021850585938e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 59,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.879810321905097e-07,
+              "maximum_absolute_error": 1.3113021850585938e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 60,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.730239086507936e-07,
+              "maximum_absolute_error": 1.430511474609375e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 61,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 4.202011893994495e-07,
+              "maximum_absolute_error": 1.6689300537109375e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-key",
+              "mode": "cumulative",
+              "position": 62,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.669777299819543e-07,
+              "maximum_absolute_error": 1.430511474609375e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 0,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.1876376738182444e-07,
+              "maximum_absolute_error": 6.556510925292969e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 1,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.2280399864248466e-07,
+              "maximum_absolute_error": 8.344650268554688e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 2,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.1459288152291265e-07,
+              "maximum_absolute_error": 7.450580596923828e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 3,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.244191191242862e-07,
+              "maximum_absolute_error": 7.152557373046875e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 4,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.6730392594108707e-07,
+              "maximum_absolute_error": 9.5367431640625e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 5,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.566378836694639e-07,
+              "maximum_absolute_error": 1.0728836059570312e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 6,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.1435439495908213e-07,
+              "maximum_absolute_error": 7.152557373046875e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 7,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.2919905379458214e-07,
+              "maximum_absolute_error": 7.152557373046875e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 8,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.40866165515763e-07,
+              "maximum_absolute_error": 5.960464477539062e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 9,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.083026456351945e-07,
+              "maximum_absolute_error": 5.960464477539062e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 10,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.094555438565294e-07,
+              "maximum_absolute_error": 5.662441253662109e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 11,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.3227971130145306e-07,
+              "maximum_absolute_error": 7.152557373046875e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 12,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.355386297698715e-07,
+              "maximum_absolute_error": 7.152557373046875e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 13,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.392729013285134e-07,
+              "maximum_absolute_error": 7.748603820800781e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 14,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.297656974154961e-07,
+              "maximum_absolute_error": 5.960464477539062e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 15,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.214652224414749e-07,
+              "maximum_absolute_error": 4.76837158203125e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 16,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.256737102219631e-07,
+              "maximum_absolute_error": 6.556510925292969e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 17,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.5621886240733147e-07,
+              "maximum_absolute_error": 7.152557373046875e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 18,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.315573167128605e-07,
+              "maximum_absolute_error": 7.152557373046875e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 19,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.6106158063375915e-07,
+              "maximum_absolute_error": 7.152557373046875e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 20,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.4705769280662935e-07,
+              "maximum_absolute_error": 5.960464477539062e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 21,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.355701494456298e-07,
+              "maximum_absolute_error": 5.364418029785156e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 22,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.260959431372612e-07,
+              "maximum_absolute_error": 6.556510925292969e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 23,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.4264354553670273e-07,
+              "maximum_absolute_error": 7.152557373046875e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 24,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.2120473747454525e-07,
+              "maximum_absolute_error": 6.556510925292969e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 25,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.5404187315180025e-07,
+              "maximum_absolute_error": 8.046627044677734e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 26,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.0523776217705745e-07,
+              "maximum_absolute_error": 7.748603820800781e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 27,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.256653826611e-07,
+              "maximum_absolute_error": 8.344650268554688e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 28,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.254401690355735e-07,
+              "maximum_absolute_error": 6.556510925292969e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 29,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.349460087065381e-07,
+              "maximum_absolute_error": 7.152557373046875e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 30,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.212325623280776e-07,
+              "maximum_absolute_error": 7.152557373046875e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 31,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.541524051797751e-07,
+              "maximum_absolute_error": 6.556510925292969e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 32,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.1543802947453514e-07,
+              "maximum_absolute_error": 5.960464477539062e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 33,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.1892943752609426e-07,
+              "maximum_absolute_error": 6.556510925292969e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 34,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.273531774539151e-07,
+              "maximum_absolute_error": 8.344650268554688e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 35,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.2058179044724966e-07,
+              "maximum_absolute_error": 5.960464477539062e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 36,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.2206978062276903e-07,
+              "maximum_absolute_error": 6.556510925292969e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 37,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.3757422102098644e-07,
+              "maximum_absolute_error": 5.960464477539062e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 38,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.274799382779747e-07,
+              "maximum_absolute_error": 6.556510925292969e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 39,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.200655385171558e-07,
+              "maximum_absolute_error": 8.344650268554688e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 40,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.599941749143909e-07,
+              "maximum_absolute_error": 7.152557373046875e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 41,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.3015908229572233e-07,
+              "maximum_absolute_error": 5.960464477539062e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 42,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.3001063570736733e-07,
+              "maximum_absolute_error": 5.960464477539062e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 43,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.716871503911534e-07,
+              "maximum_absolute_error": 1.0728836059570312e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 44,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.551968461579236e-07,
+              "maximum_absolute_error": 8.344650268554688e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 45,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.71364279772024e-07,
+              "maximum_absolute_error": 8.940696716308594e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 46,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.3968746038226527e-07,
+              "maximum_absolute_error": 6.556510925292969e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 47,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.621233588546602e-07,
+              "maximum_absolute_error": 1.1324882507324219e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 48,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.141145157314895e-07,
+              "maximum_absolute_error": 5.960464477539062e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 49,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.342383649851399e-07,
+              "maximum_absolute_error": 7.152557373046875e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 50,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.240397461468092e-07,
+              "maximum_absolute_error": 7.152557373046875e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 51,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.31031117184466e-07,
+              "maximum_absolute_error": 9.5367431640625e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 52,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.6658343560702633e-07,
+              "maximum_absolute_error": 7.748603820800781e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 53,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.6593462482414907e-07,
+              "maximum_absolute_error": 7.152557373046875e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 54,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.215317860849609e-07,
+              "maximum_absolute_error": 5.960464477539062e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 55,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.2784237191663124e-07,
+              "maximum_absolute_error": 7.152557373046875e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 56,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.5571414969126636e-07,
+              "maximum_absolute_error": 6.556510925292969e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 57,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.964984500726132e-07,
+              "maximum_absolute_error": 8.940696716308594e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 58,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.3638337981756194e-07,
+              "maximum_absolute_error": 7.301568984985352e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 59,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.211628154531354e-07,
+              "maximum_absolute_error": 7.748603820800781e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 60,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.497941634122981e-07,
+              "maximum_absolute_error": 8.344650268554688e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 61,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.663024870093068e-07,
+              "maximum_absolute_error": 8.344650268554688e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "cached-value",
+              "mode": "cumulative",
+              "position": 62,
+              "position_kind": "memory-frame",
+              "relative_l2_error": 3.400563741706719e-07,
+              "maximum_absolute_error": 6.556510925292969e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "gate-logits",
+              "mode": "cumulative",
+              "position": 0,
+              "position_kind": "decoder-token",
+              "relative_l2_error": 3.6623376331590407e-07,
+              "maximum_absolute_error": 5.662441253662109e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "gate-logits",
+              "mode": "cumulative",
+              "position": 1,
+              "position_kind": "decoder-token",
+              "relative_l2_error": 3.458711148596194e-07,
+              "maximum_absolute_error": 5.960464477539062e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "gate-logits",
+              "mode": "cumulative",
+              "position": 2,
+              "position_kind": "decoder-token",
+              "relative_l2_error": 3.5000388720618503e-07,
+              "maximum_absolute_error": 8.344650268554688e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "gate-logits",
+              "mode": "cumulative",
+              "position": 3,
+              "position_kind": "decoder-token",
+              "relative_l2_error": 3.5915522289542423e-07,
+              "maximum_absolute_error": 7.152557373046875e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "gate-logits",
+              "mode": "cumulative",
+              "position": 4,
+              "position_kind": "decoder-token",
+              "relative_l2_error": 3.570906983441091e-07,
+              "maximum_absolute_error": 6.556510925292969e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "gate-logits",
+              "mode": "cumulative",
+              "position": 5,
+              "position_kind": "decoder-token",
+              "relative_l2_error": 3.5734126413444756e-07,
+              "maximum_absolute_error": 6.556510925292969e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "gate-logits",
+              "mode": "cumulative",
+              "position": 6,
+              "position_kind": "decoder-token",
+              "relative_l2_error": 3.4756033073790604e-07,
+              "maximum_absolute_error": 5.960464477539062e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "gate-logits",
+              "mode": "cumulative",
+              "position": 7,
+              "position_kind": "decoder-token",
+              "relative_l2_error": 3.6903853128933406e-07,
+              "maximum_absolute_error": 7.152557373046875e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "gated-context",
+              "mode": "cumulative",
+              "position": 0,
+              "position_kind": "decoder-token",
+              "relative_l2_error": 4.248129243933363e-07,
+              "maximum_absolute_error": 6.854534149169922e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "gated-context",
+              "mode": "cumulative",
+              "position": 1,
+              "position_kind": "decoder-token",
+              "relative_l2_error": 3.770902878841298e-07,
+              "maximum_absolute_error": 5.364418029785156e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "gated-context",
+              "mode": "cumulative",
+              "position": 2,
+              "position_kind": "decoder-token",
+              "relative_l2_error": 4.983498342880921e-07,
+              "maximum_absolute_error": 1.2516975402832031e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "gated-context",
+              "mode": "cumulative",
+              "position": 3,
+              "position_kind": "decoder-token",
+              "relative_l2_error": 4.2914950881822733e-07,
+              "maximum_absolute_error": 5.364418029785156e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "gated-context",
+              "mode": "cumulative",
+              "position": 4,
+              "position_kind": "decoder-token",
+              "relative_l2_error": 3.999329862836021e-07,
+              "maximum_absolute_error": 5.960464477539062e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "gated-context",
+              "mode": "cumulative",
+              "position": 5,
+              "position_kind": "decoder-token",
+              "relative_l2_error": 4.223855398777232e-07,
+              "maximum_absolute_error": 1.1920928955078125e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "gated-context",
+              "mode": "cumulative",
+              "position": 6,
+              "position_kind": "decoder-token",
+              "relative_l2_error": 4.5848267404835497e-07,
+              "maximum_absolute_error": 9.5367431640625e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "gated-context",
+              "mode": "cumulative",
+              "position": 7,
+              "position_kind": "decoder-token",
+              "relative_l2_error": 4.902212822344154e-07,
+              "maximum_absolute_error": 6.556510925292969e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "normalized-query",
+              "mode": "cumulative",
+              "position": 0,
+              "position_kind": "decoder-token",
+              "relative_l2_error": 3.6002421666125883e-07,
+              "maximum_absolute_error": 1.1920928955078125e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "normalized-query",
+              "mode": "cumulative",
+              "position": 1,
+              "position_kind": "decoder-token",
+              "relative_l2_error": 3.6062158415006706e-07,
+              "maximum_absolute_error": 1.3113021850585938e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "normalized-query",
+              "mode": "cumulative",
+              "position": 2,
+              "position_kind": "decoder-token",
+              "relative_l2_error": 3.5643404316942906e-07,
+              "maximum_absolute_error": 1.5497207641601562e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "normalized-query",
+              "mode": "cumulative",
+              "position": 3,
+              "position_kind": "decoder-token",
+              "relative_l2_error": 4.036569976051396e-07,
+              "maximum_absolute_error": 1.9073486328125e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "normalized-query",
+              "mode": "cumulative",
+              "position": 4,
+              "position_kind": "decoder-token",
+              "relative_l2_error": 3.338964802424016e-07,
+              "maximum_absolute_error": 1.1920928955078125e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "normalized-query",
+              "mode": "cumulative",
+              "position": 5,
+              "position_kind": "decoder-token",
+              "relative_l2_error": 3.4906165069514827e-07,
+              "maximum_absolute_error": 1.1920928955078125e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "normalized-query",
+              "mode": "cumulative",
+              "position": 6,
+              "position_kind": "decoder-token",
+              "relative_l2_error": 3.502978813685331e-07,
+              "maximum_absolute_error": 1.5497207641601562e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "normalized-query",
+              "mode": "cumulative",
+              "position": 7,
+              "position_kind": "decoder-token",
+              "relative_l2_error": 3.675259563351574e-07,
+              "maximum_absolute_error": 1.1920928955078125e-06,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "projection",
+              "mode": "cumulative",
+              "position": 0,
+              "position_kind": "decoder-token",
+              "relative_l2_error": 3.535917301178415e-07,
+              "maximum_absolute_error": 7.450580596923828e-08,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "projection",
+              "mode": "cumulative",
+              "position": 1,
+              "position_kind": "decoder-token",
+              "relative_l2_error": 3.705699782585725e-07,
+              "maximum_absolute_error": 1.043081283569336e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "projection",
+              "mode": "cumulative",
+              "position": 2,
+              "position_kind": "decoder-token",
+              "relative_l2_error": 4.34813699712322e-07,
+              "maximum_absolute_error": 1.043081283569336e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "projection",
+              "mode": "cumulative",
+              "position": 3,
+              "position_kind": "decoder-token",
+              "relative_l2_error": 3.200156015736866e-07,
+              "maximum_absolute_error": 7.450580596923828e-08,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "projection",
+              "mode": "cumulative",
+              "position": 4,
+              "position_kind": "decoder-token",
+              "relative_l2_error": 3.1761669561092276e-07,
+              "maximum_absolute_error": 7.450580596923828e-08,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "projection",
+              "mode": "cumulative",
+              "position": 5,
+              "position_kind": "decoder-token",
+              "relative_l2_error": 3.4183861430392426e-07,
+              "maximum_absolute_error": 7.450580596923828e-08,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "projection",
+              "mode": "cumulative",
+              "position": 6,
+              "position_kind": "decoder-token",
+              "relative_l2_error": 3.3500569429634197e-07,
+              "maximum_absolute_error": 7.450580596923828e-08,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "projection",
+              "mode": "cumulative",
+              "position": 7,
+              "position_kind": "decoder-token",
+              "relative_l2_error": 3.8679843328282004e-07,
+              "maximum_absolute_error": 7.82310962677002e-08,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "raw-query",
+              "mode": "cumulative",
+              "position": 0,
+              "position_kind": "decoder-token",
+              "relative_l2_error": 3.44358227266639e-07,
+              "maximum_absolute_error": 4.76837158203125e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "raw-query",
+              "mode": "cumulative",
+              "position": 1,
+              "position_kind": "decoder-token",
+              "relative_l2_error": 3.479168242392916e-07,
+              "maximum_absolute_error": 5.960464477539062e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "raw-query",
+              "mode": "cumulative",
+              "position": 2,
+              "position_kind": "decoder-token",
+              "relative_l2_error": 3.500677223655657e-07,
+              "maximum_absolute_error": 5.960464477539062e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "raw-query",
+              "mode": "cumulative",
+              "position": 3,
+              "position_kind": "decoder-token",
+              "relative_l2_error": 3.854135854908236e-07,
+              "maximum_absolute_error": 7.152557373046875e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "raw-query",
+              "mode": "cumulative",
+              "position": 4,
+              "position_kind": "decoder-token",
+              "relative_l2_error": 3.228202842819883e-07,
+              "maximum_absolute_error": 4.917383193969727e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "raw-query",
+              "mode": "cumulative",
+              "position": 5,
+              "position_kind": "decoder-token",
+              "relative_l2_error": 3.4566681961223367e-07,
+              "maximum_absolute_error": 5.960464477539062e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "raw-query",
+              "mode": "cumulative",
+              "position": 6,
+              "position_kind": "decoder-token",
+              "relative_l2_error": 3.275220024079317e-07,
+              "maximum_absolute_error": 4.76837158203125e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "raw-query",
+              "mode": "cumulative",
+              "position": 7,
+              "position_kind": "decoder-token",
+              "relative_l2_error": 3.571191768969584e-07,
+              "maximum_absolute_error": 5.960464477539062e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "projection",
+              "mode": "shared-context",
+              "position": 0,
+              "position_kind": "decoder-token",
+              "relative_l2_error": 3.0808141104898823e-07,
+              "maximum_absolute_error": 5.960464477539063e-08,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "projection",
+              "mode": "shared-context",
+              "position": 1,
+              "position_kind": "decoder-token",
+              "relative_l2_error": 3.102307744029531e-07,
+              "maximum_absolute_error": 7.450580596923828e-08,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "projection",
+              "mode": "shared-context",
+              "position": 2,
+              "position_kind": "decoder-token",
+              "relative_l2_error": 3.29677732224809e-07,
+              "maximum_absolute_error": 7.450580596923828e-08,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "projection",
+              "mode": "shared-context",
+              "position": 3,
+              "position_kind": "decoder-token",
+              "relative_l2_error": 3.3224080198124284e-07,
+              "maximum_absolute_error": 1.043081283569336e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "projection",
+              "mode": "shared-context",
+              "position": 4,
+              "position_kind": "decoder-token",
+              "relative_l2_error": 3.054184389839065e-07,
+              "maximum_absolute_error": 1.043081283569336e-07,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "projection",
+              "mode": "shared-context",
+              "position": 5,
+              "position_kind": "decoder-token",
+              "relative_l2_error": 3.090436848651734e-07,
+              "maximum_absolute_error": 7.450580596923828e-08,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "projection",
+              "mode": "shared-context",
+              "position": 6,
+              "position_kind": "decoder-token",
+              "relative_l2_error": 3.1831189062359044e-07,
+              "maximum_absolute_error": 7.450580596923828e-08,
+              "within_existing_threshold": true
+            },
+            {
+              "stage": "projection",
+              "mode": "shared-context",
+              "position": 7,
+              "position_kind": "decoder-token",
+              "relative_l2_error": 3.3952542821680254e-07,
+              "maximum_absolute_error": 7.450580596923828e-08,
+              "within_existing_threshold": true
+            }
+          ],
+          "q8_codes": [
+            {
+              "position": 0,
+              "own_context_codes_different_from_actual_kernel": 0,
+              "shared_native_context_codes_different_from_actual_kernel": 0,
+              "shared_scale_max_absolute_error": 0.0
+            },
+            {
+              "position": 1,
+              "own_context_codes_different_from_actual_kernel": 0,
+              "shared_native_context_codes_different_from_actual_kernel": 0,
+              "shared_scale_max_absolute_error": 4.656612873077393e-10
+            },
+            {
+              "position": 2,
+              "own_context_codes_different_from_actual_kernel": 0,
+              "shared_native_context_codes_different_from_actual_kernel": 0,
+              "shared_scale_max_absolute_error": 4.656612873077393e-10
+            },
+            {
+              "position": 3,
+              "own_context_codes_different_from_actual_kernel": 0,
+              "shared_native_context_codes_different_from_actual_kernel": 0,
+              "shared_scale_max_absolute_error": 0.0
+            },
+            {
+              "position": 4,
+              "own_context_codes_different_from_actual_kernel": 0,
+              "shared_native_context_codes_different_from_actual_kernel": 0,
+              "shared_scale_max_absolute_error": 0.0
+            },
+            {
+              "position": 5,
+              "own_context_codes_different_from_actual_kernel": 0,
+              "shared_native_context_codes_different_from_actual_kernel": 0,
+              "shared_scale_max_absolute_error": 0.0
+            },
+            {
+              "position": 6,
+              "own_context_codes_different_from_actual_kernel": 0,
+              "shared_native_context_codes_different_from_actual_kernel": 0,
+              "shared_scale_max_absolute_error": 0.0
+            },
+            {
+              "position": 7,
+              "own_context_codes_different_from_actual_kernel": 0,
+              "shared_native_context_codes_different_from_actual_kernel": 0,
+              "shared_scale_max_absolute_error": 4.656612873077393e-10
+            }
+          ],
+          "normalization_replay": [
+            {
+              "position": 0,
+              "normalized_input_relative_l2_change": 8.862417644195375e-08,
+              "native_query_relative_l2_change": 8.443744548003451e-08,
+              "native_query_max_absolute_change": 1.1920928955078125e-07
+            },
+            {
+              "position": 1,
+              "normalized_input_relative_l2_change": 1.810906553600944e-07,
+              "native_query_relative_l2_change": 1.984601141202802e-07,
+              "native_query_max_absolute_change": 3.5762786865234375e-07
+            },
+            {
+              "position": 2,
+              "normalized_input_relative_l2_change": 3.291075074685068e-07,
+              "native_query_relative_l2_change": 3.156187062813842e-07,
+              "native_query_max_absolute_change": 4.76837158203125e-07
+            },
+            {
+              "position": 3,
+              "normalized_input_relative_l2_change": 1.8345845376188663e-07,
+              "native_query_relative_l2_change": 1.7825938414262055e-07,
+              "native_query_max_absolute_change": 2.384185791015625e-07
+            },
+            {
+              "position": 4,
+              "normalized_input_relative_l2_change": 9.588498528501077e-08,
+              "native_query_relative_l2_change": 1.5726111257663433e-07,
+              "native_query_max_absolute_change": 2.384185791015625e-07
+            },
+            {
+              "position": 5,
+              "normalized_input_relative_l2_change": 2.5780735768421437e-07,
+              "native_query_relative_l2_change": 3.02560806630936e-07,
+              "native_query_max_absolute_change": 4.76837158203125e-07
+            },
+            {
+              "position": 6,
+              "normalized_input_relative_l2_change": 4.892538640888233e-08,
+              "native_query_relative_l2_change": 0.0,
+              "native_query_max_absolute_change": 0.0
+            },
+            {
+              "position": 7,
+              "normalized_input_relative_l2_change": 5.4650008962653374e-08,
+              "native_query_relative_l2_change": 8.753820424090009e-08,
+              "native_query_max_absolute_change": 1.1920928955078125e-07
+            }
+          ],
+          "query_replay_baseline_bit_identical": true,
+          "traced_vs_original_per_token_relative_l2_error": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "original_module_control_tolerance": 2e-06,
+          "original_module_control_passed": true,
+          "native_threshold_unchanged": 0.0002,
+          "deployment_permitted": false
+        },
+        "rows": [
+          {
+            "layer": 0,
+            "mode": "cumulative",
+            "position": 0,
+            "relative_l2_error": 3.22716658729405e-07,
+            "maximum_absolute_error": 1.1920928955078125e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 0,
+            "mode": "cumulative",
+            "position": 1,
+            "relative_l2_error": 3.1086096896615345e-07,
+            "maximum_absolute_error": 1.3113021850585938e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 0,
+            "mode": "cumulative",
+            "position": 2,
+            "relative_l2_error": 2.9746638574579265e-07,
+            "maximum_absolute_error": 1.2796372175216675e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 0,
+            "mode": "cumulative",
+            "position": 3,
+            "relative_l2_error": 3.3347652106385794e-07,
+            "maximum_absolute_error": 1.3113021850585938e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 0,
+            "mode": "cumulative",
+            "position": 4,
+            "relative_l2_error": 3.2810078209877247e-07,
+            "maximum_absolute_error": 1.0132789611816406e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 0,
+            "mode": "cumulative",
+            "position": 5,
+            "relative_l2_error": 3.259352467921417e-07,
+            "maximum_absolute_error": 1.0132789611816406e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 0,
+            "mode": "cumulative",
+            "position": 6,
+            "relative_l2_error": 3.1036665859573986e-07,
+            "maximum_absolute_error": 1.2516975402832031e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 0,
+            "mode": "cumulative",
+            "position": 7,
+            "relative_l2_error": 0.0004704879829660058,
+            "maximum_absolute_error": 0.000991225242614746,
+            "within_existing_threshold": false
+          },
+          {
+            "layer": 0,
+            "mode": "shared-input",
+            "position": 0,
+            "relative_l2_error": 2.637843010688812e-07,
+            "maximum_absolute_error": 9.5367431640625e-07,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 0,
+            "mode": "shared-input",
+            "position": 1,
+            "relative_l2_error": 2.5001662606882746e-07,
+            "maximum_absolute_error": 1.2516975402832031e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 0,
+            "mode": "shared-input",
+            "position": 2,
+            "relative_l2_error": 2.575917221747659e-07,
+            "maximum_absolute_error": 1.1920928955078125e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 0,
+            "mode": "shared-input",
+            "position": 3,
+            "relative_l2_error": 2.821014675191691e-07,
+            "maximum_absolute_error": 1.1324882507324219e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 0,
+            "mode": "shared-input",
+            "position": 4,
+            "relative_l2_error": 2.738080127073772e-07,
+            "maximum_absolute_error": 9.5367431640625e-07,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 0,
+            "mode": "shared-input",
+            "position": 5,
+            "relative_l2_error": 2.7857393547492393e-07,
+            "maximum_absolute_error": 9.5367431640625e-07,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 0,
+            "mode": "shared-input",
+            "position": 6,
+            "relative_l2_error": 2.6315234435969614e-07,
+            "maximum_absolute_error": 1.1026859283447266e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 0,
+            "mode": "shared-input",
+            "position": 7,
+            "relative_l2_error": 0.0004704921448137611,
+            "maximum_absolute_error": 0.000991225242614746,
+            "within_existing_threshold": false
+          },
+          {
+            "layer": 1,
+            "mode": "cumulative",
+            "position": 0,
+            "relative_l2_error": 3.8192652596080734e-07,
+            "maximum_absolute_error": 1.430511474609375e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 1,
+            "mode": "cumulative",
+            "position": 1,
+            "relative_l2_error": 3.1787917009751254e-07,
+            "maximum_absolute_error": 1.3113021850585938e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 1,
+            "mode": "cumulative",
+            "position": 2,
+            "relative_l2_error": 1.2729267382383114e-06,
+            "maximum_absolute_error": 5.0067901611328125e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 1,
+            "mode": "cumulative",
+            "position": 3,
+            "relative_l2_error": 3.4944815752169234e-07,
+            "maximum_absolute_error": 1.2516975402832031e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 1,
+            "mode": "cumulative",
+            "position": 4,
+            "relative_l2_error": 3.440437410517916e-07,
+            "maximum_absolute_error": 1.1920928955078125e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 1,
+            "mode": "cumulative",
+            "position": 5,
+            "relative_l2_error": 3.3733110171851877e-07,
+            "maximum_absolute_error": 1.0132789611816406e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 1,
+            "mode": "cumulative",
+            "position": 6,
+            "relative_l2_error": 3.406203461508994e-07,
+            "maximum_absolute_error": 1.1324882507324219e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 1,
+            "mode": "cumulative",
+            "position": 7,
+            "relative_l2_error": 0.00039075035601854324,
+            "maximum_absolute_error": 0.000942230224609375,
+            "within_existing_threshold": false
+          },
+          {
+            "layer": 1,
+            "mode": "shared-input",
+            "position": 0,
+            "relative_l2_error": 2.991234566707135e-07,
+            "maximum_absolute_error": 1.6689300537109375e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 1,
+            "mode": "shared-input",
+            "position": 1,
+            "relative_l2_error": 2.0272820222544397e-07,
+            "maximum_absolute_error": 1.430511474609375e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 1,
+            "mode": "shared-input",
+            "position": 2,
+            "relative_l2_error": 2.0268119271804608e-07,
+            "maximum_absolute_error": 8.344650268554688e-07,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 1,
+            "mode": "shared-input",
+            "position": 3,
+            "relative_l2_error": 2.1722010501434852e-07,
+            "maximum_absolute_error": 9.5367431640625e-07,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 1,
+            "mode": "shared-input",
+            "position": 4,
+            "relative_l2_error": 2.2827462942132115e-07,
+            "maximum_absolute_error": 1.0728836059570312e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 1,
+            "mode": "shared-input",
+            "position": 5,
+            "relative_l2_error": 2.0050185867148684e-07,
+            "maximum_absolute_error": 9.5367431640625e-07,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 1,
+            "mode": "shared-input",
+            "position": 6,
+            "relative_l2_error": 2.453329557283723e-07,
+            "maximum_absolute_error": 1.0132789611816406e-06,
+            "within_existing_threshold": true
+          },
+          {
+            "layer": 1,
+            "mode": "shared-input",
+            "position": 7,
+            "relative_l2_error": 2.784295816127269e-07,
+            "maximum_absolute_error": 1.0728836059570312e-06,
+            "within_existing_threshold": true
+          }
+        ],
+        "traced_vs_original_jax_hidden_relative_l2_error": 2.427937317861506e-07,
+        "original_jax_control_within_existing_threshold": true,
+        "traced_vs_original_jax_per_token_relative_l2_error": [
+          1.2003049221220863e-07,
+          5.640868749878791e-08,
+          6.078484489080438e-07,
+          1.2010305283638445e-07,
+          1.3098031104163965e-07,
+          1.0548877327209993e-07,
+          1.2568290230774437e-07,
+          1.612958726582292e-07
+        ],
+        "original_jax_control_tolerance": 2e-06,
+        "original_jax_control_passed": true,
+        "relative_tolerance_unchanged": 0.0002,
+        "deployment_permitted": false
+      },
+      "layer_checker_sha256": "6a28dd53867ccd96bcef1ff16adfab36999c577864945b97b741deed9f289958",
+      "sublayer_checker_sha256": "83f09a1da2d9cc4e9b0d78af9da30845df70687a9cc92e4ce53dd08c2e99d743",
+      "native_trace_source": {
+        "schema": 1,
+        "scope": "Generate a host-only instrumented copy; never edit the production engine.",
+        "production_source_sha256": "dca48cf6d2c9b6e02059f00b849d8b7adfb15151abe0bfc7317a510e0d200b10",
+        "generator_sha256": "48525e9b3166142baa9d2dac80984d603b97a2938da679804f82b68df65bce9e",
+        "generated_sha256": "97ec833c4a18d5afa65e45c31f3920cde6ec3fa882499612e4b6219c46b08779"
+      },
+      "cross_checker_sha256": "61fd212c4b5fbd6c76c3dc400d50a1acfcf3fb05651e9eaeb20273377b1c9ba2"
+    },
+    "asan_ubsan": {
+      "schema": 1,
+      "scope": "Cross-attention/Q8 captures: actual model and malformed-input/output-preservation checks under Zig ASAN/UBSAN",
+      "binary_sha256": "aa5d063b997d118bcdb4218387798092be5f47adfe2a67f0a5d414a0ce6b55f5",
+      "cases": [
+        {
+          "case": "valid",
+          "exit_code": 0,
+          "expected": 0
+        },
+        {
+          "case": "nan",
+          "exit_code": 1,
+          "expected": 1
+        },
+        {
+          "case": "misaligned",
+          "exit_code": 1,
+          "expected": 1
+        },
+        {
+          "case": "empty",
+          "exit_code": 1,
+          "expected": 1
+        },
+        {
+          "case": "out-of-vocabulary",
+          "exit_code": 1,
+          "expected": 1
+        },
+        {
+          "case": "empty-tokens",
+          "exit_code": 1,
+          "expected": 1
+        },
+        {
+          "case": "misaligned-tokens",
+          "exit_code": 1,
+          "expected": 1
+        },
+        {
+          "case": "existing-output-preserved",
+          "exit_code": 1,
+          "expected": 1
+        }
+      ],
+      "all_passed": true,
+      "deployment_permitted": false
+    },
+    "guards": {
+      "cross-attention-window-v1": {
+        "schema": 1,
+        "state": "stopped",
+        "command": [
+          "/var/home/jack/Projects/.system-cache/venvs/ackerman-english-training-20261030/bin/python",
+          "tools/check_english_decoder.py",
+          "--checkpoint",
+          "build/native-policy-training-20261031/step2-v1/step-00000002",
+          "--model",
+          "build/native-policy-training-20261031/export-step2-v1/english-student-research.cact",
+          "--needle-source",
+          "/var/home/jack/Projects/.system-cache/ackerman-english-training/needle-source",
+          "--network",
+          "build/native-policy-training-20261031/network-step2-v1",
+          "--binary",
+          "build/english-decoder-cmake-v1/decoder_probe",
+          "--output",
+          "build/native-policy-training-20261031/cross-attention-step2-v1",
+          "--cross-attention"
+        ],
+        "guard_pid": 403789,
+        "child_pid": 404215,
+        "rss_limit_bytes": 3221225472,
+        "launch_available_memory_bytes": 5368709120,
+        "host_available_memory_floor_bytes": 1073741824,
+        "cpu_only": true,
+        "cpus": 2,
+        "nice_increment": 10,
+        "maximum_job_seconds": 300.0,
+        "peak_observed_process_group_rss_bytes": 1361543168,
+        "admitted": true,
+        "available_at_launch_bytes": 6795091968,
+        "admission_wait_seconds": 3.001,
+        "cpu_affinity": [
+          0,
+          1
+        ],
+        "reason": null,
+        "exit_code": 1,
+        "job_elapsed_seconds": 37.913
+      },
+      "network-recorded-runtime-window-v1": {
+        "schema": 1,
+        "state": "stopped",
+        "command": [
+          "/var/home/jack/Projects/.system-cache/venvs/ackerman-english-training-20261030/bin/python",
+          "tools/check_english_network.py",
+          "--checkpoint",
+          "build/native-policy-training-20261031/step2-v1/step-00000002",
+          "--model",
+          "build/native-policy-training-20261031/export-step2-v1/english-student-research.cact",
+          "--binary",
+          "build/english-native-cmake/wh_run",
+          "--needle-source",
+          "/var/home/jack/Projects/.system-cache/ackerman-english-training/needle-source",
+          "--catalog",
+          "/var/home/jack/Projects/AckermanOS-whistle-decoder-memory/tests/audio/youtube/manifest.json",
+          "--audio-root",
+          "/var/home/jack/Projects/AckermanOS-whistle-decoder-memory/build/youtube-fixtures",
+          "--output",
+          "build/native-policy-training-20261031/network-recorded-runtime-v1",
+          "--native-aware"
+        ],
+        "guard_pid": 411650,
+        "child_pid": 411813,
+        "rss_limit_bytes": 4294967296,
+        "launch_available_memory_bytes": 6442450944,
+        "host_available_memory_floor_bytes": 1073741824,
+        "cpu_only": true,
+        "cpus": 2,
+        "nice_increment": 10,
+        "maximum_job_seconds": 900.0,
+        "peak_observed_process_group_rss_bytes": 1642893312,
+        "admitted": true,
+        "available_at_launch_bytes": 6866735104,
+        "admission_wait_seconds": 3.001,
+        "cpu_affinity": [
+          0,
+          1
+        ],
+        "reason": null,
+        "exit_code": 1,
+        "job_elapsed_seconds": 69.976
+      },
+      "cross-attention-recorded-runtime-window-v1": {
+        "schema": 1,
+        "state": "complete",
+        "command": [
+          "/var/home/jack/Projects/.system-cache/venvs/ackerman-english-training-20261030/bin/python",
+          "tools/check_english_decoder.py",
+          "--checkpoint",
+          "build/native-policy-training-20261031/step2-v1/step-00000002",
+          "--model",
+          "build/native-policy-training-20261031/export-step2-v1/english-student-research.cact",
+          "--needle-source",
+          "/var/home/jack/Projects/.system-cache/ackerman-english-training/needle-source",
+          "--network",
+          "build/native-policy-training-20261031/network-recorded-runtime-v1",
+          "--binary",
+          "build/english-decoder-cmake-v1/decoder_probe",
+          "--output",
+          "build/native-policy-training-20261031/cross-attention-recorded-runtime-v1",
+          "--cross-attention"
+        ],
+        "guard_pid": 415832,
+        "child_pid": 416257,
+        "rss_limit_bytes": 3221225472,
+        "launch_available_memory_bytes": 5368709120,
+        "host_available_memory_floor_bytes": 1073741824,
+        "cpu_only": true,
+        "cpus": 2,
+        "nice_increment": 10,
+        "maximum_job_seconds": 300.0,
+        "peak_observed_process_group_rss_bytes": 1359302656,
+        "admitted": true,
+        "available_at_launch_bytes": 6477492224,
+        "admission_wait_seconds": 3.002,
+        "cpu_affinity": [
+          0,
+          1
+        ],
+        "reason": null,
+        "exit_code": 0,
+        "job_elapsed_seconds": 55.352
+      },
+      "cross-normalization-replay-window-v1": {
+        "schema": 1,
+        "state": "complete",
+        "command": [
+          "/var/home/jack/Projects/.system-cache/venvs/ackerman-english-training-20261030/bin/python",
+          "tools/check_english_decoder.py",
+          "--checkpoint",
+          "build/native-policy-training-20261031/step2-v1/step-00000002",
+          "--model",
+          "build/native-policy-training-20261031/export-step2-v1/english-student-research.cact",
+          "--needle-source",
+          "/var/home/jack/Projects/.system-cache/ackerman-english-training/needle-source",
+          "--network",
+          "build/native-policy-training-20261031/network-recorded-runtime-v1",
+          "--binary",
+          "build/english-decoder-cmake-v1/decoder_probe",
+          "--linear-binary",
+          "build/english-decoder-cmake-v1/profile_probe",
+          "--output",
+          "build/native-policy-training-20261031/cross-normalization-replay-v1",
+          "--cross-attention"
+        ],
+        "guard_pid": 423667,
+        "child_pid": 423782,
+        "rss_limit_bytes": 3221225472,
+        "launch_available_memory_bytes": 5368709120,
+        "host_available_memory_floor_bytes": 1073741824,
+        "cpu_only": true,
+        "cpus": 2,
+        "nice_increment": 10,
+        "maximum_job_seconds": 300.0,
+        "peak_observed_process_group_rss_bytes": 1399230464,
+        "admitted": true,
+        "available_at_launch_bytes": 5414760448,
+        "admission_wait_seconds": 3.001,
+        "cpu_affinity": [
+          0,
+          1
+        ],
+        "reason": null,
+        "exit_code": 0,
+        "job_elapsed_seconds": 47.944
+      },
+      "float-recorded-runtime-window-v2": {
+        "schema": 1,
+        "state": "complete",
+        "command": [
+          "/var/home/jack/Projects/.system-cache/venvs/ackerman-english-training-20261030/bin/python",
+          "tools/check_english_network.py",
+          "--checkpoint",
+          "build/native-policy-training-20261031/step2-v1/step-00000002",
+          "--model",
+          "build/native-policy-training-20261031/export-step2-v1/english-student-research.cact",
+          "--binary",
+          "build/english-native-cmake/wh_run",
+          "--needle-source",
+          "/var/home/jack/Projects/.system-cache/ackerman-english-training/needle-source",
+          "--catalog",
+          "/var/home/jack/Projects/AckermanOS-whistle-decoder-memory/tests/audio/youtube/manifest.json",
+          "--audio-root",
+          "/var/home/jack/Projects/AckermanOS-whistle-decoder-memory/build/youtube-fixtures",
+          "--output",
+          "build/native-policy-training-20261031/float-recorded-runtime-v2"
+        ],
+        "guard_pid": 435259,
+        "child_pid": 435430,
+        "rss_limit_bytes": 3221225472,
+        "launch_available_memory_bytes": 5368709120,
+        "host_available_memory_floor_bytes": 1073741824,
+        "cpu_only": true,
+        "cpus": 2,
+        "nice_increment": 10,
+        "maximum_job_seconds": 900.0,
+        "peak_observed_process_group_rss_bytes": 1409978368,
+        "admitted": true,
+        "available_at_launch_bytes": 5574336512,
+        "admission_wait_seconds": 3.001,
+        "cpu_affinity": [
+          0,
+          1
+        ],
+        "reason": null,
+        "exit_code": 0,
+        "job_elapsed_seconds": 50.533
+      }
+    },
+    "superseded_float_admission": {
+      "schema": 1,
+      "original_guard_pid": 426423,
+      "child_was_never_started": true,
+      "reason": "Superseded unstarted guard using measured prior control peaks below 1.65 GB; next attempt caps at 3 GiB plus 2 GiB reserve rather than 4 GiB plus 2 GiB",
+      "original_receipt_preserved": true,
+      "only_owned_waiting_guard_signalled": true,
+      "guard_confirmed_terminal": true,
+      "shell_exit_code": 143
+    },
+    "float_recorded_runtime": {
+      "schema": 1,
+      "scope": "Float execution with matched CQ weights and FP16-rounded other parameters; no A8/KV8, accuracy or device acceptance",
+      "execution_mode": "float",
+      "training_runtime_settings": {
+        "dtype": "float32",
+        "flash": false,
+        "remat": true,
+        "scan_unroll": 1
+      },
+      "runtime_configuration_module_sha256": "eadc9d67581f14b4c00eebfe618325f5d60dac3082eb6060ecd62433cb0cea39",
+      "checkpoint_training_deploy_policy": "native-fast",
+      "model_sha256": "37a8d6e407c7ffbc64fb46a8340cb41b29447a528fb836590e91800b94fc819b",
+      "native_binary_sha256": "9361da884d23b7fa33bbb1156c2ceaf057899a8b5f11d8b084475cda4c0352e3",
+      "checker_sha256": "ba3ea441d093becac2a4744b57ff9280a4055a22c27215ba6072ea95b674b982",
+      "checkpoint_manifest_sha256": "f018c908c5249db8739e95aad7829d6939c2e1a7aac1d2af8ca173aa54d2ec64",
+      "encoder_relative_tolerance": 0.0002,
+      "logits_absolute_tolerance": 0.002,
+      "tokens": [
+        2,
+        2048,
+        42,
+        101,
+        7,
+        1023,
+        33,
+        99
+      ],
+      "cases": [
+        {
+          "id": "cohen-want-make-app",
+          "audio_sha256": "8545bb49d4bb7715a3eda61884af801be24338692a9716eec87b6e5bb022d416",
+          "frames": 17,
+          "encoder_relative_l2_error": 6.437128945435688e-07,
+          "logits_max_absolute_error": 2.86102294921875e-06,
+          "native_memory_logits_max_absolute_error": 2.86102294921875e-06,
+          "argmax_identical": true,
+          "all_finite": true,
+          "within_tolerance": true
+        },
+        {
+          "id": "adalo-want-make-app",
+          "audio_sha256": "eb01ffbd64e65efd23316403c67758c87acd9b2048e92bc9ba53cd9d90d8e7d6",
+          "frames": 18,
+          "encoder_relative_l2_error": 7.02464205915021e-07,
+          "logits_max_absolute_error": 7.62939453125e-06,
+          "native_memory_logits_max_absolute_error": 7.62939453125e-06,
+          "argmax_identical": true,
+          "all_finite": true,
+          "within_tolerance": true
+        },
+        {
+          "id": "raroque-get-started",
+          "audio_sha256": "1ee4209e04d379a1b6e70f6a5593fbd0418cc4552a46f3e2edf09c5f3ab701cd",
+          "frames": 33,
+          "encoder_relative_l2_error": 8.261774269158195e-07,
+          "logits_max_absolute_error": 3.337860107421875e-06,
+          "native_memory_logits_max_absolute_error": 3.337860107421875e-06,
+          "argmax_identical": true,
+          "all_finite": true,
+          "within_tolerance": true
+        },
+        {
+          "id": "levi-introduction",
+          "audio_sha256": "187abf6e5a6181f1f249c0e20aa35da8ffecfe1171662f73ffed1a6d9ed11f3f",
+          "frames": 63,
+          "encoder_relative_l2_error": 7.002112738518917e-07,
+          "logits_max_absolute_error": 5.7220458984375e-06,
+          "native_memory_logits_max_absolute_error": 5.7220458984375e-06,
+          "argmax_identical": true,
+          "all_finite": true,
+          "within_tolerance": true
+        }
+      ],
+      "all_passed": true,
+      "deployment_permitted": false
+    }
+  },
+  "preservation": "Initial unsupported flash-mode cross probe and all earlier default-runtime receipts remain retained; no checkpoint, policy, native engine arithmetic or device model changed.",
+  "whole_float_recorded_runtime_passed": true
+}

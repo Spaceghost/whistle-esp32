@@ -12,10 +12,10 @@ class DecoderTraceTests(unittest.TestCase):
     def setUp(self):
         self.source = (ROOT/'engine/src/nd_whistle.c').read_text()
 
-    def test_only_five_trace_calls_are_added(self):
+    def test_only_capture_calls_are_added(self):
         generated = instrument(self.source)
-        restored, count = re.subn(r'    trace_boundary\(layer, pos, "[a-z-]+", x, d\);\n', '', generated)
-        self.assertEqual(count, 5)
+        restored, count = re.subn(r'    trace_[a-z_]+\([^;\n]*\);\n', '', generated)
+        self.assertEqual(count, 13)
         self.assertEqual(restored, self.source)
 
     def test_missing_boundary_refused(self):
@@ -30,6 +30,10 @@ class DecoderTraceTests(unittest.TestCase):
     def test_missing_decoder_refused(self):
         with self.assertRaises(ValueError):
             instrument(self.source.replace('static void dec_block(', 'static void changed_block('))
+
+    def test_missing_cross_projection_refused(self):
+        with self.assertRaisesRegex(ValueError, 'projection anchor'):
+            instrument(self.source.replace('    lin(w, X + X_OUT, o, 1, t2);', ''))
 
 
 if __name__ == '__main__':

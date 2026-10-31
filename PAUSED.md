@@ -1,3 +1,28 @@
+## Recorded runtime restored / cross components controlled — 2026-10-31
+
+A real evaluation mismatch was found: pinned WhistleConfig.from_saved drops
+flash/dtype/remat/scan_unroll, and prior diagnostics used flash=True despite
+training signature flash=False. New english_runtime restores and validates all
+four options, checks geometry, and records the helper hash. Earlier default-mode
+measurements remain historical evidence; use docs/english-runtime.md for scope.
+
+Correct-runtime full fast comparison still fails all four clips. With identical
+native normalized input, all cross-attention components and context Q8 codes
+agree. Standalone normalization replay changes native query output only at
+~3.16e-7 relative; it does not reproduce a large jump. Do not assert a specific
+normalization/projection bug from these controls. Compare composed normalization
+and quantization execution next, preserving all primitive controls and limits.
+
+The source generator now adds13 capture calls, verified by5 integrity tests;
+4 runtime-restoration tests and8 Zig ASAN/UBSAN probe checks pass. All previous
+research artifacts, raw tensors and failed controls remain intact. The corrected
+whole-float control now passes all4 clips, terminal0, under a3GiB cap/2GiB reserve
+(observed1.41GB process group). Its initial unstarted
+4GiB-cap guard was explicitly superseded, identity checked and confirmed terminal
+before the replacement launched. No training child had started on that guard.
+See research/english-recorded-runtime-20261031.json for exact receipts and final
+float status. No model/firmware/checkpoint/policy changes or other-workload eviction.
+
 ## Cross-attention localized — 2026-10-31
 
 The first-layer eighth-token discrepancy is now local to cross-attention:

@@ -25,7 +25,13 @@ def main():
     p.add_argument('--float', dest='floating', action='store_true')
     p.add_argument('--layers', action='store_true', help='Compare native and simulated decoder layer boundaries')
     p.add_argument('--sublayers', action='store_true', help='Also compare first-block self/cross-attention and feed-forward boundaries')
+    p.add_argument('--cross-attention', action='store_true', help='Compare first-block cross-attention projections, cache and Q8 decisions')
+    p.add_argument('--linear-binary', type=Path, help='Native profile_probe used for controlled query projection replay')
     a = p.parse_args()
+    if a.cross_attention:
+        a.sublayers = True
+        if a.linear_binary is None or not a.linear_binary.is_file():
+            p.error('--cross-attention requires a built --linear-binary profile_probe')
     if a.sublayers:
         a.layers = True
     if a.output.exists():
@@ -64,7 +70,8 @@ def main():
     if jax.default_backend() != 'cpu':
         raise ValueError('CPU only')
     saved = checkpoints.read_checkpoint(a.checkpoint / 'model.safetensors')
-    cfg = whistle.WhistleConfig.from_saved(saved['config'])
+    import english_runtime
+    cfg = english_runtime.configuration(whistle, saved['config'], signature)
     params = (english_precision.qat_params(saved['params'], quantize, signature['qat_bits']) if a.floating else
               english_native_quant.parameters(saved['params'], quantize, signature['qat_bits']))
     def stored(path, leaf):
@@ -112,6 +119,8 @@ def main():
                          logits_max_absolute_error=float(np.max(np.abs(actual_logits[i]-expected_logits[i]))),
                          shared_hidden_head_max_absolute_error=float(np.max(np.abs(actual_logits[i]-shared_logits[i])))))
     report = dict(schema=1, scope=__doc__, case=case['id'], audio_sha256=case['audio_sha256'], execution_mode=mode,
+                  training_runtime_settings=english_runtime.describe(cfg),
+                  runtime_configuration_module_sha256=sha(Path(english_runtime.__file__)),
                   model_sha256=sha(a.model), checkpoint_manifest_sha256=sha(a.checkpoint / 'manifest.json'),
                   network_receipt_sha256=sha(a.network / 'network.json'), encoder_input_sha256=sha(enc_path),
                   native_binary_sha256=sha(a.binary), checker_sha256=sha(Path(__file__)),
@@ -126,11 +135,16 @@ def main():
             report['sublayer_checker_sha256'] = sha(Path(english_decoder_sublayers.__file__))
             provenance = a.binary.parent / 'decoder-trace-source.json'
             report['native_trace_source'] = json.loads(provenance.read_text())
+        if a.cross_attention:
+            import english_cross_attention
+            report['cross_checker_sha256'] = sha(Path(english_cross_attention.__file__))
     (a.output / 'decoder.json').write_text(json.dumps(report, indent=2)+'\n')
     if a.layers and not report['layers']['original_jax_control_passed']:
         raise ValueError('Layer trace changed the JAX baseline; preserve evidence, do not attribute it to native execution')
     if a.sublayers and not report['layers']['sublayers']['original_module_control_passed']:
         raise ValueError('Sublayer trace changed the original block; preserve evidence')
+    if a.cross_attention and not report['layers']['cross_attention']['original_module_control_passed']:
+        raise ValueError('Cross-attention trace changed the original module; preserve evidence')
     (a.output / 'INCOMPLETE').unlink()
     print(json.dumps(report), flush=True)
 

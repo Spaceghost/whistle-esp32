@@ -1,5 +1,11 @@
 # English decoder: where fast inference diverges
 
+**Scope update:** the earlier numbers below used the loader's default
+`flash=True` reference. This checkpoint trained with `flash=False`. The checker
+now restores the recorded runtime; [current component controls and remaining
+composed-path mismatch](english-runtime.md) supersede attribution based only
+on these earlier comparisons.
+
 **Cross-attention in the first decoder layer diverges at the eighth tested token.**
 Self-attention and feed-forward agree when given identical inputs.
 
@@ -81,8 +87,8 @@ all jobs completed without eviction or GPU allocation.
 ## Host-only operation captures
 
 `tools/prepare_decoder_trace.py` creates a build-local engine copy with exactly
-five capture calls inside the decoder block. Production engine source is never
-edited. Four source-integrity tests prove that removing those calls restores
+thirteen capture calls inside the decoder block. Production engine source is never
+edited. Five source-integrity tests prove that removing those calls restores
 the original bytes and refuse missing or ambiguous anchors. Build receipts hash
 the engine, generator and generated source.
 
