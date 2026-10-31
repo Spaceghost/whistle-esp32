@@ -1,3 +1,17 @@
+## Native-policy export controls completed — 2026-10-31
+
+The active research continuation validated the actual native-policy step-two
+export: all 89 packed matrices and all four float-network clips pass. All four
+fast-network clips still fail the unchanged strict gate. Decoder comparison
+using native encoder memory passes three clips but fails the Levi introduction
+(0.003729 versus 0.002); investigate both encoder and decoder sensitivity.
+See `research/english-native-policy-validation-20261031.json`.
+
+Guarded jobs network-window-v1, float-window-v1 and weights-window-v1 are all
+terminal. The fast comparison exits 1 with preserved failure evidence; float
+and weights exit 0. No research model deployment, speech-accuracy claim,
+GPU allocation or other-workload eviction. Earlier pauses below remain history.
+
 # English native research resumed — parent goal active, 2026-10-30
 
 ## Current checkpoint — 2026-10-31

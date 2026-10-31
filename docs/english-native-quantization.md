@@ -164,9 +164,34 @@ preserve failures and successful controls. Raw audio, tensors and optimizer
 data remain outside Git. Jobs used bounded CPU/RAM; other workloads and Bak's
 hold were left alone. No target RAM, speed, power or accuracy improvement is claimed.
 
+## Actual native-policy checkpoint: validated controls ✅
+
+The checks above originally used upstream-policy weights. The **new two-step
+native-policy checkpoint** now has its own complete four-clip and storage audit.
+These are the same cached natural YouTube clips, with hashes checked before use.
+
+| Check on the new export | Result | Meaning |
+| :--- | :--- | :--- |
+| All 89 packed CQ matrices | ✅ Within original storage tolerances | Packing preserves this checkpoint's quantized weights |
+| Float network, four clips | ✅ Maximum encoder error 8.19e-7; logit error 7.63e-6 | Architecture and stored values agree without fast activation quantization |
+| Fast network, four clips | ☐ All four miss the existing strict gate | Maximum encoder error 0.007621; logit error 0.014909 |
+| Decoder given native encoder memory | ⚠️ Three pass; Levi introduction fails | First three ≤5.73e-6; Levi introduction 0.003729, above 0.002 |
+| Real recognition / Watch deployment | ☐ Unverified | Two optimizer steps do not produce an accepted recognizer |
+
+The fourth clip prevents attributing the entire mismatch to the encoder.
+Both encoder and decoder rounding sensitivity need further investigation.
+Identical argmax IDs here still do not establish speech accuracy. No thresholds
+were changed, no failed output was overwritten, and no research model was installed.
+
+The three jobs completed sequentially on two CPU cores at reduced priority.
+Observed process-group peaks were 1.63 GB (fast), 1.45 GB (float) and 1.02 GB
+(weights); none needed workload eviction or GPU allocation.
+
+[Exact per-clip, per-matrix and resource receipts](../research/english-native-policy-validation-20261031.json).
+
 ## Next work
 
-1. Bound remaining shared-input rounding sensitivity without relaxing existing gates.
+1. Localize encoder and Levi-clip decoder rounding sensitivity on the native-policy checkpoint without relaxing gates.
 2. Prepare meaningful native-policy training when resources and full audio are available.
 3. Preserve signature-checked checkpoint/restart behavior for the longer run.
 4. Train meaningfully when resources are free, then score held-out speech.

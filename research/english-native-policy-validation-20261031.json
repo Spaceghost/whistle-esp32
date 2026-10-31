@@ -1,0 +1,1273 @@
+{
+  "schema": 1,
+  "date": "2026-10-31",
+  "scope": "Validation of the actual two-step native-policy checkpoint/export; not trained recognizer accuracy or target acceptance",
+  "source_commit": "22af7bd",
+  "model_sha256": "37a8d6e407c7ffbc64fb46a8340cb41b29447a528fb836590e91800b94fc819b",
+  "model_bytes": 8832915,
+  "packed_weight_matrices": 89,
+  "float_network_passed": true,
+  "fast_network_passed": false,
+  "thresholds_unchanged": true,
+  "speech_accuracy_verified": false,
+  "deployment_permitted": false,
+  "evidence": {
+    "native_fast_network": {
+      "schema": 1,
+      "scope": "Native-aware fast-kernel simulation applied to existing checkpoint; no new training, accuracy or device acceptance",
+      "execution_mode": "cq-h128-a8-away-cb8-kv-f32-v1",
+      "checkpoint_training_deploy_policy": "native-fast",
+      "model_sha256": "37a8d6e407c7ffbc64fb46a8340cb41b29447a528fb836590e91800b94fc819b",
+      "native_binary_sha256": "9361da884d23b7fa33bbb1156c2ceaf057899a8b5f11d8b084475cda4c0352e3",
+      "checker_sha256": "aa9f5e662be5f72fc017ff37b0f04d44861ec97797740ebbf8cbdee077874b2a",
+      "checkpoint_manifest_sha256": "f018c908c5249db8739e95aad7829d6939c2e1a7aac1d2af8ca173aa54d2ec64",
+      "encoder_relative_tolerance": 0.0002,
+      "logits_absolute_tolerance": 0.002,
+      "tokens": [
+        2,
+        2048,
+        42,
+        101,
+        7,
+        1023,
+        33,
+        99
+      ],
+      "cases": [
+        {
+          "id": "cohen-want-make-app",
+          "audio_sha256": "8545bb49d4bb7715a3eda61884af801be24338692a9716eec87b6e5bb022d416",
+          "frames": 17,
+          "encoder_relative_l2_error": 0.007620458956807852,
+          "logits_max_absolute_error": 0.014908015727996826,
+          "native_memory_logits_max_absolute_error": 4.76837158203125e-06,
+          "argmax_identical": true,
+          "all_finite": true,
+          "within_tolerance": false
+        },
+        {
+          "id": "adalo-want-make-app",
+          "audio_sha256": "eb01ffbd64e65efd23316403c67758c87acd9b2048e92bc9ba53cd9d90d8e7d6",
+          "frames": 18,
+          "encoder_relative_l2_error": 0.007607109844684601,
+          "logits_max_absolute_error": 0.013570412993431091,
+          "native_memory_logits_max_absolute_error": 5.7220458984375e-06,
+          "argmax_identical": true,
+          "all_finite": true,
+          "within_tolerance": false
+        },
+        {
+          "id": "raroque-get-started",
+          "audio_sha256": "1ee4209e04d379a1b6e70f6a5593fbd0418cc4552a46f3e2edf09c5f3ab701cd",
+          "frames": 33,
+          "encoder_relative_l2_error": 0.006866126786917448,
+          "logits_max_absolute_error": 0.014710664749145508,
+          "native_memory_logits_max_absolute_error": 3.814697265625e-06,
+          "argmax_identical": true,
+          "all_finite": true,
+          "within_tolerance": false
+        },
+        {
+          "id": "levi-introduction",
+          "audio_sha256": "187abf6e5a6181f1f249c0e20aa35da8ffecfe1171662f73ffed1a6d9ed11f3f",
+          "frames": 63,
+          "encoder_relative_l2_error": 0.006266037933528423,
+          "logits_max_absolute_error": 0.013100042939186096,
+          "native_memory_logits_max_absolute_error": 0.003728806972503662,
+          "argmax_identical": true,
+          "all_finite": true,
+          "within_tolerance": false
+        }
+      ],
+      "all_passed": false,
+      "deployment_permitted": false,
+      "simulation_sha256": "f540ca867fa5bca80e94f62f8bcce522449206430bd364cf8d6018ec6c413a23"
+    },
+    "float_network": {
+      "schema": 1,
+      "scope": "Float execution with matched CQ weights and FP16-rounded other parameters; no A8/KV8, accuracy or device acceptance",
+      "execution_mode": "float",
+      "checkpoint_training_deploy_policy": "native-fast",
+      "model_sha256": "37a8d6e407c7ffbc64fb46a8340cb41b29447a528fb836590e91800b94fc819b",
+      "native_binary_sha256": "9361da884d23b7fa33bbb1156c2ceaf057899a8b5f11d8b084475cda4c0352e3",
+      "checker_sha256": "aa9f5e662be5f72fc017ff37b0f04d44861ec97797740ebbf8cbdee077874b2a",
+      "checkpoint_manifest_sha256": "f018c908c5249db8739e95aad7829d6939c2e1a7aac1d2af8ca173aa54d2ec64",
+      "encoder_relative_tolerance": 0.0002,
+      "logits_absolute_tolerance": 0.002,
+      "tokens": [
+        2,
+        2048,
+        42,
+        101,
+        7,
+        1023,
+        33,
+        99
+      ],
+      "cases": [
+        {
+          "id": "cohen-want-make-app",
+          "audio_sha256": "8545bb49d4bb7715a3eda61884af801be24338692a9716eec87b6e5bb022d416",
+          "frames": 17,
+          "encoder_relative_l2_error": 6.590951784346544e-07,
+          "logits_max_absolute_error": 2.86102294921875e-06,
+          "native_memory_logits_max_absolute_error": 2.86102294921875e-06,
+          "argmax_identical": true,
+          "all_finite": true,
+          "within_tolerance": true
+        },
+        {
+          "id": "adalo-want-make-app",
+          "audio_sha256": "eb01ffbd64e65efd23316403c67758c87acd9b2048e92bc9ba53cd9d90d8e7d6",
+          "frames": 18,
+          "encoder_relative_l2_error": 7.210596209006326e-07,
+          "logits_max_absolute_error": 7.62939453125e-06,
+          "native_memory_logits_max_absolute_error": 7.62939453125e-06,
+          "argmax_identical": true,
+          "all_finite": true,
+          "within_tolerance": true
+        },
+        {
+          "id": "raroque-get-started",
+          "audio_sha256": "1ee4209e04d379a1b6e70f6a5593fbd0418cc4552a46f3e2edf09c5f3ab701cd",
+          "frames": 33,
+          "encoder_relative_l2_error": 8.182805117940006e-07,
+          "logits_max_absolute_error": 2.86102294921875e-06,
+          "native_memory_logits_max_absolute_error": 4.291534423828125e-06,
+          "argmax_identical": true,
+          "all_finite": true,
+          "within_tolerance": true
+        },
+        {
+          "id": "levi-introduction",
+          "audio_sha256": "187abf6e5a6181f1f249c0e20aa35da8ffecfe1171662f73ffed1a6d9ed11f3f",
+          "frames": 63,
+          "encoder_relative_l2_error": 6.961627718737873e-07,
+          "logits_max_absolute_error": 5.7220458984375e-06,
+          "native_memory_logits_max_absolute_error": 5.245208740234375e-06,
+          "argmax_identical": true,
+          "all_finite": true,
+          "within_tolerance": true
+        }
+      ],
+      "all_passed": true,
+      "deployment_permitted": false
+    },
+    "packed_weights": {
+      "schema": 1,
+      "scope": "Full-checkpoint original-codebook CQ storage comparison; native int8 GEMM applies additional level rounding",
+      "training_deploy_policy": "native-fast",
+      "model_sha256": "37a8d6e407c7ffbc64fb46a8340cb41b29447a528fb836590e91800b94fc819b",
+      "checkpoint_manifest_sha256": "f018c908c5249db8739e95aad7829d6939c2e1a7aac1d2af8ca173aa54d2ec64",
+      "checker_sha256": "b72a5edc8267e9e8767d43de4720a5c03fd6e72d755231df7a5bfbb4eb334987",
+      "absolute_tolerance": 2e-06,
+      "relative_tolerance": 2e-05,
+      "matrices": [
+        {
+          "name": "embedding",
+          "shape": [
+            2049,
+            512
+          ],
+          "bits": 4,
+          "maximum_absolute_error": 9.313225746154785e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer00.q_proj",
+          "shape": [
+            384,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer00.k_proj",
+          "shape": [
+            96,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer00.v_proj",
+          "shape": [
+            128,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer00.gate_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer00.out_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 9.313225746154785e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer01.q_proj",
+          "shape": [
+            384,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer01.k_proj",
+          "shape": [
+            96,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer01.v_proj",
+          "shape": [
+            128,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer01.gate_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer01.out_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 9.313225746154785e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "mhc_phi_pre",
+          "shape": [
+            8,
+            2048
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "mhc_phi_post",
+          "shape": [
+            8,
+            2048
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "mhc_phi_res",
+          "shape": [
+            32,
+            2048
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "engram0.tables",
+          "shape": [
+            73728,
+            128
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.2293457984924316e-07,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "engram0.key_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "engram0.value_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 9.313225746154785e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer00.cross.q_proj",
+          "shape": [
+            384,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer00.cross.k_proj",
+          "shape": [
+            384,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer00.cross.v_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer00.cross.gate_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer00.cross.out_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 9.313225746154785e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer01.cross.q_proj",
+          "shape": [
+            384,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer01.cross.k_proj",
+          "shape": [
+            384,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer01.cross.v_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer01.cross.gate_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer01.cross.out_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 9.313225746154785e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder00.q_proj",
+          "shape": [
+            384,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder00.k_proj",
+          "shape": [
+            96,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder00.v_proj",
+          "shape": [
+            128,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder00.gate_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder00.out_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.656612873077393e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder00.pw1",
+          "shape": [
+            1024,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder00.pw2",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.656612873077393e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder01.q_proj",
+          "shape": [
+            384,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder01.k_proj",
+          "shape": [
+            96,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder01.v_proj",
+          "shape": [
+            128,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder01.gate_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder01.out_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.656612873077393e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder01.pw1",
+          "shape": [
+            1024,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder01.pw2",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.656612873077393e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder02.q_proj",
+          "shape": [
+            384,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder02.k_proj",
+          "shape": [
+            96,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder02.v_proj",
+          "shape": [
+            128,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder02.gate_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder02.out_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.656612873077393e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder02.pw1",
+          "shape": [
+            1024,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder02.pw2",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.656612873077393e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder03.q_proj",
+          "shape": [
+            384,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder03.k_proj",
+          "shape": [
+            96,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder03.v_proj",
+          "shape": [
+            128,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder03.gate_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder03.out_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.656612873077393e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder03.pw1",
+          "shape": [
+            1024,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder03.pw2",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.656612873077393e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder04.q_proj",
+          "shape": [
+            384,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder04.k_proj",
+          "shape": [
+            96,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder04.v_proj",
+          "shape": [
+            128,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder04.gate_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder04.out_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.656612873077393e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder04.pw1",
+          "shape": [
+            1024,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 3.725290298461914e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder04.pw2",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.656612873077393e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder05.q_proj",
+          "shape": [
+            384,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder05.k_proj",
+          "shape": [
+            96,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder05.v_proj",
+          "shape": [
+            128,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder05.gate_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder05.out_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.656612873077393e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder05.pw1",
+          "shape": [
+            1024,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder05.pw2",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 9.313225746154785e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder06.q_proj",
+          "shape": [
+            384,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder06.k_proj",
+          "shape": [
+            96,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder06.v_proj",
+          "shape": [
+            128,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder06.gate_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder06.out_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.656612873077393e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder06.pw1",
+          "shape": [
+            1024,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder06.pw2",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.656612873077393e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder07.q_proj",
+          "shape": [
+            384,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder07.k_proj",
+          "shape": [
+            96,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder07.v_proj",
+          "shape": [
+            128,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder07.gate_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder07.out_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.656612873077393e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder07.pw1",
+          "shape": [
+            1024,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder07.pw2",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.656612873077393e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder.mhc_phi_pre",
+          "shape": [
+            32,
+            2048
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder.mhc_phi_post",
+          "shape": [
+            32,
+            2048
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder.mhc_phi_res",
+          "shape": [
+            128,
+            2048
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "stem.pw_1",
+          "shape": [
+            128,
+            128
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 6.332993507385254e-08,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "stem.pw_2",
+          "shape": [
+            128,
+            128
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.470348358154297e-08,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "stem.out",
+          "shape": [
+            512,
+            1280
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        }
+      ],
+      "all_passed": true,
+      "deployment_permitted": false
+    },
+    "resource_guards": {
+      "network": {
+        "schema": 1,
+        "state": "stopped",
+        "command": [
+          "/var/home/jack/Projects/.system-cache/venvs/ackerman-english-training-20261030/bin/python",
+          "tools/check_english_network.py",
+          "--checkpoint",
+          "build/native-policy-training-20261031/step2-v1/step-00000002",
+          "--model",
+          "build/native-policy-training-20261031/export-step2-v1/english-student-research.cact",
+          "--binary",
+          "build/english-native-cmake/wh_run",
+          "--needle-source",
+          "/var/home/jack/Projects/.system-cache/ackerman-english-training/needle-source",
+          "--catalog",
+          "/var/home/jack/Projects/AckermanOS-whistle-decoder-memory/tests/audio/youtube/manifest.json",
+          "--audio-root",
+          "/var/home/jack/Projects/AckermanOS-whistle-decoder-memory/build/youtube-fixtures",
+          "--output",
+          "build/native-policy-training-20261031/network-step2-v1",
+          "--native-aware"
+        ],
+        "guard_pid": 351659,
+        "child_pid": 351810,
+        "rss_limit_bytes": 4294967296,
+        "launch_available_memory_bytes": 6442450944,
+        "host_available_memory_floor_bytes": 1073741824,
+        "cpu_only": true,
+        "cpus": 2,
+        "nice_increment": 10,
+        "maximum_job_seconds": 900.0,
+        "peak_observed_process_group_rss_bytes": 1621438464,
+        "admitted": true,
+        "available_at_launch_bytes": 8935051264,
+        "admission_wait_seconds": 3.001,
+        "cpu_affinity": [
+          0,
+          1
+        ],
+        "reason": null,
+        "exit_code": 1,
+        "job_elapsed_seconds": 67.433
+      },
+      "float": {
+        "schema": 1,
+        "state": "complete",
+        "command": [
+          "/var/home/jack/Projects/.system-cache/venvs/ackerman-english-training-20261030/bin/python",
+          "tools/check_english_network.py",
+          "--checkpoint",
+          "build/native-policy-training-20261031/step2-v1/step-00000002",
+          "--model",
+          "build/native-policy-training-20261031/export-step2-v1/english-student-research.cact",
+          "--binary",
+          "build/english-native-cmake/wh_run",
+          "--needle-source",
+          "/var/home/jack/Projects/.system-cache/ackerman-english-training/needle-source",
+          "--catalog",
+          "/var/home/jack/Projects/AckermanOS-whistle-decoder-memory/tests/audio/youtube/manifest.json",
+          "--audio-root",
+          "/var/home/jack/Projects/AckermanOS-whistle-decoder-memory/build/youtube-fixtures",
+          "--output",
+          "build/native-policy-training-20261031/float-step2-v1"
+        ],
+        "guard_pid": 354457,
+        "child_pid": 354608,
+        "rss_limit_bytes": 4294967296,
+        "launch_available_memory_bytes": 6442450944,
+        "host_available_memory_floor_bytes": 1073741824,
+        "cpu_only": true,
+        "cpus": 2,
+        "nice_increment": 10,
+        "maximum_job_seconds": 900.0,
+        "peak_observed_process_group_rss_bytes": 1441513472,
+        "admitted": true,
+        "available_at_launch_bytes": 9044242432,
+        "admission_wait_seconds": 3.001,
+        "cpu_affinity": [
+          0,
+          1
+        ],
+        "reason": null,
+        "exit_code": 0,
+        "job_elapsed_seconds": 49.838
+      },
+      "weights": {
+        "schema": 1,
+        "state": "complete",
+        "command": [
+          "/var/home/jack/Projects/.system-cache/venvs/ackerman-english-training-20261030/bin/python",
+          "tools/check_english_weight_parity.py",
+          "--checkpoint",
+          "build/native-policy-training-20261031/step2-v1/step-00000002",
+          "--model",
+          "build/native-policy-training-20261031/export-step2-v1/english-student-research.cact",
+          "--needle-source",
+          "/var/home/jack/Projects/.system-cache/ackerman-english-training/needle-source",
+          "--output",
+          "build/native-policy-training-20261031/weights-step2-v1.json"
+        ],
+        "guard_pid": 356658,
+        "child_pid": 356753,
+        "rss_limit_bytes": 2147483648,
+        "launch_available_memory_bytes": 4294967296,
+        "host_available_memory_floor_bytes": 1073741824,
+        "cpu_only": true,
+        "cpus": 2,
+        "nice_increment": 10,
+        "maximum_job_seconds": 120.0,
+        "peak_observed_process_group_rss_bytes": 1019142144,
+        "admitted": true,
+        "available_at_launch_bytes": 9025417216,
+        "admission_wait_seconds": 3.001,
+        "cpu_affinity": [
+          0,
+          1
+        ],
+        "reason": null,
+        "exit_code": 0,
+        "job_elapsed_seconds": 12.437
+      }
+    }
+  }
+}
