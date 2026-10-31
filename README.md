@@ -50,6 +50,12 @@ A source-verified English corpus builder and smaller BPE vocabulary experiment
 are available in [the research guide](docs/english-corpus.md). These prepare
 training/evaluation data; they do not produce a deployable replacement model.
 
+**✅ The two-step English test export now fits the Watch partition at 8.83 MB.**
+All 89 packed CQ matrices and the checked native float encoder/decoder outputs
+agree with the trainer. This is a pipeline milestone, not a trained recognizer.
+Activation/cache quantization, meaningful training, held-out accuracy and Watch
+acceptance remain open. See [status tables and flow diagrams](docs/english-native.md).
+
 ## What you need
 
 | Part | Notes |

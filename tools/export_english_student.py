@@ -63,7 +63,7 @@ def main():
         raise ValueError('Frontend or precision implementation differs from training')
     if signature['qat_bits'] == 2 and profile != 3:
         raise ValueError('Two-bit body requires its matched stable English training policy')
-    whistle, _, checkpoints = helper['source_modules'](a.needle_source)
+    whistle, quantize, checkpoints = helper['source_modules'](a.needle_source)
     export = importlib.import_module('_ack_needle.model.export')
     from sentencepiece import sentencepiece_model_pb2
     cfg = whistle.WhistleConfig.from_saved(metadata['config'])
@@ -80,7 +80,8 @@ def main():
     (a.output / 'INCOMPLETE').write_text('Research export not complete.\n')
     tokenizer = export.whistle_tokenizer_blob(proto, ('en',))
     print('packing_full_model', flush=True)
-    blob, tensors = english_precision.pack_model(export, saved['params'], cfg.needle(), tokenizer, cfg, signature['qat_bits'])
+    import english_export_math
+    blob, tensors = english_export_math.pack_model(export, quantize, saved['params'], cfg.needle(), tokenizer, cfg, signature['qat_bits'])
     blob = mark_training_frontend(blob, profile)
     artifact = a.output / 'english-student-research.cact'
     with artifact.open('xb') as target:
@@ -90,6 +91,8 @@ def main():
               'checkpoint_step': metadata['step'], 'tokenizer_sha256': sha(a.tokenizer),
               'config': metadata['config'], 'training_signature': signature,
               'source_commit': helper['NEEDLE_COMMIT'], 'export_script_sha256': sha(Path(__file__)),
+              'packing_math': 'pinned trainer JAX float32, codebook choice and FP16 norm rounding',
+              'packing_module_sha256': sha(Path(english_export_math.__file__)),
               'bytes': len(blob), 'sha256': sha(artifact), 'tensors': tensors,
               'text_vocabulary': cfg.text, 'english_prefix_id': cfg.text, 'embedding_rows': cfg.vocab,
               'body_weight_bits': signature['qat_bits'], 'tied_embedding_bits': 4, 'audio_frontend_profile': profile, 'native_format': 'AWE1',

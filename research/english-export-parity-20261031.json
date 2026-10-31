@@ -1,0 +1,2264 @@
+{
+  "schema": 1,
+  "date": "2026-10-31",
+  "scope": "Corrected CQ packing and whole-network float comparison for a two-step research checkpoint; not an accepted recognizer",
+  "float_network_comparison_verified": true,
+  "quantized_activation_cache_comparison_verified": false,
+  "neural_accuracy_verified": false,
+  "watch_acceptance_verified": false,
+  "deployment_permitted": false,
+  "training_source_unchanged": true,
+  "evidence": {
+    "original_failed_weight_audit": {
+      "schema": 1,
+      "scope": "Full-checkpoint CQ packing/QAT comparison only",
+      "model_sha256": "97b590477e48f04c2b1cafd3ceab2347355b999c77a3523cf24c4adb1abcf779",
+      "checkpoint_manifest_sha256": "c781f2be72e9a2c908df05c96be748897adb2774c8a979a10e484a20322ac8e3",
+      "checker_sha256": "0774a0f16dd66c232a2f9cb1fa1d8fd1d491b7407ebbb4e36e1c71cffb9adf64",
+      "absolute_tolerance": 2e-06,
+      "relative_tolerance": 2e-05,
+      "matrices": [
+        {
+          "name": "embedding",
+          "shape": [
+            2049,
+            512
+          ],
+          "bits": 4,
+          "maximum_absolute_error": 0.0004616864025592804,
+          "values_outside_tolerance": 128,
+          "within_tolerance": false
+        },
+        {
+          "name": "layer00.q_proj",
+          "shape": [
+            384,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer00.k_proj",
+          "shape": [
+            96,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer00.v_proj",
+          "shape": [
+            128,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer00.gate_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer00.out_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 9.313225746154785e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer01.q_proj",
+          "shape": [
+            384,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer01.k_proj",
+          "shape": [
+            96,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer01.v_proj",
+          "shape": [
+            128,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer01.gate_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer01.out_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 9.313225746154785e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "mhc_phi_pre",
+          "shape": [
+            8,
+            2048
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "mhc_phi_post",
+          "shape": [
+            8,
+            2048
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "mhc_phi_res",
+          "shape": [
+            32,
+            2048
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "engram0.tables",
+          "shape": [
+            73728,
+            128
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 3.032386302947998e-05,
+          "values_outside_tolerance": 410,
+          "within_tolerance": false
+        },
+        {
+          "name": "engram0.key_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.9773603677749634e-05,
+          "values_outside_tolerance": 111,
+          "within_tolerance": false
+        },
+        {
+          "name": "engram0.value_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.337192952632904e-05,
+          "values_outside_tolerance": 82,
+          "within_tolerance": false
+        },
+        {
+          "name": "layer00.cross.q_proj",
+          "shape": [
+            384,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer00.cross.k_proj",
+          "shape": [
+            384,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 3.207474946975708e-05,
+          "values_outside_tolerance": 109,
+          "within_tolerance": false
+        },
+        {
+          "name": "layer00.cross.v_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer00.cross.gate_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer00.cross.out_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.5165656805038452e-05,
+          "values_outside_tolerance": 84,
+          "within_tolerance": false
+        },
+        {
+          "name": "layer01.cross.q_proj",
+          "shape": [
+            384,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer01.cross.k_proj",
+          "shape": [
+            384,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 3.6135315895080566e-05,
+          "values_outside_tolerance": 216,
+          "within_tolerance": false
+        },
+        {
+          "name": "layer01.cross.v_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer01.cross.gate_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 2.8185546398162842e-05,
+          "values_outside_tolerance": 102,
+          "within_tolerance": false
+        },
+        {
+          "name": "layer01.cross.out_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 9.313225746154785e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder00.q_proj",
+          "shape": [
+            384,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder00.k_proj",
+          "shape": [
+            96,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder00.v_proj",
+          "shape": [
+            128,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder00.gate_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder00.out_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.656612873077393e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder00.pw1",
+          "shape": [
+            1024,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder00.pw2",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.656612873077393e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder01.q_proj",
+          "shape": [
+            384,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder01.k_proj",
+          "shape": [
+            96,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder01.v_proj",
+          "shape": [
+            128,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder01.gate_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder01.out_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 6.727874279022217e-06,
+          "values_outside_tolerance": 53,
+          "within_tolerance": false
+        },
+        {
+          "name": "encoder01.pw1",
+          "shape": [
+            1024,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder01.pw2",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.656612873077393e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder02.q_proj",
+          "shape": [
+            384,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder02.k_proj",
+          "shape": [
+            96,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder02.v_proj",
+          "shape": [
+            128,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder02.gate_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder02.out_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.656612873077393e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder02.pw1",
+          "shape": [
+            1024,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder02.pw2",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.656612873077393e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder03.q_proj",
+          "shape": [
+            384,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder03.k_proj",
+          "shape": [
+            96,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder03.v_proj",
+          "shape": [
+            128,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder03.gate_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder03.out_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.656612873077393e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder03.pw1",
+          "shape": [
+            1024,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder03.pw2",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.656612873077393e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder04.q_proj",
+          "shape": [
+            384,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder04.k_proj",
+          "shape": [
+            96,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder04.v_proj",
+          "shape": [
+            128,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder04.gate_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder04.out_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.656612873077393e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder04.pw1",
+          "shape": [
+            1024,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 2.773478627204895e-05,
+          "values_outside_tolerance": 107,
+          "within_tolerance": false
+        },
+        {
+          "name": "encoder04.pw2",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.656612873077393e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder05.q_proj",
+          "shape": [
+            384,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder05.k_proj",
+          "shape": [
+            96,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder05.v_proj",
+          "shape": [
+            128,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder05.gate_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder05.out_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.656612873077393e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder05.pw1",
+          "shape": [
+            1024,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder05.pw2",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.656612873077393e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder06.q_proj",
+          "shape": [
+            384,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder06.k_proj",
+          "shape": [
+            96,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder06.v_proj",
+          "shape": [
+            128,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder06.gate_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder06.out_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.656612873077393e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder06.pw1",
+          "shape": [
+            1024,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder06.pw2",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.656612873077393e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder07.q_proj",
+          "shape": [
+            384,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder07.k_proj",
+          "shape": [
+            96,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder07.v_proj",
+          "shape": [
+            128,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder07.gate_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder07.out_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.656612873077393e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder07.pw1",
+          "shape": [
+            1024,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder07.pw2",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.656612873077393e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder.mhc_phi_pre",
+          "shape": [
+            32,
+            2048
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder.mhc_phi_post",
+          "shape": [
+            32,
+            2048
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 3.203749656677246e-05,
+          "values_outside_tolerance": 107,
+          "within_tolerance": false
+        },
+        {
+          "name": "encoder.mhc_phi_res",
+          "shape": [
+            128,
+            2048
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "stem.pw_1",
+          "shape": [
+            128,
+            128
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 5.21540641784668e-08,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "stem.pw_2",
+          "shape": [
+            128,
+            128
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.470348358154297e-08,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "stem.out",
+          "shape": [
+            512,
+            1280
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 2.9496848583221436e-05,
+          "values_outside_tolerance": 107,
+          "within_tolerance": false
+        }
+      ],
+      "all_passed": false,
+      "deployment_permitted": false
+    },
+    "matched_export": {
+      "schema": 1,
+      "scope": "Two-step research checkpoint export; not an accepted recognizer",
+      "checkpoint_manifest_sha256": "c781f2be72e9a2c908df05c96be748897adb2774c8a979a10e484a20322ac8e3",
+      "checkpoint_step": 2,
+      "tokenizer_sha256": "70b605e6951bf8460742ed3756019ad5e57a940a0d0b0e14d07b4b2f96fc6885",
+      "config": {
+        "text": 2048,
+        "languages": [
+          "en"
+        ],
+        "dim": 512,
+        "kv_heads": 2,
+        "qk_dim": 48,
+        "v_dim": 64,
+        "enc_layers": 8,
+        "dec_layers": 2,
+        "conv_kernel": 9,
+        "taps": 3,
+        "lanes": 4,
+        "enc_lanes": 4,
+        "sites": [
+          1
+        ],
+        "orders": [
+          2,
+          3
+        ],
+        "slots": 18432,
+        "hashes": 2,
+        "stem": 128,
+        "stem_stages": 3,
+        "rope": 100000.0,
+        "mels": 80,
+        "rate": 16000,
+        "fft": 512,
+        "win": 400,
+        "hop": 160,
+        "max_tokens": 320,
+        "pad": 0,
+        "eos": 1,
+        "bos": 2,
+        "dtype": "float32",
+        "flash": false,
+        "remat": true,
+        "scan_unroll": 1
+      },
+      "training_signature": {
+        "corpus_sha256": "0dedae607af955f07c74e0db68cb8e506c4c9d6f16d131dbc1ed4b37e163da4e",
+        "tokenizer_sha256": "70b605e6951bf8460742ed3756019ad5e57a940a0d0b0e14d07b4b2f96fc6885",
+        "train_manifest_sha256": "ceb2f15fd1d406006d7aa5ec53b38b905c655e5d182e032d7cf0e12c7f8eab00",
+        "source_receipt_sha256": "0217a8bdd09d45d31f2e3ed3db1bfba04fb72c63aa124ec3b35ff98d5836963c",
+        "config": {
+          "text": 2048,
+          "languages": [
+            "en"
+          ],
+          "dim": 512,
+          "kv_heads": 2,
+          "qk_dim": 48,
+          "v_dim": 64,
+          "enc_layers": 8,
+          "dec_layers": 2,
+          "conv_kernel": 9,
+          "taps": 3,
+          "lanes": 4,
+          "enc_lanes": 4,
+          "sites": [
+            1
+          ],
+          "orders": [
+            2,
+            3
+          ],
+          "slots": 18432,
+          "hashes": 2,
+          "stem": 128,
+          "stem_stages": 3,
+          "rope": 100000.0,
+          "mels": 80,
+          "rate": 16000,
+          "fft": 512,
+          "win": 400,
+          "hop": 160,
+          "max_tokens": 320,
+          "pad": 0,
+          "eos": 1,
+          "bos": 2,
+          "dtype": "float32",
+          "flash": false,
+          "remat": true,
+          "scan_unroll": 1
+        },
+        "training_script_sha256": "61e2a9d4b23cdfe7e26fcd1debf833287ffaf9c9164eb6e2e1b6d830f5898455",
+        "packages": {
+          "jax": "0.12.0.1",
+          "jaxlib": "0.12.0.1",
+          "flax": "0.12.12",
+          "optax": "0.2.8",
+          "numpy": "2.5.4",
+          "safetensors": "0.8.0",
+          "sentencepiece": "0.2.2",
+          "soundfile": "0.14.0"
+        },
+        "python": "3.12.14",
+        "sampler": "Random(seed+epoch) shuffle with global-step offset",
+        "seed": 0,
+        "batch_size": 1,
+        "maximum_samples": 32000,
+        "batch_tokens": 32,
+        "qat_bits": 2,
+        "lr": 0.0001,
+        "tied_embedding_bits": 4,
+        "audio_frontend_profile": 3,
+        "frontend_module_sha256": "de4839fc6b47057cce479c55fc4f5c90ea16bbe2b3b4d27affd8eac935a0eaa9",
+        "precision_module_sha256": "811b288d955927843e3366bdbdfa4ba9d4673885e9228c0770c2d122478b98ef",
+        "selected_train_ids_sha256": "1800d5726190483634a25096a9fcae13e26111f2956cc16f62ea12c9607aac7d",
+        "optimizer": "clip1.0 + optax.adamw(default weight_decay)"
+      },
+      "source_commit": "b4fc11b04f1852888d375c8c6dfbaca44572d014",
+      "export_script_sha256": "8df258ef165d5bbf6175f2d41ef9d2628d14189625009f455271e8a83d60b4f2",
+      "packing_math": "pinned trainer JAX float32, codebook choice and FP16 norm rounding",
+      "packing_module_sha256": "c5a7226eea4d0928fefd23690c84cfbdc55a393f42f4342c266f0a7d69dcdeda",
+      "bytes": 8832915,
+      "sha256": "74fb673b1a564928fb3b2cd6d47cac15c8aa8d415d37804d4b6ef710222f7ade",
+      "tensors": 455,
+      "text_vocabulary": 2048,
+      "english_prefix_id": 2048,
+      "embedding_rows": 2049,
+      "body_weight_bits": 2,
+      "tied_embedding_bits": 4,
+      "audio_frontend_profile": 3,
+      "native_format": "AWE1",
+      "native_validation_complete": false,
+      "neural_accuracy_verified": false,
+      "deployment_permitted": false
+    },
+    "matched_export_guard": {
+      "exit_code": 0,
+      "stop_reason": null,
+      "peak_child_rss_bytes": 908046336,
+      "elapsed_seconds": 11.271,
+      "rss_limit_bytes": 2147483648,
+      "cpu_only": true
+    },
+    "matched_weight_audit": {
+      "schema": 1,
+      "scope": "Full-checkpoint CQ packing/QAT comparison only",
+      "model_sha256": "74fb673b1a564928fb3b2cd6d47cac15c8aa8d415d37804d4b6ef710222f7ade",
+      "checkpoint_manifest_sha256": "c781f2be72e9a2c908df05c96be748897adb2774c8a979a10e484a20322ac8e3",
+      "checker_sha256": "0774a0f16dd66c232a2f9cb1fa1d8fd1d491b7407ebbb4e36e1c71cffb9adf64",
+      "absolute_tolerance": 2e-06,
+      "relative_tolerance": 2e-05,
+      "matrices": [
+        {
+          "name": "embedding",
+          "shape": [
+            2049,
+            512
+          ],
+          "bits": 4,
+          "maximum_absolute_error": 9.313225746154785e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer00.q_proj",
+          "shape": [
+            384,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer00.k_proj",
+          "shape": [
+            96,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer00.v_proj",
+          "shape": [
+            128,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer00.gate_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer00.out_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 9.313225746154785e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer01.q_proj",
+          "shape": [
+            384,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer01.k_proj",
+          "shape": [
+            96,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer01.v_proj",
+          "shape": [
+            128,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer01.gate_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer01.out_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 9.313225746154785e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "mhc_phi_pre",
+          "shape": [
+            8,
+            2048
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "mhc_phi_post",
+          "shape": [
+            8,
+            2048
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "mhc_phi_res",
+          "shape": [
+            32,
+            2048
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "engram0.tables",
+          "shape": [
+            73728,
+            128
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.2293457984924316e-07,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "engram0.key_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "engram0.value_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 9.313225746154785e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer00.cross.q_proj",
+          "shape": [
+            384,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer00.cross.k_proj",
+          "shape": [
+            384,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer00.cross.v_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer00.cross.gate_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer00.cross.out_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 9.313225746154785e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer01.cross.q_proj",
+          "shape": [
+            384,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer01.cross.k_proj",
+          "shape": [
+            384,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer01.cross.v_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer01.cross.gate_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 3.725290298461914e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "layer01.cross.out_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 9.313225746154785e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder00.q_proj",
+          "shape": [
+            384,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder00.k_proj",
+          "shape": [
+            96,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder00.v_proj",
+          "shape": [
+            128,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder00.gate_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder00.out_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.656612873077393e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder00.pw1",
+          "shape": [
+            1024,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder00.pw2",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.656612873077393e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder01.q_proj",
+          "shape": [
+            384,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder01.k_proj",
+          "shape": [
+            96,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder01.v_proj",
+          "shape": [
+            128,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder01.gate_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder01.out_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.656612873077393e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder01.pw1",
+          "shape": [
+            1024,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder01.pw2",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.656612873077393e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder02.q_proj",
+          "shape": [
+            384,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder02.k_proj",
+          "shape": [
+            96,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder02.v_proj",
+          "shape": [
+            128,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder02.gate_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder02.out_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.656612873077393e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder02.pw1",
+          "shape": [
+            1024,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder02.pw2",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.656612873077393e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder03.q_proj",
+          "shape": [
+            384,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder03.k_proj",
+          "shape": [
+            96,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder03.v_proj",
+          "shape": [
+            128,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder03.gate_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder03.out_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.656612873077393e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder03.pw1",
+          "shape": [
+            1024,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder03.pw2",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.656612873077393e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder04.q_proj",
+          "shape": [
+            384,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder04.k_proj",
+          "shape": [
+            96,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder04.v_proj",
+          "shape": [
+            128,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder04.gate_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder04.out_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.656612873077393e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder04.pw1",
+          "shape": [
+            1024,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 3.725290298461914e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder04.pw2",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.656612873077393e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder05.q_proj",
+          "shape": [
+            384,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder05.k_proj",
+          "shape": [
+            96,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder05.v_proj",
+          "shape": [
+            128,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder05.gate_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder05.out_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.656612873077393e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder05.pw1",
+          "shape": [
+            1024,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder05.pw2",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.656612873077393e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder06.q_proj",
+          "shape": [
+            384,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder06.k_proj",
+          "shape": [
+            96,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder06.v_proj",
+          "shape": [
+            128,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder06.gate_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder06.out_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.656612873077393e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder06.pw1",
+          "shape": [
+            1024,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder06.pw2",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.656612873077393e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder07.q_proj",
+          "shape": [
+            384,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder07.k_proj",
+          "shape": [
+            96,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder07.v_proj",
+          "shape": [
+            128,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder07.gate_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder07.out_proj",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.656612873077393e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder07.pw1",
+          "shape": [
+            1024,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder07.pw2",
+          "shape": [
+            512,
+            512
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.656612873077393e-10,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder.mhc_phi_pre",
+          "shape": [
+            32,
+            2048
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder.mhc_phi_post",
+          "shape": [
+            32,
+            2048
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "encoder.mhc_phi_res",
+          "shape": [
+            128,
+            2048
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "stem.pw_1",
+          "shape": [
+            128,
+            128
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 5.21540641784668e-08,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "stem.pw_2",
+          "shape": [
+            128,
+            128
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 4.470348358154297e-08,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        },
+        {
+          "name": "stem.out",
+          "shape": [
+            512,
+            1280
+          ],
+          "bits": 2,
+          "maximum_absolute_error": 1.862645149230957e-09,
+          "values_outside_tolerance": 0,
+          "within_tolerance": true
+        }
+      ],
+      "all_passed": true,
+      "deployment_permitted": false
+    },
+    "matched_weight_guard": {
+      "exit_code": 0,
+      "stop_reason": null,
+      "peak_child_rss_bytes": 1047519232,
+      "elapsed_seconds": 22.6,
+      "rss_limit_bytes": 2147483648,
+      "cpu_only": true
+    },
+    "matched_network": {
+      "schema": 1,
+      "scope": "Float execution with matched CQ weights and FP16-rounded other parameters; no A8/KV8, accuracy or device acceptance",
+      "model_sha256": "74fb673b1a564928fb3b2cd6d47cac15c8aa8d415d37804d4b6ef710222f7ade",
+      "native_binary_sha256": "9361da884d23b7fa33bbb1156c2ceaf057899a8b5f11d8b084475cda4c0352e3",
+      "checker_sha256": "e55b28033752b3b07d4e357dc2f3d2f7646c9db5d08d4a446106abb66e9cbfc5",
+      "checkpoint_manifest_sha256": "c781f2be72e9a2c908df05c96be748897adb2774c8a979a10e484a20322ac8e3",
+      "encoder_relative_tolerance": 0.0002,
+      "logits_absolute_tolerance": 0.002,
+      "tokens": [
+        2,
+        2048,
+        42,
+        101,
+        7,
+        1023,
+        33,
+        99
+      ],
+      "cases": [
+        {
+          "id": "cohen-want-make-app",
+          "audio_sha256": "8545bb49d4bb7715a3eda61884af801be24338692a9716eec87b6e5bb022d416",
+          "frames": 17,
+          "encoder_relative_l2_error": 6.349588375087478e-07,
+          "logits_max_absolute_error": 1.9073486328125e-06,
+          "native_memory_logits_max_absolute_error": 1.6689300537109375e-06,
+          "argmax_identical": true,
+          "all_finite": true,
+          "within_tolerance": true
+        },
+        {
+          "id": "adalo-want-make-app",
+          "audio_sha256": "eb01ffbd64e65efd23316403c67758c87acd9b2048e92bc9ba53cd9d90d8e7d6",
+          "frames": 18,
+          "encoder_relative_l2_error": 6.859825134597486e-07,
+          "logits_max_absolute_error": 6.67572021484375e-06,
+          "native_memory_logits_max_absolute_error": 6.67572021484375e-06,
+          "argmax_identical": true,
+          "all_finite": true,
+          "within_tolerance": true
+        },
+        {
+          "id": "raroque-get-started",
+          "audio_sha256": "1ee4209e04d379a1b6e70f6a5593fbd0418cc4552a46f3e2edf09c5f3ab701cd",
+          "frames": 33,
+          "encoder_relative_l2_error": 8.042608783398464e-07,
+          "logits_max_absolute_error": 4.76837158203125e-06,
+          "native_memory_logits_max_absolute_error": 3.814697265625e-06,
+          "argmax_identical": true,
+          "all_finite": true,
+          "within_tolerance": true
+        },
+        {
+          "id": "levi-introduction",
+          "audio_sha256": "187abf6e5a6181f1f249c0e20aa35da8ffecfe1171662f73ffed1a6d9ed11f3f",
+          "frames": 63,
+          "encoder_relative_l2_error": 6.750115062459372e-07,
+          "logits_max_absolute_error": 5.7220458984375e-06,
+          "native_memory_logits_max_absolute_error": 5.245208740234375e-06,
+          "argmax_identical": true,
+          "all_finite": true,
+          "within_tolerance": true
+        }
+      ],
+      "all_passed": true,
+      "deployment_permitted": false
+    },
+    "matched_network_guard": {
+      "exit_code": 0,
+      "stop_reason": null,
+      "peak_child_rss_bytes": 1432944640,
+      "elapsed_seconds": 51.332,
+      "rss_limit_bytes": 2147483648,
+      "cpu_only": true
+    },
+    "native_sanitizer_smoke": {
+      "binary_sha256": "07bea291c800604f4bd6d461d35feaf7ae0d062794eedcf02dbbdef6b8f68404",
+      "prefix": {
+        "exit_code": 0,
+        "result": {
+          "prefix": 2048,
+          "first_token_matches_teacher_forcing": true,
+          "confidence_matches_teacher_forcing": true,
+          "expected_score_hex": "-0x1.015fcp-3",
+          "actual_score_hex": "-0x1.015fcp-3"
+        }
+      },
+      "real_clip_decode": {
+        "exit_code": 0,
+        "result": {
+          "vocabulary": 2049,
+          "prefix": 2048,
+          "score_hex": "-0x1.c6748p-3",
+          "tokens": [
+            2048
+          ]
+        }
+      },
+      "options": "ASAN detect_leaks=1 halt_on_error=1; UBSAN halt_on_error=1",
+      "scope": "Prefix consistency and one cached real clip; not Watch memory acceptance"
+    },
+    "python_guards": {
+      "count": 26,
+      "passed": true,
+      "scope": "Focused corpus/tokenizer/checkpoint/format guards; actual packing and network comparison results above provide numerical evidence"
+    },
+    "guard_admission": {
+      "weight_matched_v1": "No child launched; original 3 GiB child budget + 2 GiB spare exceeded available RAM",
+      "weight_matched_v2": "Used 2 GiB child budget after prior audit measured approximately 1 GiB peak; retained 2 GiB launch spare and 1 GiB live host floor",
+      "other_workloads_terminated_or_paused": false,
+      "gpu_acquired": false,
+      "bak_started": false
+    }
+  }
+}

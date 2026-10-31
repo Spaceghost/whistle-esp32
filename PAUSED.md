@@ -9,15 +9,19 @@ Read [current feature/status guide](docs/english-native.md) and
 `research/english-native-20261031.json`. The actual profile-3 mixed export is
 8,832,915 bytes and fits the model partition. Two training steps and restart,
 native/sanitized execution, six frontend comparisons and legacy regression pass.
-Whole-network numerical parity, meaningful training/accuracy and physical Watch
+Quantized activation/cache comparison, meaningful training/accuracy and physical Watch
 acceptance remain open. No research firmware/model was installed.
 
-Follow-on whole-network comparison found and fixed research position encoding:
-the encoder now passes the original numerical threshold on all four clips.
-Decoder logits still exceed 0.002; do not relax the threshold. Preserve
+Follow-on whole-network comparison found and fixed research position encoding.
+A full-checkpoint audit then exposed NumPy/JAX quantization-boundary differences
+in 12 of 89 CQ matrices. The corrected JAX-math export now passes all 89 weight
+checks and the original encoder/decoder thresholds on all four clips. Preserve
 `build/network-profile3-v{1,2}/` including tested binaries and reports. The
-next bounded task is to isolate that decoder discrepancy. Neither comparison
-used a GPU or disturbed other workloads.
+new artifact is `build/student-matched-profile3-v1/`, with successful receipts
+in `build/weight-matched-v2.json` and `build/network-matched-v1/`. Read
+`research/english-export-parity-20261031.json`. Next: compare the quantized
+activation/cache path before meaningful training. No GPU or other workload was
+displaced. Source trainer/features/precision hashes remain unchanged.
 
 Local preserved outputs beneath this worktree:
 `build/english-native-training-20261031/stable-mixed-step{1-v4,2-resume}/`,
