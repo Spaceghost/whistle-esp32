@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 import runpy
 import tempfile
+import types
 import unittest
 
 m = runpy.run_path(str(Path(__file__).resolve().parents[1] / 'tools/train_english_student.py'))
@@ -88,6 +89,22 @@ class EnglishStudentGuardTest(unittest.TestCase):
         (root / 'INCOMPLETE').write_text('unfinished')
         with self.assertRaises(ValueError):
             m['checkpoint_manifest'](root)
+
+    def test_native_policy_cannot_silently_change_module_or_cache_arithmetic(self):
+        source = self.root / 'native_quant.py'
+        source.write_text('exact simulation version one')
+        module = types.SimpleNamespace(__file__=str(source), POLICY='test-native-policy-v1')
+        signature = m['deployment_signature']('native-fast', module)
+        self.assertEqual(m['verify_deployment_signature'](signature, module), 'native-fast')
+        changed = dict(signature, native_attention_cache='int8')
+        with self.assertRaises(ValueError):m['verify_deployment_signature'](changed, module)
+        source.write_text('different arithmetic, same policy name')
+        with self.assertRaises(ValueError):m['verify_deployment_signature'](signature, module)
+
+    def test_policy_selection_preserves_legacy_reader_and_refuses_unknown_policy(self):
+        self.assertEqual(m['verify_deployment_signature']({}), 'upstream-a8-kv8')
+        with self.assertRaises(ValueError):m['deployment_signature']('native-fast')
+        with self.assertRaises(ValueError):m['verify_deployment_signature']({'deploy_policy':'unknown'})
 
 
 if __name__ == '__main__':

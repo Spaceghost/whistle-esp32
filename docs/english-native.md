@@ -10,6 +10,12 @@
 | Native float execution | ✅ | All 89 CQ matrices and encoder/decoder outputs agree with the trainer on the checked cases |
 | Speech quality + Watch acceptance | ☐ | Activation/cache quantization comparison, full training, held-out scores and physical tests remain open |
 
+The latest [native-policy two-step probe and restart](english-native-quantization.md)
+also export to 8,832,915 bytes. With the Watch's signed app store preserved,
+the effective model budget is 11,010,048 bytes, leaving **2,177,133 usable bytes**.
+The larger partition figure above describes physical space, not permission to
+overwrite the app-store carve-out.
+
 ## The route to a release
 
 ```mermaid

@@ -57,6 +57,8 @@ def main():
         quantize.configure_deploy(act_bits=8, kv_bits=8)
     if a.native_aware:
         import english_native_quant
+        if signature.get('deploy_policy') == 'native-fast':
+            helper['verify_deployment_signature'](signature, english_native_quant)
         english_native_quant.install(whistle, quantize)
         quantize.configure_deploy(act_bits=8, kv_bits=0)
     import jax
@@ -138,6 +140,7 @@ def main():
         scope = 'Native-aware fast-kernel simulation applied to existing checkpoint; no new training, accuracy or device acceptance'
         mode = english_native_quant.POLICY
     report = dict(schema=1, scope=scope, execution_mode=mode,
+                  checkpoint_training_deploy_policy=signature.get('deploy_policy', 'upstream-a8-kv8'),
                   model_sha256=sha(a.model), native_binary_sha256=sha(a.binary), checker_sha256=sha(Path(__file__)),
                   checkpoint_manifest_sha256=sha(a.checkpoint / 'manifest.json'),
                   encoder_relative_tolerance=2e-4, logits_absolute_tolerance=2e-3,

@@ -38,6 +38,27 @@ def canonical(value):
     return json.dumps(value, sort_keys=True, separators=(',', ':'))
 
 
+def deployment_signature(policy, native_module=None):
+    if policy not in ('upstream-a8-kv8', 'native-fast'):
+        raise ValueError('Unknown training deployment policy')
+    result = {'deploy_policy': policy}
+    if policy == 'native-fast':
+        if native_module is None:
+            raise ValueError('Native policy requires its exact simulation module')
+        result.update(native_quant_policy=native_module.POLICY,
+                      native_quant_module_sha256=sha(Path(native_module.__file__)),
+                      native_attention_cache='float32', native_activation_domain='Hadamard groups of 128')
+    return result
+
+
+def verify_deployment_signature(signature, native_module=None):
+    policy = signature.get('deploy_policy', 'upstream-a8-kv8')
+    expected = deployment_signature(policy, native_module)
+    if policy == 'native-fast' and any(signature.get(key) != value for key, value in expected.items()):
+        raise ValueError('Native simulation implementation or arithmetic differs from training')
+    return policy
+
+
 def verify_source(root):
     if sha(root / 'ACK_SOURCE.json') != NEEDLE_RECEIPT:
         raise ValueError('Training source receipt differs from the pinned archive inventory')
@@ -216,9 +237,13 @@ def main():
     parser.add_argument('--seed', type=int, default=0)
     parser.add_argument('--lr', type=float, default=1e-4)
     parser.add_argument('--qat-bits', type=int, choices=(0, 2, 4), default=2)
+    parser.add_argument('--deploy-policy', choices=('upstream-a8-kv8', 'native-fast'), default='upstream-a8-kv8',
+                        help='Experimental native-fast matches this fork kernel; creates an incompatible new training signature')
     parser.add_argument('--parameter-budget-bytes', type=int, default=256 * 1024 * 1024)
     parser.add_argument('--resume', type=Path)
     args = parser.parse_args()
+    if args.deploy_policy == 'native-fast' and not args.qat_bits:
+        parser.error('Native-fast training requires two- or four-bit CQ weights')
     if args.steps < 1 or args.batch_size < 1 or args.limit_train_clips < 0 or args.seed < 0 or not 4 <= args.batch_tokens <= 320:
         parser.error('Invalid bounded training count or token budget')
     if not math.isfinite(args.max_seconds) or not 0 < args.max_seconds <= 30 or not math.isfinite(args.lr) or args.lr <= 0:
@@ -258,6 +283,9 @@ def main():
     import english_features
     import english_precision
     english_features.install(whistle)
+    if args.deploy_policy == 'native-fast':
+        import english_native_quant
+        english_native_quant.install(whistle, quantize)
     cfg = whistle.WhistleConfig(text=args.vocabulary, languages=('en',), dim=512,
         enc_layers=8, dec_layers=2, sites=(1,), slots=18432, flash=False, remat=True)
     model = whistle.Whistle(cfg)
@@ -283,6 +311,8 @@ def main():
         'frontend_module_sha256': sha(Path(english_features.__file__)),
         'precision_module_sha256': sha(Path(english_precision.__file__)),
         'selected_train_ids_sha256': ids_hash, 'optimizer': 'clip1.0 + optax.adamw(default weight_decay)'}
+    signature.update(deployment_signature(args.deploy_policy,
+                     english_native_quant if args.deploy_policy == 'native-fast' else None))
     with (args.output / 'plan.json').open('x') as output:
         output.write(json.dumps({'signature': signature, 'parameters': count,
                                  'parameter_bytes': count * 4, 'selection': selection}, indent=2) + '\n')
@@ -312,12 +342,15 @@ def main():
         params = unfreeze(model.init(jax.random.PRNGKey(args.seed), jnp.asarray(first[0]),
             jnp.asarray(first[1]), jnp.asarray(first[2][:, :-1]), quant=False)['params'])
         opt_state, step = optimizer.init(params), 0
-    quantize.configure_deploy(act_bits=8, kv_bits=8)
+    quantize.configure_deploy(act_bits=8, kv_bits=0 if args.deploy_policy == 'native-fast' else 8)
     # Initialization may share constant-zero buffers among norm leaves. Give
     # each donated leaf its own buffer; this does not change parameter values.
     params, opt_state = jax.tree.map(lambda value: jnp.array(value, copy=True), (params, opt_state))
     def loss_fn(parameters, wav, lengths, tokens):
-        deployed = english_precision.qat_params(parameters, quantize, args.qat_bits) if args.qat_bits else parameters
+        if args.deploy_policy == 'native-fast':
+            deployed = english_native_quant.parameters(parameters, quantize, args.qat_bits)
+        else:
+            deployed = english_precision.qat_params(parameters, quantize, args.qat_bits) if args.qat_bits else parameters
         logits = model.apply({'params': deployed}, wav, lengths, tokens[:, :-1], quant=bool(args.qat_bits))
         mask = tokens[:, 1:] != cfg.pad
         loss = optax.softmax_cross_entropy_with_integer_labels(logits, tokens[:, 1:])

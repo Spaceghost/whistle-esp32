@@ -58,6 +58,14 @@ Each isolated block also receives its **actual native input**, so upstream
 drift cannot hide a local discrepancy. Seven pass; the eighth still misses
 the strict threshold. Both cumulative and isolated results remain preserved.
 
+The controlled replay reproduces that eighth-block discrepancy inside C itself:
+a relative input perturbation of 1.03e-7 produces a 0.000239703 output change,
+against the simulation's 0.000239705 difference. The two error vectors have
+cosine 0.99999964; simulation versus perturbed-native output differs by only
+2.02e-7 relative. Repeated unperturbed native runs are bit-identical. Float-mode
+output changes only about 1.50e-7 for that perturbation. This supports an int8
+rounding-boundary explanation; it does not replace the failed strict gate.
+
 As a control, all 19 stage comparisons pass in float mode on that same clip.
 This checks the diagnostic path independently of the proposed quantized policy.
 
@@ -82,12 +90,74 @@ after source verification; pinned upstream files remain unchanged.
 `tools/check_english_network.py --native-aware` evaluates this proposal on
 existing weights. It does not make them native-policy-trained weights.
 
+### Versioned training and restart now work
+
+`tools/train_english_student.py --deploy-policy native-fast` selects this
+simulation explicitly. The default remains `upstream-a8-kv8`. Native policy ID,
+module hash, activation domain and float cache policy join the checkpoint
+signature. Changed module bytes or cache assumptions are refused. The exporter
+checks the same descriptor; CQ storage tests distinguish stored codebook values
+from the fast kernel's additional int8 level rounding.
+
+**✅ A fresh full-parameter step and a new-process restart both completed.**
+All 29,537,627 parameters remain trainable. Both steps had finite gradients and
+nonzero updates. The probe still uses just two short training clips; it is not
+meaningful corpus training or evidence of recognition quality.
+
+After RAM became free naturally, the first job completed in 146 seconds with
+3,676,188,672 bytes peak observed process-group RSS. The resumed job completed
+in 22 seconds with 2,492,358,656 bytes. Neither displaced another workload.
+The resulting export is 8,832,915 bytes, SHA-256
+`37a8d6e407c7ffbc64fb46a8340cb41b29447a528fb836590e91800b94fc819b`.
+It fits the Watch's **11,010,048-byte effective model budget**, preserving the
+signed app store, with 2,177,133 bytes spare. Native prefix/one-clip execution
+passes ASAN/UBSAN; physical and accuracy acceptance remain open.
+
+[Training, restart, export and resource receipts](../research/english-native-training-20261031.json)
+also include the controlled rounding study. The physical model partition is
+larger; use the effective budget when apps must be preserved.
+
+**Existing checkpoints need their original trainer.** The earlier two-step
+checkpoint used trainer SHA `61e2a9d4b23cdfe7e26fcd1debf833287ffaf9c9164eb6e2e1b6d830f5898455`,
+retained in Git at `6fbd604`. Use that source to resume it; choose a fresh run
+for the new native policy. No saved model or optimizer has been overwritten.
+
+`tools/guard_english_job.py` replaces one-off launchers with a reusable CPU job
+guard. It waits for four sustained RAM samples, lowers the job's scheduling
+priority and accounts for its process group's RSS. It stops only that owned
+group on memory, host-floor or time limits. Its real process tests verify that
+timeouts leave a separate process running and that receipts cannot be reused.
+
+For the first native training probe the limits are 4 GiB owned-group RSS,
+2 GiB additional launch reserve, 1 GiB host floor, two CPU cores and 15 minutes.
+Admission waits up to five minutes. Other workloads remain running. A bounded
+probe checks training machinery; it is not full-corpus training.
+
+```sh
+# First source the host's storage/cache environment, then use a fresh report.
+python tools/guard_english_job.py \
+  --report "$NEW_REPORT" --max-rss-gib 4 --reserve-gib 2 \
+  --host-floor-gib 1 --wait-seconds 300 --max-seconds 900 \
+  -- python tools/train_english_student.py \
+  --corpus "$CORPUS" --tokenizers "$TOKENIZERS" \
+  --needle-source "$NEEDLE_SOURCE" \
+  --audio-source-root "$ORIGINAL_AUDIO_ROOT" \
+  --audio-local-root "$LOCAL_AUDIO_ROOT" --output "$NEW_OUTPUT" \
+  --vocabulary 2048 --steps 1 --batch-size 1 --max-seconds 2 \
+  --batch-tokens 32 --limit-train-clips 2 --deploy-policy native-fast
+```
+
+Set the path variables to the verified inputs from the
+[training guide](english-student.md). The guard receipt records the full actual command.
+
 `host/profile_probe.c` exposes individual CQ operations to host checks.
 `host/stage_probe.c` includes the existing engine implementation to reach
 static stages without adding a production API or device state.
 `tools/english_stage_diagnostics.py` compares cumulative and shared-input stages.
 Actual C stage execution passes Zig ASAN/UBSAN. No production engine arithmetic,
-firmware, device model, service or training source changed in this milestone.
+firmware, device model or service changed in the kernel-diagnosis milestone.
+The subsequent training-policy source change is described above; its first
+native-policy step and cross-process restart now pass.
 
 [Exact numeric/resource receipts](../research/english-native-quantization-20261031.json)
 preserve failures and successful controls. Raw audio, tensors and optimizer
@@ -97,7 +167,7 @@ hold were left alone. No target RAM, speed, power or accuracy improvement is cla
 ## Next work
 
 1. Bound remaining shared-input rounding sensitivity without relaxing existing gates.
-2. Integrate native-aware training with an explicit module/signature version.
-3. Verify fresh full-parameter training and checkpoint restart under resource limits.
+2. Prepare meaningful native-policy training when resources and full audio are available.
+3. Preserve signature-checked checkpoint/restart behavior for the longer run.
 4. Train meaningfully when resources are free, then score held-out speech.
 5. Verify Watch RAM/stack, microphone behavior and signed OTA/USB recovery before release.

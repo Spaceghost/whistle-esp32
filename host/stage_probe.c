@@ -22,13 +22,25 @@ static int save(const char *root,const char *name,const float *data,size_t count
     int rc=fwrite(data,sizeof(float),count,f)!=count;fclose(f);return rc;
 }
 int main(int argc,char **argv) {
-    if(argc!=4 && argc!=5)return 2;
-    if(argc==5){if(strcmp(argv[4],"--float"))return 2;nd_cq_int8=0;}
+    if(argc<4 || argc>7)return 2;
+    int block_mode=argc>=6;
+    if(block_mode && strcmp(argv[4],"--block"))return 2;
+    if(argc==5 || argc==7){if(strcmp(argv[argc-1],"--float"))return 2;nd_cq_int8=0;}
     size_t bytes,nbytes;void *blob=load(argv[1],&bytes);
     float *pcm=load(argv[2],&nbytes),*mel=NULL,*s=NULL,*lanes=NULL,*out=NULL;
     nd_whistle w={0};int rc=1;
-    if(!blob || !pcm || !nbytes || nbytes%sizeof(float) || nbytes>30u*16000u*sizeof(float))goto done;
+    if(!blob || !pcm || !nbytes || nbytes%sizeof(float))goto done;
     if(nd_whistle_open(&w,blob,bytes))goto done;
+    if(block_mode) {
+        char *end=NULL;unsigned long layer=strtoul(argv[5],&end,10);
+        size_t row=(size_t)w.lanes*w.d*sizeof(float);
+        if(!*argv[5] || *end || layer>=w.enc_layers || !row || nbytes%row || nbytes/row>400)goto done;
+        for(size_t i=0;i<nbytes/sizeof(float);i++)if(!isfinite(pcm[i]))goto done;
+        mhc_step(&w,w.i_enc_mhc,(unsigned)layer,(unsigned)layer,pcm,(unsigned)(nbytes/row),enc_block,NULL);
+        rc=save(argv[3],"block",pcm,nbytes/sizeof(float));
+        goto done;
+    }
+    if(nbytes>30u*16000u*sizeof(float))goto done;
     unsigned n=(unsigned)(nbytes/sizeof(float)),M=n/w.hop,T=nd_whistle_frames(&w,n);
     if(!M || !T)goto done;
     mel=malloc((size_t)M*w.mels*sizeof(float));s=malloc((size_t)T*w.d*sizeof(float));

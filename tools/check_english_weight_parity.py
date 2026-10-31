@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compare every packed CQ matrix with its actual full-checkpoint QAT values.
+"""Compare stored CQ matrices with the checkpoint's original-codebook projection.
 
 CPU only. Use an external resource guard. No speech or deployment acceptance.
 """
@@ -88,7 +88,8 @@ def main():
                       within_tolerance=bool(within.all()))
         results.append(record)
         print(json.dumps(record), flush=True)
-    report = dict(schema=1, scope='Full-checkpoint CQ packing/QAT comparison only',
+    report = dict(schema=1, scope='Full-checkpoint original-codebook CQ storage comparison; native int8 GEMM applies additional level rounding',
+                  training_deploy_policy=signature.get('deploy_policy', 'upstream-a8-kv8'),
                   model_sha256=sha(a.model), checkpoint_manifest_sha256=sha(a.checkpoint / 'manifest.json'),
                   checker_sha256=sha(Path(__file__)), absolute_tolerance=2e-6, relative_tolerance=2e-5,
                   matrices=results, all_passed=bool(results and all(x['within_tolerance'] for x in results)),

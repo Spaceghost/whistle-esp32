@@ -38,7 +38,33 @@ Preserve `build/network-fast-v1/`, `build/network-native-aware-v{1,2}/`,
 `build/native-quant-asan-v1/`. Older simulated module/checker source snapshots
 and tested binaries stay with their original reports. The next task is to
 bound remaining rounding sensitivity and prepare explicitly versioned native
-training; current trainer/features/precision and checkpoint remain unchanged.
+training. The historical checkpoint and its exact trainer remain preserved at
+Git commit `6fbd604`; the source below adds a new incompatible training signature.
+
+The current trainer exposes `--deploy-policy native-fast` and hashes its policy,
+module, activation domain and float-cache assumptions into checkpoints. Default
+policy is still upstream A8/KV8. Thirty focused tests pass, including changed
+policy/module refusal and real guard process-isolation/receipt preservation.
+`tools/guard_english_job.py` provides bounded CPU admission without eviction.
+The first native-policy step, cross-process model/optimizer restart and export
+now pass. This two-clip probe is not meaningful training or speech acceptance.
+Read `research/english-native-training-20261031.json` for final numeric receipts.
+
+Queued 2026-10-31 under `build/native-policy-training-20261031/`:
+`sensitivity-window-v1.json` runs the controlled block perturbation probe after
+2.5 GiB is available; `training-window-v1.json` waits for 6 GiB before a fresh
+one-step 4 GiB-cap native-policy training probe. Both retain a 1 GiB live host
+floor and stop admission after five minutes. Inspect actual report/process
+state before any retry; a waiting report alone is not proof of a live process.
+
+All admission jobs above and `resume-window-v1.json`/`export-window-v1.json`
+are now TERMINAL0 after memory freed naturally. Fresh outputs are
+`step1-v1/step-00000001`, `step2-v1/step-00000002` and `export-step2-v1/` beneath
+that same build root. Model SHA is
+`37a8d6e407c7ffbc64fb46a8340cb41b29447a528fb836590e91800b94fc819b`.
+Keep the effective model limit 11,010,048 bytes to preserve the signed app store.
+The strict fast-path numerical gate remains open; do not mark it green from the
+successful training machinery or controlled perturbation diagnosis.
 
 Local preserved outputs beneath this worktree:
 `build/english-native-training-20261031/stable-mixed-step{1-v4,2-resume}/`,

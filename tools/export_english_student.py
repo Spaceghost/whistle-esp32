@@ -41,9 +41,13 @@ def main():
     p = argparse.ArgumentParser(description=__doc__)
     for name in ('checkpoint', 'needle-source', 'tokenizer', 'output'):
         p.add_argument('--' + name, type=Path, required=True)
+    p.add_argument('--model-budget-bytes', type=int, default=11010048,
+                   help='Watch model limit with its signed app store preserved')
     a = p.parse_args()
     if a.output.exists():
         p.error('Preserve prior output; choose a fresh directory')
+    if a.model_budget_bytes <= 0:
+        p.error('Model budget must be positive')
     os.environ['JAX_PLATFORMS'] = 'cpu'
     os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
     os.environ['XLA_PYTHON_CLIENT_PREALLOCATE'] = 'false'
@@ -63,6 +67,10 @@ def main():
         raise ValueError('Frontend or precision implementation differs from training')
     if signature['qat_bits'] == 2 and profile != 3:
         raise ValueError('Two-bit body requires its matched stable English training policy')
+    policy = signature.get('deploy_policy', 'upstream-a8-kv8')
+    if policy == 'native-fast':
+        import english_native_quant
+    helper['verify_deployment_signature'](signature, english_native_quant if policy == 'native-fast' else None)
     whistle, quantize, checkpoints = helper['source_modules'](a.needle_source)
     export = importlib.import_module('_ack_needle.model.export')
     from sentencepiece import sentencepiece_model_pb2
@@ -83,6 +91,8 @@ def main():
     import english_export_math
     blob, tensors = english_export_math.pack_model(export, quantize, saved['params'], cfg.needle(), tokenizer, cfg, signature['qat_bits'])
     blob = mark_training_frontend(blob, profile)
+    if len(blob) > a.model_budget_bytes:
+        raise ValueError('Research export exceeds model budget; preserve app storage')
     artifact = a.output / 'english-student-research.cact'
     with artifact.open('xb') as target:
         target.write(blob);target.flush();os.fsync(target.fileno())
@@ -93,7 +103,10 @@ def main():
               'source_commit': helper['NEEDLE_COMMIT'], 'export_script_sha256': sha(Path(__file__)),
               'packing_math': 'pinned trainer JAX float32, codebook choice and FP16 norm rounding',
               'packing_module_sha256': sha(Path(english_export_math.__file__)),
+              'training_deploy_policy': policy,
+              'native_quant_policy': signature.get('native_quant_policy'),
               'bytes': len(blob), 'sha256': sha(artifact), 'tensors': tensors,
+              'model_budget_bytes': a.model_budget_bytes, 'fits_model_budget': True,
               'text_vocabulary': cfg.text, 'english_prefix_id': cfg.text, 'embedding_rows': cfg.vocab,
               'body_weight_bits': signature['qat_bits'], 'tied_embedding_bits': 4, 'audio_frontend_profile': profile, 'native_format': 'AWE1',
               'native_validation_complete': False, 'neural_accuracy_verified': False,
