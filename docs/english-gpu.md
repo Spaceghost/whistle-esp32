@@ -8,7 +8,7 @@
 | GPU admission/process guard | ✅ 13 tests pass | Simulated GPU telemetry + real process isolation |
 | Backend parent/device binding | ✅ 4 tests pass | Refuses unadmitted processes, wrong devices and allocation overrides |
 | Real GPU backend smoke | ✅ Actual guarded execution passes | Terminal guard exit 0; no CPU fallback |
-| Guarded student runner | ☐ GPU execution unverified | Accelerated path added; legacy CPU trainer preserved |
+| Guarded student runner | ☐ First compile exceeded host cap | Full model initialized; no completed student update |
 
 ```mermaid
 flowchart TD
@@ -107,3 +107,22 @@ from GPU hardware acceptance.
 **Next:** complete admitted backend verification, then validate the GPU student
 path and its checkpoint/restart behavior. The full corpus now passes all 33,844 file hashes. Preserve the open numeric, held-out
 accuracy and physical Watch acceptance gates.
+
+## Student compilation: measured limit, next experiment
+
+The actual two-clip student diagnostic initialized all 29,537,627 parameters,
+then exceeded its tighter 2.75 GiB host cap while compiling update one. The
+guard stopped only its own group after 345.25 seconds; sampled peak RSS was
+3,040,595,968 bytes and VRAM 2,267,021,312 bytes. No update or complete checkpoint
+was produced. This does not invalidate the separate successful backend checks.
+
+[Exact failed student window](../research/english-gpu-student-memory-20261031.json).
+
+An optional `--release-initialization-cache` experiment clears initialization
+executables before compiling the training step. It hashes all live model and
+optimizer arrays before and after and refuses any change. RSS observations and
+the state digest are recorded; a lower peak is not claimed until measured.
+The model, data, precision and gradient calculation are preserved. The new
+runner source/option/helper hashes are part of checkpoint compatibility. Use
+the recorded source revision for earlier accelerated checkpoints; the original
+CPU trainer remains unchanged.

@@ -1,3 +1,22 @@
+## GPU student compiler memory measured — 2026-10-31
+
+Student exec65627 TERMINAL1, child exit-9 via owned-group RSS guard. First
+full-model update compilation reached3,040,595,968B RSS against2.75GiB cap;
+VRAM2,267,021,312B,345.25s. NO completed update or READY checkpoint. Earlier
+RUNNING notes below superseded; no active GPU job remains. Exact receipt
+research/english-gpu-student-memory-20261031.json. Successful backend proof
+remains valid; no other workload/device/model/conversation changed.
+
+Next experiment --release-initialization-cache records current RSS and requires
+bit-identical hashes of every live model/optimizer array across JAX cache clear.
+New runner/helper source and option are signed into checkpoint compatibility;
+existing CPU checkpoints require their recorded source. Original CPU trainer
+and native quantization unchanged. CPU regression94482 TERMINAL0: all3 tests pass, including bit-identical
+next Adam update after clearing caches. GPU memory benefit and student execution
+still unverified. Full goal remains active, no research deployment.
+
+---
+
 ## Actual CUDA backend verified — 2026-10-31
 
 ✅ Sixth diagnostic guard53317 terminal0, backend all_passed. RTX3070: matmul

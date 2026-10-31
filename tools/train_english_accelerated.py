@@ -47,6 +47,8 @@ def main():
     parser.add_argument('--gpu-backend-receipt',type=Path)
     parser.add_argument('--checkpoint-every',type=int,default=1000)
     parser.add_argument('--checkpoint-reserve-gib',type=float,default=2)
+    parser.add_argument('--release-initialization-cache', action='store_true',
+                        help='Clear initialization executables before training; verify all live state bytes')
     args = parser.parse_args()
     if args.deploy_policy == 'native-fast' and not args.qat_bits:
         parser.error('Native-fast training requires two- or four-bit CQ weights')
@@ -121,6 +123,10 @@ def main():
                      english_native_quant if args.deploy_policy == 'native-fast' else None))
     signature.update(execution=execution,training_helper_sha256=sha(Path(core.__file__)),
                      training_control_sha256=sha(Path(control.__file__)))
+    signature['release_initialization_cache'] = args.release_initialization_cache
+    if args.release_initialization_cache:
+        import english_training_memory
+        signature['training_memory_sha256'] = sha(Path(english_training_memory.__file__))
     with (args.output / 'plan.json').open('x') as output:
         output.write(json.dumps({'signature': signature, 'parameters': count,
                                  'parameter_bytes': count * 4, 'selection': selection,
@@ -155,6 +161,11 @@ def main():
     # Initialization may share constant-zero buffers among norm leaves. Give
     # each donated leaf its own buffer; this does not change parameter values.
     params, opt_state = jax.tree.map(lambda value: jnp.array(value, copy=True), (params, opt_state))
+    cache_release = None
+    if args.release_initialization_cache:
+        progress('release_initialization_cache')
+        cache_release = english_training_memory.release_initialization_cache(jax, params, opt_state)
+        progress('initialization_cache_released', **cache_release)
     def loss_fn(parameters, wav, lengths, tokens):
         if args.deploy_policy == 'native-fast':
             deployed = english_native_quant.parameters(parameters, quantize, args.qat_bits)
@@ -213,6 +224,7 @@ def main():
         'stop_requested':interrupted,'requested_steps_completed':step-initial_step==args.steps,
         'peak_rss_bytes': resource.getrusage(resource.RUSAGE_SELF).ru_maxrss * 1024,
         'backend': jax.default_backend(), 'neural_accuracy_verified': False,
+        'initialization_cache_release': cache_release,
         'native_export_compatibility_verified': False, 'deployment_permitted': False}
     with (args.output / 'training.json').open('x') as output:
         output.write(json.dumps(report, indent=2) + '\n')
