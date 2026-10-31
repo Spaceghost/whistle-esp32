@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "scope": "CPU invariance controls only; full GPU memory benefit unproven",
+  "files": {
+    "tools/english_training_memory.py": "bd6fe0ec49f05217f9034c64c67d59923d3ccace32ce2048e61a9404829c557e",
+    "tools/train_english_accelerated.py": "b213e02f9ac9207d246d441eb1196d142d09e6cafcd5b108f6596358007f9912",
+    "tests/test_english_training_memory.py": "466ad9d85b2cbc9df6443e237d047c193b5f9213b836d56846212c97656a4928"
+  },
+  "control_guard": {
+    "schema": 1,
+    "state": "complete",
+    "command": [
+      "/var/home/jack/Projects/.system-cache/venvs/ackerman-english-training-20261030/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_english_training_*.py",
+      "-v"
+    ],
+    "guard_pid": 1106045,
+    "child_pid": 1106266,
+    "rss_limit_bytes": 1073741824,
+    "launch_available_memory_bytes": 2147483648,
+    "host_available_memory_floor_bytes": 1073741824,
+    "cpu_only": true,
+    "cpus": 2,
+    "nice_increment": 10,
+    "maximum_job_seconds": 180.0,
+    "peak_observed_process_group_rss_bytes": 257835008,
+    "admitted": true,
+    "available_at_launch_bytes": 5225848832,
+    "admission_wait_seconds": 3.001,
+    "cpu_affinity": [
+      0,
+      1
+    ],
+    "reason": null,
+    "exit_code": 0,
+    "job_elapsed_seconds": 1.068
+  },
+  "trim_without_cache_release_refused": true,
+  "gpu_memory_reduction_proven": false,
+  "production_model_changed": false
+}

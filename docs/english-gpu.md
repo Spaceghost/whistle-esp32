@@ -135,7 +135,33 @@ this cap** and remains optional, off by default. Three CPU controls pass,
 including a bit-identical next Adam update.
 [Final cache-state and failed resource evidence](../research/english-initialization-cache-control-20261031.json).
 
-A larger short diagnostic waits for 4 GiB host budget plus 2 GiB launch reserve.
+The later v4 and v5 admission windows are terminal without starting a child.
+V4 required 4 GiB host budget plus 2 GiB reserve; v5 required 3.5 GiB plus
+1.5 GiB reserve. [Terminal receipts](../research/english-gpu-admission-terminal-20261031.json).
 It must complete updates and checkpoint recovery before the full 25-second /
 160-token shape is tested. Neither short-clip execution nor successful backend
 numerics establishes the full-shape resource budget or speech quality.
+
+
+## Next memory experiment: return unused host heap
+
+`--release-initialization-cache --trim-initialization-heap` adds an optional
+Linux/glibc allocator trim after caches are cleared. Both flags are off by
+default. The [allocator API](https://man7.org/linux/man-pages/man3/malloc_trim.3.html)
+can return unused pages to the OS; this does not guarantee a lower compiler
+peak or enough room for training.
+
+| Control | Required evidence |
+| :--- | :--- |
+| Existing training state | Every parameter and optimizer byte hashes identically before/after |
+| Next update | CPU Adam result remains bit-identical |
+| Unsupported allocator | Refuse before touching state |
+| Actual memory benefit | Record RSS after clearing, after trimming and after digest verification |
+| Training acceptance | Real GPU updates and durable checkpoint resume; full-shape sizing remains separate |
+
+The helper uses the allocator already loaded by the process, with the exact C
+argument/return types. It never loads a second libc. Its source hash and the
+opt-in trim flag are part of checkpoint compatibility. Old checkpoints still
+require their recorded source revision. No change to the model, dataset,
+quantization policy, gradient calculation or original CPU trainer is intended.
+A successful small CPU control alone is not evidence of full-model RAM savings.

@@ -49,7 +49,11 @@ def main():
     parser.add_argument('--checkpoint-reserve-gib',type=float,default=2)
     parser.add_argument('--release-initialization-cache', action='store_true',
                         help='Clear initialization executables before training; verify all live state bytes')
+    parser.add_argument('--trim-initialization-heap', action='store_true',
+                        help='Experimental glibc trim after cache release; requires --release-initialization-cache')
     args = parser.parse_args()
+    if args.trim_initialization_heap and not args.release_initialization_cache:
+        parser.error('Host heap trimming requires --release-initialization-cache')
     if args.deploy_policy == 'native-fast' and not args.qat_bits:
         parser.error('Native-fast training requires two- or four-bit CQ weights')
     if args.steps < 1 or args.batch_size < 1 or args.limit_train_clips < 0 or args.seed < 0 or not 4 <= args.batch_tokens <= 320 or args.checkpoint_every<1:
@@ -124,6 +128,8 @@ def main():
     signature.update(execution=execution,training_helper_sha256=sha(Path(core.__file__)),
                      training_control_sha256=sha(Path(control.__file__)))
     signature['release_initialization_cache'] = args.release_initialization_cache
+    if args.trim_initialization_heap:
+        signature['trim_initialization_heap'] = True
     if args.release_initialization_cache:
         import english_training_memory
         signature['training_memory_sha256'] = sha(Path(english_training_memory.__file__))
@@ -164,7 +170,8 @@ def main():
     cache_release = None
     if args.release_initialization_cache:
         progress('release_initialization_cache')
-        cache_release = english_training_memory.release_initialization_cache(jax, params, opt_state)
+        cache_release = english_training_memory.release_initialization_cache(
+            jax, params, opt_state, trim_host_heap=args.trim_initialization_heap)
         progress('initialization_cache_released', **cache_release)
     def loss_fn(parameters, wav, lengths, tokens):
         if args.deploy_policy == 'native-fast':
