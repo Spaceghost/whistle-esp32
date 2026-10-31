@@ -1,3 +1,33 @@
+## Larger GPU diagnostic admitted; prior cap failure confirmed — 2026-10-31
+
+| Work | Status |
+| :--- | :--- |
+| Watch 77 | ✅ Installed OTA VALID; all device/control holds released |
+| Startup trim | ✅ About 280 MiB returned; all 337 model/optimizer arrays unchanged |
+| Old 2.75 GiB test | ⛔ Terminal RSS limit at 3,129,143,296 bytes; zero updates/checkpoints |
+| Larger diagnostic | 🔄 Live: 3.5 GiB host cap + 1 GiB admission reserve/runtime floor |
+| Full training / native speech quality | ⬜ Not complete; no new weights deployed |
+
+**Poll session 50246**, guard **1160207**, child **1161179**.
+Both processes were verified live after admission. Report:
+`build/training-readiness-20261031/gpu-student-heap-trim-v3.json`.
+Output: `build/accelerated-student-20261031/gpu-step2-heap-trim-v3`.
+Source `2210081`; training code remains frozen. Two full-parameter short-clip
+updates and periodic READY checkpoints are requested. GPU budgets remain
+2 GiB pool / 3 GiB observed cap / 2 GiB reserve, with the short-diagnostic
+35% admission ceiling, 30-second dwell and 900-second child cap.
+Other workloads continue. Full training retains its 10% utilization ceiling.
+
+The launch reserve matches the earlier CPU control; this job has the stricter
+3.5 GiB owned cap. Runtime withdrawal still preserves a 1 GiB host floor.
+Do not duplicate on an observation timeout. Verify actual terminal state,
+finite nonzero updates and READY files before new-process resume or full-shape
+sizing. Session 30534 is terminal1, child -9, not live; its exact negative result
+is in [the terminal receipt](research/english-heap-trim-terminal-20261031.json).
+The full Watch/English goal remains active and incomplete.
+
+---
+
 ## Watch 77 installed; full GPU student experiment live — 2026-10-31
 
 ✅ Private Watch 77/seq78 signed OTA is VALID. Its release preserves production

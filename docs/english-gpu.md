@@ -1,6 +1,21 @@
 # English GPU runner: wait first, then verify
 
-**✅ Real CUDA matrix, gradient and convolution checks pass on the RTX 3070.**
+**CUDA works. Full GPU student updates are not yet verified.**
+
+| Current milestone | Status |
+| :--- | :--- |
+| Backend numerics and 51 locked packages | ✅ Verified on the RTX 3070 |
+| Initialization heap trim | ✅ Saves 280 MiB with all 337 arrays unchanged |
+| Training under the old 2.75 GiB host cap | ⛔ Compilation exceeds the cap; no checkpoint |
+| Larger bounded retry | ⏳ 3.5 GiB host cap, 1 GiB launch reserve and runtime floor |
+| Full training and speech quality | ⬜ Still required |
+
+The larger retry preserves the model, precision, data and gradient calculation.
+It uses the same launch reserve as the earlier CPU control and stops only its
+owned process if runtime floors are crossed. This is a short diagnostic; full
+training retains the default 10% admission ceiling.
+
+## Verified backend controls
 
 | Requirement | State | Scope |
 | :--- | :--- | :--- |
@@ -138,12 +153,12 @@ including a bit-identical next Adam update.
 The later v4 and v5 admission windows are terminal without starting a child.
 V4 required 4 GiB host budget plus 2 GiB reserve; v5 required 3.5 GiB plus
 1.5 GiB reserve. [Terminal receipts](../research/english-gpu-admission-terminal-20261031.json).
-It must complete updates and checkpoint recovery before the full 25-second /
+The student must complete updates and checkpoint recovery before the full 25-second /
 160-token shape is tested. Neither short-clip execution nor successful backend
 numerics establishes the full-shape resource budget or speech quality.
 
 
-## Next memory experiment: return unused host heap
+## Measured memory experiment: return unused host heap
 
 `--release-initialization-cache --trim-initialization-heap` adds an optional
 Linux/glibc allocator trim after caches are cleared. Both flags are off by
@@ -167,11 +182,11 @@ quantization policy, gradient calculation or original CPU trainer is intended.
 A successful small CPU control alone is not evidence of full-model RAM savings.
 
 
-The actual full GPU initialization experiment now measures a 293,376,000-byte
+The actual full GPU initialization experiment measured a 293,376,000-byte
 immediate RSS reduction after trimming. All 337 live arrays (354,451,528
-bytes) retain the exact earlier control digest. Compilation is still running
-under the old failed 2.75 GiB host cap; this is not yet a verified update,
-checkpoint, full-run peak reduction or speech result.
+bytes) retained the exact earlier control digest. The receipt below is the
+historical live snapshot taken before that run stopped; its terminal result
+follows. It does not prove an update, checkpoint or speech result.
 [Measured state and live guard snapshot](../research/english-heap-trim-live-state-20261031.json).
 
 
