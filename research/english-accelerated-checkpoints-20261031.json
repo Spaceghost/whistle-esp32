@@ -1,0 +1,1449 @@
+{
+  "schema": 1,
+  "date": "2026-10-31",
+  "scope": "Periodic checkpoint/restart machinery on full-parameter CPU probe; two short clips, three optimizer updates, not meaningful full-corpus training",
+  "periodic_cpu_checkpoints_verified": true,
+  "cross_process_cpu_resume_verified": true,
+  "reference_parameter_and_optimizer_bytes_identical": true,
+  "control_tests_passed": 12,
+  "gpu_student_execution_verified": false,
+  "meaningful_full_corpus_training_started": false,
+  "neural_accuracy_verified": false,
+  "deployment_permitted": false,
+  "source_sha256": {
+    "tools/train_english_accelerated.py": "78684fe41252a58a42f557b4186333b377bd9c2a9c1c2d68a07d912b43dd99c2",
+    "tools/english_training_control.py": "b413680f64f19bc69a055cbcd01c8ea4f46ccd2b1dd4b270c78f2b331a9c645b",
+    "tests/test_english_training_control.py": "6064b23dfb00ed3b6959df0016139c9bd5ef369b060652f844b21f23eaeffbef",
+    "tools/check_english_checkpoint_parity.py": "a5f2e3994bc53db12c5c36a124f13a394652c65b33641ade9c5ee25bed2e44a0"
+  },
+  "evidence": {
+    "fresh_cpu": {
+      "schema": 1,
+      "scope": "Bounded accelerated full-parameter run; not an accepted speech model",
+      "source_commit": "b4fc11b04f1852888d375c8c6dfbaca44572d014",
+      "signature": {
+        "corpus_sha256": "0dedae607af955f07c74e0db68cb8e506c4c9d6f16d131dbc1ed4b37e163da4e",
+        "tokenizer_sha256": "70b605e6951bf8460742ed3756019ad5e57a940a0d0b0e14d07b4b2f96fc6885",
+        "train_manifest_sha256": "ceb2f15fd1d406006d7aa5ec53b38b905c655e5d182e032d7cf0e12c7f8eab00",
+        "source_receipt_sha256": "0217a8bdd09d45d31f2e3ed3db1bfba04fb72c63aa124ec3b35ff98d5836963c",
+        "config": {
+          "text": 2048,
+          "languages": [
+            "en"
+          ],
+          "dim": 512,
+          "kv_heads": 2,
+          "qk_dim": 48,
+          "v_dim": 64,
+          "enc_layers": 8,
+          "dec_layers": 2,
+          "conv_kernel": 9,
+          "taps": 3,
+          "lanes": 4,
+          "enc_lanes": 4,
+          "sites": [
+            1
+          ],
+          "orders": [
+            2,
+            3
+          ],
+          "slots": 18432,
+          "hashes": 2,
+          "stem": 128,
+          "stem_stages": 3,
+          "rope": 100000.0,
+          "mels": 80,
+          "rate": 16000,
+          "fft": 512,
+          "win": 400,
+          "hop": 160,
+          "max_tokens": 320,
+          "pad": 0,
+          "eos": 1,
+          "bos": 2,
+          "dtype": "float32",
+          "flash": false,
+          "remat": true,
+          "scan_unroll": 1
+        },
+        "training_script_sha256": "78684fe41252a58a42f557b4186333b377bd9c2a9c1c2d68a07d912b43dd99c2",
+        "packages": {
+          "jax": "0.12.0.1",
+          "jaxlib": "0.12.0.1",
+          "flax": "0.12.12",
+          "optax": "0.2.8",
+          "numpy": "2.5.4",
+          "safetensors": "0.8.0",
+          "sentencepiece": "0.2.2",
+          "soundfile": "0.14.0"
+        },
+        "python": "3.12.14",
+        "sampler": "Random(seed+epoch) shuffle with global-step offset",
+        "seed": 0,
+        "batch_size": 1,
+        "maximum_samples": 32000,
+        "batch_tokens": 32,
+        "qat_bits": 2,
+        "lr": 0.0001,
+        "tied_embedding_bits": 4,
+        "audio_frontend_profile": 3,
+        "frontend_module_sha256": "de4839fc6b47057cce479c55fc4f5c90ea16bbe2b3b4d27affd8eac935a0eaa9",
+        "precision_module_sha256": "811b288d955927843e3366bdbdfa4ba9d4673885e9228c0770c2d122478b98ef",
+        "selected_train_ids_sha256": "1800d5726190483634a25096a9fcae13e26111f2956cc16f62ea12c9607aac7d",
+        "optimizer": "clip1.0 + optax.adamw(default weight_decay)",
+        "deploy_policy": "native-fast",
+        "native_quant_policy": "cq-h128-a8-away-cb8-kv-f32-v1",
+        "native_quant_module_sha256": "f540ca867fa5bca80e94f62f8bcce522449206430bd364cf8d6018ec6c413a23",
+        "native_attention_cache": "float32",
+        "native_activation_domain": "Hadamard groups of 128",
+        "execution": {
+          "backend": "cpu",
+          "matmul_precision": "highest"
+        },
+        "training_helper_sha256": "1914c2beaf28aafcb5306f1719ef566a28d847fc532ea48499ea5889504e9b1d",
+        "training_control_sha256": "b413680f64f19bc69a055cbcd01c8ea4f46ccd2b1dd4b270c78f2b331a9c645b"
+      },
+      "parameters": 29537627,
+      "all_parameters_trainable": true,
+      "frozen_parameters": 0,
+      "initial_step": 0,
+      "final_step": 2,
+      "resumed": false,
+      "selection": {
+        "eligible": 2,
+        "excluded_duration": 28513,
+        "excluded_tokens": 0,
+        "limit": 2
+      },
+      "steps": [
+        {
+          "step": 1,
+          "loss": 9.06688404083252,
+          "gradient_norm": 294.43267822265625,
+          "update_norm": 0.39861851930618286,
+          "all_gradients_finite": true
+        },
+        {
+          "step": 2,
+          "loss": 8.81956958770752,
+          "gradient_norm": 138.03466796875,
+          "update_norm": 0.3033939599990845,
+          "all_gradients_finite": true
+        }
+      ],
+      "checkpoint": "step-00000002",
+      "checkpoint_manifest_sha256": "273143ed89fdc00917ba2f092da9774f65c27b414c1265a39f1db91a891d7f72",
+      "checkpoints": [
+        {
+          "step": 1,
+          "checkpoint": "step-00000001",
+          "manifest_sha256": "2da292a3f6824f6e395850176856e66685923450744725d27defa4f2bb8c22e5"
+        },
+        {
+          "step": 2,
+          "checkpoint": "step-00000002",
+          "manifest_sha256": "273143ed89fdc00917ba2f092da9774f65c27b414c1265a39f1db91a891d7f72"
+        }
+      ],
+      "checkpoint_every": 1,
+      "stop_requested": false,
+      "requested_steps_completed": true,
+      "peak_rss_bytes": 4103032832,
+      "backend": "cpu",
+      "neural_accuracy_verified": false,
+      "native_export_compatibility_verified": false,
+      "deployment_permitted": false
+    },
+    "resumed_cpu": {
+      "schema": 1,
+      "scope": "Bounded accelerated full-parameter run; not an accepted speech model",
+      "source_commit": "b4fc11b04f1852888d375c8c6dfbaca44572d014",
+      "signature": {
+        "corpus_sha256": "0dedae607af955f07c74e0db68cb8e506c4c9d6f16d131dbc1ed4b37e163da4e",
+        "tokenizer_sha256": "70b605e6951bf8460742ed3756019ad5e57a940a0d0b0e14d07b4b2f96fc6885",
+        "train_manifest_sha256": "ceb2f15fd1d406006d7aa5ec53b38b905c655e5d182e032d7cf0e12c7f8eab00",
+        "source_receipt_sha256": "0217a8bdd09d45d31f2e3ed3db1bfba04fb72c63aa124ec3b35ff98d5836963c",
+        "config": {
+          "text": 2048,
+          "languages": [
+            "en"
+          ],
+          "dim": 512,
+          "kv_heads": 2,
+          "qk_dim": 48,
+          "v_dim": 64,
+          "enc_layers": 8,
+          "dec_layers": 2,
+          "conv_kernel": 9,
+          "taps": 3,
+          "lanes": 4,
+          "enc_lanes": 4,
+          "sites": [
+            1
+          ],
+          "orders": [
+            2,
+            3
+          ],
+          "slots": 18432,
+          "hashes": 2,
+          "stem": 128,
+          "stem_stages": 3,
+          "rope": 100000.0,
+          "mels": 80,
+          "rate": 16000,
+          "fft": 512,
+          "win": 400,
+          "hop": 160,
+          "max_tokens": 320,
+          "pad": 0,
+          "eos": 1,
+          "bos": 2,
+          "dtype": "float32",
+          "flash": false,
+          "remat": true,
+          "scan_unroll": 1
+        },
+        "training_script_sha256": "78684fe41252a58a42f557b4186333b377bd9c2a9c1c2d68a07d912b43dd99c2",
+        "packages": {
+          "jax": "0.12.0.1",
+          "jaxlib": "0.12.0.1",
+          "flax": "0.12.12",
+          "optax": "0.2.8",
+          "numpy": "2.5.4",
+          "safetensors": "0.8.0",
+          "sentencepiece": "0.2.2",
+          "soundfile": "0.14.0"
+        },
+        "python": "3.12.14",
+        "sampler": "Random(seed+epoch) shuffle with global-step offset",
+        "seed": 0,
+        "batch_size": 1,
+        "maximum_samples": 32000,
+        "batch_tokens": 32,
+        "qat_bits": 2,
+        "lr": 0.0001,
+        "tied_embedding_bits": 4,
+        "audio_frontend_profile": 3,
+        "frontend_module_sha256": "de4839fc6b47057cce479c55fc4f5c90ea16bbe2b3b4d27affd8eac935a0eaa9",
+        "precision_module_sha256": "811b288d955927843e3366bdbdfa4ba9d4673885e9228c0770c2d122478b98ef",
+        "selected_train_ids_sha256": "1800d5726190483634a25096a9fcae13e26111f2956cc16f62ea12c9607aac7d",
+        "optimizer": "clip1.0 + optax.adamw(default weight_decay)",
+        "deploy_policy": "native-fast",
+        "native_quant_policy": "cq-h128-a8-away-cb8-kv-f32-v1",
+        "native_quant_module_sha256": "f540ca867fa5bca80e94f62f8bcce522449206430bd364cf8d6018ec6c413a23",
+        "native_attention_cache": "float32",
+        "native_activation_domain": "Hadamard groups of 128",
+        "execution": {
+          "backend": "cpu",
+          "matmul_precision": "highest"
+        },
+        "training_helper_sha256": "1914c2beaf28aafcb5306f1719ef566a28d847fc532ea48499ea5889504e9b1d",
+        "training_control_sha256": "b413680f64f19bc69a055cbcd01c8ea4f46ccd2b1dd4b270c78f2b331a9c645b"
+      },
+      "parameters": 29537627,
+      "all_parameters_trainable": true,
+      "frozen_parameters": 0,
+      "initial_step": 2,
+      "final_step": 3,
+      "resumed": true,
+      "selection": {
+        "eligible": 2,
+        "excluded_duration": 28513,
+        "excluded_tokens": 0,
+        "limit": 2
+      },
+      "steps": [
+        {
+          "step": 3,
+          "loss": 7.856823444366455,
+          "gradient_norm": 36.361114501953125,
+          "update_norm": 0.27252981066703796,
+          "all_gradients_finite": true
+        }
+      ],
+      "checkpoint": "step-00000003",
+      "checkpoint_manifest_sha256": "4035f151acd83af5a3a224ae3065dce5b087d1bf92b6ca09992b342bc64ee5ba",
+      "checkpoints": [
+        {
+          "step": 3,
+          "checkpoint": "step-00000003",
+          "manifest_sha256": "4035f151acd83af5a3a224ae3065dce5b087d1bf92b6ca09992b342bc64ee5ba"
+        }
+      ],
+      "checkpoint_every": 1,
+      "stop_requested": false,
+      "requested_steps_completed": true,
+      "peak_rss_bytes": 3424227328,
+      "backend": "cpu",
+      "neural_accuracy_verified": false,
+      "native_export_compatibility_verified": false,
+      "deployment_permitted": false
+    },
+    "reference_state_parity": {
+      "schema": 1,
+      "scope": "Compare parameter bytes and optimizer files across complete checkpoints.\n\nMetadata/signatures may intentionally differ between runners. No JAX import,\ntraining, GPU initialization or speech-accuracy acceptance.\n",
+      "step": 2,
+      "parameters": 29537627,
+      "reference_manifest_sha256": "f018c908c5249db8739e95aad7829d6939c2e1a7aac1d2af8ca173aa54d2ec64",
+      "candidate_manifest_sha256": "273143ed89fdc00917ba2f092da9774f65c27b414c1265a39f1db91a891d7f72",
+      "checker_sha256": "a5f2e3994bc53db12c5c36a124f13a394652c65b33641ade9c5ee25bed2e44a0",
+      "cases": [
+        {
+          "name": "embedding/embedding",
+          "shape": [
+            2049,
+            512
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/final_norm/scale",
+          "shape": [
+            512
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/layers/block/ZCRMSNorm_0/scale",
+          "shape": [
+            8,
+            512
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/layers/block/attn_gate",
+          "shape": [
+            8
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/layers/block/conv_norm/scale",
+          "shape": [
+            8,
+            512
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/layers/block/conv_out_norm/scale",
+          "shape": [
+            8,
+            512
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/layers/block/dw",
+          "shape": [
+            8,
+            9,
+            1,
+            512
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/layers/block/hadamard_mlp/b2",
+          "shape": [
+            8,
+            512
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/layers/block/hadamard_mlp/cond_u",
+          "shape": [
+            8,
+            8,
+            512
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/layers/block/hadamard_mlp/cond_v",
+          "shape": [
+            8,
+            512,
+            8
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/layers/block/hadamard_mlp/d1",
+          "shape": [
+            8,
+            512
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/layers/block/hadamard_mlp/d2",
+          "shape": [
+            8,
+            512
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/layers/block/hadamard_mlp/d3",
+          "shape": [
+            8,
+            512
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/layers/block/hadamard_mlp/d4",
+          "shape": [
+            8,
+            512
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/layers/block/hadamard_mlp/w1a",
+          "shape": [
+            8,
+            16,
+            16
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/layers/block/hadamard_mlp/w1b",
+          "shape": [
+            8,
+            32,
+            32
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/layers/block/hadamard_mlp/w2a",
+          "shape": [
+            8,
+            16,
+            16
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/layers/block/hadamard_mlp/w2b",
+          "shape": [
+            8,
+            32,
+            32
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/layers/block/hadamard_mlp/w3a",
+          "shape": [
+            8,
+            16,
+            16
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/layers/block/hadamard_mlp/w3b",
+          "shape": [
+            8,
+            32,
+            32
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/layers/block/hadamard_mlp_0/b2",
+          "shape": [
+            8,
+            512
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/layers/block/hadamard_mlp_0/cond_u",
+          "shape": [
+            8,
+            8,
+            512
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/layers/block/hadamard_mlp_0/cond_v",
+          "shape": [
+            8,
+            512,
+            8
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/layers/block/hadamard_mlp_0/d1",
+          "shape": [
+            8,
+            512
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/layers/block/hadamard_mlp_0/d2",
+          "shape": [
+            8,
+            512
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/layers/block/hadamard_mlp_0/d3",
+          "shape": [
+            8,
+            512
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/layers/block/hadamard_mlp_0/d4",
+          "shape": [
+            8,
+            512
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/layers/block/hadamard_mlp_0/w1a",
+          "shape": [
+            8,
+            16,
+            16
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/layers/block/hadamard_mlp_0/w1b",
+          "shape": [
+            8,
+            32,
+            32
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/layers/block/hadamard_mlp_0/w2a",
+          "shape": [
+            8,
+            16,
+            16
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/layers/block/hadamard_mlp_0/w2b",
+          "shape": [
+            8,
+            32,
+            32
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/layers/block/hadamard_mlp_0/w3a",
+          "shape": [
+            8,
+            16,
+            16
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/layers/block/hadamard_mlp_0/w3b",
+          "shape": [
+            8,
+            32,
+            32
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/layers/block/post_attn_norm/scale",
+          "shape": [
+            8,
+            512
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/layers/block/pre_hada_norm/scale",
+          "shape": [
+            8,
+            512
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/layers/block/pre_hada_norm_0/scale",
+          "shape": [
+            8,
+            512
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/layers/block/pw1/kernel",
+          "shape": [
+            8,
+            512,
+            1024
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/layers/block/pw2/kernel",
+          "shape": [
+            8,
+            512,
+            512
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/layers/block/self_attn/gate_proj/kernel",
+          "shape": [
+            8,
+            512,
+            512
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/layers/block/self_attn/k_norm/scale",
+          "shape": [
+            8,
+            48
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/layers/block/self_attn/k_proj/kernel",
+          "shape": [
+            8,
+            512,
+            96
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/layers/block/self_attn/out_proj/kernel",
+          "shape": [
+            8,
+            512,
+            512
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/layers/block/self_attn/q_norm/scale",
+          "shape": [
+            8,
+            48
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/layers/block/self_attn/q_proj/kernel",
+          "shape": [
+            8,
+            512,
+            384
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/layers/block/self_attn/v_proj/kernel",
+          "shape": [
+            8,
+            512,
+            128
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/mhc_a_post",
+          "shape": [
+            8
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/mhc_a_pre",
+          "shape": [
+            8
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/mhc_a_res",
+          "shape": [
+            8
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/mhc_b_post",
+          "shape": [
+            8,
+            4
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/mhc_b_pre",
+          "shape": [
+            8,
+            4
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/mhc_b_res",
+          "shape": [
+            8,
+            4,
+            4
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/mhc_phi_post",
+          "shape": [
+            8,
+            2048,
+            4
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/mhc_phi_pre",
+          "shape": [
+            8,
+            2048,
+            4
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "encoder/mhc_phi_res",
+          "shape": [
+            8,
+            2048,
+            16
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "engrams_0/embedding",
+          "shape": [
+            4,
+            18432,
+            128
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "engrams_0/key_proj/kernel",
+          "shape": [
+            512,
+            512
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "engrams_0/taps",
+          "shape": [
+            4,
+            512
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "engrams_0/value_proj/kernel",
+          "shape": [
+            512,
+            512
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "pe_gate",
+          "shape": [],
+          "bit_identical": true
+        },
+        {
+          "name": "stack/final_norm/scale",
+          "shape": [
+            512
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stack/layers/block/ZCRMSNorm_0/scale",
+          "shape": [
+            2,
+            512
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stack/layers/block/attn_gate",
+          "shape": [
+            2
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stack/layers/block/cross_attn/gate_proj/kernel",
+          "shape": [
+            2,
+            512,
+            512
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stack/layers/block/cross_attn/k_norm/scale",
+          "shape": [
+            2,
+            48
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stack/layers/block/cross_attn/k_proj/kernel",
+          "shape": [
+            2,
+            512,
+            384
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stack/layers/block/cross_attn/out_proj/kernel",
+          "shape": [
+            2,
+            512,
+            512
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stack/layers/block/cross_attn/q_norm/scale",
+          "shape": [
+            2,
+            48
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stack/layers/block/cross_attn/q_proj/kernel",
+          "shape": [
+            2,
+            512,
+            384
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stack/layers/block/cross_attn/v_proj/kernel",
+          "shape": [
+            2,
+            512,
+            512
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stack/layers/block/cross_gate",
+          "shape": [
+            2
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stack/layers/block/cross_norm/scale",
+          "shape": [
+            2,
+            512
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stack/layers/block/hadamard_mlp/b2",
+          "shape": [
+            2,
+            512
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stack/layers/block/hadamard_mlp/cond_u",
+          "shape": [
+            2,
+            8,
+            512
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stack/layers/block/hadamard_mlp/cond_v",
+          "shape": [
+            2,
+            512,
+            8
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stack/layers/block/hadamard_mlp/d1",
+          "shape": [
+            2,
+            512
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stack/layers/block/hadamard_mlp/d2",
+          "shape": [
+            2,
+            512
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stack/layers/block/hadamard_mlp/d3",
+          "shape": [
+            2,
+            512
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stack/layers/block/hadamard_mlp/d4",
+          "shape": [
+            2,
+            512
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stack/layers/block/hadamard_mlp/w1a",
+          "shape": [
+            2,
+            16,
+            16
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stack/layers/block/hadamard_mlp/w1b",
+          "shape": [
+            2,
+            32,
+            32
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stack/layers/block/hadamard_mlp/w2a",
+          "shape": [
+            2,
+            16,
+            16
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stack/layers/block/hadamard_mlp/w2b",
+          "shape": [
+            2,
+            32,
+            32
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stack/layers/block/hadamard_mlp/w3a",
+          "shape": [
+            2,
+            16,
+            16
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stack/layers/block/hadamard_mlp/w3b",
+          "shape": [
+            2,
+            32,
+            32
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stack/layers/block/post_attn_norm/scale",
+          "shape": [
+            2,
+            512
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stack/layers/block/post_cross_norm/scale",
+          "shape": [
+            2,
+            512
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stack/layers/block/pre_hada_norm/scale",
+          "shape": [
+            2,
+            512
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stack/layers/block/self_attn/gate_proj/kernel",
+          "shape": [
+            2,
+            512,
+            512
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stack/layers/block/self_attn/k_norm/scale",
+          "shape": [
+            2,
+            48
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stack/layers/block/self_attn/k_proj/kernel",
+          "shape": [
+            2,
+            512,
+            96
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stack/layers/block/self_attn/k_taps",
+          "shape": [
+            2,
+            3,
+            96
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stack/layers/block/self_attn/out_proj/kernel",
+          "shape": [
+            2,
+            512,
+            512
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stack/layers/block/self_attn/q_norm/scale",
+          "shape": [
+            2,
+            48
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stack/layers/block/self_attn/q_proj/kernel",
+          "shape": [
+            2,
+            512,
+            384
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stack/layers/block/self_attn/q_taps",
+          "shape": [
+            2,
+            3,
+            384
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stack/layers/block/self_attn/v_proj/kernel",
+          "shape": [
+            2,
+            512,
+            128
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stack/layers/block/self_attn/v_taps",
+          "shape": [
+            2,
+            3,
+            128
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stack/mhc_a_post",
+          "shape": [
+            2
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stack/mhc_a_pre",
+          "shape": [
+            2
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stack/mhc_a_res",
+          "shape": [
+            2
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stack/mhc_b_post",
+          "shape": [
+            2,
+            4
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stack/mhc_b_pre",
+          "shape": [
+            2,
+            4
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stack/mhc_b_res",
+          "shape": [
+            2,
+            4,
+            4
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stack/mhc_phi_post",
+          "shape": [
+            2,
+            2048,
+            4
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stack/mhc_phi_pre",
+          "shape": [
+            2,
+            2048,
+            4
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stack/mhc_phi_res",
+          "shape": [
+            2,
+            2048,
+            16
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stem/dw_1",
+          "shape": [
+            3,
+            3,
+            1,
+            128
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stem/dw_2",
+          "shape": [
+            3,
+            3,
+            1,
+            128
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stem/out/kernel",
+          "shape": [
+            1280,
+            512
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stem/pw_1/kernel",
+          "shape": [
+            128,
+            128
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stem/pw_2/kernel",
+          "shape": [
+            128,
+            128
+          ],
+          "bit_identical": true
+        },
+        {
+          "name": "stem/w",
+          "shape": [
+            3,
+            3,
+            1,
+            128
+          ],
+          "bit_identical": true
+        }
+      ],
+      "all_parameter_arrays_bit_identical": true,
+      "optimizer_bytes_identical": true,
+      "deployment_permitted": false
+    },
+    "guards": {
+      "accelerated-cpu-window-v1": {
+        "schema": 1,
+        "state": "stopped",
+        "command": [
+          "/var/home/jack/Projects/.system-cache/venvs/ackerman-english-training-20261030/bin/python",
+          "tools/train_english_accelerated.py",
+          "--corpus",
+          "/var/home/jack/Projects/.system-cache/ackerman-english-training/cpu-inputs-20261030/corpus",
+          "--tokenizers",
+          "/var/home/jack/Projects/.system-cache/ackerman-english-training/cpu-inputs-20261030/tokenizers",
+          "--needle-source",
+          "/var/home/jack/Projects/.system-cache/ackerman-english-training/needle-source",
+          "--audio-source-root",
+          "/srv/ai/cache/datasets/librispeech/english-corpus-20261030",
+          "--audio-local-root",
+          "/var/home/jack/Projects/.system-cache/ackerman-english-training/cpu-inputs-20261030/audio",
+          "--output",
+          "build/accelerated-student-20261031/cpu-step2-v1",
+          "--backend",
+          "cpu",
+          "--deploy-policy",
+          "native-fast",
+          "--steps",
+          "2",
+          "--batch-size",
+          "1",
+          "--max-seconds",
+          "2",
+          "--batch-tokens",
+          "32",
+          "--limit-train-clips",
+          "2",
+          "--checkpoint-every",
+          "1"
+        ],
+        "guard_pid": 564732,
+        "child_pid": 564909,
+        "rss_limit_bytes": 4294967296,
+        "launch_available_memory_bytes": 5368709120,
+        "host_available_memory_floor_bytes": 1073741824,
+        "cpu_only": true,
+        "cpus": 2,
+        "nice_increment": 10,
+        "maximum_job_seconds": 900.0,
+        "peak_observed_process_group_rss_bytes": 241713152,
+        "admitted": true,
+        "available_at_launch_bytes": 5496381440,
+        "admission_wait_seconds": 3.001,
+        "cpu_affinity": [
+          0,
+          1
+        ],
+        "reason": null,
+        "exit_code": 1,
+        "job_elapsed_seconds": 43.258
+      },
+      "accelerated-cpu-window-v2": {
+        "schema": 1,
+        "state": "complete",
+        "command": [
+          "/var/home/jack/Projects/.system-cache/venvs/ackerman-english-training-20261030/bin/python",
+          "tools/train_english_accelerated.py",
+          "--corpus",
+          "/var/home/jack/Projects/.system-cache/ackerman-english-training/cpu-inputs-20261030/corpus",
+          "--tokenizers",
+          "/var/home/jack/Projects/.system-cache/ackerman-english-training/cpu-inputs-20261030/tokenizers",
+          "--needle-source",
+          "/var/home/jack/Projects/.system-cache/ackerman-english-training/needle-source",
+          "--audio-source-root",
+          "/srv/ai/cache/datasets/librispeech/english-corpus-20261030",
+          "--audio-local-root",
+          "/var/home/jack/Projects/.system-cache/ackerman-english-training/cpu-inputs-20261030/audio",
+          "--output",
+          "build/accelerated-student-20261031/cpu-step2-v2",
+          "--backend",
+          "cpu",
+          "--deploy-policy",
+          "native-fast",
+          "--steps",
+          "2",
+          "--batch-size",
+          "1",
+          "--max-seconds",
+          "2",
+          "--batch-tokens",
+          "32",
+          "--limit-train-clips",
+          "2",
+          "--checkpoint-every",
+          "1"
+        ],
+        "guard_pid": 571443,
+        "child_pid": 571651,
+        "rss_limit_bytes": 4294967296,
+        "launch_available_memory_bytes": 5368709120,
+        "host_available_memory_floor_bytes": 1073741824,
+        "cpu_only": true,
+        "cpus": 2,
+        "nice_increment": 10,
+        "maximum_job_seconds": 900.0,
+        "peak_observed_process_group_rss_bytes": 4102844416,
+        "admitted": true,
+        "available_at_launch_bytes": 5392437248,
+        "admission_wait_seconds": 3.001,
+        "cpu_affinity": [
+          0,
+          1
+        ],
+        "reason": null,
+        "exit_code": 0,
+        "job_elapsed_seconds": 362.076
+      },
+      "accelerated-state-parity-window-v1": {
+        "schema": 1,
+        "state": "complete",
+        "command": [
+          "/var/home/jack/Projects/.system-cache/venvs/ackerman-english-training-20261030/bin/python",
+          "tools/check_english_checkpoint_parity.py",
+          "--reference",
+          "build/native-policy-training-20261031/step2-v1/step-00000002",
+          "--candidate",
+          "build/accelerated-student-20261031/cpu-step2-v2/step-00000002",
+          "--output",
+          "build/training-readiness-20261031/accelerated-state-parity-v1.json"
+        ],
+        "guard_pid": 595179,
+        "child_pid": 595297,
+        "rss_limit_bytes": 536870912,
+        "launch_available_memory_bytes": 2684354560,
+        "host_available_memory_floor_bytes": 1073741824,
+        "cpu_only": true,
+        "cpus": 2,
+        "nice_increment": 10,
+        "maximum_job_seconds": 300.0,
+        "peak_observed_process_group_rss_bytes": 352948224,
+        "admitted": true,
+        "available_at_launch_bytes": 5896175616,
+        "admission_wait_seconds": 3.001,
+        "cpu_affinity": [
+          0,
+          1
+        ],
+        "reason": null,
+        "exit_code": 0,
+        "job_elapsed_seconds": 119.622
+      },
+      "accelerated-resume-window-v1": {
+        "schema": 1,
+        "state": "complete",
+        "command": [
+          "/var/home/jack/Projects/.system-cache/venvs/ackerman-english-training-20261030/bin/python",
+          "tools/train_english_accelerated.py",
+          "--corpus",
+          "/var/home/jack/Projects/.system-cache/ackerman-english-training/cpu-inputs-20261030/corpus",
+          "--tokenizers",
+          "/var/home/jack/Projects/.system-cache/ackerman-english-training/cpu-inputs-20261030/tokenizers",
+          "--needle-source",
+          "/var/home/jack/Projects/.system-cache/ackerman-english-training/needle-source",
+          "--audio-source-root",
+          "/srv/ai/cache/datasets/librispeech/english-corpus-20261030",
+          "--audio-local-root",
+          "/var/home/jack/Projects/.system-cache/ackerman-english-training/cpu-inputs-20261030/audio",
+          "--output",
+          "build/accelerated-student-20261031/cpu-resume-v1",
+          "--backend",
+          "cpu",
+          "--deploy-policy",
+          "native-fast",
+          "--steps",
+          "1",
+          "--batch-size",
+          "1",
+          "--max-seconds",
+          "2",
+          "--batch-tokens",
+          "32",
+          "--limit-train-clips",
+          "2",
+          "--checkpoint-every",
+          "1",
+          "--resume",
+          "build/accelerated-student-20261031/cpu-step2-v2/step-00000002"
+        ],
+        "guard_pid": 607821,
+        "child_pid": 607919,
+        "rss_limit_bytes": 4294967296,
+        "launch_available_memory_bytes": 5368709120,
+        "host_available_memory_floor_bytes": 1073741824,
+        "cpu_only": true,
+        "cpus": 2,
+        "nice_increment": 10,
+        "maximum_job_seconds": 900.0,
+        "peak_observed_process_group_rss_bytes": 3423424512,
+        "admitted": true,
+        "available_at_launch_bytes": 5658554368,
+        "admission_wait_seconds": 3.001,
+        "cpu_affinity": [
+          0,
+          1
+        ],
+        "reason": null,
+        "exit_code": 0,
+        "job_elapsed_seconds": 244.683
+      }
+    }
+  },
+  "retained_failure": "First accelerated attempt ad14d9f failed before model allocation: missing hashlib import. Corrected in31d294d; separate output used. Original CPU trainer unchanged."
+}

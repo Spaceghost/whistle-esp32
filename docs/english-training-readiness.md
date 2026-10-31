@@ -1,13 +1,13 @@
 # English training: make the full run possible
 
-**5,305 held-out clips are local and hash-verified. The training archive is downloading.**
+**All 33,844 required clips are local and hash-verified. GPU execution awaits system RAM.**
 
 | Requirement | State | Evidence |
 | :--- | :--- | :--- |
-| Full local corpus | ⬇️ Training archive downloading | Validation 2,694 / 2,694 and test 2,611 / 2,611 hashes pass |
-| Local source acquisition | ⬇️ Active | Official HTTPS archives; exact size + MD5 + SHA-256 before extraction |
+| Full local corpus | ✅ Complete | Training 28,539; validation 2,694; test 2,611 hashes pass |
+| Local source acquisition | ✅ Complete | All three archives passed exact size + MD5 + SHA-256 before extraction |
 | Separate CUDA environment | ✅ Installed; all 51 versions match | CPU environment preserved; backend admission pending |
-| GPU execution guard | ✅ Implemented and tested | Backend smoke waits for resources; student trainer remains CPU-only |
+| GPU execution guard | ✅ Implemented and tested | Backend smoke awaits RAM; accelerated student path implemented, GPU unverified |
 | Meaningful training and acceptance | ☐ Not started | Requires full data, resource admission and later accuracy/device gates |
 
 ```mermaid
@@ -22,30 +22,26 @@ flowchart TD
     H --> I[Watch memory and microphone acceptance]
 ```
 
-## What the audit found
+## What the final audit verified
 
-| Split | Required clips | Initially present and verified | Missing |
+| Split | Required and verified clips | Verified hours | Missing / corrupt |
 | :--- | ---: | ---: | ---: |
-| Training | 28,539 | 2 | 28,537 |
-| Validation | 2,694 | 2 | 2,692 |
-| Test | 2,611 | 0 | 2,611 |
+| Training | ✅ 28,539 | 100.59 | 0 / 0 |
+| Validation | ✅ 2,694 | 5.31 | 0 / 0 |
+| Test | ✅ 2,611 | 5.32 | 0 / 0 |
 
-`tools/audit_english_training.py` verifies the corpus manifests, training-only
-tokenizer and pinned model source before checking every mapped local file.
-It does not initialize JAX or a GPU context. Missing/corrupt lists stay beneath
-the chosen build output, without transcript text. Four focused tests cover sparse
-caches, changed bytes, empty splits and symlink escape refusal.
+`tools/audit_english_training.py` verified the corpus manifests, training-only
+tokenizer and pinned source, then every required local audio hash. It did not
+initialize JAX or CUDA. Four focused tests cover sparse caches, changed bytes,
+empty splits and symlink escape refusal. The original four-file probe cache is
+preserved separately.
 
-The GPU snapshot is a point-in-time observation, not an idle admission or a
-reservation. The working environment has no JAX CUDA plugin. No training can be
-inferred from an idle utilization reading or from a successful dependency solve.
+The audit ran in the CPU environment, which has no CUDA plugin. The separate
+51-package CUDA environment is installed; its backend remains unverified.
+A GPU snapshot does not reserve resources or establish execution.
 
-The follow-up audit of the new audio root verifies all **5,305 required
-validation/test clips**, totaling 10.63 hours. Training files in that new root
-remain absent until the final archive is verified and extracted. The original
-four-file probe cache is preserved separately.
-
-[Initial and follow-up exact audits](../research/english-training-readiness-20261031.json).
+[Final full-corpus and terminal resource receipts](../research/english-full-corpus-readiness-20261031.json).
+[Earlier sparse and held-out audits](../research/english-training-readiness-20261031.json).
 
 ## Full audio, without touching Bak
 
@@ -61,15 +57,14 @@ The source is [OpenSLR LibriSpeech](https://www.openslr.org/12/). Source license
 are retained during extraction. No Bak command, remote dataset mutation or
 rewrite of the existing four-file probe cache is involved.
 
-Current local job:
+Completed local staging:
 
 - Status: `build/training-readiness-20261031/staging-v1/status.json`.
 - Archives: `~/Projects/.system-cache/datasets/librispeech-20261031/`.
 - New audio: `~/Projects/.system-cache/ackerman-english-training/full-audio-20261031/`.
 
-Rerun the auditor against the new audio root after staging completes, keeping
-the original origin prefix and manifest/tokenizer bytes. A successful archive
-download alone does not establish that every required local clip is ready.
+The final audit independently checked every extracted clip against the original
+manifest. Archive verification and individual audio verification both pass.
 
 ## CUDA dependency preparation
 
@@ -90,6 +85,6 @@ admission guard and an explicit allocation policy: JAX normally preallocates
 allocations. See the [JAX memory guide](https://docs.jax.dev/en/latest/gpu_memory_allocation.html).
 
 **GPU admission is implemented:** [guard behavior and backend smoke →](english-gpu.md).
-Next verify the backend only when resources are free, then add GPU student
-training. Preserve other workloads. Full numeric, held-out speech and physical
+Next verify the backend when system RAM is free, then validate the implemented
+[accelerated student path](english-accelerated-training.md). Preserve other workloads. Full numeric, held-out speech and physical
 Watch gates remain open.

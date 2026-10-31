@@ -1,3 +1,37 @@
+## Current milestone — full corpus and durable accelerated CPU runner — 2026-10-31
+
+✅ All 33,844 required audio hashes pass: training 28,539 / 100.59h;
+validation 2,694 / 5.31h; test 2,611 / 5.32h. All three source archives passed
+size, MD5 and SHA-256 checks and extraction. Stager2838 terminal0; audit-v3
+reports complete, no missing/corrupt files. Earlier LIVE staging notes below
+are historical and superseded.
+
+✅ Separate accelerated runner saves periodic model + Adam snapshots. Fresh
+CPU updates1–2 produce READY checkpoints; all29,537,627 parameter bytes and
+optimizer bytes exactly match the unchanged original CPU reference. A new
+process restores step2 and completes update/checkpoint3. Twelve control tests
+pass. Initial missing-import failure retained; corrected source31d294d.
+Guards22057/73071/19563 terminal0; original CPU trainer/native engine unchanged.
+See docs/english-accelerated-training.md and exact research receipt.
+
+⏳ GPU student execution remains unverified. Guard61553 was superseded before
+any child and ended130. Diagnostic44522 (35% graphics tolerance only, default
+memory budgets unchanged) ended75/not-started: host RAM below5GiB launch need.
+No backend child/CUDA initialization. All earlier LIVE GPU notes below are
+superseded. Full training still uses10% utilization policy. Separate CUDA env
+installed, all51 versions match; other workloads keep running.
+
+Next validate real CUDA backend when RAM is free, then GPU student periodic
+save/resume. Meaningful full-corpus training, strict native numeric gate,
+held-out speech, Watch memory/stack and physical acceptance remain OPEN.
+Goal active, no research model deployment. Watch/Deck/apps/conversations unchanged.
+Evidence: research/english-full-corpus-readiness-20261031.json and
+research/english-accelerated-checkpoints-20261031.json.
+
+---
+
+Historical milestone log follows; current state above takes precedence.
+
 ## Isolated CUDA environment / GPU guard active — 2026-10-31
 
 New GPU environment installation8818 TERMINAL0, all51 locked versions verified;

@@ -1,0 +1,185 @@
+{
+  "schema": 1,
+  "scope": "Full corpus readiness and terminal GPU diagnostic admission; no training or CUDA initialization",
+  "audio_audit": {
+    "schema": 1,
+    "scope": "Audit full local English audio and GPU metadata without loading JAX.\n\nNo remote access, downloads, model allocation or training launch. Missing audio\nis listed for later staging, never silently reduced to the small cached probe.\n",
+    "audit_complete": true,
+    "full_local_audio_hash_verified": true,
+    "split_audio": {
+      "train": {
+        "required": 28539,
+        "present": 28539,
+        "missing": 0,
+        "hash_verified": 28539,
+        "hash_mismatch": 0,
+        "bytes_present": 6611795328,
+        "samples_required": 5794034668,
+        "samples_verified": 5794034668,
+        "hours_required": 100.59087965277777,
+        "hours_verified": 100.59087965277777,
+        "complete": true
+      },
+      "validation": {
+        "required": 2694,
+        "present": 2694,
+        "missing": 0,
+        "hash_verified": 2694,
+        "hash_mismatch": 0,
+        "bytes_present": 353658740,
+        "samples_required": 305717292,
+        "samples_verified": 305717292,
+        "hours_required": 5.307591875,
+        "hours_verified": 5.307591875,
+        "complete": true
+      },
+      "test": {
+        "required": 2611,
+        "present": 2611,
+        "missing": 0,
+        "hash_verified": 2611,
+        "hash_mismatch": 0,
+        "bytes_present": 361930253,
+        "samples_required": 306611770,
+        "samples_verified": 306611770,
+        "hours_required": 5.323121006944445,
+        "hours_verified": 5.323121006944445,
+        "complete": true
+      }
+    },
+    "input_receipts": {
+      "corpus_sha256": "0dedae607af955f07c74e0db68cb8e506c4c9d6f16d131dbc1ed4b37e163da4e",
+      "tokenizer_sha256": "70b605e6951bf8460742ed3756019ad5e57a940a0d0b0e14d07b4b2f96fc6885",
+      "train_manifest_sha256": "ceb2f15fd1d406006d7aa5ec53b38b905c655e5d182e032d7cf0e12c7f8eab00"
+    },
+    "needle_source_receipt_sha256": "0217a8bdd09d45d31f2e3ed3db1bfba04fb72c63aa124ec3b35ff98d5836963c",
+    "tokenizer_sha256": "70b605e6951bf8460742ed3756019ad5e57a940a0d0b0e14d07b4b2f96fc6885",
+    "auditor_sha256": "7695e50322a797cd4c23251ad5bc3db84cf76e9f65f886d8cf4351e487833179",
+    "trainer_sha256": "1914c2beaf28aafcb5306f1719ef566a28d847fc532ea48499ea5889504e9b1d",
+    "packages": {
+      "jaxlib": "0.12.0.1",
+      "jax": "0.12.0.1"
+    },
+    "gpu_snapshot": {
+      "query_complete": true,
+      "devices": [
+        {
+          "index": 0,
+          "name": "NVIDIA GeForce RTX 3070",
+          "total_memory_mib": 8192,
+          "free_memory_mib": 7324,
+          "utilization_percent": 21,
+          "driver_version": "615.78.08",
+          "compute_processes": 0,
+          "compute_memory_mib": 0
+        },
+        {
+          "index": 1,
+          "name": "NVIDIA GeForce RTX 4060",
+          "total_memory_mib": 8188,
+          "free_memory_mib": 3571,
+          "utilization_percent": 0,
+          "driver_version": "615.78.08",
+          "compute_processes": 1,
+          "compute_memory_mib": 4298
+        }
+      ],
+      "sustained_idle_admission_verified": false
+    },
+    "jax_cuda_plugin_installed": false,
+    "gpu_backend_verified": false,
+    "gpu_launch_permitted": false,
+    "missing_audio_list_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "corrupt_audio_list_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "training_started": false,
+    "deployment_permitted": false
+  },
+  "archive_staging": {
+    "schema": 1,
+    "scope": "Stage exact pinned LibriSpeech archives locally; no Bak access or training.\n\nRate-limited HTTPS, retained partial downloads, exact size/MD5/SHA checks and\nregular-file-only extraction. Every output/evidence directory must be new.\n",
+    "state": "complete",
+    "pid": 468768,
+    "active_download_pid": null,
+    "source": "https://openslr.trmal.net/resources/12/",
+    "rate_limit": "8M",
+    "corpus_sha256": "0dedae607af955f07c74e0db68cb8e506c4c9d6f16d131dbc1ed4b37e163da4e",
+    "completed": [
+      {
+        "split": "validation",
+        "file": "dev-clean.tar.gz",
+        "bytes": 337926286,
+        "sha256": "76f87d090650617fca0cac8f88b9416e0ebf80350acb97b343a85fa903728ab3",
+        "archive_verified": true,
+        "extracted": true
+      },
+      {
+        "split": "test",
+        "file": "test-clean.tar.gz",
+        "bytes": 346663984,
+        "sha256": "39fde525e59672dc6d1551919b1478f724438a95aa55f874b576be21967e6c23",
+        "archive_verified": true,
+        "extracted": true
+      },
+      {
+        "split": "train",
+        "file": "train-clean-100.tar.gz",
+        "bytes": 6387309499,
+        "sha256": "d4ddd1d5a6ab303066f14971d768ee43278a5f2a0aa43dc716b0e64ecbbbf6e2",
+        "archive_verified": true,
+        "extracted": true
+      }
+    ],
+    "training_started": false,
+    "active_archive": null,
+    "expected_bytes": 6387309499,
+    "downloaded_bytes": 6387309499
+  },
+  "gpu_diagnostic_admission": {
+    "schema": 1,
+    "state": "not-started",
+    "guard_pid": 655810,
+    "child_pid": null,
+    "admitted": false,
+    "device_index": 0,
+    "command": [
+      "/var/home/jack/Projects/.system-cache/venvs/ackerman-english-gpu-20261031/bin/python",
+      "tools/check_english_gpu_backend.py",
+      "--output",
+      "build/training-readiness-20261031/gpu-backend-smoke-v3"
+    ],
+    "required_idle_seconds": 30.0,
+    "max_admission_utilization": 35,
+    "gpu_observed_limit_bytes": 3221225472,
+    "gpu_free_floor_bytes": 2147483648,
+    "host_rss_limit_bytes": 3221225472,
+    "host_free_floor_bytes": 1073741824,
+    "jax_pool_bytes": 2147483648,
+    "limits_are_sampled_not_hardware_partition": true,
+    "peak_owned_gpu_bytes": 0,
+    "peak_group_rss_bytes": 0,
+    "reason": "host_memory_headroom",
+    "device_fingerprint": "e1a7db351af277ca",
+    "gpu_total_bytes": 8589934592,
+    "observed_gpu_utilization": 23,
+    "observed_gpu_free_bytes": 7679770624,
+    "observed_host_available_bytes": 4996210688,
+    "observed_compute_processes": 0,
+    "sustained_idle_seconds": 0,
+    "admission_wait_seconds": 180.00699636900026
+  },
+  "gpu_diagnostic_guard_exit_code": 75,
+  "superseded_guard": {
+    "schema": 1,
+    "reason": "Bounded backend-only diagnostic can use observed spare capacity: graphics-only GPU0, no compute jobs, 7.15 GiB free; 35 percent ceiling for tiny matmul/gradient/convolution, unchanged budgets and idle dwell; full training default remains10 percent",
+    "owned_unstarted_guard_pid": 533423,
+    "no_child_had_started": true,
+    "original_receipt_preserved": true,
+    "guard_confirmed_terminal": true,
+    "exit_code": 130
+  },
+  "cpu_audit_environment_has_no_cuda_plugin": true,
+  "separate_cuda_environment_installed": true,
+  "gpu_backend_verified": false,
+  "meaningful_training_started": false,
+  "deployment_permitted": false
+}

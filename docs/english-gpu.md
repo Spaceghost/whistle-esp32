@@ -7,8 +7,8 @@
 | Separate environment | ✅ 51 locked versions match | Existing CPU environment preserved |
 | GPU admission/process guard | ✅ 13 tests pass | Simulated GPU telemetry + real process isolation |
 | Backend parent/device binding | ✅ 4 tests pass | Refuses unadmitted processes, wrong devices and allocation overrides |
-| Real GPU backend smoke | ⏳ Waiting for idle resources | No CUDA initialization before admission |
-| Whistle GPU training | ☐ Not implemented or started | Existing student trainer remains CPU-only |
+| Real GPU backend smoke | ⏳ Awaiting system RAM | No CUDA initialization before admission |
+| Guarded student runner | ☐ GPU execution unverified | Accelerated path added; legacy CPU trainer preserved |
 
 ```mermaid
 flowchart TD
@@ -23,12 +23,17 @@ flowchart TD
     H -- yes --> I[Stop only our process group]
 ```
 
-The first live three-minute window ended `not-started` because the selected
-GPU remained above its utilization threshold. No child was launched. A separate
-one-hour admission window is now queued with the same limits. These are real
-metadata observations, separate from the simulated test cases.
+The first three-minute window ended without a child because GPU utilization
+exceeded admission. Its queued successor was explicitly stopped before any
+child launched. A third bounded diagnostic window allowed 35% utilization for
+the tiny backend check after confirming graphics-only activity and spare GPU
+memory; its memory budgets and 30-second dwell were unchanged. It also ended
+without a child: available host RAM was below the 5 GiB launch requirement.
+No CUDA initialization or backend success is claimed. Full training retains the
+default 10% utilization ceiling. No other workload was paused or evicted.
 
-[Installation, test and first-admission receipt](../research/english-gpu-admission-20261031.json).
+[Installation and initial admission](../research/english-gpu-admission-20261031.json).
+[Terminal diagnostic and full-data evidence](../research/english-full-corpus-readiness-20261031.json).
 
 ## Admission and ownership
 
@@ -79,7 +84,10 @@ The [lockfile](../research/english-gpu-cuda13-linux-x86_64-py312.lock.txt) and
 [dependency plan](../research/english-gpu-dependency-plan-20261031.json) preserve
 its exact packages. Installed versions are verified without initializing CUDA.
 
-**Next:** complete admitted backend verification, then add a GPU-capable student
-training path with checked checkpoint/restart behavior. The full corpus must
-finish staging and pass its audio audit. Preserve the open numeric, held-out
+The [accelerated student runner](english-accelerated-training.md) now implements
+a guarded CUDA path and periodic checkpoints; its CPU regression is separate
+from GPU hardware acceptance.
+
+**Next:** complete admitted backend verification, then validate the GPU student
+path and its checkpoint/restart behavior. The full corpus now passes all 33,844 file hashes. Preserve the open numeric, held-out
 accuracy and physical Watch acceptance gates.

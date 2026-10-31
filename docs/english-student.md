@@ -1,13 +1,17 @@
 # English student: training and restart
 
-**Current training readiness:** full local audio staging is active, and a
-separate 51-package CUDA dependency lock is prepared. The existing trainer is
-still CPU-only; no GPU training has started.
+**Current training readiness:** all 33,844 local audio hashes pass. A separate
+51-package CUDA environment is installed. The accelerated runner passes CPU
+checkpoint/reference/resume checks; GPU execution awaits free system RAM.
 [Read the current checklist and data flow →](english-training-readiness.md)
 
 > ▶️ Research resumed. Read [the current native milestone](english-native.md)
 > for the 2026-10-31 mixed-precision export, measured partition fit and remaining
 > gates. Wait for free Alienware resources; leave other workloads running.
+
+A separate [accelerated runner](english-accelerated-training.md) now adds
+periodic checkpoints and a guarded CUDA path. The original CPU trainer and its
+old checkpoint compatibility remain intact.
 
 The current trainer defaults to **two-bit body / four-bit tied embedding** and
 stable frontend profile 3. Exact source/module hashes are part of checkpoint
