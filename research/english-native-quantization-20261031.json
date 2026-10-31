@@ -1,0 +1,648 @@
+{
+  "schema": 1,
+  "date": "2026-10-31",
+  "scope": "Fast native CQ arithmetic diagnosis and proposed simulation on existing two-step weights, not native-policy training",
+  "whole_fast_network_numeric_gate_passed": false,
+  "native_policy_integrated_into_trainer": false,
+  "new_neural_training_performed": false,
+  "production_engine_arithmetic_changed": false,
+  "neural_accuracy_verified": false,
+  "watch_acceptance_verified": false,
+  "deployment_permitted": false,
+  "evidence": {
+    "original_upstream_simulation": {
+      "schema": 1,
+      "scope": "Native fast CQ execution versus trainer A8/KV8 simulation; float tolerances retained to expose discrepancies, no accuracy or device acceptance",
+      "execution_mode": "native-fast-vs-trainer-a8-kv8",
+      "model_sha256": "74fb673b1a564928fb3b2cd6d47cac15c8aa8d415d37804d4b6ef710222f7ade",
+      "native_binary_sha256": "9361da884d23b7fa33bbb1156c2ceaf057899a8b5f11d8b084475cda4c0352e3",
+      "checker_sha256": "38a3ec61cd2df77c2e3e1e47ef7c1b91ddc62afe4265dd95c0b1b31542153b65",
+      "checkpoint_manifest_sha256": "c781f2be72e9a2c908df05c96be748897adb2774c8a979a10e484a20322ac8e3",
+      "encoder_relative_tolerance": 0.0002,
+      "logits_absolute_tolerance": 0.002,
+      "tokens": [
+        2,
+        2048,
+        42,
+        101,
+        7,
+        1023,
+        33,
+        99
+      ],
+      "cases": [
+        {
+          "id": "cohen-want-make-app",
+          "audio_sha256": "8545bb49d4bb7715a3eda61884af801be24338692a9716eec87b6e5bb022d416",
+          "frames": 17,
+          "encoder_relative_l2_error": 0.01043655164539814,
+          "logits_max_absolute_error": 0.026844501495361328,
+          "native_memory_logits_max_absolute_error": 0.025379180908203125,
+          "argmax_identical": true,
+          "all_finite": true,
+          "within_tolerance": false
+        },
+        {
+          "id": "adalo-want-make-app",
+          "audio_sha256": "eb01ffbd64e65efd23316403c67758c87acd9b2048e92bc9ba53cd9d90d8e7d6",
+          "frames": 18,
+          "encoder_relative_l2_error": 0.010743854567408562,
+          "logits_max_absolute_error": 0.026656776666641235,
+          "native_memory_logits_max_absolute_error": 0.02734816074371338,
+          "argmax_identical": true,
+          "all_finite": true,
+          "within_tolerance": false
+        },
+        {
+          "id": "raroque-get-started",
+          "audio_sha256": "1ee4209e04d379a1b6e70f6a5593fbd0418cc4552a46f3e2edf09c5f3ab701cd",
+          "frames": 33,
+          "encoder_relative_l2_error": 0.009428191930055618,
+          "logits_max_absolute_error": 0.02589350938796997,
+          "native_memory_logits_max_absolute_error": 0.023639440536499023,
+          "argmax_identical": true,
+          "all_finite": true,
+          "within_tolerance": false
+        },
+        {
+          "id": "levi-introduction",
+          "audio_sha256": "187abf6e5a6181f1f249c0e20aa35da8ffecfe1171662f73ffed1a6d9ed11f3f",
+          "frames": 63,
+          "encoder_relative_l2_error": 0.00934928935021162,
+          "logits_max_absolute_error": 0.027751043438911438,
+          "native_memory_logits_max_absolute_error": 0.025410354137420654,
+          "argmax_identical": true,
+          "all_finite": true,
+          "within_tolerance": false
+        }
+      ],
+      "all_passed": false,
+      "deployment_permitted": false
+    },
+    "native_simulation_first_attempt": {
+      "schema": 1,
+      "scope": "Native-aware fast-kernel simulation applied to existing checkpoint; no new training, accuracy or device acceptance",
+      "execution_mode": "cq-h128-a8-away-cb8-kv-f32-v1",
+      "model_sha256": "74fb673b1a564928fb3b2cd6d47cac15c8aa8d415d37804d4b6ef710222f7ade",
+      "native_binary_sha256": "9361da884d23b7fa33bbb1156c2ceaf057899a8b5f11d8b084475cda4c0352e3",
+      "checker_sha256": "e3ade4a33937b0dacee5f5f1461a78d695ff97d3bf35d475b6e0d31d45a7a5dd",
+      "checkpoint_manifest_sha256": "c781f2be72e9a2c908df05c96be748897adb2774c8a979a10e484a20322ac8e3",
+      "encoder_relative_tolerance": 0.0002,
+      "logits_absolute_tolerance": 0.002,
+      "tokens": [
+        2,
+        2048,
+        42,
+        101,
+        7,
+        1023,
+        33,
+        99
+      ],
+      "cases": [
+        {
+          "id": "cohen-want-make-app",
+          "audio_sha256": "8545bb49d4bb7715a3eda61884af801be24338692a9716eec87b6e5bb022d416",
+          "frames": 17,
+          "encoder_relative_l2_error": 0.00890959519892931,
+          "logits_max_absolute_error": 0.01587769389152527,
+          "native_memory_logits_max_absolute_error": 0.009882748126983643,
+          "argmax_identical": true,
+          "all_finite": true,
+          "within_tolerance": false
+        },
+        {
+          "id": "adalo-want-make-app",
+          "audio_sha256": "eb01ffbd64e65efd23316403c67758c87acd9b2048e92bc9ba53cd9d90d8e7d6",
+          "frames": 18,
+          "encoder_relative_l2_error": 0.008142287842929363,
+          "logits_max_absolute_error": 0.01576864719390869,
+          "native_memory_logits_max_absolute_error": 0.00943291187286377,
+          "argmax_identical": true,
+          "all_finite": true,
+          "within_tolerance": false
+        },
+        {
+          "id": "raroque-get-started",
+          "audio_sha256": "1ee4209e04d379a1b6e70f6a5593fbd0418cc4552a46f3e2edf09c5f3ab701cd",
+          "frames": 33,
+          "encoder_relative_l2_error": 0.007574477698653936,
+          "logits_max_absolute_error": 0.014579102396965027,
+          "native_memory_logits_max_absolute_error": 0.009862907230854034,
+          "argmax_identical": true,
+          "all_finite": true,
+          "within_tolerance": false
+        },
+        {
+          "id": "levi-introduction",
+          "audio_sha256": "187abf6e5a6181f1f249c0e20aa35da8ffecfe1171662f73ffed1a6d9ed11f3f",
+          "frames": 63,
+          "encoder_relative_l2_error": 0.006768631748855114,
+          "logits_max_absolute_error": 0.015406213700771332,
+          "native_memory_logits_max_absolute_error": 0.010857462882995605,
+          "argmax_identical": true,
+          "all_finite": true,
+          "within_tolerance": false
+        }
+      ],
+      "all_passed": false,
+      "deployment_permitted": false,
+      "simulation_sha256": "cd87b030b3ee94cd6449c67e768e43f09b5f154cb1966105ebc4e5dbfc5f9568"
+    },
+    "native_simulation_with_stem": {
+      "schema": 1,
+      "scope": "Native-aware fast-kernel simulation applied to existing checkpoint; no new training, accuracy or device acceptance",
+      "execution_mode": "cq-h128-a8-away-cb8-kv-f32-v1",
+      "model_sha256": "74fb673b1a564928fb3b2cd6d47cac15c8aa8d415d37804d4b6ef710222f7ade",
+      "native_binary_sha256": "9361da884d23b7fa33bbb1156c2ceaf057899a8b5f11d8b084475cda4c0352e3",
+      "checker_sha256": "e3ade4a33937b0dacee5f5f1461a78d695ff97d3bf35d475b6e0d31d45a7a5dd",
+      "checkpoint_manifest_sha256": "c781f2be72e9a2c908df05c96be748897adb2774c8a979a10e484a20322ac8e3",
+      "encoder_relative_tolerance": 0.0002,
+      "logits_absolute_tolerance": 0.002,
+      "tokens": [
+        2,
+        2048,
+        42,
+        101,
+        7,
+        1023,
+        33,
+        99
+      ],
+      "cases": [
+        {
+          "id": "cohen-want-make-app",
+          "audio_sha256": "8545bb49d4bb7715a3eda61884af801be24338692a9716eec87b6e5bb022d416",
+          "frames": 17,
+          "encoder_relative_l2_error": 0.007623210083693266,
+          "logits_max_absolute_error": 0.014342620968818665,
+          "native_memory_logits_max_absolute_error": 0.009882748126983643,
+          "argmax_identical": true,
+          "all_finite": true,
+          "within_tolerance": false
+        },
+        {
+          "id": "adalo-want-make-app",
+          "audio_sha256": "eb01ffbd64e65efd23316403c67758c87acd9b2048e92bc9ba53cd9d90d8e7d6",
+          "frames": 18,
+          "encoder_relative_l2_error": 0.007553224451839924,
+          "logits_max_absolute_error": 0.01450076699256897,
+          "native_memory_logits_max_absolute_error": 0.00943291187286377,
+          "argmax_identical": true,
+          "all_finite": true,
+          "within_tolerance": false
+        },
+        {
+          "id": "raroque-get-started",
+          "audio_sha256": "1ee4209e04d379a1b6e70f6a5593fbd0418cc4552a46f3e2edf09c5f3ab701cd",
+          "frames": 33,
+          "encoder_relative_l2_error": 0.0069005307741463184,
+          "logits_max_absolute_error": 0.014837995171546936,
+          "native_memory_logits_max_absolute_error": 0.009862907230854034,
+          "argmax_identical": true,
+          "all_finite": true,
+          "within_tolerance": false
+        },
+        {
+          "id": "levi-introduction",
+          "audio_sha256": "187abf6e5a6181f1f249c0e20aa35da8ffecfe1171662f73ffed1a6d9ed11f3f",
+          "frames": 63,
+          "encoder_relative_l2_error": 0.006193957291543484,
+          "logits_max_absolute_error": 0.011817418038845062,
+          "native_memory_logits_max_absolute_error": 0.010857462882995605,
+          "argmax_identical": true,
+          "all_finite": true,
+          "within_tolerance": false
+        }
+      ],
+      "all_passed": false,
+      "deployment_permitted": false,
+      "simulation_sha256": "f540ca867fa5bca80e94f62f8bcce522449206430bd364cf8d6018ec6c413a23"
+    },
+    "primitive_and_gradient_checks": {
+      "schema": 1,
+      "scope": "Four real packed matrices, rounding ties and fixture gradients; not whole-network or speech acceptance",
+      "policy": "cq-h128-a8-away-cb8-kv-f32-v1",
+      "model_sha256": "74fb673b1a564928fb3b2cd6d47cac15c8aa8d415d37804d4b6ef710222f7ade",
+      "binary_sha256": "4347a7420559ce896b03e3085e9b1442a81012f3ea9f398d6eb84257e253b43e",
+      "simulation_sha256": "f540ca867fa5bca80e94f62f8bcce522449206430bd364cf8d6018ec6c413a23",
+      "checker_sha256": "d409f3d63099ffd223491df62e1c29404ba7e735eb084d3fab537e30da9e067d",
+      "cases": [
+        {
+          "name": "tied-output",
+          "tensor_index": 0,
+          "bits": 4,
+          "input_width": 512,
+          "maximum_absolute_error": 7.301568984985352e-07,
+          "within_tolerance": true,
+          "all_finite": true
+        },
+        {
+          "name": "decoder-query",
+          "tensor_index": 2,
+          "bits": 2,
+          "input_width": 512,
+          "maximum_absolute_error": 5.364418029785156e-07,
+          "within_tolerance": true,
+          "all_finite": true
+        },
+        {
+          "name": "decoder-mhc",
+          "tensor_index": 61,
+          "bits": 2,
+          "input_width": 2048,
+          "maximum_absolute_error": 7.748603820800781e-07,
+          "within_tolerance": true,
+          "all_finite": true
+        },
+        {
+          "name": "stem-output",
+          "tensor_index": 452,
+          "bits": 2,
+          "input_width": 1280,
+          "maximum_absolute_error": 1.0728836059570312e-06,
+          "within_tolerance": true,
+          "all_finite": true
+        }
+      ],
+      "round_half_away_ties_verified": true,
+      "activation_straight_through_gradient_verified": true,
+      "padded_cq_straight_through_gradient_verified": true,
+      "original_lookup_tied_output_gradient_and_no_mutation_verified": true,
+      "absolute_tolerance": 2e-05,
+      "relative_tolerance": 0.0002,
+      "all_passed": true,
+      "deployment_permitted": false
+    },
+    "stage_localization": {
+      "schema": 1,
+      "scope": "Stage localization on first catalog clip; no decoder, training, speech or target acceptance",
+      "native_binary_sha256": "697a4c624d48bd0e06001c2a67bbc6e31d405849daf1651b3b24942a69073fa3",
+      "model_sha256": "74fb673b1a564928fb3b2cd6d47cac15c8aa8d415d37804d4b6ef710222f7ade",
+      "input_pcm_sha256": "186eb0eceb4ca43991a9b311ba70b6a0e8452185aadfc6439de05db2bb7bc258",
+      "checker_sha256": "c2e110d92da7c2573b631c6b209d19cdd00942f7ac6e0cad0a95232a73407a1a",
+      "stages": [
+        {
+          "stage": "stem",
+          "relative_l2_error": 0.002346555469557643,
+          "maximum_absolute_error": 1.6412172954005655e-08,
+          "all_finite": true,
+          "within_tolerance": false
+        },
+        {
+          "stage": "stem-native-features",
+          "relative_l2_error": 4.671666431477206e-07,
+          "maximum_absolute_error": 2.2168933355715126e-12,
+          "all_finite": true,
+          "within_tolerance": true
+        },
+        {
+          "stage": "lanes-0",
+          "relative_l2_error": 0.013285565190017223,
+          "maximum_absolute_error": 0.00422827061265707,
+          "all_finite": true,
+          "within_tolerance": false
+        },
+        {
+          "stage": "isolated-lanes-0",
+          "relative_l2_error": 5.373971134758904e-07,
+          "maximum_absolute_error": 2.682209014892578e-07,
+          "all_finite": true,
+          "within_tolerance": true
+        },
+        {
+          "stage": "lanes-1",
+          "relative_l2_error": 0.011812658980488777,
+          "maximum_absolute_error": 0.02474471926689148,
+          "all_finite": true,
+          "within_tolerance": false
+        },
+        {
+          "stage": "isolated-lanes-1",
+          "relative_l2_error": 4.429640102898702e-05,
+          "maximum_absolute_error": 0.00017547607421875,
+          "all_finite": true,
+          "within_tolerance": true
+        },
+        {
+          "stage": "lanes-2",
+          "relative_l2_error": 0.010678261518478394,
+          "maximum_absolute_error": 0.02340725064277649,
+          "all_finite": true,
+          "within_tolerance": false
+        },
+        {
+          "stage": "isolated-lanes-2",
+          "relative_l2_error": 1.0991471981469658e-06,
+          "maximum_absolute_error": 1.0132789611816406e-05,
+          "all_finite": true,
+          "within_tolerance": true
+        },
+        {
+          "stage": "lanes-3",
+          "relative_l2_error": 0.01027626171708107,
+          "maximum_absolute_error": 0.02205786108970642,
+          "all_finite": true,
+          "within_tolerance": false
+        },
+        {
+          "stage": "isolated-lanes-3",
+          "relative_l2_error": 2.4868592163329595e-07,
+          "maximum_absolute_error": 1.1920928955078125e-06,
+          "all_finite": true,
+          "within_tolerance": true
+        },
+        {
+          "stage": "lanes-4",
+          "relative_l2_error": 0.010154809802770615,
+          "maximum_absolute_error": 0.02768692374229431,
+          "all_finite": true,
+          "within_tolerance": false
+        },
+        {
+          "stage": "isolated-lanes-4",
+          "relative_l2_error": 0.00010862475028261542,
+          "maximum_absolute_error": 0.0007413625717163086,
+          "all_finite": true,
+          "within_tolerance": true
+        },
+        {
+          "stage": "lanes-5",
+          "relative_l2_error": 0.010153432376682758,
+          "maximum_absolute_error": 0.03026479482650757,
+          "all_finite": true,
+          "within_tolerance": false
+        },
+        {
+          "stage": "isolated-lanes-5",
+          "relative_l2_error": 2.1107733516601002e-07,
+          "maximum_absolute_error": 1.0728836059570312e-06,
+          "all_finite": true,
+          "within_tolerance": true
+        },
+        {
+          "stage": "lanes-6",
+          "relative_l2_error": 0.009847749024629593,
+          "maximum_absolute_error": 0.028734147548675537,
+          "all_finite": true,
+          "within_tolerance": false
+        },
+        {
+          "stage": "isolated-lanes-6",
+          "relative_l2_error": 1.632371640880592e-05,
+          "maximum_absolute_error": 0.0001448988914489746,
+          "all_finite": true,
+          "within_tolerance": true
+        },
+        {
+          "stage": "lanes-7",
+          "relative_l2_error": 0.0093541843816638,
+          "maximum_absolute_error": 0.02786242961883545,
+          "all_finite": true,
+          "within_tolerance": false
+        },
+        {
+          "stage": "isolated-lanes-7",
+          "relative_l2_error": 0.0002397052594460547,
+          "maximum_absolute_error": 0.0020212531089782715,
+          "all_finite": true,
+          "within_tolerance": false
+        },
+        {
+          "stage": "encoder",
+          "relative_l2_error": 0.007629967760294676,
+          "maximum_absolute_error": 0.028402984142303467,
+          "all_finite": true,
+          "within_tolerance": false
+        }
+      ],
+      "all_passed": false,
+      "relative_tolerance": 0.0002,
+      "deployment_permitted": false
+    },
+    "baseline_resource_guard": {
+      "exit_code": 1,
+      "stop_reason": null,
+      "peak_child_rss_bytes": 1497522176,
+      "elapsed_seconds": 51.838,
+      "rss_limit_bytes": 2147483648,
+      "cpu_only": true
+    },
+    "first_native_resource_guard": {
+      "exit_code": 1,
+      "stop_reason": null,
+      "peak_child_rss_bytes": 1604378624,
+      "elapsed_seconds": 70.384,
+      "rss_limit_bytes": 2147483648,
+      "cpu_only": true
+    },
+    "native_stem_resource_guard": {
+      "exit_code": 1,
+      "stop_reason": null,
+      "peak_child_rss_bytes": 1642954752,
+      "elapsed_seconds": 70.116,
+      "rss_limit_bytes": 2147483648,
+      "cpu_only": true
+    },
+    "primitive_resource_guard": {
+      "exit_code": 0,
+      "stop_reason": null,
+      "peak_child_rss_bytes": 644775936,
+      "elapsed_seconds": 14.28,
+      "rss_limit_bytes": 2147483648,
+      "cpu_only": true
+    },
+    "stage_resource_guard": {
+      "exit_code": 1,
+      "stop_reason": null,
+      "peak_child_rss_bytes": 1167753216,
+      "elapsed_seconds": 25.794,
+      "rss_limit_bytes": 2147483648,
+      "cpu_only": true
+    },
+    "stage_sanitizer_smoke": {
+      "exit_code": 0,
+      "binary_sha256": "be3abc6934cc51f504301f357eddbdefc037a36b34166cd7880c6822865a9afc",
+      "scope": "Native full encoder stages on one cached clip, ASAN/UBSAN halt-on-error plus leak detection",
+      "stdout_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "source_sha256": {
+      "host/profile_probe.c": "33d9fbbaa65814173ca507c188e5a9af410b42557a27b968d380dd280c0c2fb9",
+      "host/stage_probe.c": "ba23b08ad5317c49babcaab5a23ca3a04df0bdb9ca2fbdfe4c25c32440e7a2c0",
+      "tools/check_english_network.py": "c5bed6a7d216c781d1729a323d0d4a2106f3a039d365583dddc558910e3b00b6",
+      "tools/check_english_native_quant.py": "d409f3d63099ffd223491df62e1c29404ba7e735eb084d3fab537e30da9e067d",
+      "tools/english_native_quant.py": "f540ca867fa5bca80e94f62f8bcce522449206430bd364cf8d6018ec6c413a23",
+      "tools/english_stage_diagnostics.py": "c2e110d92da7c2573b631c6b209d19cdd00942f7ac6e0cad0a95232a73407a1a",
+      "engine/src/nd_whistle.c": "dca48cf6d2c9b6e02059f00b849d8b7adfb15151abe0bfc7317a510e0d200b10"
+    },
+    "routine_guards": {
+      "host_ctests": 10,
+      "focused_python_guards": 26,
+      "all_passed": true,
+      "scope": "Existing host and input/checkpoint/format guards; numerical checks carry separate pass/fail results above"
+    },
+    "float_stage_control": {
+      "schema": 1,
+      "scope": "Stage localization on first catalog clip; no decoder, training, speech or target acceptance",
+      "native_binary_sha256": "697a4c624d48bd0e06001c2a67bbc6e31d405849daf1651b3b24942a69073fa3",
+      "model_sha256": "74fb673b1a564928fb3b2cd6d47cac15c8aa8d415d37804d4b6ef710222f7ade",
+      "input_pcm_sha256": "186eb0eceb4ca43991a9b311ba70b6a0e8452185aadfc6439de05db2bb7bc258",
+      "checker_sha256": "c2e110d92da7c2573b631c6b209d19cdd00942f7ac6e0cad0a95232a73407a1a",
+      "stages": [
+        {
+          "stage": "stem",
+          "relative_l2_error": 1.4921869251338649e-06,
+          "maximum_absolute_error": 7.332801033044234e-12,
+          "all_finite": true,
+          "within_tolerance": true
+        },
+        {
+          "stage": "stem-native-features",
+          "relative_l2_error": 7.234147005874547e-07,
+          "maximum_absolute_error": 3.637978807091713e-12,
+          "all_finite": true,
+          "within_tolerance": true
+        },
+        {
+          "stage": "lanes-0",
+          "relative_l2_error": 1.2873530295109958e-06,
+          "maximum_absolute_error": 4.6193599700927734e-07,
+          "all_finite": true,
+          "within_tolerance": true
+        },
+        {
+          "stage": "isolated-lanes-0",
+          "relative_l2_error": 8.76138187777542e-07,
+          "maximum_absolute_error": 2.8312206268310547e-07,
+          "all_finite": true,
+          "within_tolerance": true
+        },
+        {
+          "stage": "lanes-1",
+          "relative_l2_error": 9.740688255988061e-07,
+          "maximum_absolute_error": 1.8505379557609558e-06,
+          "all_finite": true,
+          "within_tolerance": true
+        },
+        {
+          "stage": "isolated-lanes-1",
+          "relative_l2_error": 5.998284677843913e-07,
+          "maximum_absolute_error": 1.6689300537109375e-06,
+          "all_finite": true,
+          "within_tolerance": true
+        },
+        {
+          "stage": "lanes-2",
+          "relative_l2_error": 8.75019225077267e-07,
+          "maximum_absolute_error": 1.8477439880371094e-06,
+          "all_finite": true,
+          "within_tolerance": true
+        },
+        {
+          "stage": "isolated-lanes-2",
+          "relative_l2_error": 3.9632146808799007e-07,
+          "maximum_absolute_error": 1.7881393432617188e-06,
+          "all_finite": true,
+          "within_tolerance": true
+        },
+        {
+          "stage": "lanes-3",
+          "relative_l2_error": 8.394653150389786e-07,
+          "maximum_absolute_error": 1.7881393432617188e-06,
+          "all_finite": true,
+          "within_tolerance": true
+        },
+        {
+          "stage": "isolated-lanes-3",
+          "relative_l2_error": 3.514052195896511e-07,
+          "maximum_absolute_error": 1.430511474609375e-06,
+          "all_finite": true,
+          "within_tolerance": true
+        },
+        {
+          "stage": "lanes-4",
+          "relative_l2_error": 8.424156021646922e-07,
+          "maximum_absolute_error": 2.2649765014648438e-06,
+          "all_finite": true,
+          "within_tolerance": true
+        },
+        {
+          "stage": "isolated-lanes-4",
+          "relative_l2_error": 3.3566323054401437e-07,
+          "maximum_absolute_error": 2.0265579223632812e-06,
+          "all_finite": true,
+          "within_tolerance": true
+        },
+        {
+          "stage": "lanes-5",
+          "relative_l2_error": 8.25786798941408e-07,
+          "maximum_absolute_error": 2.3245811462402344e-06,
+          "all_finite": true,
+          "within_tolerance": true
+        },
+        {
+          "stage": "isolated-lanes-5",
+          "relative_l2_error": 2.842986361883959e-07,
+          "maximum_absolute_error": 1.6689300537109375e-06,
+          "all_finite": true,
+          "within_tolerance": true
+        },
+        {
+          "stage": "lanes-6",
+          "relative_l2_error": 7.934363566164393e-07,
+          "maximum_absolute_error": 2.3245811462402344e-06,
+          "all_finite": true,
+          "within_tolerance": true
+        },
+        {
+          "stage": "isolated-lanes-6",
+          "relative_l2_error": 2.6868676172853156e-07,
+          "maximum_absolute_error": 1.430511474609375e-06,
+          "all_finite": true,
+          "within_tolerance": true
+        },
+        {
+          "stage": "lanes-7",
+          "relative_l2_error": 7.594326234539039e-07,
+          "maximum_absolute_error": 2.2649765014648438e-06,
+          "all_finite": true,
+          "within_tolerance": true
+        },
+        {
+          "stage": "isolated-lanes-7",
+          "relative_l2_error": 2.5016711902026145e-07,
+          "maximum_absolute_error": 1.5497207641601562e-06,
+          "all_finite": true,
+          "within_tolerance": true
+        },
+        {
+          "stage": "encoder",
+          "relative_l2_error": 6.353165531436389e-07,
+          "maximum_absolute_error": 2.6226043701171875e-06,
+          "all_finite": true,
+          "within_tolerance": true
+        }
+      ],
+      "all_passed": true,
+      "relative_tolerance": 0.0002,
+      "deployment_permitted": false
+    },
+    "float_stage_control_guard": {
+      "exit_code": 0,
+      "stop_reason": null,
+      "peak_child_rss_bytes": 1033519104,
+      "elapsed_seconds": 20.537,
+      "rss_limit_bytes": 2147483648,
+      "cpu_only": true
+    }
+  },
+  "resource_policy": {
+    "cpu_only": true,
+    "cpu_affinity_cores": 2,
+    "child_rss_limit_bytes": 2147483648,
+    "host_available_memory_floor_bytes": 1073741824,
+    "launch_spare_bytes": 2147483648,
+    "other_workloads_paused_or_terminated": false,
+    "bak_started": false
+  }
+}

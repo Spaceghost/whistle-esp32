@@ -23,6 +23,23 @@ in `build/weight-matched-v2.json` and `build/network-matched-v1/`. Read
 activation/cache path before meaningful training. No GPU or other workload was
 displaced. Source trainer/features/precision hashes remain unchanged.
 
+Fast-path comparison and diagnostics are now in
+`docs/english-native-quantization.md` and
+`research/english-native-quantization-20261031.json`. Original upstream A8/KV8
+differs from this fork's actual grouped Hadamard/int8 CQ kernel. The proposed
+native-aware simulation passes four actual matrix kernels and fixture gradient
+checks, but strict whole-network comparison still fails. Shared-input controls
+localize frontend rounding sensitivity: stem passes with identical native
+features; seven of eight encoder blocks pass with identical native inputs.
+Do not relax thresholds or call these native-policy-trained weights.
+
+Preserve `build/network-fast-v1/`, `build/network-native-aware-v{1,2}/`,
+`build/native-stages-v{1,2}/`, `build/native-quant-primitives-v{1,2}/` and
+`build/native-quant-asan-v1/`. Older simulated module/checker source snapshots
+and tested binaries stay with their original reports. The next task is to
+bound remaining rounding sensitivity and prepare explicitly versioned native
+training; current trainer/features/precision and checkpoint remain unchanged.
+
 Local preserved outputs beneath this worktree:
 `build/english-native-training-20261031/stable-mixed-step{1-v4,2-resume}/`,
 `build/student-mixed-profile3-v1/`, `build/frontend-mixed-profile3-v1/`,

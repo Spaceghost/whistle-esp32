@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compare exported float C execution with the matching JAX network, CPU only.
+"""Compare exported C execution with the matching JAX network, CPU only.
 
 This isolates weight packing and architecture. Activation/KV quantization,
 speech accuracy and target-device performance require separate acceptance.
@@ -23,6 +23,13 @@ def main():
     p = argparse.ArgumentParser(description=__doc__)
     for name in ('checkpoint', 'model', 'binary', 'needle-source', 'catalog', 'audio-root', 'output'):
         p.add_argument('--' + name, type=Path, required=True)
+    modes = p.add_mutually_exclusive_group()
+    modes.add_argument('--quantized', action='store_true',
+                   help='Measure native fast CQ execution against trainer A8/KV8 simulation')
+    modes.add_argument('--native-aware', action='store_true',
+                       help='Evaluate the proposed native-aware simulation on existing weights; does not retrain them')
+    p.add_argument('--stage-binary', type=Path,
+                   help='Only diagnose encoder stages on the first clip with this host-only probe')
     a = p.parse_args()
     if a.output.exists():
         p.error('Choose a new output directory; preserve previous evidence')
@@ -46,6 +53,12 @@ def main():
         raise ValueError('Changed training implementation')
     whistle, quantize, checkpoints = helper['source_modules'](a.needle_source)
     english_features.install(whistle)
+    if a.quantized:
+        quantize.configure_deploy(act_bits=8, kv_bits=8)
+    if a.native_aware:
+        import english_native_quant
+        english_native_quant.install(whistle, quantize)
+        quantize.configure_deploy(act_bits=8, kv_bits=0)
     import jax
     import jax.numpy as jnp
     import numpy as np
@@ -55,14 +68,18 @@ def main():
     cfg = whistle.WhistleConfig.from_saved(saved['config'])
     # Export stores non-CQ parameters in FP16. Match those stored values,
     # retaining FP32 computation, to isolate execution rather than rounding.
-    deployed = english_precision.qat_params(saved['params'], quantize, signature['qat_bits'])
+    deployed = (english_native_quant.parameters(saved['params'], quantize, signature['qat_bits']) if a.native_aware
+                else english_precision.qat_params(saved['params'], quantize, signature['qat_bits']))
+    def derived_head(path):
+        return (a.native_aware and len(path) == 1 and getattr(path[0], 'key', None) == english_native_quant.OUTPUT_HEAD)
     deployed = jax.tree_util.tree_map_with_path(
-        lambda path, leaf: leaf if quantize._is_quant_leaf(path, leaf)
+        lambda path, leaf: leaf if quantize._is_quant_leaf(path, leaf) or derived_head(path)
         else jnp.asarray(leaf).astype(jnp.float16).astype(jnp.float32), deployed)
     model = whistle.Whistle(cfg)
     tokens = jnp.asarray([[2, cfg.text, 42, 101, 7, 1023, 33, 99]], dtype=jnp.int32)
-    encode = jax.jit(lambda params, wav, lengths: model.apply({'params': params}, wav, lengths, quant=False, method=model.encode))
-    logits = jax.jit(lambda params, enc, lengths: model.apply({'params': params}, tokens, enc, lengths, quant=False, method=model.logits))
+    quant = a.quantized or a.native_aware
+    encode = jax.jit(lambda params, wav, lengths: model.apply({'params': params}, wav, lengths, quant=quant, method=model.encode))
+    logits = jax.jit(lambda params, enc, lengths: model.apply({'params': params}, tokens, enc, lengths, quant=quant, method=model.logits))
     a.output.mkdir(parents=True)
     (a.output / 'INCOMPLETE').write_text('Whole-network parity not established.\n')
     cases = []
@@ -75,11 +92,17 @@ def main():
             if (f.getnchannels(), f.getsampwidth(), f.getframerate()) != (1, 2, 16000):
                 raise ValueError('Wrong audio format')
             pcm = np.frombuffer(f.readframes(f.getnframes()), '<i2').astype(np.float32) / 32768.
+        if a.stage_binary:
+            import english_stage_diagnostics
+            english_stage_diagnostics.compare(a, model, deployed, cfg, whistle, pcm, quant)
+            return
         enc_path = a.output / f'{index}-native-encoder.f32'
         lg_path = a.output / f'{index}-native-logits.f32'
-        command = [str(a.binary.resolve()), str(a.model.resolve()), str(wav), '--float', '--lang', 'en',
+        command = [str(a.binary.resolve()), str(a.model.resolve()), str(wav), '--lang', 'en',
                    '--enc-out', str(enc_path.resolve()), '--logits-out', str(lg_path.resolve()),
                    '--tokens', ','.join(map(str, np.asarray(tokens)[0]))]
+        if not quant:
+            command.append('--float')
         result = subprocess.run(command, capture_output=True, text=True, timeout=180)
         (a.output / f'{index}-native.log').write_text(result.stdout + result.stderr)
         result.check_returncode()
@@ -108,12 +131,20 @@ def main():
                       within_tolerance=bool(finite and relative < 2e-4 and error < 2e-3 and isolated_error < 2e-3 and same))
         cases.append(record)
         print(json.dumps(record), flush=True)
-    report = dict(schema=1, scope='Float execution with matched CQ weights and FP16-rounded other parameters; no A8/KV8, accuracy or device acceptance',
+    scope = ('Native fast CQ execution versus trainer A8/KV8 simulation; float tolerances retained to expose discrepancies, no accuracy or device acceptance'
+             if a.quantized else 'Float execution with matched CQ weights and FP16-rounded other parameters; no A8/KV8, accuracy or device acceptance')
+    mode = 'native-fast-vs-trainer-a8-kv8' if a.quantized else 'float'
+    if a.native_aware:
+        scope = 'Native-aware fast-kernel simulation applied to existing checkpoint; no new training, accuracy or device acceptance'
+        mode = english_native_quant.POLICY
+    report = dict(schema=1, scope=scope, execution_mode=mode,
                   model_sha256=sha(a.model), native_binary_sha256=sha(a.binary), checker_sha256=sha(Path(__file__)),
                   checkpoint_manifest_sha256=sha(a.checkpoint / 'manifest.json'),
                   encoder_relative_tolerance=2e-4, logits_absolute_tolerance=2e-3,
                   tokens=np.asarray(tokens)[0].tolist(), cases=cases,
                   all_passed=all(c['within_tolerance'] for c in cases), deployment_permitted=False)
+    if a.native_aware:
+        report['simulation_sha256'] = sha(Path(english_native_quant.__file__))
     (a.output / 'network.json').write_text(json.dumps(report, indent=2) + '\n')
     if not report['all_passed']:
         raise ValueError('Whole-network comparison failed; preserve evidence')

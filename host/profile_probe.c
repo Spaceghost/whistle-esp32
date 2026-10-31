@@ -29,6 +29,24 @@ int main(int argc,char **argv) {
     if(opened){fprintf(stderr,"open %d\n",opened);nd_whistle_close(&w);free(blob);return 4;}
     if(!strcmp(argv[2],"inspect")) {
         printf("{\"vocabulary\":%u,\"model_state_bytes\":%zu}\n",w.vocab,sizeof(w));rc=0;
+    }else if(!strcmp(argv[2],"cq-linear") && argc==6) {
+        char *end=NULL;unsigned long index=strtoul(argv[3],&end,10);
+        if(!*argv[3] || *end || index>=w.c.h4.num_tensors)goto done;
+        const nd_tensor *tensor=&w.t[index];
+        if(!nd_cq_q8_ok(tensor) || tensor->ndim!=2)goto done;
+        size_t nbytes;float *input=read_file(argv[4],&nbytes);
+        size_t row_bytes=(size_t)tensor->shape[1]*sizeof(float);
+        if(!input || !row_bytes || !nbytes || nbytes%row_bytes || nbytes/row_bytes>32){free(input);goto done;}
+        unsigned rows=(unsigned)(nbytes/row_bytes);
+        size_t count=(size_t)rows*tensor->shape[0];
+        if(count>4u*1024u*1024u){free(input);goto done;}
+        float *output=malloc(count*sizeof(float));nd_q8_act activations={0};
+        if(!output || nd_cq_q8_prepare(tensor,input,rows,&activations)){free(output);free(input);goto done;}
+        const void *data=(const unsigned char*)blob+tensor->offset;
+        nd_cq_q8_gemm(&w.c,tensor,data,&activations,0,tensor->shape[0],output);
+        FILE *f=fopen(argv[5],"wbx");
+        if(f){rc=fwrite(output,sizeof(float),count,f)==count?0:1;fclose(f);}
+        nd_cq_q8_free(&activations);free(output);free(input);
     }else if(!strcmp(argv[2],"mel") && argc==5) {
         size_t nbytes;float *pcm=read_file(argv[3],&nbytes);
         if(!pcm || nbytes%sizeof(float) || nbytes>16000*30*sizeof(float)){free(pcm);goto done;}

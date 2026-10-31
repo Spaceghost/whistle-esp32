@@ -82,6 +82,9 @@ endif()
 add_executable(profile_probe profile_probe.c)
 target_link_libraries(profile_probe PRIVATE needle_engine)
 
+add_executable(stage_probe stage_probe.c)
+target_link_libraries(stage_probe PRIVATE needle_engine)
+
 add_executable(frontend_silence_test frontend_silence_test.c)
 target_link_libraries(frontend_silence_test PRIVATE needle_engine)
 target_compile_options(frontend_silence_test PRIVATE -UNDEBUG)

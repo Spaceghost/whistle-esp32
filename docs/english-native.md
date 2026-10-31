@@ -151,7 +151,7 @@ bound. Step one peaked at 3,304,222,720 bytes; resumed step two peaked at
 2,469,711,872 bytes. Both completed with finite gradients and nonzero updates.
 Two losses on different examples do not establish learning quality.
 
-1. Check the native quantized activation/cache path against the trainer's A8/KV8 simulation.
+1. Finish [native fast-path stability checks](english-native-quantization.md); kernel simulation passes, strict whole-network comparison remains open.
 2. Train meaningfully when resources and the complete corpus are available.
 3. Score held-out English, app requests and character names against the baseline.
 4. Measure Watch memory/stack and test real microphone interactions.
