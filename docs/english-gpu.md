@@ -173,3 +173,11 @@ bytes) retain the exact earlier control digest. Compilation is still running
 under the old failed 2.75 GiB host cap; this is not yet a verified update,
 checkpoint, full-run peak reduction or speech result.
 [Measured state and live guard snapshot](../research/english-heap-trim-live-state-20261031.json).
+
+
+The controlled 2.75 GiB run is now terminal. Startup trimming saved 280 MiB
+and preserved the full state, but update-one compilation later reached
+3,129,143,296 bytes sampled process-group RSS. The guard stopped only the
+owned process; no update, training report or READY checkpoint was created.
+**Trimming alone does not solve this cap.**
+[Terminal resource and state evidence](../research/english-heap-trim-terminal-20261031.json).
