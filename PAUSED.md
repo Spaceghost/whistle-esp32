@@ -6,7 +6,17 @@
 | Full-shape CPU fallback | ✅ Three updates + READY snapshots; ~7.9s warm update |
 | Full-shape GPU recovery | ✅ New process restored checkpoint1, completed updates2/3 and saved verified READY snapshots; terminal0 |
 | First complete epoch | ⏳ Admission guard live, waiting above10% utilization limit; no child at this observation |
-| Watch80 reading candidate | ✅ Target build and exact USB parity pass; unsigned/uninstalled, Watch79 boot/control remains separately owned |
+| Watch80 reading release | ✅ Signed OTA installed VALID; model, three apps, conversation, journal and peer security preserved; own control released |
+
+Watch0.1.80/sequence81 is installed OTA_VALID2/boothealthy, with production
+weights8c unchanged. Exact dev189 app02ae2d63/USBe4caf118 was independently
+verified; one signed OTA only. Three app entries/hashes, conversation, whole
+journal metadata/reply hash and peer identity/security match preflight. A
+SHA-verified240x240 framebuffer was privately inspected. All own Watch
+control/USB/target holds and TUF writer are released. Physical new touch/voice
+acceptance and USB reflash of this exact version remain untested. Full sanitized
+receipts live on private AckermanOS feature/watch-reading-20261031; frozen image
+source13059be. Do not reflash it because an older handoff below says pending.
 
 Export metadata preflight is now verified on actual GPU checkpoint3: nine
 focused controls and the bounded real integration pass,25,800,704B sampled
