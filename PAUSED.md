@@ -1,3 +1,34 @@
+## Current decoder and C API sanitizer revalidation complete — 2026-10-31
+
+✅ Rebuilt profile/stage/generateddecoder with real GCC ASan/UBSan. Current
+generated decoder8cases PASS: validactualmodel, NaN/misaligned/emptyencoder,
+outofvocab/empty/misalignedtokens, repeatedoutputrefusal. Allstderr clean and
+invalidcases createNOoutputs; repeatedvalid output inventory hash unchanged.
+New check_english_decoder_safety.py requires currentpassing canaries and actual
+ASan/UBSan symbols, records hashes and core dumpsdisabled.
+
+✅ Seven native C API tests PASS under verifiedruntimes: EnglishAPI/commands,
+fastallocationfallback,tokenizermemory,speechgatememory,decoderconfidence,
+silentfrontend. ASan initpresent in ALL7binaries; sanitizerflags checked;6tests
+assertions active (-UNDEBUG), commands use explicit failure returns. Five
+trace-source integrity tests PASS, exactly13capture additions; production/
+generator/generated hashes verified. Old historical Zig ASan labels are NOT
+retroactively accepted; current decoder gap is closed by this NEW run. Other
+untested profile/stage safety cases and physical/numeric/ASR gates stay open.
+
+Guards35319 build,34840 decoder,6282 nativeC suite ALLTERMINAL0. No owned native
+job remains. Exact research/english-native-sanitizer-revalidation-20261031.json;
+human table/graph docs/english-decoder.md, updated docs/english-memory.md.
+No engine/trainer/device/model/TUF/Bak/other-workload change. Full goal active.
+
+GPUwait46639/guard738565 requires samehandle/livePID re-poll; last verified
+waitingRAM,nochild. Do NOTduplicate on observation timeout. Requirements4GiBhost
+budget+2GiBreserve, shortdiagnostic35percent graphics threshold,3600swait/900s
+childcap. Full training10percent unchanged/NOTstarted. Next actual GPUstudent
+updates/save/resume and full25s/160token sizing beforemeaningfultraining.
+
+---
+
 ## Actual ESP32-S3 engine compile and ABI measured — 2026-10-31
 
 ✅ Baseline5d1fc97 and research engine4a547bc all5 component sources compile

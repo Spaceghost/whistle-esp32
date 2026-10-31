@@ -33,6 +33,36 @@ key, value, normalization or memory-construction difference.
 
 [Exact sublayer, source-integrity, sanitizer and resource receipts](../research/english-decoder-sublayers-20261031.json).
 
+## Current sanitizer checks: rerun with verified runtimes
+
+| Check | Result |
+| :--- | :--- |
+| Actual model and retained encoder/token input | ✅ Decoder completes without sanitizer errors |
+| Invalid encoder inputs | ✅ NaN, empty and misaligned buffers refused before output |
+| Invalid token inputs | ✅ Out-of-vocabulary, empty and misaligned buffers refused |
+| Existing outputs | ✅ Repeated run refuses; every prior output hash preserved |
+
+All eight cases now pass under actual GCC ASan/UBSan, after deliberate fault
+canaries prove both runtimes work. Five source-integrity checks confirm the
+current trace adds exactly 13 capture calls and preserves the original source.
+Seven native C API checks also pass with sanitizer instrumentation and active
+assertions or explicit failure returns. These checks close the current diagnostic
+safety gap; they do not change the failing full fast numeric gate or establish
+speech quality/physical Watch acceptance.
+
+```mermaid
+flowchart LR
+    A[Prove sanitizer fault detection] --> B[Run actual model]
+    B --> C[Refuse malformed buffers and tokens]
+    C --> D[Preserve existing output files]
+    D --> E[Eight safety checks pass]
+```
+
+[Exact current safety and native API evidence](../research/english-native-sanitizer-revalidation-20261031.json).
+`tools/check_english_decoder_safety.py` repeats these cases without JAX or training.
+Historical Zig labels below remain historical; this is a new, independently
+recorded GCC run of the current generated decoder.
+
 ## Layer boundary controls
 
 | Boundary | Result | What it establishes |

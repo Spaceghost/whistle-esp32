@@ -1,0 +1,285 @@
+{
+  "schema": 1,
+  "scope": "Current generated decoder and seven native C checks under actual GCC ASan/UBSan; not numerical or physical acceptance",
+  "decoder_safety": {
+    "schema": 1,
+    "scope": "Run actual-model decoder and malformed-input checks under proven sanitizers.\n\nNo JAX, training, numerical-parity acceptance or device access.\n",
+    "cases": [
+      {
+        "case": "valid",
+        "exit_code": 0,
+        "expected": 0,
+        "no_sanitizer_diagnostic": true
+      },
+      {
+        "case": "nan",
+        "exit_code": 1,
+        "expected": 1,
+        "no_sanitizer_diagnostic": true
+      },
+      {
+        "case": "misaligned",
+        "exit_code": 1,
+        "expected": 1,
+        "no_sanitizer_diagnostic": true
+      },
+      {
+        "case": "empty",
+        "exit_code": 1,
+        "expected": 1,
+        "no_sanitizer_diagnostic": true
+      },
+      {
+        "case": "out-of-vocabulary",
+        "exit_code": 1,
+        "expected": 1,
+        "no_sanitizer_diagnostic": true
+      },
+      {
+        "case": "empty-tokens",
+        "exit_code": 1,
+        "expected": 1,
+        "no_sanitizer_diagnostic": true
+      },
+      {
+        "case": "misaligned-tokens",
+        "exit_code": 1,
+        "expected": 1,
+        "no_sanitizer_diagnostic": true
+      },
+      {
+        "case": "existing-output-preserved",
+        "exit_code": 1,
+        "expected": 1,
+        "no_sanitizer_diagnostic": true
+      }
+    ],
+    "all_passed": true,
+    "existing_output_inventory_sha256": "69accf3bd0a8288c70800eeab6c5e2318dedd5459f3265b38ca8cb00b2e91bfe",
+    "existing_outputs_preserved": true,
+    "binary_sha256": "8c138bfbf7b005e6375e65e27a51c5867c480f72d7c43b1e8937cd1fa4924ed1",
+    "checker_sha256": "7b54f56666a81667710c1f555961cb0639d5f71a0d78f01082c19333137d055e",
+    "model_sha256": "37a8d6e407c7ffbc64fb46a8340cb41b29447a528fb836590e91800b94fc819b",
+    "encoder_sha256": "93bf56c9285301f7197e94645a1280854dd116ead1eb37a056765d20939b4810",
+    "tokens_sha256": "1e107ffd6f2163c106e4c159a36406e71a8fce3e8bb998f5816a9d801154e9f1",
+    "sanitizer_proof_sha256": "6fd112d2dd81fec2f7ee2950ce9b76cca80a4944ae85f6b58931404e23b94c64",
+    "numerical_parity_verified": false,
+    "deployment_permitted": false
+  },
+  "trace_source": {
+    "schema": 1,
+    "scope": "Generate a host-only instrumented copy; never edit the production engine.",
+    "production_source_sha256": "dca48cf6d2c9b6e02059f00b849d8b7adfb15151abe0bfc7317a510e0d200b10",
+    "generator_sha256": "48525e9b3166142baa9d2dac80984d603b97a2938da679804f82b68df65bce9e",
+    "generated_sha256": "97ec833c4a18d5afa65e45c31f3920cde6ec3fa882499612e4b6219c46b08779"
+  },
+  "source_integrity_tests": {
+    "tests": 5,
+    "passed": true,
+    "source_sha256": "8331b0f141253941c7c838e6be9cb5d837f38a3564c86fe031bb62f6f374f819"
+  },
+  "c_api": {
+    "tests": 7,
+    "passed": true,
+    "binaries": [
+      {
+        "binary": "english_test",
+        "sha256": "4ef439b072829f9e63f2db63f891b18773b969fc79b1014f4dd9cd8c3d7de73a",
+        "asan_init_present": true,
+        "assertions_enabled": true,
+        "uses_explicit_failure_returns": false,
+        "flags_sha256": "5095fba10a944cc6967fc8413700fbc7c64f2e8981df19850f8730e09c3ecb8d"
+      },
+      {
+        "binary": "ledcmd_test",
+        "sha256": "423154431753f758195dd73d934fc91e7e7fa62a73d274ed9fa5d94fae6dfdad",
+        "asan_init_present": true,
+        "assertions_enabled": false,
+        "uses_explicit_failure_returns": true,
+        "flags_sha256": "81f87ce0a980e7421bd324e1d4818008d23dac1151a47f93ec54fadaedc497be"
+      },
+      {
+        "binary": "alloc_test",
+        "sha256": "4a64da0eefcbb58cfb23749ddb197fb6c090a088a7f12f5a64eadb458f31a7db",
+        "asan_init_present": true,
+        "assertions_enabled": true,
+        "uses_explicit_failure_returns": false,
+        "flags_sha256": "1241c9d7ad6ea88a294fe360c13e9a045c1a2dec7bb3931ae77a53d5aeff402d"
+      },
+      {
+        "binary": "tokenizer_memory_test",
+        "sha256": "49831a6043367a3fe67472af4749b8873e06eea080bddf9ff88ff3c13836f37c",
+        "asan_init_present": true,
+        "assertions_enabled": true,
+        "uses_explicit_failure_returns": false,
+        "flags_sha256": "5095fba10a944cc6967fc8413700fbc7c64f2e8981df19850f8730e09c3ecb8d"
+      },
+      {
+        "binary": "speech_gate_test",
+        "sha256": "5b0135408718fcdeb424548c84898015d88bfb2ebab5134142c2222bc4f8010a",
+        "asan_init_present": true,
+        "assertions_enabled": true,
+        "uses_explicit_failure_returns": false,
+        "flags_sha256": "5095fba10a944cc6967fc8413700fbc7c64f2e8981df19850f8730e09c3ecb8d"
+      },
+      {
+        "binary": "decoder_score_test",
+        "sha256": "d1e9960380257604f3edf50e1384cea1eb614fc7fe782cab8531aeb05a31b7d7",
+        "asan_init_present": true,
+        "assertions_enabled": true,
+        "uses_explicit_failure_returns": false,
+        "flags_sha256": "5095fba10a944cc6967fc8413700fbc7c64f2e8981df19850f8730e09c3ecb8d"
+      },
+      {
+        "binary": "frontend_silence_test",
+        "sha256": "c4214294c5f9af23bfd62c619b493eee71fdfac11e729d233ce81b55ec84b5eb",
+        "asan_init_present": true,
+        "assertions_enabled": true,
+        "uses_explicit_failure_returns": false,
+        "flags_sha256": "5095fba10a944cc6967fc8413700fbc7c64f2e8981df19850f8730e09c3ecb8d"
+      }
+    ],
+    "ctest_log_sha256": "fde1f4cc3949f498252c9cee954ebbde0765f135be385e9f4aba1cd629bd5108"
+  },
+  "sanitizer_canaries": {
+    "schema": 1,
+    "scope": "Require actual ASan and UBSan fault detection, not accepted compiler flags.",
+    "checker_sha256": "544b45c954707d8595f80aa3067b333a351fe812af5cff11c848bc288f95e79b",
+    "compiler_command": "/usr/bin/gcc",
+    "cases": [
+      {
+        "case": "heap",
+        "sanitizer": "address",
+        "source_sha256": "4c46bfdb4fd33d491b794a032ff521af841c1b7720b37024acf25f7a423ac224",
+        "compile_exit_code": 0,
+        "expected_error_reported": true,
+        "exit_code": 1,
+        "binary_sha256": "646aa0db9c257e32cfa58013be00462a6bff339635fcfda52b860bcb92b7895b"
+      },
+      {
+        "case": "overflow",
+        "sanitizer": "undefined",
+        "source_sha256": "cd59806e7f044f268471b68c6b9e137e39e9df62aabddb19a42f4fd72e1a908d",
+        "compile_exit_code": 0,
+        "expected_error_reported": true,
+        "exit_code": 1,
+        "binary_sha256": "69b97e47ee1217e3ad650d7de3cd38c4e56a99f7272d6ae10919c3230a17af29"
+      }
+    ],
+    "all_passed": true
+  },
+  "guards": {
+    "native-probes-gcc-sanitizer-build-v1": {
+      "schema": 1,
+      "state": "complete",
+      "command": [
+        "/var/home/jack/Projects/.system-cache/venvs/ackerman-english-training-20261030/bin/cmake",
+        "--build",
+        "build/english-memory-gcc-asan-20261031",
+        "--target",
+        "profile_probe",
+        "stage_probe",
+        "decoder_probe",
+        "-j2"
+      ],
+      "guard_pid": 832826,
+      "child_pid": 833005,
+      "rss_limit_bytes": 1073741824,
+      "launch_available_memory_bytes": 3221225472,
+      "host_available_memory_floor_bytes": 1073741824,
+      "cpu_only": true,
+      "cpus": 2,
+      "nice_increment": 10,
+      "maximum_job_seconds": 240.0,
+      "peak_observed_process_group_rss_bytes": 128737280,
+      "admitted": true,
+      "available_at_launch_bytes": 4232581120,
+      "admission_wait_seconds": 3.001,
+      "cpu_affinity": [
+        0,
+        1
+      ],
+      "reason": null,
+      "exit_code": 0,
+      "job_elapsed_seconds": 57.32
+    },
+    "decoder-gcc-safety-window-v1": {
+      "schema": 1,
+      "state": "complete",
+      "command": [
+        "/var/home/jack/Projects/.system-cache/venvs/ackerman-english-training-20261030/bin/python",
+        "tools/check_english_decoder_safety.py",
+        "--binary",
+        "build/english-memory-gcc-asan-20261031/decoder_probe",
+        "--model",
+        "build/native-policy-training-20261031/export-step2-v1/english-student-research.cact",
+        "--encoder",
+        "build/native-policy-training-20261031/network-step2-v1/3-native-encoder.f32",
+        "--tokens",
+        "build/native-policy-training-20261031/decoder-sublayers-step2-v1/tokens.u32",
+        "--sanitizer-proof",
+        "build/training-readiness-20261031/sanitizer-canary-v6/receipt.json",
+        "--output",
+        "build/english-memory-20261031/decoder-safety-v1"
+      ],
+      "guard_pid": 837747,
+      "child_pid": 838025,
+      "rss_limit_bytes": 1073741824,
+      "launch_available_memory_bytes": 3221225472,
+      "host_available_memory_floor_bytes": 1073741824,
+      "cpu_only": true,
+      "cpus": 2,
+      "nice_increment": 10,
+      "maximum_job_seconds": 180.0,
+      "peak_observed_process_group_rss_bytes": 41136128,
+      "admitted": true,
+      "available_at_launch_bytes": 4100595712,
+      "admission_wait_seconds": 3.001,
+      "cpu_affinity": [
+        0,
+        1
+      ],
+      "reason": null,
+      "exit_code": 0,
+      "job_elapsed_seconds": 6.613
+    },
+    "native-c-api-gcc-safety-window-v1": {
+      "schema": 1,
+      "state": "complete",
+      "command": [
+        "bash",
+        "-c",
+        "cmake --build build/english-memory-gcc-asan-20261031 --target english_test ledcmd_test alloc_test tokenizer_memory_test speech_gate_test decoder_score_test frontend_silence_test -j2 && ctest --test-dir build/english-memory-gcc-asan-20261031 --output-on-failure -R \"^(english_api|english_commands|fast_allocation_fallback|tokenizer_memory|speech_gate_memory|decoder_confidence_memory|research_frontend_silence)$\""
+      ],
+      "guard_pid": 841650,
+      "child_pid": 841912,
+      "rss_limit_bytes": 1073741824,
+      "launch_available_memory_bytes": 3221225472,
+      "host_available_memory_floor_bytes": 1073741824,
+      "cpu_only": true,
+      "cpus": 2,
+      "nice_increment": 10,
+      "maximum_job_seconds": 240.0,
+      "peak_observed_process_group_rss_bytes": 136138752,
+      "admitted": true,
+      "available_at_launch_bytes": 3983753216,
+      "admission_wait_seconds": 3.001,
+      "cpu_affinity": [
+        0,
+        1
+      ],
+      "reason": null,
+      "exit_code": 0,
+      "job_elapsed_seconds": 21.173
+    }
+  },
+  "source_sha256": {
+    "tools/check_english_decoder_safety.py": "7b54f56666a81667710c1f555961cb0639d5f71a0d78f01082c19333137d055e",
+    "host/decoder_probe.c": "fe503d22f64fe0087c6fdc54b9dae71227b129056ed20e9be0cb753eddc4f0ac",
+    "tools/prepare_decoder_trace.py": "48525e9b3166142baa9d2dac80984d603b97a2938da679804f82b68df65bce9e"
+  },
+  "full_native_numeric_gate_passed": false,
+  "neural_accuracy_verified": false,
+  "watch_acceptance_verified": false,
+  "deployment_permitted": false
+}

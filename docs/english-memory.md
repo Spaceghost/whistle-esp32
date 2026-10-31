@@ -37,6 +37,8 @@ flowchart TD
 | :--- | :--- |
 | Release model probe | ✅ All three durations complete; no tracked leaks |
 | GCC ASan + UBSan model probe | ✅ Same heap figures; no sanitizer errors |
+| Current generated decoder | ✅ Eight real-model/refusal/output-preservation cases pass |
+| Native C API | ✅ Seven checks pass with assertions/failure returns active |
 | GCC deliberate heap overflow | ✅ ASan detects it and exits nonzero |
 | GCC deliberate signed overflow | ✅ UBSan detects it and exits nonzero |
 | Earlier Zig ASan labels | ⚠️ Do not establish ASan coverage |
@@ -46,9 +48,10 @@ deliberate heap overflow exited successfully. Its current profile, stage and
 decoder binaries contain UBSan symbols and no ASan symbols. Requesting ASan
 alone fails to link its runtime; its signed-overflow canary does abort correctly.
 Earlier numerical and guard-test results remain historical evidence, but their
-**ASan claims need revalidation**. The new end-to-end memory probe is the scope
-of the replacement coverage; it does not retroactively cover every generated
-decoder diagnostic or malformed-input case.
+**ASan claims need revalidation**. Replacement coverage now includes the end-to-end memory probe, the current
+generated decoder's eight input/output-safety checks and seven native C API
+checks. It does not retroactively cover older artifacts or other untested
+profile/stage diagnostic cases.
 
 The replacement uses GCC 16.2.1 with matching Fedora ASan/UBSan runtimes extracted
 into the workdata cache. No OS package was installed. Official Koji RPM identity,
@@ -57,6 +60,7 @@ payload digests and SHA-256 values are retained; RPM signatures were not verifie
 model run counts as sanitizer evidence. Deliberate faults cannot write core dumps.
 
 [Exact heap, toolchain, canary and resource receipts](../research/english-native-memory-20261031.json).
+[Current decoder/C API revalidation and source integrity](../research/english-native-sanitizer-revalidation-20261031.json).
 
 ## Run it again
 
