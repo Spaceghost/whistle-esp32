@@ -8,13 +8,25 @@ import tempfile
 import unittest
 import wave
 
-import numpy as np
-import soundfile as sf
+try:
+    import numpy as np
+    import soundfile as sf
+except ImportError:
+    np = sf = None
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]/'tools'))
 import eval_english_native as scoring
 
 
+class WordMetricTests(unittest.TestCase):
+    def test_normalization_and_edit_distance(self):
+        self.assertEqual(scoring.words('“Don’t” CALL Levi—please!'), ["don't", 'call', 'levi', 'please'])
+        self.assertEqual(scoring.words('one_two'), ['one', 'two'])
+        self.assertEqual(scoring.word_errors(['one', 'two'], []), 2)
+        self.assertEqual(scoring.word_errors(['one', 'two'], ['one', 'three', 'four']), 2)
+
+
+@unittest.skipIf(sf is None, 'Run audio/engine controls in the locked CPU research environment')
 class HeldOutNativeTests(unittest.TestCase):
     def setUp(self):
         self.temporary = tempfile.TemporaryDirectory()
@@ -59,12 +71,6 @@ class HeldOutNativeTests(unittest.TestCase):
             output=self.root/name, split='validation', limit=0, seed=0, depth=2, timeout=5)
         values.update(changes)
         return argparse.Namespace(**values)
-
-    def test_normalization_and_edit_distance(self):
-        self.assertEqual(scoring.words('“Don’t” CALL Levi—please!'), ["don't", 'call', 'levi', 'please'])
-        self.assertEqual(scoring.words('one_two'), ['one', 'two'])
-        self.assertEqual(scoring.word_errors(['one', 'two'], []), 2)
-        self.assertEqual(scoring.word_errors(['one', 'two'], ['one', 'three', 'four']), 2)
 
     def test_full_split_micro_wer_and_frozen_evidence(self):
         args = self.args(); report = scoring.evaluate(args)

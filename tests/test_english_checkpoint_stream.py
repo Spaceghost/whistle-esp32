@@ -11,12 +11,15 @@ os.environ['JAX_PLATFORMS'] = 'cpu'
 os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'tools'))
 
-import jax
-import jax.numpy as jnp
-import numpy as np
-import optax
-from flax import serialization
-from safetensors.numpy import save_file
+try:
+    import jax
+    import jax.numpy as jnp
+    import numpy as np
+    import optax
+    from flax import serialization
+    from safetensors.numpy import save_file
+except ImportError:
+    jax = None
 import english_checkpoint_stream as stream
 import train_english_student as core
 
@@ -28,6 +31,7 @@ class ModelFiles:
                   metadata={'step': str(data['step'])})
 
 
+@unittest.skipIf(jax is None, 'Run checkpoint controls in the locked training environment')
 class StreamingCheckpointTests(unittest.TestCase):
     def state(self):
         params = {'w': jnp.arange(64, dtype=jnp.float32).reshape(8, 8) / 64}

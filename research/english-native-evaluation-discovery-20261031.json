@@ -1,0 +1,40 @@
+{
+  "schema": 1,
+  "scope": "Native CMake English-test discovery plus explicit complete research-environment controls; dependency skips are not acceptance evidence",
+  "stdlib_discovered": 95,
+  "stdlib_passed": 77,
+  "stdlib_dependency_skips": 18,
+  "locked_cpu_scorer_passed": 9,
+  "locked_cpu_checkpoint_passed": 5,
+  "locked_cpu_skipped": 0,
+  "guard": {
+    "schema": 1,
+    "state": "complete",
+    "command": [
+      "bash",
+      "-c",
+      "set -e\npython3 -S -m unittest discover -s tests -p \"test_english_*.py\" -v\n/var/home/jack/Projects/.system-cache/venvs/ackerman-english-training-20261030/bin/python -m unittest discover -s tests -p test_english_evaluation.py -v\n/var/home/jack/Projects/.system-cache/venvs/ackerman-english-training-20261030/bin/python -m unittest discover -s tests -p test_english_checkpoint_stream.py -v"
+    ],
+    "guard_pid": 1302305,
+    "child_pid": 1302421,
+    "rss_limit_bytes": 1073741824,
+    "launch_available_memory_bytes": 2147483648,
+    "host_available_memory_floor_bytes": 1073741824,
+    "cpu_only": true,
+    "cpus": 2,
+    "nice_increment": 10,
+    "maximum_job_seconds": 180.0,
+    "peak_observed_process_group_rss_bytes": 253358080,
+    "admitted": true,
+    "available_at_launch_bytes": 6785933312,
+    "admission_wait_seconds": 3.001,
+    "cpu_affinity": [
+      0,
+      1
+    ],
+    "reason": null,
+    "exit_code": 0,
+    "job_elapsed_seconds": 13.176
+  },
+  "training_source_unchanged": true
+}

@@ -79,3 +79,20 @@ Every result retains `recognition_accuracy_accepted=false` and
 physical microphone, latency, power or release gates.
 
 [Control and actual integration receipts](../research/english-native-evaluation-20261031.json).
+
+
+## Test discovery and the complete baseline
+
+The scorer controls use the native project's `test_english_*.py` discovery
+pattern. Standard-library-only discovery runs the pure metric checks and
+reports missing research dependencies as explicit skips. The locked CPU
+environment runs all nine scorer and five checkpoint controls without skips.
+The current discovery check runs 77 tests with 18 dependency skips; those skips
+do not establish model or audio acceptance.
+[Discovery and complete research-environment controls](../research/english-native-evaluation-discovery-20261031.json).
+
+A complete validation baseline of the existing model is now running under a
+two-core, 1 GiB CPU guard. It includes all 2,694 validation clips, uses the same
+seed and normalization as the four-clip integration check, and preserves every
+clip. Its output is private ignored build storage until the run completes.
+Partial WER remains progress only. This baseline will not approve new weights.
