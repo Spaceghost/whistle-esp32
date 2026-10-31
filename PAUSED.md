@@ -1,3 +1,30 @@
+## Actual ESP32-S3 engine compile and ABI measured — 2026-10-31
+
+✅ Baseline5d1fc97 and research engine4a547bc all5 component sources compile
+with frozen Watch compile_commands/config, SDK5.5.4, Xtensa GCC14.2.0 and pinned
+SDKimage209569617d40dc2190907bfa7508aa5dfc0823698663fc28a4405ef8012a78b0.
+New check_english_target.py produces actualELF32Xtensa objects, sizes and .su
+frames. Guard11379 TERMINAL0,62.14s; container removed, no active target job.
+Container separate1GiBhard cap/no swap/twoCPU quota/180s timeout; outerguardRSS
+only describes host client. Source/config mounted READONLY; outputs task scratch.
+
+Unlinked text31410 ->33044B (+1634), initializeddata8B and BSS4168B unchanged.
+Actual target nd_whistle state8456B BOTH (host8552 difference is ABI, NOT savings).
+Largest frameenc_block20656B unchanged; decoderblock12992,decstep11568,mlprows
+10336; logmel5232->5248. Allreportedframesstatic, but nested/callback/task stack
+acceptance remains OPEN. This is NOT a fully linked firmware image, runtime
+acceptance, new pin or model deployment. Exact research/english-target-compile-20261031.json;
+human table/graph appended docs/english-memory.md. Engine/trainer unchanged.
+
+Larger GPU admission46639 still needs re-polling samehandle/liveguard738565;
+last confirmed waiting other compute/RAM, no child. Do not duplicate because
+an observation expires. Requirements4GiBhost budget+2GiBreserve,900s childcap,
+3600s wait. Short diagnostic35percent graphics tolerance; full training default
+10percent and NOT started. All GPUstudent/save/resume/fullshape, native numeric,
+ASR quality, full-link and physical WatchRAM/stack/speed/mic gates open. Goal active.
+
+---
+
 ## Native requested heap measured / sanitizer evidence corrected — 2026-10-31
 
 ✅ New host wh_memory and checker run actual8,832,915B native-policy export on

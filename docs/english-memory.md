@@ -69,6 +69,40 @@ Both checkers preserve existing output directories. Raw weights remain outside
 Git. The probe wraps the current engine's malloc/calloc/free calls; changing the
 engine's allocator path requires reviewing this coverage.
 
+## Actual ESP32-S3 compilation
+
+✅ Both engines compile with the frozen Watch flags, SDK 5.5.4 and Xtensa GCC
+14.2.0 in the pinned image. Source/configuration mounts were read-only.
+
+| Target measurement | Pinned engine | Research engine |
+| :--- | ---: | ---: |
+| Unlinked text + read-only data | 31,410 B | 33,044 B |
+| Initialized data | 8 B | 8 B |
+| Uninitialized data | 4,168 B | 4,168 B |
+| `nd_whistle` state, real target ABI | 8,456 B | 8,456 B |
+| Largest reported function frame | 20,656 B | 20,656 B |
+
+The code delta is **1,634 bytes before final linking**, not a firmware image
+size measurement. The 8,456-byte target struct differs from the 8,552-byte host
+struct because of the ABI; this is not an optimization. The frontend's individual
+frame rises from 5,232 to 5,248 bytes. All reported engine frames are static,
+but nested calls, callback workers and task scheduling still need full stack
+verification. Unchanged largest-frame size does not prove sufficient task stack.
+
+```mermaid
+flowchart LR
+    A[Frozen Watch compile database] --> B[Pinned SDK and read-only sources]
+    B --> C[Compile both engine versions]
+    C --> D[Object size, 32-bit ABI and stack frames]
+    D --> E[Full linking and physical acceptance still open]
+```
+
+[Exact target objects, source/configuration hashes and stack frames](../research/english-target-compile-20261031.json).
+`tools/check_english_target.py` produces these observations and refuses a host
+object in place of an ELF32 Xtensa ABI probe. The container had a separate
+1 GiB memory limit, two-CPU quota and 180-second deadline; the outer guard's
+process-group RSS describes its host client, not the container's entire memory.
+
 ## Firmware integration remains separate
 
 The inspected Watch source pins engine `5d1fc976b0b630406b1511161707c74f37348030`,

@@ -8,6 +8,7 @@
 | Train, save, restart | ✅ | Two real optimizer steps; model and optimizer restored in a new process |
 | Model partition fit | ✅ | 8,832,915 bytes; 3,618,925 bytes spare in the 12,451,840-byte partition |
 | Native float execution | ✅ | All 89 CQ matrices and encoder/decoder outputs agree with the trainer on the checked cases |
+| ESP32-S3 source/ABI compile | ✅ | All five engine files compile; target state remains 8,456 B; full linking/runtime acceptance open |
 | Speech quality + Watch acceptance | ☐ | Activation/cache quantization comparison, full training, held-out scores and physical tests remain open |
 
 The latest [native-policy two-step probe and restart](english-native-quantization.md)

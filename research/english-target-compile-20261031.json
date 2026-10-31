@@ -1,0 +1,1246 @@
+{
+  "schema": 1,
+  "scope": "Real ESP32-S3 object compilation and per-function static frames, not linked firmware or physical stack acceptance",
+  "baseline_engine_commit": "5d1fc976b0b630406b1511161707c74f37348030",
+  "candidate_engine_source_commit": "4a547bc",
+  "sdk_image": "209569617d40dc2190907bfa7508aa5dfc0823698663fc28a4405ef8012a78b0",
+  "target": {
+    "schema": 1,
+    "scope": "Compile baseline/candidate engine with a frozen firmware compilation database.\n\nRun inside its pinned SDK image with source/configuration mounted read-only.\nObject and per-function stack sizes are not linked-image or runtime acceptance.\n",
+    "checker_sha256": "fe2daa56e9a5903c5d058cc165e8400165fc285b09372cc9f7313b6bd2e1e95b",
+    "compile_database_sha256": "232fe72b806672747c2e350348767a302ab0f7b793dd4d73f51c182f56de709b",
+    "compiler_version": "xtensa-esp-elf-gcc (crosstool-NG esp-14.2.0_20260121) 14.2.0",
+    "variants": {
+      "baseline": [
+        {
+          "name": "nd_whistle.c",
+          "source_sha256": "ac99de143cec9c0ca0b808b5598093c58209a562f96d7980214e771475b27f69",
+          "object_sha256": "17d6a1b205d6a5c6a8ca2bd15d69cd434bd6eceb92fce7b1162019ea3cd5d82d",
+          "text_bytes": 21338,
+          "data_bytes": 0,
+          "bss_bytes": 4168,
+          "stack_frames": [
+            {
+              "function": "rms_unit",
+              "bytes": 48,
+              "kind": "static"
+            },
+            {
+              "function": "session_end",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "lanes_init",
+              "bytes": 48,
+              "kind": "static"
+            },
+            {
+              "function": "kron",
+              "bytes": 2080,
+              "kind": "static"
+            },
+            {
+              "function": "rope",
+              "bytes": 48,
+              "kind": "static"
+            },
+            {
+              "function": "sh_end",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "lin_rows",
+              "bytes": 112,
+              "kind": "static"
+            },
+            {
+              "function": "lin",
+              "bytes": 48,
+              "kind": "static"
+            },
+            {
+              "function": "add_keywords",
+              "bytes": 144,
+              "kind": "static"
+            },
+            {
+              "function": "nd_expf",
+              "bytes": 64,
+              "kind": "static"
+            },
+            {
+              "function": "softmax",
+              "bytes": 48,
+              "kind": "static"
+            },
+            {
+              "function": "sigm",
+              "bytes": 48,
+              "kind": "static"
+            },
+            {
+              "function": "silu_inplace",
+              "bytes": 48,
+              "kind": "static"
+            },
+            {
+              "function": "sh_rows",
+              "bytes": 48,
+              "kind": "static"
+            },
+            {
+              "function": "sh_lin",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "hv",
+              "bytes": 48,
+              "kind": "static"
+            },
+            {
+              "function": "hvec",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "zc",
+              "bytes": 48,
+              "kind": "static"
+            },
+            {
+              "function": "lanes_out",
+              "bytes": 2112,
+              "kind": "static"
+            },
+            {
+              "function": "sh_begin.isra",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "mhc_step",
+              "bytes": 192,
+              "kind": "static"
+            },
+            {
+              "function": "dec_step",
+              "bytes": 11568,
+              "kind": "static"
+            },
+            {
+              "function": "session_begin",
+              "bytes": 416,
+              "kind": "static"
+            },
+            {
+              "function": "decode_pass.constprop",
+              "bytes": 3440,
+              "kind": "static"
+            },
+            {
+              "function": "conv_part",
+              "bytes": 592,
+              "kind": "static"
+            },
+            {
+              "function": "mlp_rows",
+              "bytes": 10336,
+              "kind": "static"
+            },
+            {
+              "function": "mlp_residual",
+              "bytes": 96,
+              "kind": "static"
+            },
+            {
+              "function": "enc_block",
+              "bytes": 20656,
+              "kind": "static"
+            },
+            {
+              "function": "dec_block",
+              "bytes": 12992,
+              "kind": "static"
+            },
+            {
+              "function": "nd_whistle_logmel",
+              "bytes": 5232,
+              "kind": "static"
+            },
+            {
+              "function": "nd_whistle_frames",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "nd_whistle_encode",
+              "bytes": 192,
+              "kind": "static"
+            },
+            {
+              "function": "nd_whistle_logits",
+              "bytes": 2096,
+              "kind": "static"
+            },
+            {
+              "function": "nd_whistle_set_keywords",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "nd_whistle_add_keywords",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "nd_whistle_find_speech",
+              "bytes": 64,
+              "kind": "static"
+            },
+            {
+              "function": "nd_whistle_decode",
+              "bytes": 48,
+              "kind": "static"
+            },
+            {
+              "function": "nd_whistle_detok",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "nd_whistle_cache_head",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "nd_whistle_set_depth",
+              "bytes": 160,
+              "kind": "static"
+            },
+            {
+              "function": "nd_whistle_open",
+              "bytes": 80,
+              "kind": "static"
+            },
+            {
+              "function": "nd_whistle_close",
+              "bytes": 32,
+              "kind": "static"
+            }
+          ]
+        },
+        {
+          "name": "nd_cact.c",
+          "source_sha256": "3b17c59a26b7d29546eea490d5dc7ccf152976a8885e6f279e8bbccbd20be578",
+          "object_sha256": "6ee3e9895778e09e6671a57c4aad43c2d9a640ce43ee39772e60b7dd2d90c2d2",
+          "text_bytes": 831,
+          "data_bytes": 0,
+          "bss_bytes": 0,
+          "stack_frames": [
+            {
+              "function": "rd_u32",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "nd_cact_open",
+              "bytes": 240,
+              "kind": "static"
+            },
+            {
+              "function": "nd_cact_codebook",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "nd_cact_tensor",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "nd_cact_data",
+              "bytes": 32,
+              "kind": "static"
+            }
+          ]
+        },
+        {
+          "name": "nd_quant.c",
+          "source_sha256": "e74138f6fcffac699b3626292a10040bd00414ab83a035fc3daf522b9f8e601b",
+          "object_sha256": "3df8e0d3e6ae85265b4a5e2fdf64e0de27c08ab7c2d99bc98b6b0ba4c32afc9b",
+          "text_bytes": 5756,
+          "data_bytes": 8,
+          "bss_bytes": 0,
+          "stack_frames": [
+            {
+              "function": "nd_cq_in_pad",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "nd_cq_row_bytes",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "nd_cq_groups",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "dot_group",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "rows_serial",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "nd_alloc_fast",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "nd_f16_slow",
+              "bytes": 48,
+              "kind": "static"
+            },
+            {
+              "function": "nd_f16",
+              "bytes": 48,
+              "kind": "static"
+            },
+            {
+              "function": "gemv_rows_offset",
+              "bytes": 48,
+              "kind": "static"
+            },
+            {
+              "function": "gemv_rows_generic",
+              "bytes": 48,
+              "kind": "static"
+            },
+            {
+              "function": "lut2_rows",
+              "bytes": 48,
+              "kind": "static"
+            },
+            {
+              "function": "gemm8_rows",
+              "bytes": 128,
+              "kind": "static"
+            },
+            {
+              "function": "gemm_rows",
+              "bytes": 112,
+              "kind": "static"
+            },
+            {
+              "function": "nd_fwht",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "nd_cq_scratch",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "nd_cq_prepare",
+              "bytes": 48,
+              "kind": "static"
+            },
+            {
+              "function": "nd_cq_gemv_rows",
+              "bytes": 96,
+              "kind": "static"
+            },
+            {
+              "function": "nd_cq_gemv_prepared",
+              "bytes": 96,
+              "kind": "static"
+            },
+            {
+              "function": "nd_cq_lut_build",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "nd_cq_gemv_lut2",
+              "bytes": 96,
+              "kind": "static"
+            },
+            {
+              "function": "nd_cq_gemv_gather",
+              "bytes": 96,
+              "kind": "static"
+            },
+            {
+              "function": "nd_cq_gemv",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "nd_cq_q8_ok",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "nd_cq_q8_prepare",
+              "bytes": 592,
+              "kind": "static"
+            },
+            {
+              "function": "nd_cq_q8_free",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "nd_cq_q8_gemm",
+              "bytes": 160,
+              "kind": "static"
+            },
+            {
+              "function": "nd_cq_gemm_rows",
+              "bytes": 160,
+              "kind": "static"
+            },
+            {
+              "function": "nd_cq_gemm_prepared",
+              "bytes": 48,
+              "kind": "static"
+            },
+            {
+              "function": "nd_cq_dequant_row",
+              "bytes": 80,
+              "kind": "static"
+            }
+          ]
+        },
+        {
+          "name": "nd_tokenizer.c",
+          "source_sha256": "7412748e73af4fec931a2dfffbbc48683cdc4f8edfecb6a955728eab5ded8fc1",
+          "object_sha256": "bd69be20123d9c72190cbf202337d34d581c0ed37168fce7a2a8e62d9004627c",
+          "text_bytes": 2139,
+          "data_bytes": 0,
+          "bss_bytes": 0,
+          "stack_frames": [
+            {
+              "function": "rd_u32",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "hex_nibble",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "byte_piece_value",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "utf8_len",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "lookup",
+              "bytes": 48,
+              "kind": "static"
+            },
+            {
+              "function": "bpe_segment$part$0",
+              "bytes": 80,
+              "kind": "static"
+            },
+            {
+              "function": "nd_tok_free",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "nd_tok_init",
+              "bytes": 48,
+              "kind": "static"
+            },
+            {
+              "function": "nd_tok_piece",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "nd_tok_encode_ex",
+              "bytes": 80,
+              "kind": "static"
+            },
+            {
+              "function": "nd_tok_encode",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "nd_tok_decode_ex",
+              "bytes": 48,
+              "kind": "static"
+            },
+            {
+              "function": "nd_tok_decode",
+              "bytes": 32,
+              "kind": "static"
+            }
+          ]
+        },
+        {
+          "name": "nd_ledcmd.c",
+          "source_sha256": "24fad1dee02d297bdfe682bc30b91d033933b891aec65f0f8665b3fff79abcba",
+          "object_sha256": "aeab4a730e0aa04615b4f5de593d4ee686ada1a45f7810e0df6798a958f251dd",
+          "text_bytes": 1346,
+          "data_bytes": 0,
+          "bss_bytes": 0,
+          "stack_frames": [
+            {
+              "function": "is_letter",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "nd_led_keywords",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "nd_utf8_lower",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "nd_led_parse",
+              "bytes": 208,
+              "kind": "static"
+            }
+          ]
+        },
+        {
+          "name": "abi.c",
+          "source_sha256": "21324a37f9fbdea6778be6c21d1dfc44346ee585b24b4d47ff0f2a0f23382ab6",
+          "object_sha256": "0464308eb15a71d9d46ebb679c2ee92c63a0ec09764ad76a848cddbebec459e0",
+          "text_bytes": 0,
+          "data_bytes": 0,
+          "bss_bytes": 8456,
+          "model_state_target_bytes": 8456,
+          "stack_frames": []
+        }
+      ],
+      "candidate": [
+        {
+          "name": "nd_whistle.c",
+          "source_sha256": "dca48cf6d2c9b6e02059f00b849d8b7adfb15151abe0bfc7317a510e0d200b10",
+          "object_sha256": "9fd151e832a043ae853166228eba3d544b74d9707a8cd2d676d393a5d151e69b",
+          "text_bytes": 22956,
+          "data_bytes": 0,
+          "bss_bytes": 4168,
+          "stack_frames": [
+            {
+              "function": "rms_unit",
+              "bytes": 48,
+              "kind": "static"
+            },
+            {
+              "function": "session_end",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "lanes_init",
+              "bytes": 48,
+              "kind": "static"
+            },
+            {
+              "function": "kron",
+              "bytes": 2080,
+              "kind": "static"
+            },
+            {
+              "function": "rope",
+              "bytes": 48,
+              "kind": "static"
+            },
+            {
+              "function": "sh_end",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "lin_rows",
+              "bytes": 112,
+              "kind": "static"
+            },
+            {
+              "function": "lin",
+              "bytes": 48,
+              "kind": "static"
+            },
+            {
+              "function": "add_keywords",
+              "bytes": 144,
+              "kind": "static"
+            },
+            {
+              "function": "nd_expf",
+              "bytes": 64,
+              "kind": "static"
+            },
+            {
+              "function": "softmax",
+              "bytes": 48,
+              "kind": "static"
+            },
+            {
+              "function": "sigm",
+              "bytes": 48,
+              "kind": "static"
+            },
+            {
+              "function": "silu_inplace",
+              "bytes": 48,
+              "kind": "static"
+            },
+            {
+              "function": "sh_rows",
+              "bytes": 48,
+              "kind": "static"
+            },
+            {
+              "function": "sh_lin",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "hv",
+              "bytes": 48,
+              "kind": "static"
+            },
+            {
+              "function": "hvec",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "zc",
+              "bytes": 48,
+              "kind": "static"
+            },
+            {
+              "function": "lanes_out",
+              "bytes": 2112,
+              "kind": "static"
+            },
+            {
+              "function": "sh_begin.isra",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "session_begin",
+              "bytes": 432,
+              "kind": "static"
+            },
+            {
+              "function": "mhc_step",
+              "bytes": 192,
+              "kind": "static"
+            },
+            {
+              "function": "dec_step",
+              "bytes": 11568,
+              "kind": "static"
+            },
+            {
+              "function": "decode_pass.constprop",
+              "bytes": 3440,
+              "kind": "static"
+            },
+            {
+              "function": "conv_part",
+              "bytes": 592,
+              "kind": "static"
+            },
+            {
+              "function": "mlp_rows",
+              "bytes": 10336,
+              "kind": "static"
+            },
+            {
+              "function": "mlp_residual",
+              "bytes": 96,
+              "kind": "static"
+            },
+            {
+              "function": "enc_block",
+              "bytes": 20656,
+              "kind": "static"
+            },
+            {
+              "function": "dec_block",
+              "bytes": 12992,
+              "kind": "static"
+            },
+            {
+              "function": "nd_whistle_logmel",
+              "bytes": 5248,
+              "kind": "static"
+            },
+            {
+              "function": "nd_whistle_frames",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "nd_whistle_encode",
+              "bytes": 192,
+              "kind": "static"
+            },
+            {
+              "function": "nd_whistle_logits",
+              "bytes": 2096,
+              "kind": "static"
+            },
+            {
+              "function": "nd_whistle_set_keywords",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "nd_whistle_add_keywords",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "nd_whistle_find_speech",
+              "bytes": 64,
+              "kind": "static"
+            },
+            {
+              "function": "nd_whistle_decode",
+              "bytes": 48,
+              "kind": "static"
+            },
+            {
+              "function": "nd_whistle_detok",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "nd_whistle_cache_head",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "nd_whistle_set_depth",
+              "bytes": 160,
+              "kind": "static"
+            },
+            {
+              "function": "nd_whistle_open",
+              "bytes": 96,
+              "kind": "static"
+            },
+            {
+              "function": "nd_whistle_close",
+              "bytes": 32,
+              "kind": "static"
+            }
+          ]
+        },
+        {
+          "name": "nd_cact.c",
+          "source_sha256": "4a462d3a7edc2d1492d5096ea0b08098551fab392d0d91e0da3961e8ffad0c9f",
+          "object_sha256": "275c59f6846458a6ff1961dd0cf72de5a7044b1c558f645ef2eb5c2c294b4037",
+          "text_bytes": 847,
+          "data_bytes": 0,
+          "bss_bytes": 0,
+          "stack_frames": [
+            {
+              "function": "rd_u32",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "nd_cact_open",
+              "bytes": 240,
+              "kind": "static"
+            },
+            {
+              "function": "nd_cact_codebook",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "nd_cact_tensor",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "nd_cact_data",
+              "bytes": 32,
+              "kind": "static"
+            }
+          ]
+        },
+        {
+          "name": "nd_quant.c",
+          "source_sha256": "e74138f6fcffac699b3626292a10040bd00414ab83a035fc3daf522b9f8e601b",
+          "object_sha256": "4197cb9059f99cae05ffd3a65bca6d8b6ef7e8cdff648dae576525e77f26e4b1",
+          "text_bytes": 5756,
+          "data_bytes": 8,
+          "bss_bytes": 0,
+          "stack_frames": [
+            {
+              "function": "nd_cq_in_pad",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "nd_cq_row_bytes",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "nd_cq_groups",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "dot_group",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "rows_serial",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "nd_alloc_fast",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "nd_f16_slow",
+              "bytes": 48,
+              "kind": "static"
+            },
+            {
+              "function": "nd_f16",
+              "bytes": 48,
+              "kind": "static"
+            },
+            {
+              "function": "gemv_rows_offset",
+              "bytes": 48,
+              "kind": "static"
+            },
+            {
+              "function": "gemv_rows_generic",
+              "bytes": 48,
+              "kind": "static"
+            },
+            {
+              "function": "lut2_rows",
+              "bytes": 48,
+              "kind": "static"
+            },
+            {
+              "function": "gemm8_rows",
+              "bytes": 128,
+              "kind": "static"
+            },
+            {
+              "function": "gemm_rows",
+              "bytes": 112,
+              "kind": "static"
+            },
+            {
+              "function": "nd_fwht",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "nd_cq_scratch",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "nd_cq_prepare",
+              "bytes": 48,
+              "kind": "static"
+            },
+            {
+              "function": "nd_cq_gemv_rows",
+              "bytes": 96,
+              "kind": "static"
+            },
+            {
+              "function": "nd_cq_gemv_prepared",
+              "bytes": 96,
+              "kind": "static"
+            },
+            {
+              "function": "nd_cq_lut_build",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "nd_cq_gemv_lut2",
+              "bytes": 96,
+              "kind": "static"
+            },
+            {
+              "function": "nd_cq_gemv_gather",
+              "bytes": 96,
+              "kind": "static"
+            },
+            {
+              "function": "nd_cq_gemv",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "nd_cq_q8_ok",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "nd_cq_q8_prepare",
+              "bytes": 592,
+              "kind": "static"
+            },
+            {
+              "function": "nd_cq_q8_free",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "nd_cq_q8_gemm",
+              "bytes": 160,
+              "kind": "static"
+            },
+            {
+              "function": "nd_cq_gemm_rows",
+              "bytes": 160,
+              "kind": "static"
+            },
+            {
+              "function": "nd_cq_gemm_prepared",
+              "bytes": 48,
+              "kind": "static"
+            },
+            {
+              "function": "nd_cq_dequant_row",
+              "bytes": 80,
+              "kind": "static"
+            }
+          ]
+        },
+        {
+          "name": "nd_tokenizer.c",
+          "source_sha256": "7412748e73af4fec931a2dfffbbc48683cdc4f8edfecb6a955728eab5ded8fc1",
+          "object_sha256": "96e3774f854a65cc3809839394739094841aab41167946c9e8002249953f5d34",
+          "text_bytes": 2139,
+          "data_bytes": 0,
+          "bss_bytes": 0,
+          "stack_frames": [
+            {
+              "function": "rd_u32",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "hex_nibble",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "byte_piece_value",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "utf8_len",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "lookup",
+              "bytes": 48,
+              "kind": "static"
+            },
+            {
+              "function": "bpe_segment$part$0",
+              "bytes": 80,
+              "kind": "static"
+            },
+            {
+              "function": "nd_tok_free",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "nd_tok_init",
+              "bytes": 48,
+              "kind": "static"
+            },
+            {
+              "function": "nd_tok_piece",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "nd_tok_encode_ex",
+              "bytes": 80,
+              "kind": "static"
+            },
+            {
+              "function": "nd_tok_encode",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "nd_tok_decode_ex",
+              "bytes": 48,
+              "kind": "static"
+            },
+            {
+              "function": "nd_tok_decode",
+              "bytes": 32,
+              "kind": "static"
+            }
+          ]
+        },
+        {
+          "name": "nd_ledcmd.c",
+          "source_sha256": "24fad1dee02d297bdfe682bc30b91d033933b891aec65f0f8665b3fff79abcba",
+          "object_sha256": "87ae1d3ff0f2665c207e45b0f576b3116978cbc6d675d000a9e6caeba33de15d",
+          "text_bytes": 1346,
+          "data_bytes": 0,
+          "bss_bytes": 0,
+          "stack_frames": [
+            {
+              "function": "is_letter",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "nd_led_keywords",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "nd_utf8_lower",
+              "bytes": 32,
+              "kind": "static"
+            },
+            {
+              "function": "nd_led_parse",
+              "bytes": 208,
+              "kind": "static"
+            }
+          ]
+        },
+        {
+          "name": "abi.c",
+          "source_sha256": "21324a37f9fbdea6778be6c21d1dfc44346ee585b24b4d47ff0f2a0f23382ab6",
+          "object_sha256": "97876f2382f989f514078ef617ce0c3e71336b4702b65244b4d7a436fab9f3d4",
+          "text_bytes": 0,
+          "data_bytes": 0,
+          "bss_bytes": 8456,
+          "model_state_target_bytes": 8456,
+          "stack_frames": []
+        }
+      ]
+    },
+    "linked_firmware_verified": false,
+    "physical_stack_acceptance_verified": false,
+    "deployment_permitted": false
+  },
+  "summary": {
+    "baseline": {
+      "text_bytes": 31410,
+      "data_bytes": 8,
+      "bss_bytes": 4168,
+      "model_state_target_bytes": 8456,
+      "largest_static_frame_bytes": 20656,
+      "all_reported_frames_static": true,
+      "largest_frames": [
+        {
+          "function": "enc_block",
+          "bytes": 20656,
+          "kind": "static"
+        },
+        {
+          "function": "dec_block",
+          "bytes": 12992,
+          "kind": "static"
+        },
+        {
+          "function": "dec_step",
+          "bytes": 11568,
+          "kind": "static"
+        },
+        {
+          "function": "mlp_rows",
+          "bytes": 10336,
+          "kind": "static"
+        },
+        {
+          "function": "nd_whistle_logmel",
+          "bytes": 5232,
+          "kind": "static"
+        }
+      ]
+    },
+    "candidate": {
+      "text_bytes": 33044,
+      "data_bytes": 8,
+      "bss_bytes": 4168,
+      "model_state_target_bytes": 8456,
+      "largest_static_frame_bytes": 20656,
+      "all_reported_frames_static": true,
+      "largest_frames": [
+        {
+          "function": "enc_block",
+          "bytes": 20656,
+          "kind": "static"
+        },
+        {
+          "function": "dec_block",
+          "bytes": 12992,
+          "kind": "static"
+        },
+        {
+          "function": "dec_step",
+          "bytes": 11568,
+          "kind": "static"
+        },
+        {
+          "function": "mlp_rows",
+          "bytes": 10336,
+          "kind": "static"
+        },
+        {
+          "function": "nd_whistle_logmel",
+          "bytes": 5248,
+          "kind": "static"
+        }
+      ]
+    }
+  },
+  "header_sha256": {
+    "baseline": {
+      "nd_alloc.h": "10a33fd7ccd32af311a836ea56a40128c00e0dcae0107596d5626ce2ad94b8e8",
+      "nd_cact.h": "6df6e670a72e3081441d6725810b895ee336210bb940db90a6e0dc89b191efd5",
+      "nd_grammar.h": "4637871fccffbcdf9c349fb9948a02072c05430c6fd255103b947ffa316e92c0",
+      "nd_ledcmd.h": "7e67c60ff08cf8c2f1936af925a05469971107ae7cd801fda350f7a4276d5cda",
+      "nd_model.h": "2e02fe38e2e62e1625b8afb4454c2858d043bf07add6be941a6729588ef87a31",
+      "nd_quant.h": "923e4d5dcfab987ebd1ebcbc39c594cd6831273475362790bc2d528a639d21a9",
+      "nd_sample.h": "83a9dd088f828f6131ab224387a63c12f32aa312a15ea618c35b0463697b6311",
+      "nd_tokenizer.h": "77ab46f9206f9a0a2d4a32eb53cc1d39050f533db6857d8f8c040a23631569e6",
+      "nd_whistle.h": "d24004b02b6b6e36cc2af9402dd866ac4d4259ddbe7ad1f8ac25be49c4f2be83"
+    },
+    "candidate": {
+      "nd_alloc.h": "10a33fd7ccd32af311a836ea56a40128c00e0dcae0107596d5626ce2ad94b8e8",
+      "nd_cact.h": "6b1e8da679fd2bdb1ca84ef565b4a68d87c6f547cbd35f70f03f87fd7d5f3d78",
+      "nd_grammar.h": "4637871fccffbcdf9c349fb9948a02072c05430c6fd255103b947ffa316e92c0",
+      "nd_ledcmd.h": "7e67c60ff08cf8c2f1936af925a05469971107ae7cd801fda350f7a4276d5cda",
+      "nd_model.h": "2e02fe38e2e62e1625b8afb4454c2858d043bf07add6be941a6729588ef87a31",
+      "nd_quant.h": "923e4d5dcfab987ebd1ebcbc39c594cd6831273475362790bc2d528a639d21a9",
+      "nd_sample.h": "83a9dd088f828f6131ab224387a63c12f32aa312a15ea618c35b0463697b6311",
+      "nd_tokenizer.h": "77ab46f9206f9a0a2d4a32eb53cc1d39050f533db6857d8f8c040a23631569e6",
+      "nd_whistle.h": "d24004b02b6b6e36cc2af9402dd866ac4d4259ddbe7ad1f8ac25be49c4f2be83"
+    }
+  },
+  "watch_configuration_sha256": {
+    "firmware/build/config/sdkconfig.h": "bd79340aa7366089b035d98921b9c02504206ae42110ef865a3fcfc198e449cc",
+    "firmware/build/toolchain/cflags": "8d77b3e2357b4da3073a354dc18e17e3790259eb28ea4d188a14c8c97beb0043",
+    "firmware/main/main.c": "79dc7f42bb3ff522d20f9eff10f8089d40131cd1828467932d9f40ef956acf45"
+  },
+  "guard": {
+    "schema": 1,
+    "state": "complete",
+    "command": [
+      "podman",
+      "run",
+      "--rm",
+      "--name",
+      "ackerman-english-target-20261031",
+      "--security-opt",
+      "label=disable",
+      "--network=none",
+      "--memory=1g",
+      "--memory-swap=1g",
+      "--cpus=2",
+      "--pids-limit=128",
+      "--timeout=180",
+      "-e",
+      "PYTHONDONTWRITEBYTECODE=1",
+      "-e",
+      "TMPDIR=/var/home/jack/Projects/.agent-tmp/ackerman-english-native/target-compile-20261031/tmp",
+      "-e",
+      "TMP=/var/home/jack/Projects/.agent-tmp/ackerman-english-native/target-compile-20261031/tmp",
+      "-e",
+      "TEMP=/var/home/jack/Projects/.agent-tmp/ackerman-english-native/target-compile-20261031/tmp",
+      "-v",
+      "/var/home/jack/Projects/AckermanOS-watch-experience-20261031:/var/home/jack/Projects/AckermanOS-watch-experience-20261031:ro",
+      "-v",
+      "/var/home/jack/Projects/Whistle-English-Native-20261030:/var/home/jack/Projects/Whistle-English-Native-20261030:ro",
+      "-v",
+      "/var/home/jack/Projects/.agent-tmp/ackerman-english-native/target-compile-20261031:/var/home/jack/Projects/.agent-tmp/ackerman-english-native/target-compile-20261031:rw",
+      "--entrypoint",
+      "python3",
+      "209569617d40dc2190907bfa7508aa5dfc0823698663fc28a4405ef8012a78b0",
+      "/var/home/jack/Projects/Whistle-English-Native-20261030/tools/check_english_target.py",
+      "--compile-db",
+      "/var/home/jack/Projects/AckermanOS-watch-experience-20261031/firmware/build/compile_commands.json",
+      "--baseline-engine",
+      "/var/home/jack/Projects/AckermanOS-watch-experience-20261031/vendor/whistle/engine",
+      "--candidate-engine",
+      "/var/home/jack/Projects/Whistle-English-Native-20261030/engine",
+      "--output",
+      "/var/home/jack/Projects/.agent-tmp/ackerman-english-native/target-compile-20261031/run-v1"
+    ],
+    "guard_pid": 810811,
+    "child_pid": 811136,
+    "rss_limit_bytes": 1073741824,
+    "launch_available_memory_bytes": 3221225472,
+    "host_available_memory_floor_bytes": 1073741824,
+    "cpu_only": true,
+    "cpus": 2,
+    "nice_increment": 10,
+    "maximum_job_seconds": 240.0,
+    "peak_observed_process_group_rss_bytes": 51875840,
+    "admitted": true,
+    "available_at_launch_bytes": 3577774080,
+    "admission_wait_seconds": 3.001,
+    "cpu_affinity": [
+      0,
+      1
+    ],
+    "reason": null,
+    "exit_code": 0,
+    "job_elapsed_seconds": 62.14
+  },
+  "resource_scope": "CPU guard samples the host client process group; container separately capped at1GiB/twoCPUs/no swap/180s; observed container limit1.074GB",
+  "read_only_firmware_source_mount": true,
+  "firmware_submodule_pin_changed": false,
+  "linked_firmware_verified": false,
+  "physical_stack_acceptance_verified": false,
+  "speech_quality_verified": false,
+  "deployment_permitted": false
+}
