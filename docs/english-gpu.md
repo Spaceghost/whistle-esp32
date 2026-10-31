@@ -1,13 +1,13 @@
 # English GPU runner: wait first, then verify
 
-**The first full CUDA student update passed; durable GPU saving is still open.**
+**Actual CUDA updates and durable checkpoint recovery pass.**
 
 | Current milestone | Status |
 | :--- | :--- |
 | Backend numerics and 51 locked packages | ✅ Verified on the RTX 3070 |
 | Initialization heap trim | ✅ Saves 280 MiB with all 337 arrays unchanged |
 | First full-parameter CUDA update | ✅ Finite gradients and nonzero update |
-| Recoverable GPU checkpoint | ⏳ Streamed writer tested; actual GPU save/resume pending |
+| Recoverable GPU checkpoint | ✅ Checkpoints 1 and 2 plus new-process resumed 3 verified |
 | Full training and speech quality | ⬜ Still required |
 
 The larger retry preserves the model, precision, data and gradient calculation.
@@ -23,7 +23,7 @@ training retains the default 10% admission ceiling.
 | GPU admission/process guard | ✅ 13 tests pass | Simulated GPU telemetry + real process isolation |
 | Backend parent/device binding | ✅ 4 tests pass | Refuses unadmitted processes, wrong devices and allocation overrides |
 | Real GPU backend smoke | ✅ Actual guarded execution passes | Terminal guard exit 0; no CPU fallback |
-| Guarded student runner | ✅ First CUDA update completed | Saving the optimizer then exceeded its cap; no READY checkpoint |
+| Guarded student runner | ✅ CUDA updates and recovery verified | Short-clip machinery only; full-shape and recognition gates remain open |
 
 ```mermaid
 flowchart TD
@@ -205,3 +205,10 @@ optimizer file and no READY. Preserve that partial evidence; it is not resumable
 The [optional streaming writer](english-accelerated-training.md#save-the-optimizer-without-a-full-host-copy)
 now passes five compatibility/recovery controls. Actual GPU save and resume
 remain required.
+
+
+The streamed writer's actual CUDA retry and new-process resume both completed
+with terminal guard exit 0. READY checkpoints 1, 2 and 3 have verified model
+and optimizer hashes. Full-shape sizing and meaningful full-corpus training
+remain separate requirements.
+[GPU checkpoint and recovery receipt](../research/english-gpu-checkpoint-recovery-20261031.json).

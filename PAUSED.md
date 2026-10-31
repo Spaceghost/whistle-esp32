@@ -1,3 +1,36 @@
+## GPU checkpoints and recovery pass; full-shape probe live — 2026-10-31
+
+| Milestone | Status |
+| :--- | :--- |
+| Watch 77 | ✅ Installed OTA VALID; no device/control hold |
+| GPU short-clip updates | ✅ Fresh updates 1 and 2; READY model + Adam snapshots |
+| New-process GPU resume | ✅ Restored 2 → completed 3; READY hashes verified |
+| Planned full shape | 🔄 Probe state: running; all 28,539 clips retained |
+| Useful trained recognizer | ⬜ Training, held-out/native quality and physical gates remain open |
+
+Poll **session 40536**, guard **1207506**. Child at latest observation:
+**1208963**. Verify the same process/report; do not duplicate on timeout.
+Report: `build/training-readiness-20261031/gpu-fullshape-stream-v1.json`.
+Output: `build/accelerated-student-20261031/gpu-fullshape-stream-v1`.
+Frozen training source **7577539**. One fresh full-parameter update with
+25-second / 160-token padding, limit-train-clips=0, full local audio cache.
+Selection was independently rechecked: all 28,539 rows, zero duration/token
+exclusions, exact planned ordered-ID hash. No truncation or inherited weights.
+
+Same 3.5 GiB host cap / 1.5 GiB admission reserve / 1 GiB runtime floor,
+GPU 2 GiB pool / 3 GiB observed cap / 2 GiB reserve, 35% short-probe ceiling,
+30-second dwell, 900-second child cap. Full training retains its 10% ceiling.
+Other workloads continue; no device, TUF or Bak changes.
+
+Prior sessions 47919 and 4175 are terminal0; guards/children exited.
+Fresh GPU checkpoints1/2 and restored3 are complete and hash verified. One
+cross-run parameter differs by 2.3283e-10 while first loss/norms match exactly;
+do not claim bitwise GPU reproducibility. The exact evidence is in
+[the recovery receipt](research/english-gpu-checkpoint-recovery-20261031.json).
+No research model has been deployed; full goal remains active and incomplete.
+
+---
+
 ## Streamed GPU checkpoint retry admitted — 2026-10-31
 
 | Milestone | Status |

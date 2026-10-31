@@ -6,10 +6,10 @@ The original CPU trainer remains unchanged for its existing checkpoints.
 | Capability | State | Evidence |
 | :--- | :--- | :--- |
 | Global-step checkpoint cadence | ✅ 12 control tests pass | Cadence, stop signals, backend proof and drift refusal |
-| Real periodic saving | ✅ CPU checkpoints 1 and 2 complete | Full 29,537,627-parameter model + Adam state |
+| Real periodic saving | ✅ CPU and GPU checkpoints 1 and 2 complete | Full 29,537,627-parameter model + Adam state |
 | Training arithmetic preserved | ✅ Exact CPU reference match | Every parameter array and optimizer bytes match step two |
-| New-process resume | ✅ CPU update 3 complete | Model + optimizer restored from checkpoint 2; checkpoint 3 verified |
-| Guarded CUDA training path | ✅ First finite full-parameter update completed | Actual recoverable GPU checkpoint and new-process resume still pending |
+| New-process resume | ✅ CPU and GPU update 3 complete | Model + optimizer restored from checkpoint 2; checkpoint 3 hashes verified |
+| Guarded CUDA training path | ✅ Fresh updates and checkpoint recovery complete | Full 25s/160-token shape and speech quality remain open |
 
 ```mermaid
 flowchart TD
@@ -103,7 +103,7 @@ so earlier checkpoints still require their recorded source/options.
 | Actual Adam restore and next update | ✅ Bit-identical |
 | Failed or short output | ✅ Refused; no READY |
 | Existing checkpoint / changed bytes | ✅ Preserved / refused |
-| Full GPU checkpoint under the cap | ⬜ Still needs actual execution |
+| Full GPU checkpoint under the cap | ✅ Checkpoints 1, 2 and resumed 3 verified |
 
 A streamed save retains only a serialized leaf at a time instead of a full
 host optimizer tree and complete packed payload. This bounds that part of
@@ -126,3 +126,25 @@ Reproduce with separate guarded invocations of
 supplying the same model, pinned Needle source and fresh output directories.
 A readable model from the failed save is used only for its array geometry; this
 measurement does not turn that incomplete directory into a resumable snapshot.
+
+
+## Actual CUDA checkpoint milestone
+
+Fresh execution completed two finite, nonzero full-parameter updates and wrote
+READY snapshots 1 and 2. A new process restored snapshot 2, completed update 3
+and wrote a hash-verified READY snapshot 3. Both guards exited 0; sampled host
+peaks were 2,652,418,048 and 2,675,671,040 bytes, below the 3.5 GiB owned cap.
+The compiler cache was warm; these total peaks do not isolate the writer's
+contribution. The separate CPU comparison above does.
+
+The old pre-writer-change GPU run and the new run have exactly equal first
+loss and aggregate gradient/update norms. Across all 112 parameter arrays, one
+float differs by 2.3283e-10. This is recorded rather than claiming bitwise GPU
+reproducibility. The byte-format and CPU Adam recovery controls remain exact.
+
+These are two short public training clips with fixed two-second / 32-token
+padding. They verify training and recovery machinery, not useful speech
+recognition. The next resource probe keeps all 28,539 training clips selected
+and uses the planned 25-second / 160-token shape. No clips may be truncated or
+excluded to make that probe pass.
+[Actual training, all three manifests, terminal guards and comparison](../research/english-gpu-checkpoint-recovery-20261031.json).
