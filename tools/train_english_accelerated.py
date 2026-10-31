@@ -51,6 +51,8 @@ def main():
                         help='Clear initialization executables before training; verify all live state bytes')
     parser.add_argument('--trim-initialization-heap', action='store_true',
                         help='Experimental glibc trim after cache release; requires --release-initialization-cache')
+    parser.add_argument('--stream-checkpoints', action='store_true',
+                        help='Write Flax optimizer bytes one leaf at a time instead of copying the whole state')
     args = parser.parse_args()
     if args.trim_initialization_heap and not args.release_initialization_cache:
         parser.error('Host heap trimming requires --release-initialization-cache')
@@ -133,6 +135,12 @@ def main():
     if args.release_initialization_cache:
         import english_training_memory
         signature['training_memory_sha256'] = sha(Path(english_training_memory.__file__))
+    checkpoint_writer = write_checkpoint
+    if args.stream_checkpoints:
+        import english_checkpoint_stream
+        checkpoint_writer = english_checkpoint_stream.write_checkpoint
+        signature['checkpoint_writer'] = 'flax-msgpack-stream-v1'
+        signature['checkpoint_writer_sha256'] = sha(Path(english_checkpoint_stream.__file__))
     with (args.output / 'plan.json').open('x') as output:
         output.write(json.dumps({'signature': signature, 'parameters': count,
                                  'parameter_bytes': count * 4, 'selection': selection,
@@ -203,7 +211,7 @@ def main():
             'trainable_parameters':count,'neural_accuracy_verified':False,'deployment_permitted':False}
         checkpoint=args.output/('step-'+str(step).zfill(8))
         progress('write_checkpoint',step=step)
-        manifest=write_checkpoint(checkpoint,params,opt_state,metadata,checkpoints,serialization)
+        manifest=checkpoint_writer(checkpoint,params,opt_state,metadata,checkpoints,serialization)
         last_saved=step
         saved.append(dict(step=step,checkpoint=checkpoint.name,manifest_sha256=sha(checkpoint/'manifest.json')))
         progress('checkpoint_ready',step=step,checkpoint=checkpoint.name)

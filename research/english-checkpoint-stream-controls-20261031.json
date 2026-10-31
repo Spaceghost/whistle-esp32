@@ -1,0 +1,51 @@
+{
+  "schema": 1,
+  "scope": "Flax byte compatibility, real CPU Adam recovery and incomplete-write safety; full GPU memory benefit not yet measured",
+  "files": {
+    "tools/english_checkpoint_stream.py": "ed6b4d6a44d8a18cc923d765f3a7eff8da6e2672cb2f098ab115ddc017194489",
+    "tools/train_english_accelerated.py": "f53a680c4f3116cdd17e58e33022146b106afcf60a301ae319c5deb86507dbea",
+    "tests/test_english_checkpoint_stream.py": "f9cc6dfbd52c2ae7d7581b5aace20e9518748c299679f1377f1629b9d960ad1f"
+  },
+  "tests_passed": 5,
+  "optimizer_bytes_bit_identical_to_flax": true,
+  "restored_next_adam_update_bit_identical": true,
+  "failed_and_short_writes_refused": true,
+  "earlier_checkpoints_preserved": true,
+  "modified_checkpoint_bytes_refused": true,
+  "guard": {
+    "schema": 1,
+    "state": "complete",
+    "command": [
+      "/var/home/jack/Projects/.system-cache/venvs/ackerman-english-training-20261030/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_english_checkpoint_stream.py",
+      "-v"
+    ],
+    "guard_pid": 1179583,
+    "child_pid": 1180007,
+    "rss_limit_bytes": 1073741824,
+    "launch_available_memory_bytes": 2147483648,
+    "host_available_memory_floor_bytes": 1073741824,
+    "cpu_only": true,
+    "cpus": 2,
+    "nice_increment": 10,
+    "maximum_job_seconds": 180.0,
+    "peak_observed_process_group_rss_bytes": 251727872,
+    "admitted": true,
+    "available_at_launch_bytes": 5880737792,
+    "admission_wait_seconds": 3.001,
+    "cpu_affinity": [
+      0,
+      1
+    ],
+    "reason": null,
+    "exit_code": 0,
+    "job_elapsed_seconds": 4.218
+  },
+  "deployment_permitted": false
+}

@@ -82,3 +82,31 @@ The two-core guards kept a 1 GiB host floor and did not evict other workloads.
 **Next:** validate the CUDA student path. The real
 [GPU backend admission and numeric checks](english-gpu.md) now pass. Keep full numeric, held-out
 native speech and physical Watch acceptance open.
+
+
+## Save the optimizer without a full host copy
+
+The first real CUDA update completed with finite gradients and a nonzero
+parameter update. Saving its optimizer then exceeded the 3.5 GiB host cap;
+the partial directory retains `INCOMPLETE` and cannot be resumed.
+[Exact first-update and failed-save evidence](../research/english-first-gpu-update-20261031.json).
+
+`--stream-checkpoints` is an optional writer that emits the same Flax msgpack
+format one array at a time. It preserves the model format, optimizer values,
+fsync/hash/READY ordering and existing readers. The original CPU trainer is
+unchanged. The option and writer source hash enter the accelerated signature,
+so earlier checkpoints still require their recorded source/options.
+
+| Control | Result |
+| :--- | :--- |
+| Flax optimizer bytes, including chunked arrays | ✅ Bit-identical |
+| Actual Adam restore and next update | ✅ Bit-identical |
+| Failed or short output | ✅ Refused; no READY |
+| Existing checkpoint / changed bytes | ✅ Preserved / refused |
+| Full GPU checkpoint under the cap | ⬜ Still needs actual execution |
+
+A streamed save retains only a serialized leaf at a time instead of a full
+host optimizer tree and complete packed payload. This bounds that part of
+serialization by its largest leaf; the model writer, live state and compiler
+allocations still contribute to total RSS.
+[Five CPU controls and resource receipt](../research/english-checkpoint-stream-controls-20261031.json).
