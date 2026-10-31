@@ -1,3 +1,26 @@
+## Heap-trim GPU admission terminal; Watch 77 OTA underway — 2026-10-31
+
+| Milestone | Status |
+| :--- | :--- |
+| Optional allocator-trim controls | ✅ 21 tests pass; next CPU Adam update is bit-identical |
+| Full GPU memory experiment | ⏸️ Admission ended without a child; spare host RAM stayed below 5 GiB |
+| Actual full-model RAM savings | ⬜ Unproven; the trim operation never ran on the GPU student |
+| Full-corpus training | ⬜ Not started; no GPU student checkpoint created |
+| Watch 77 | 🔄 Signed dev177 published and verified; one guarded OTA/install observation underway in private repo |
+
+Session 39416 / guard 1107977 is terminal75 (`not-started`,
+`host_memory_headroom`), confirmed absent from `/proc`. Do not poll it as live
+or launch a duplicate automatically. See
+[terminal admission receipt](research/english-heap-trim-admission-20261031.json).
+All resource floors and other workloads were preserved. The optional trim
+remains off by default. The full English-model goal remains active and incomplete.
+
+Next: finish Watch 77 postflight, then wait for a sufficient Alienware compute
+window. Real full-model updates/save/resume, full-shape resource sizing,
+held-out speech quality and physical memory/latency remain required.
+
+---
+
 ## Heap-trim experiment prepared; admission waiting — 2026-10-31
 
 ✅ Source `2210081` adds an opt-in allocator trim after initialization-cache
