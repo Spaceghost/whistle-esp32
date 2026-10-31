@@ -43,6 +43,27 @@ A GPU snapshot does not reserve resources or establish execution.
 [Final full-corpus and terminal resource receipts](../research/english-full-corpus-readiness-20261031.json).
 [Earlier sparse and held-out audits](../research/english-training-readiness-20261031.json).
 
+## Full training shape: every clip still included
+
+| Training setting | Verified plan |
+| :--- | :--- |
+| Dataset | ✅ All 28,539 training clips / 100.59 hours |
+| Audio shape | 25 seconds; longest actual clip 24.525 seconds |
+| Token budget | 160; longest actual sequence 150 tokens |
+| Excluded or truncated | ✅ Zero |
+| One epoch, batch size 1 | 28,539 updates; deterministic shuffle visits each clip exactly once |
+
+The tighter shape preserves the same ordered selection hash as the original
+30-second / 320-token plan. It reduces padding, without claiming a measured
+speedup. The sampler's next-epoch offset was also checked. Validation/test clips
+remain outside the training selection. A resource window is not an epoch and
+must resume from its last complete checkpoint.
+
+[Exact full-selection and epoch-plan evidence](../research/english-full-training-plan-20261031.json).
+GPU backend, student execution and resource sizing still need actual validation
+before this full-size run. The previous two-clip regression remains a machinery
+check, not the training dataset.
+
 ## Full audio, without touching Bak
 
 `tools/stage_english_audio.py` uses the retained corpus receipt's exact archive

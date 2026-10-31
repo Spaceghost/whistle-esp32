@@ -1,0 +1,42 @@
+{
+  "schema": 1,
+  "scope": "Full-corpus selection with tighter fixed padding; no clips excluded and no JAX import or training",
+  "inputs": {
+    "corpus_sha256": "0dedae607af955f07c74e0db68cb8e506c4c9d6f16d131dbc1ed4b37e163da4e",
+    "tokenizer_sha256": "70b605e6951bf8460742ed3756019ad5e57a940a0d0b0e14d07b4b2f96fc6885",
+    "train_manifest_sha256": "ceb2f15fd1d406006d7aa5ec53b38b905c655e5d182e032d7cf0e12c7f8eab00"
+  },
+  "selection": {
+    "eligible": 28539,
+    "excluded_duration": 0,
+    "excluded_tokens": 0,
+    "limit": 0
+  },
+  "required_train_clips": 28539,
+  "selected_train_clips": 28539,
+  "all_train_clips_included": true,
+  "selected_hours": 100.59087965277777,
+  "maximum_audio_seconds": 24.525,
+  "maximum_sequence_tokens": 150,
+  "selected_train_ids_sha256": "5f85bb57d7da23f492d0ef8dfacdf246fa6b2d1d8c8a4572a59d6ab853c5e67a",
+  "batch_size": 1,
+  "steps_per_epoch": 28539,
+  "maximum_samples": 400000,
+  "batch_tokens": 160,
+  "vocabulary": 2048,
+  "language_tags": [
+    "en"
+  ],
+  "training_started": false,
+  "deployment_permitted": false,
+  "epoch_zero_exactly_once": true,
+  "next_epoch_offset_verified": true,
+  "reference_padding": {
+    "maximum_samples": 480000,
+    "batch_tokens": 320
+  },
+  "same_ordered_selection_as_reference": true,
+  "padding_is_not_a_measured_runtime_speedup": true,
+  "suggested_checkpoint_every": 250,
+  "checkpoint_interval_is_steps_not_seconds": true
+}
