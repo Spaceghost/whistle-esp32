@@ -2,7 +2,7 @@
 
 **Current training readiness:** all 33,844 local audio hashes pass. A separate
 51-package CUDA environment is installed. The accelerated runner passes CPU
-checkpoint/reference/resume checks; GPU execution awaits free system RAM.
+checkpoint/reference/resume checks; real CUDA backend checks now pass.
 [Read the current checklist and data flow →](english-training-readiness.md)
 
 > ▶️ Research resumed. Read [the current native milestone](english-native.md)

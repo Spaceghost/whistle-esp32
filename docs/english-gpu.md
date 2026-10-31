@@ -1,13 +1,13 @@
 # English GPU runner: wait first, then verify
 
-**The separate CUDA environment is installed. GPU execution still needs admission.**
+**✅ Real CUDA matrix, gradient and convolution checks pass on the RTX 3070.**
 
 | Requirement | State | Scope |
 | :--- | :--- | :--- |
 | Separate environment | ✅ 51 locked versions match | Existing CPU environment preserved |
 | GPU admission/process guard | ✅ 13 tests pass | Simulated GPU telemetry + real process isolation |
 | Backend parent/device binding | ✅ 4 tests pass | Refuses unadmitted processes, wrong devices and allocation overrides |
-| Real GPU backend smoke | ⏳ Awaiting system RAM | No CUDA initialization before admission |
+| Real GPU backend smoke | ✅ Actual guarded execution passes | Terminal guard exit 0; no CPU fallback |
 | Guarded student runner | ☐ GPU execution unverified | Accelerated path added; legacy CPU trainer preserved |
 
 ```mermaid
@@ -29,8 +29,24 @@ child launched. A third bounded diagnostic window allowed 35% utilization for
 the tiny backend check after confirming graphics-only activity and spare GPU
 memory; its memory budgets and 30-second dwell were unchanged. It also ended
 without a child: available host RAM was below the 5 GiB launch requirement.
-No CUDA initialization or backend success is claimed. Full training retains the
-default 10% utilization ceiling. No other workload was paused or evicted.
+Those early windows did not initialize CUDA. The successful sixth window used
+a stricter 2 GiB diagnostic host cap, retaining the 2 GiB launch reserve and
+1 GiB runtime floor. It admitted after 30.32 seconds and finished in 42.75 seconds.
+Full training retains the default 10% utilization ceiling. No other workload was
+paused or evicted.
+
+| Actual CUDA check | Maximum absolute error | Result |
+| :--- | ---: | :--- |
+| Matrix multiplication | 5.72e-6 | ✅ Existing tolerances pass |
+| Gradient | 3.58e-7 | ✅ Existing tolerances pass |
+| Convolution | 2.38e-7 | ✅ Existing tolerances pass |
+
+Observed process-group peaks were 1,315,704,832 bytes host RSS and
+2,250,244,096 bytes GPU memory. All 51 installed versions, checker/lock hashes
+and the preserved admission snapshot were revalidated after completion.
+This proves this backend, not student training or recognition accuracy.
+
+[Actual CUDA result and final resource receipt](../research/english-gpu-backend-20261031.json).
 
 [Installation and initial admission](../research/english-gpu-admission-20261031.json).
 [Terminal diagnostic and full-data evidence](../research/english-full-corpus-readiness-20261031.json).

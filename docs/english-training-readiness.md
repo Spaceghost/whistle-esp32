@@ -1,13 +1,13 @@
 # English training: make the full run possible
 
-**All 33,844 required clips are local and hash-verified. GPU execution awaits system RAM.**
+**All 33,844 required clips are local and hash-verified. The real CUDA backend passes; student hardware validation is next.**
 
 | Requirement | State | Evidence |
 | :--- | :--- | :--- |
 | Full local corpus | ✅ Complete | Training 28,539; validation 2,694; test 2,611 hashes pass |
 | Local source acquisition | ✅ Complete | All three archives passed exact size + MD5 + SHA-256 before extraction |
-| Separate CUDA environment | ✅ Installed; all 51 versions match | CPU environment preserved; backend admission pending |
-| GPU execution guard | ✅ Implemented and tested | Backend smoke awaits RAM; accelerated student path implemented, GPU unverified |
+| Separate CUDA environment | ✅ Installed; all 51 versions match | CPU environment preserved; actual backend checks pass |
+| GPU execution guard | ✅ Implemented and tested | Backend smoke passes; accelerated student GPU execution remains unverified |
 | Meaningful training and acceptance | ☐ Not started | Requires full data, resource admission and later accuracy/device gates |
 
 ```mermaid
@@ -37,7 +37,7 @@ empty splits and symlink escape refusal. The original four-file probe cache is
 preserved separately.
 
 The audit ran in the CPU environment, which has no CUDA plugin. The separate
-51-package CUDA environment is installed; its backend remains unverified.
+51-package CUDA environment is installed; its real matrix, gradient and convolution checks now pass.
 A GPU snapshot does not reserve resources or establish execution.
 
 [Final full-corpus and terminal resource receipts](../research/english-full-corpus-readiness-20261031.json).
@@ -60,8 +60,8 @@ remain outside the training selection. A resource window is not an epoch and
 must resume from its last complete checkpoint.
 
 [Exact full-selection and epoch-plan evidence](../research/english-full-training-plan-20261031.json).
-GPU backend, student execution and resource sizing still need actual validation
-before this full-size run. The previous two-clip regression remains a machinery
+The GPU backend now passes. Student execution and resource sizing still need
+actual validation before this full-size run. The previous two-clip regression remains a machinery
 check, not the training dataset.
 
 ## Full audio, without touching Bak
@@ -106,6 +106,6 @@ admission guard and an explicit allocation policy: JAX normally preallocates
 allocations. See the [JAX memory guide](https://docs.jax.dev/en/latest/gpu_memory_allocation.html).
 
 **GPU admission is implemented:** [guard behavior and backend smoke →](english-gpu.md).
-Next verify the backend when system RAM is free, then validate the implemented
+Next validate the implemented
 [accelerated student path](english-accelerated-training.md). Preserve other workloads. Full numeric, held-out speech and physical
 Watch gates remain open.

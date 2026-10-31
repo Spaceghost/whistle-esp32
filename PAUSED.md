@@ -1,3 +1,31 @@
+## Actual CUDA backend verified — 2026-10-31
+
+✅ Sixth diagnostic guard53317 terminal0, backend all_passed. RTX3070: matmul
+maxabs5.722e-6, gradient3.576e-7, convolution2.384e-7, existing limits unchanged.
+No CPU fallback. All51 installed packages and immutable admission/checker/lock
+hashes revalidated. 42.75s, peak1.316GB hostRSS /2.250GB VRAM. Diagnostic host
+cap tightened to2GiB, keeping2GiB launch reserve/1GiB runtime floor;35percent
+utilization ceiling was diagnostic-only. Earlier false backend flags below
+are historical. See research/english-gpu-backend-20261031.json.
+
+✅ Full training plan retains every28,539 clip/100.59h with25s/160token padding,
+identical ordered selection to30s/320tokens. No exclusions/truncation; longest
+24.525s/150tokens. One batch1 epoch28,539 updates visits each clip once.
+Exact plan research/english-full-training-plan-20261031.json.
+
+A bounded two-update GPU student diagnostic is queued under exec65627, report
+build/training-readiness-20261031/gpu-student-window-v2.json. Prior student
+window19266 was superseded before a child, terminal130. Diagnostic v2 uses
+35percent graphics tolerance and a tighter2.75GiB host cap with2GiB reserve;
+full training retains default10percent. Uses2 short public clips/2 updates and
+periodic checkpoints with verified backend proof. This is machinery scope,
+not meaningful full-corpus training. Poll actual handle or verify live guardPID;
+observation timeout is not terminal and must not trigger a duplicate.
+GPU student/resume, full training, native numeric/accuracy and physical Watch
+gates remain OPEN; goal active, no research model deployment or device change.
+
+---
+
 ## Current milestone — full corpus and durable accelerated CPU runner — 2026-10-31
 
 ✅ All 33,844 required audio hashes pass: training 28,539 / 100.59h;

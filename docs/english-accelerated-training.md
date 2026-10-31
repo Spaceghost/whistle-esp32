@@ -79,6 +79,6 @@ missing import; its output/source are retained. The corrected fresh run took
 3.43 GB. These include compilation/checkpoint I/O, not target inference timing.
 The two-core guards kept a 1 GiB host floor and did not evict other workloads.
 
-**Next:** validate the CUDA student path only after
-[GPU backend admission](english-gpu.md). Keep full numeric, held-out
+**Next:** validate the CUDA student path. The real
+[GPU backend admission and numeric checks](english-gpu.md) now pass. Keep full numeric, held-out
 native speech and physical Watch acceptance open.
