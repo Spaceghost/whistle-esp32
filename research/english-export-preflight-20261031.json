@@ -206,5 +206,19 @@
   "controls_source_sha256": "eec8beda3afbb108ebf6bfecb6519eb9279c25fba46f148d1e76b895ec5abb87",
   "training_source_unchanged": true,
   "neural_accuracy_verified": false,
-  "deployment_permitted": false
+  "deployment_permitted": false,
+  "prior_cpu_metadata_compatibility": [
+    {
+      "checkpoint_manifest_sha256": "f018c908c5249db8739e95aad7829d6939c2e1a7aac1d2af8ca173aa54d2ec64",
+      "step": 2,
+      "metadata_compatible": true,
+      "coverage": "metadata only; existing checkpoint bytes were not re-audited here"
+    },
+    {
+      "checkpoint_manifest_sha256": "52363e86121f43dabe87a3cd7d1ceaa9f619e0410946908a9e073d8cd7a82927",
+      "step": 3,
+      "metadata_compatible": true,
+      "coverage": "metadata only; existing checkpoint bytes were not re-audited here"
+    }
+  ]
 }

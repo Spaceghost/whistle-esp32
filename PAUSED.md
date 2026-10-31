@@ -8,6 +8,14 @@
 | First complete epoch | ⏳ Admission guard live, waiting above10% utilization limit; no child at this observation |
 | Watch80 reading candidate | ✅ Target build and exact USB parity pass; unsigned/uninstalled, Watch79 boot/control remains separately owned |
 
+Export metadata preflight is now verified on actual GPU checkpoint3: nine
+focused controls and the bounded real integration pass,25,800,704B sampled
+peak RSS. No numerical runtime loaded/model produced. Old CPU2 and full-shape
+CPU3 metadata remain compatible. The exporter reports the actual checkpoint
+step and refuses signature/config drift and foreign-language geometry.
+[Export preflight receipt](research/english-export-preflight-20261031.json).
+Training source7577539 and queued command/checkpoint signatures are unchanged.
+
 **Poll session28705, guard1511822** (confirmed live in `/proc`).
 Report: `build/training-readiness-20261031/gpu-full-epoch1-v2.json`.
 Intent: `build/english-full-campaign-20261031/epoch1-v2-intent.json`.
