@@ -1,0 +1,341 @@
+{
+  "schema": 1,
+  "date": "2026-10-31",
+  "scope": "Decoder boundary diagnosis on Levi introduction, actual native-policy two-step model; not a fixed gate or speech recognizer",
+  "model_sha256": "37a8d6e407c7ffbc64fb46a8340cb41b29447a528fb836590e91800b94fc819b",
+  "native_replay_bit_identical": true,
+  "first_seven_fast_hidden_states_within_existing_threshold": true,
+  "eighth_fast_hidden_state_within_existing_threshold": false,
+  "shared_hidden_output_projection_within_existing_threshold": true,
+  "float_control_all_eight_within_existing_threshold": true,
+  "full_fast_network_gate_passed": false,
+  "deployment_permitted": false,
+  "evidence": {
+    "fast": {
+      "schema": 1,
+      "scope": "Localize decoder/head differences using retained native encoder memory.\n\nRun under guard_english_job.py. This is diagnosis, never deployment acceptance.\nThe selected network receipt must match the checkpoint, model and execution mode.\n",
+      "case": "levi-introduction",
+      "audio_sha256": "187abf6e5a6181f1f249c0e20aa35da8ffecfe1171662f73ffed1a6d9ed11f3f",
+      "execution_mode": "cq-h128-a8-away-cb8-kv-f32-v1",
+      "model_sha256": "37a8d6e407c7ffbc64fb46a8340cb41b29447a528fb836590e91800b94fc819b",
+      "checkpoint_manifest_sha256": "f018c908c5249db8739e95aad7829d6939c2e1a7aac1d2af8ca173aa54d2ec64",
+      "network_receipt_sha256": "d2dd7b22ae351689de2228216e4c0f9c0c016cbea8ee7f6d7c82d66a3aa9acc6",
+      "encoder_input_sha256": "93bf56c9285301f7197e94645a1280854dd116ead1eb37a056765d20939b4810",
+      "native_binary_sha256": "b8f947a55ecf6241a8e5f4dec1e8a61bb116897ce03f69625e472d33434a7ca7",
+      "checker_sha256": "9854d7cb5a9227b35830721ce19b7144d7efccb9ddb96404061bcaf57940c491",
+      "native_probe_logits_bit_identical": true,
+      "rows": [
+        {
+          "position": 0,
+          "input_token": 2,
+          "hidden_relative_l2_error": 3.9463841972064984e-07,
+          "logits_max_absolute_error": 2.86102294921875e-06,
+          "shared_hidden_head_max_absolute_error": 9.5367431640625e-07
+        },
+        {
+          "position": 1,
+          "input_token": 2048,
+          "hidden_relative_l2_error": 3.006012718742568e-07,
+          "logits_max_absolute_error": 9.5367431640625e-07,
+          "shared_hidden_head_max_absolute_error": 2.86102294921875e-06
+        },
+        {
+          "position": 2,
+          "input_token": 42,
+          "hidden_relative_l2_error": 6.294938543760509e-07,
+          "logits_max_absolute_error": 7.152557373046875e-07,
+          "shared_hidden_head_max_absolute_error": 8.344650268554688e-07
+        },
+        {
+          "position": 3,
+          "input_token": 101,
+          "hidden_relative_l2_error": 3.0080548185651423e-07,
+          "logits_max_absolute_error": 2.86102294921875e-06,
+          "shared_hidden_head_max_absolute_error": 2.86102294921875e-06
+        },
+        {
+          "position": 4,
+          "input_token": 7,
+          "hidden_relative_l2_error": 3.2856871712283464e-07,
+          "logits_max_absolute_error": 9.5367431640625e-07,
+          "shared_hidden_head_max_absolute_error": 9.5367431640625e-07
+        },
+        {
+          "position": 5,
+          "input_token": 1023,
+          "hidden_relative_l2_error": 3.8407441138588183e-07,
+          "logits_max_absolute_error": 1.430511474609375e-06,
+          "shared_hidden_head_max_absolute_error": 1.9073486328125e-06
+        },
+        {
+          "position": 6,
+          "input_token": 33,
+          "hidden_relative_l2_error": 3.7102225292073854e-07,
+          "logits_max_absolute_error": 1.0132789611816406e-06,
+          "shared_hidden_head_max_absolute_error": 1.9073486328125e-06
+        },
+        {
+          "position": 7,
+          "input_token": 99,
+          "hidden_relative_l2_error": 0.0002884287969209254,
+          "logits_max_absolute_error": 0.0037289857864379883,
+          "shared_hidden_head_max_absolute_error": 8.344650268554688e-07
+        }
+      ],
+      "thresholds_unchanged": true,
+      "deployment_permitted": false
+    },
+    "float": {
+      "schema": 1,
+      "scope": "Localize decoder/head differences using retained native encoder memory.\n\nRun under guard_english_job.py. This is diagnosis, never deployment acceptance.\nThe selected network receipt must match the checkpoint, model and execution mode.\n",
+      "case": "levi-introduction",
+      "audio_sha256": "187abf6e5a6181f1f249c0e20aa35da8ffecfe1171662f73ffed1a6d9ed11f3f",
+      "execution_mode": "float",
+      "model_sha256": "37a8d6e407c7ffbc64fb46a8340cb41b29447a528fb836590e91800b94fc819b",
+      "checkpoint_manifest_sha256": "f018c908c5249db8739e95aad7829d6939c2e1a7aac1d2af8ca173aa54d2ec64",
+      "network_receipt_sha256": "96d11bb170565786ca021b9f9973372030b7e045b84963bb124416bc95450626",
+      "encoder_input_sha256": "db2077c2319323b84c5167e1abe82991a0ccdbeb9eda86a659ac07054eea8e4f",
+      "native_binary_sha256": "b8f947a55ecf6241a8e5f4dec1e8a61bb116897ce03f69625e472d33434a7ca7",
+      "checker_sha256": "9854d7cb5a9227b35830721ce19b7144d7efccb9ddb96404061bcaf57940c491",
+      "native_probe_logits_bit_identical": true,
+      "rows": [
+        {
+          "position": 0,
+          "input_token": 2,
+          "hidden_relative_l2_error": 4.0720991023590614e-07,
+          "logits_max_absolute_error": 1.0728836059570312e-06,
+          "shared_hidden_head_max_absolute_error": 1.9073486328125e-06
+        },
+        {
+          "position": 1,
+          "input_token": 2048,
+          "hidden_relative_l2_error": 3.43892679666169e-07,
+          "logits_max_absolute_error": 9.5367431640625e-07,
+          "shared_hidden_head_max_absolute_error": 9.5367431640625e-07
+        },
+        {
+          "position": 2,
+          "input_token": 42,
+          "hidden_relative_l2_error": 4.399707336233405e-07,
+          "logits_max_absolute_error": 1.1920928955078125e-06,
+          "shared_hidden_head_max_absolute_error": 8.344650268554688e-07
+        },
+        {
+          "position": 3,
+          "input_token": 101,
+          "hidden_relative_l2_error": 4.3383653292039526e-07,
+          "logits_max_absolute_error": 1.1920928955078125e-06,
+          "shared_hidden_head_max_absolute_error": 1.0728836059570312e-06
+        },
+        {
+          "position": 4,
+          "input_token": 7,
+          "hidden_relative_l2_error": 4.4640560759034997e-07,
+          "logits_max_absolute_error": 2.86102294921875e-06,
+          "shared_hidden_head_max_absolute_error": 1.9073486328125e-06
+        },
+        {
+          "position": 5,
+          "input_token": 1023,
+          "hidden_relative_l2_error": 5.052606297795137e-07,
+          "logits_max_absolute_error": 1.9073486328125e-06,
+          "shared_hidden_head_max_absolute_error": 9.5367431640625e-07
+        },
+        {
+          "position": 6,
+          "input_token": 33,
+          "hidden_relative_l2_error": 5.004793024454557e-07,
+          "logits_max_absolute_error": 1.0728836059570312e-06,
+          "shared_hidden_head_max_absolute_error": 9.5367431640625e-07
+        },
+        {
+          "position": 7,
+          "input_token": 99,
+          "hidden_relative_l2_error": 5.111524501444364e-07,
+          "logits_max_absolute_error": 1.9073486328125e-06,
+          "shared_hidden_head_max_absolute_error": 2.384185791015625e-06
+        }
+      ],
+      "thresholds_unchanged": true,
+      "deployment_permitted": false
+    },
+    "sanitizer_input_checks": {
+      "schema": 1,
+      "scope": "Actual model/retained encoder execution and malformed input refusal under Zig ASAN/UBSAN; no recognition acceptance",
+      "model_sha256": "37a8d6e407c7ffbc64fb46a8340cb41b29447a528fb836590e91800b94fc819b",
+      "binary_sha256": "ead837e497ac5a72a970a246640a5a210ee28f7395c8a37ce17069b8b1ef64c1",
+      "cases": [
+        {
+          "case": "valid",
+          "exit_code": 0,
+          "expected": 0
+        },
+        {
+          "case": "nan",
+          "exit_code": 1,
+          "expected": 1
+        },
+        {
+          "case": "misaligned",
+          "exit_code": 1,
+          "expected": 1
+        },
+        {
+          "case": "empty",
+          "exit_code": 1,
+          "expected": 1
+        },
+        {
+          "case": "out-of-vocabulary",
+          "exit_code": 1,
+          "expected": 1
+        },
+        {
+          "case": "empty-tokens",
+          "exit_code": 1,
+          "expected": 1
+        },
+        {
+          "case": "misaligned-tokens",
+          "exit_code": 1,
+          "expected": 1
+        },
+        {
+          "case": "existing-output-preserved",
+          "exit_code": 1,
+          "expected": 1
+        }
+      ],
+      "all_passed": true,
+      "deployment_permitted": false
+    },
+    "guards": {
+      "decoder-window-v1": {
+        "schema": 1,
+        "state": "stopped",
+        "command": [
+          "/var/home/jack/Projects/.system-cache/venvs/ackerman-english-training-20261030/bin/python",
+          "tools/check_english_decoder.py",
+          "--checkpoint",
+          "build/native-policy-training-20261031/step2-v1/step-00000002",
+          "--model",
+          "build/native-policy-training-20261031/export-step2-v1/english-student-research.cact",
+          "--needle-source",
+          "/var/home/jack/Projects/.system-cache/ackerman-english-training/needle-source",
+          "--network",
+          "build/native-policy-training-20261031/network-step2-v1",
+          "--binary",
+          "build/english-native-cmake/decoder_probe",
+          "--output",
+          "build/native-policy-training-20261031/decoder-step2-v1"
+        ],
+        "guard_pid": 363035,
+        "child_pid": 363132,
+        "rss_limit_bytes": 3221225472,
+        "launch_available_memory_bytes": 5368709120,
+        "host_available_memory_floor_bytes": 1073741824,
+        "cpu_only": true,
+        "cpus": 2,
+        "nice_increment": 10,
+        "maximum_job_seconds": 300.0,
+        "peak_observed_process_group_rss_bytes": 981147648,
+        "admitted": true,
+        "available_at_launch_bytes": 8990101504,
+        "admission_wait_seconds": 3.001,
+        "cpu_affinity": [
+          0,
+          1
+        ],
+        "reason": null,
+        "exit_code": 1,
+        "job_elapsed_seconds": 15.104
+      },
+      "decoder-window-v2": {
+        "schema": 1,
+        "state": "complete",
+        "command": [
+          "/var/home/jack/Projects/.system-cache/venvs/ackerman-english-training-20261030/bin/python",
+          "tools/check_english_decoder.py",
+          "--checkpoint",
+          "build/native-policy-training-20261031/step2-v1/step-00000002",
+          "--model",
+          "build/native-policy-training-20261031/export-step2-v1/english-student-research.cact",
+          "--needle-source",
+          "/var/home/jack/Projects/.system-cache/ackerman-english-training/needle-source",
+          "--network",
+          "build/native-policy-training-20261031/network-step2-v1",
+          "--binary",
+          "build/english-decoder-cmake-v1/decoder_probe",
+          "--output",
+          "build/native-policy-training-20261031/decoder-step2-v2"
+        ],
+        "guard_pid": 364633,
+        "child_pid": 364817,
+        "rss_limit_bytes": 3221225472,
+        "launch_available_memory_bytes": 5368709120,
+        "host_available_memory_floor_bytes": 1073741824,
+        "cpu_only": true,
+        "cpus": 2,
+        "nice_increment": 10,
+        "maximum_job_seconds": 300.0,
+        "peak_observed_process_group_rss_bytes": 1289682944,
+        "admitted": true,
+        "available_at_launch_bytes": 8999702528,
+        "admission_wait_seconds": 3.001,
+        "cpu_affinity": [
+          0,
+          1
+        ],
+        "reason": null,
+        "exit_code": 0,
+        "job_elapsed_seconds": 23.179
+      },
+      "decoder-float-window-v1": {
+        "schema": 1,
+        "state": "complete",
+        "command": [
+          "/var/home/jack/Projects/.system-cache/venvs/ackerman-english-training-20261030/bin/python",
+          "tools/check_english_decoder.py",
+          "--checkpoint",
+          "build/native-policy-training-20261031/step2-v1/step-00000002",
+          "--model",
+          "build/native-policy-training-20261031/export-step2-v1/english-student-research.cact",
+          "--needle-source",
+          "/var/home/jack/Projects/.system-cache/ackerman-english-training/needle-source",
+          "--network",
+          "build/native-policy-training-20261031/float-step2-v1",
+          "--binary",
+          "build/english-decoder-cmake-v1/decoder_probe",
+          "--output",
+          "build/native-policy-training-20261031/decoder-float-step2-v1",
+          "--float"
+        ],
+        "guard_pid": 367594,
+        "child_pid": 367702,
+        "rss_limit_bytes": 3221225472,
+        "launch_available_memory_bytes": 5368709120,
+        "host_available_memory_floor_bytes": 1073741824,
+        "cpu_only": true,
+        "cpus": 2,
+        "nice_increment": 10,
+        "maximum_job_seconds": 300.0,
+        "peak_observed_process_group_rss_bytes": 1188306944,
+        "admitted": true,
+        "available_at_launch_bytes": 8704872448,
+        "admission_wait_seconds": 3.001,
+        "cpu_affinity": [
+          0,
+          1
+        ],
+        "reason": null,
+        "exit_code": 0,
+        "job_elapsed_seconds": 16.37
+      }
+    }
+  },
+  "retained_failed_attempt": "decoder-window-v1 exited 1: cmake was outside PATH and the probe binary did not exist; rerun used pinned CMake and a separate build/output directory",
+  "source_sha256": {
+    "host/decoder_probe.c": "c62cfd59ba5a54ddd9f7c56de7733d699c47ba136b32aa9e8f6c4317d641d42c",
+    "tools/check_english_decoder.py": "9854d7cb5a9227b35830721ce19b7144d7efccb9ddb96404061bcaf57940c491"
+  }
+}

@@ -1,3 +1,19 @@
+## Decoder boundary diagnosis completed — 2026-10-31
+
+The actual C decoder reproduces retained logits bit for bit in fast and float
+modes. On the Levi clip, the first seven forced-token hidden states agree;
+the eighth fast hidden state diverges (relative 0.00028843). With identical
+native hidden states, the output projection agrees (maximum 2.87e-6).
+The float control passes all eight. Trace inside the eighth-token decoder next;
+do not attribute its error to the output head or relax thresholds.
+
+The new host probe passes actual-model execution and malformed-input/output
+preservation checks under Zig ASAN/UBSAN. All decoder guards are terminal.
+Attempt one failed because its probe binary had not built (cmake outside PATH);
+its source/log/output are preserved. Pinned-CMake build, separate second output
+and float control succeed. No model deployment or GPU/workload interference.
+See `research/english-decoder-boundary-20261031.json` for exact evidence.
+
 ## Native-policy export controls completed — 2026-10-31
 
 The active research continuation validated the actual native-policy step-two

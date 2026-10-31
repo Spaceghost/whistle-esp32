@@ -189,9 +189,44 @@ Observed process-group peaks were 1.63 GB (fast), 1.45 GB (float) and 1.02 GB
 
 [Exact per-clip, per-matrix and resource receipts](../research/english-native-policy-validation-20261031.json).
 
+## Levi decoder: the last tested hidden state is the boundary
+
+A host-only probe now calls the actual native decoder and output projection on
+retained encoder memory. Its logits reproduce the previous native run **bit for
+bit**, in both fast and float modes. No production API or arithmetic changed.
+
+| Levi introduction, eight forced input tokens | Fast path | Float control |
+| :--- | :--- | :--- |
+| First seven hidden states | ✅ Relative error below 4e-7 | ✅ |
+| Eighth hidden state | ☐ Relative error 0.00028843 | ✅ Maximum over all eight 5.12e-7 |
+| Projection using identical native hidden states | ✅ Maximum logit difference 2.87e-6 | ✅ 2.39e-6 |
+| Complete decoder output | ☐ Maximum logit difference 0.003729 | ✅ 2.87e-6 |
+
+```mermaid
+flowchart LR
+    A[Same native encoder memory] --> B[Decoder states 1–7 agree]
+    B --> C[State 8 diverges in fast mode]
+    C --> D[Complete logits miss strict limit]
+    E[Identical native hidden states] --> F[Native and simulated output heads agree]
+```
+
+This localizes the Levi clip's decoder discrepancy **before the output head**;
+it does not yet identify a particular attention or feed-forward operation.
+The eight tokens are fixed comparison inputs, not recognized words. This is
+not a transcription or recognition-accuracy test. Earlier failed gates remain.
+
+`host/decoder_probe.c` also retains cross-attention K/V for deeper localization.
+`tools/check_english_decoder.py` binds the checkpoint/export/network receipt,
+checks the selected mode, and refuses a changed native baseline. Run it under
+`tools/guard_english_job.py`. The new C probe passed actual-model execution,
+NaN/empty/misaligned input refusal, out-of-vocabulary token refusal and output
+preservation under Zig ASAN/UBSAN. Camera, firmware and installed model were untouched.
+
+[Exact per-token, sanitizer and resource receipts](../research/english-decoder-boundary-20261031.json).
+
 ## Next work
 
-1. Localize encoder and Levi-clip decoder rounding sensitivity on the native-policy checkpoint without relaxing gates.
+1. Trace the eighth forced decoder token inside attention/feed-forward stages; preserve the passing shared-hidden head control.
 2. Prepare meaningful native-policy training when resources and full audio are available.
 3. Preserve signature-checked checkpoint/restart behavior for the longer run.
 4. Train meaningfully when resources are free, then score held-out speech.
