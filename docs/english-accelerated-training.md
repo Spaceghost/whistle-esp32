@@ -9,7 +9,7 @@ The original CPU trainer remains unchanged for its existing checkpoints.
 | Real periodic saving | ✅ CPU and GPU checkpoints 1 and 2 complete | Full 29,537,627-parameter model + Adam state |
 | Training arithmetic preserved | ✅ Exact CPU reference match | Every parameter array and optimizer bytes match step two |
 | New-process resume | ✅ CPU and GPU update 3 complete | Model + optimizer restored from checkpoint 2; checkpoint 3 hashes verified |
-| Guarded CUDA training path | ✅ Fresh updates and checkpoint recovery complete | Full 25s/160-token shape and speech quality remain open |
+| Guarded CUDA training path | ✅ Fresh updates, recovery and full-shape checkpoint pass | Meaningful full-epoch training and speech quality remain open |
 
 ```mermaid
 flowchart TD

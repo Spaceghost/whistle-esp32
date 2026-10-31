@@ -1,3 +1,36 @@
+## Full-shape checkpoint passes; first epoch waiting — 2026-10-31
+
+| Milestone | Status |
+| :--- | :--- |
+| Watch 77 | ✅ Installed OTA VALID; no device/control hold |
+| GPU save/resume | ✅ Short-clip checkpoints 1/2 and new-process update/checkpoint 3 |
+| Full shape | ✅ 25 seconds / 160 tokens; finite update + verified READY checkpoint |
+| First complete epoch | ⏳ Admission state: waiting; no training campaign child at last observation |
+| Learned native recognizer | ⬜ Epoch training, held-out/numeric quality and physical gates remain open |
+
+Poll **session 19119**, guard **1251119**; child at observation **None**.
+Report: `build/training-readiness-20261031/gpu-full-epoch1-v1.json`.
+Intended output: `build/english-full-campaign-20261031/epoch1-v1`.
+Intent: `build/english-full-campaign-20261031/epoch1-v1-intent.json`.
+Frozen training source **7577539**. Continue full-shape checkpoint1 for
+28,538 additional updates, final global28539, checkpoint-every1000 and32GiB
+spare disk. Expected checkpoint payload about10.3GB thisepoch. Every training
+row remains selected; no duration/token truncation or inherited base weights.
+
+Full campaign uses **10%** admission ceiling, 30-second dwell, 3600-second
+maximum admission wait, 43200-second (12h) owned execution cap. Memory: host4GiB
+cap/1.5GiBlaunchreserve/1GiBruntimefloor, GPU2GiBpool/3GiBobservedcap/2GiBreserve.
+Other workloads keep running. Do not duplicate on observation timeout; verify
+actual guard/child and inspect last READY on any withdrawal. No export/deploy.
+
+Full-shape probe79050/guard1240639/child1242319 is terminal0 (98.862s), READY1
+hashverified, warmcache samplepeak2744172544B. Prior40536 did complete its
+finite update, then hit the3.5GiBcap duringcheckpointwriting; NEVERpromote its
+INCOMPLETEdirectory. [Full-shape proof](research/english-fullshape-checkpoint-20261031.json).
+Full goal remains active and incomplete; no research model deployed.
+
+---
+
 ## GPU checkpoints and recovery pass; full-shape probe live — 2026-10-31
 
 | Milestone | Status |

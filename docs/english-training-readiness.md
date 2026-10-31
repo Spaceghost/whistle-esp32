@@ -1,6 +1,6 @@
 # English training: make the full run possible
 
-**All audio is local. Short-clip GPU training and checkpoint recovery pass; the full-shape resource probe is running.**
+**All audio is local. GPU save/resume and the full training shape pass; the first epoch is waiting for free resources.**
 
 | Requirement | State | Evidence |
 | :--- | :--- | :--- |
@@ -8,7 +8,7 @@
 | Local source acquisition | ✅ Complete | All three archives passed exact size + MD5 + SHA-256 before extraction |
 | Separate CUDA environment | ✅ Installed; all 51 versions match | CPU environment preserved; actual backend checks pass |
 | GPU execution and recovery | ✅ Short-clip path verified | Two fresh CUDA updates, READY snapshots and new-process resumed update 3 pass |
-| Meaningful training and acceptance | ☐ Not started | Requires full data, resource admission and later accuracy/device gates |
+| First complete training epoch | ⏳ Guard admission waiting | Continues full-shape checkpoint 1 through all 28,539 rows; quality/device gates remain open |
 
 ```mermaid
 flowchart TD
@@ -60,10 +60,12 @@ remain outside the training selection. A resource window is not an epoch and
 must resume from its last complete checkpoint.
 
 [Exact full-selection and epoch-plan evidence](../research/english-full-training-plan-20261031.json).
-The GPU backend and short-clip save/resume path now pass. A separate guarded
-25-second / 160-token update is testing the full shape before a training
-campaign. The two-clip regression remains a machinery check, not the training
-dataset. [Actual CUDA recovery evidence](../research/english-gpu-checkpoint-recovery-20261031.json).
+The GPU backend, short-clip save/resume and full 25-second / 160-token update
+plus READY checkpoint now pass. All 28,539 rows and the planned selection hash
+remain unchanged. The warm-cache retry used a 4 GiB host cap and peaked at
+2,744,172,544 bytes sampled RSS; this is not a cold-cache guarantee.
+[Actual full-shape checkpoint evidence](../research/english-fullshape-checkpoint-20261031.json).
+The two-clip regression remains a machinery check, not the training dataset.
 
 ## Full audio, without touching Bak
 
@@ -110,3 +112,20 @@ allocations. See the [JAX memory guide](https://docs.jax.dev/en/latest/gpu_memor
 Next validate the implemented
 [accelerated student path](english-accelerated-training.md). Preserve other workloads. Full numeric, held-out speech and physical
 Watch gates remain open.
+
+
+## First epoch: wait for free resources
+
+The campaign continues the verified full-shape checkpoint at global step 1.
+Its remaining 28,538 updates finish epoch one at step 28,539; the deterministic
+sampler retains every training clip exactly once across that epoch. Checkpoints
+are due every 1,000 global steps and at the final boundary. About 10.3 GB of
+checkpoint payload is expected for this epoch, with a 32 GiB spare-disk check
+before each save. All earlier snapshots remain intact.
+
+Full training requires at most 10% GPU utilization for a sustained 30 seconds
+before admission, no other compute process on that GPU and enough spare host
+and GPU memory. The one-hour admission window does not start CUDA while busy.
+Once admitted, the owned process has a 12-hour execution cap; only its process
+group can be withdrawn. Other workloads continue. The campaign does not export,
+sign or deploy a model. An epoch alone is not speech-quality acceptance.

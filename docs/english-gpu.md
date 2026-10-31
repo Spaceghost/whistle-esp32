@@ -8,7 +8,7 @@
 | Initialization heap trim | ✅ Saves 280 MiB with all 337 arrays unchanged |
 | First full-parameter CUDA update | ✅ Finite gradients and nonzero update |
 | Recoverable GPU checkpoint | ✅ Checkpoints 1 and 2 plus new-process resumed 3 verified |
-| Full training and speech quality | ⬜ Still required |
+| Full training and speech quality | ⏳ First epoch admission waiting; recognition acceptance remains open |
 
 The larger retry preserves the model, precision, data and gradient calculation.
 It uses the same launch reserve as the earlier CPU control and stops only its
@@ -212,3 +212,11 @@ with terminal guard exit 0. READY checkpoints 1, 2 and 3 have verified model
 and optimizer hashes. Full-shape sizing and meaningful full-corpus training
 remain separate requirements.
 [GPU checkpoint and recovery receipt](../research/english-gpu-checkpoint-recovery-20261031.json).
+
+
+The full-shape 25-second / 160-token test now has a finite update and a
+hash-verified READY model/Adam checkpoint, retaining all 28,539 training rows.
+The cold 3.5 GiB attempt completed the update but was withdrawn during saving;
+its complete-sized files were not promoted without READY. A fresh warm-cache
+retry under a 4 GiB owned cap completed successfully.
+[Full-shape update and checkpoint evidence](../research/english-fullshape-checkpoint-20261031.json).
